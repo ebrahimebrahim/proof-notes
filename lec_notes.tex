@@ -1,0 +1,353 @@
+\documentclass[12pt]{article}
+
+% Basic stuff
+\usepackage{fullpage}
+\usepackage{graphics}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+
+% Skip one line between paragraphs
+\parskip1em
+ 
+% Standard things to include for math   
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+
+% Other stuff
+\usepackage{hyperref}
+\usepackage{datetime} \usdate
+
+
+% Some of Ebrahim's definitions
+\newcommand{\note}[1]{[#1]}
+\newcommand{\done}{\\\hspace*{0pt}\hfill$\blacksquare$}
+\def\N{\mathbb{N}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\e{\varepsilon}
+\def\d{\delta}
+\newcommand{\seq}[1]{\left(#1\right)_{n\in\N}}
+\newcommand{\settext}[2]{\left\{ #1\ |\ \text{#2} \right\}}
+\renewcommand{\emptyset}{\{\hspace{-2pt}\}}
+\newcommand{\powerset}[1]{\mathcal{P}(#1)}
+\newcommand{\dom}[1]{\operatorname{dom}(#1)}
+\newcommand{\ran}[1]{\operatorname{ran}(#1)}
+\newcommand{\rev}[1]{(#1)^{\dashv}}
+\newcommand{\injrightarrow}{\xrightarrow{\text{inj}}}
+\newcommand{\surjrightarrow}{\xrightarrow{\text{surj}}}
+\newcommand{\bijrightarrow}{\xrightarrow{\text{bij}}}
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+\newcommand{\ex}[1]{\paragraph{Exercise:}#1}
+
+
+
+\begin{document}
+
+\begin{center} {\Large \scshape Mathematical Proofs and Mathematical Writing}
+\end{center}
+(compiled on \today\ at\ \currenttime)
+\hfill
+
+\tableofcontents
+
+\section{Introduction}
+
+\note{what to put here:
+this course is about both set theory and writing.
+set theory is axiomatic. describe what i mean by that, why we would do that, and the historical relevance of it.
+why rigor anyway?
+logic can also be done this way, but we will not.
+we will follow a more intuitive and informal writing-focused approach for logic,
+saving our rigor-enegery for set theory.
+perhaps include a discussion levels of rigor and formality, with one level relegating the rigor to other levels.
+mention the importance of writing and the roughness of this transition for many people.
+mention the value of forgetting what you knew before, but not really forgetting it all.}
+
+\note{Write the general intro later, maybe last.}
+
+
+
+\section{Logic and Writing Mathematical Arguments}
+\label{sec:logic}
+
+This section will develop mathematical logic and show you how logical arguments factor into writing.
+We do not yet have anything to argue \emph{about}, so our ``proofs'' will be about nothing in particular.
+Section \ref{sec:sets} will later give some mathematical objects to talk about, and we will then put
+content into the empty skeleton arguments of this section.
+
+\subsection{Parts of Speech}
+
+In a language, a \emph{part of speech} is a collection of words that share grammatical properties.
+For example here are some common English parts of speech: pronouns, nouns, verbs, adjectives, and adverbs.
+Different languages can have different parts of speech that are useful for describing their grammar.
+To build up the grammar of a language, one can specify how parts of speech fit together to form larger
+\emph{constituents}, such as noun phrases and clauses. One can further describe how
+constituents fit together to form even more complex constituents, eventually grammatical sentences.
+
+Mathematics is a language, and so it makes sense to build up its grammar (its \emph{syntax}) using this same strategy.
+Instead of pronouns, nouns, verbs, noun phrases, sentences, and so on, there are just four constitutuents in
+mathematics. Two are basic parts of speech and two are more complex constituents:
+\begin{itemize}
+\item \emph{Variables} are a basic part of speech
+\item \emph{Constants} are a basic part of speech
+\item \emph{Terms} can be built out of variables, constants, other terms, and propositions.
+\item \emph{Propositions} can be built out of variables, constants, terms, and other propositions.
+\end{itemize}
+
+Let's go through each of these in detail.
+When we are done, you should have a complete syntax in hand.
+This means that given any legible string of marks, you should be able to tell
+if it's mathematically ``grammatical,'' and if it is then you should be able to tell
+if it's a term or proposition.
+
+
+\paragraph{Variables}
+Every copy of a mark from the following box is a \emph{variable}.
+\begin{center}
+\fbox{
+\parbox{30em}{
+a b c d e f g h i j k l m n o p q r s t u v w x y z\\
+A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+}
+}
+\end{center}
+
+
+
+\def\sp{\hspace{1em}}
+\paragraph{Constants}
+Every copy of a mark from the following box is a \emph{constant}.
+\begin{center}
+\fbox{
+\parbox{30em}{
+$0$ \sp $1$ \sp $2$ \sp $3$ \sp $4$ \sp $5$ \sp $6$ \sp $7$ \sp $8$ \sp $9$ \sp $\N$ \sp $\R$ \sp $\emptyset$
+}
+}
+\end{center}
+
+
+\def\sp{\hspace{1em}}
+\paragraph{Terms}
+Terms are strings of marks that are formed as follows:
+\begin{itemize}
+\item
+Every variable is a term.
+\item
+Every constant is a term.
+\item
+For each entry in the following box,
+if you replace each of $\pi$, $\rho$, and $\sigma$ with a term, then
+the resulting string of marks will be a term.
+\begin{center}
+\fbox{
+\parbox{30em}{
+$\{\pi\}$ \sp
+$\{\pi,\rho\}$ \sp
+$\{\pi,\rho,\sigma\}$ \sp
+$(\pi \cup \rho)$ \sp
+$(\pi \cap \rho)$ \sp
+$(\pi \setminus \rho)$ \sp
+$(\pi \circ \rho)$ \sp
+$(\pi \times \rho)$ \sp
+$(\pi \cdot \rho)$ \sp
+$(\pi + \rho)$ \sp
+$\powerset{\pi}$ \sp
+$\dom{\pi}$ \sp
+$\ran{\pi}$ \sp
+$\pi(\rho)$ \sp
+$\pi[\rho]$ \sp
+$\rev{\pi}$ \sp
+}
+}
+\end{center}
+\item
+For the string of marks in the following box,
+if you replace $\alpha$ with a variable and replace $\Phi$ with a proposition, then
+the resulting string of marks will be a term.
+\begin{center}\fbox{$\settext{\alpha}{$\Phi$}$}\end{center}
+\end{itemize}
+
+
+
+\def\sp{\hspace{1em}}
+\paragraph{Propositions}
+Propositions are strings of marks that are formed as follows:
+\begin{itemize}
+\item
+For each entry in the following box,
+if you replace each of $\pi$, $\rho$, and $\sigma$ with a term, then
+the resulting string of marks will be a proposition.
+\begin{center}
+\fbox{
+\parbox{30em}{
+$(\pi\in\rho)$ \sp
+$(\pi\notin\rho)$ \sp
+$(\pi=\rho)$ \sp
+$(\pi\neq\rho)$ \sp
+$(\pi\subseteq\rho)$ \sp
+$(\pi:\rho\rightarrow\sigma)$ \sp
+$(\pi:\rho\injrightarrow\sigma)$ \sp
+$(\pi:\rho\surjrightarrow\sigma)$ \sp
+$(\pi:\rho\bijrightarrow\sigma)$ \sp
+}
+}
+\end{center}
+\item
+For each entry in the following box,
+if you replace each $\Phi$ and $\Psi$ with a proposition, then
+the resulting string of marks will be a proposition.
+\begin{center}
+\fbox{
+$(\neg\Phi)$ \sp
+$(\Phi\AND\Psi)$ \sp
+$(\Phi\OR\Psi)$ \sp
+$(\Phi\Longrightarrow\Psi)$ \sp
+$(\Phi\Longleftrightarrow\Psi)$ \sp
+}
+\end{center}
+\item
+For each entry in the following box,
+if you replace $\alpha$ with a variable and replace $\Phi$ with a proposition, then
+the resulting string of marks will be a proposition.
+\begin{center}
+\fbox{
+$(\forall \alpha\, |\, \Phi)$ \sp
+$(\exists \alpha\, |\, \Phi)$ 
+}
+\end{center}
+\end{itemize}
+
+\subsubsection{Examples}
+
+\def\sp{\hspace{1em}}
+To demonstrate how this grammar works, let's write down an assortment of terms. Here's one:
+$\{a\}.$
+This is a term because it can be obtained 
+by replacing the $\pi$ in ``$\{\pi\}$'' with a copy of ``$a$'', which is itself a term because
+it's a variable, and all variables are terms.
+
+Here's another term: $\{\{\{K\}\}\}$. This is a term because
+it can be obtained by replacing the $\pi$ in ``$\{\pi\}$'' with a copy of ``$\{\{K\}\}$'',
+which is a term because
+it can be obtained by replacing the $\pi$ in ``$\{\pi\}$'' with a copy of ``$\{K\}$'',
+which is a term because
+it can be obtained by replacing the $\pi$ in ``$\{\pi\}$'' with a copy of ``$K$'',
+which is a term because
+it's a variable and all variables are terms.
+
+Here's a proposition: $(\forall x\,|\, (x\in A))$.
+This is a proposition because it can be obtained by starting with
+``$(\forall\alpha\,|\,\Phi)$"" and replacing the $\alpha$ with a copy of ``$x$'' (a variable)
+and replacing the $\Phi$ with a copy of ``$(x\in A)$'', which is itself a proposition.
+The copy of ``$(x\in A)$'' is a proposition because it can be obtained by
+starting with ``$(\pi\in\rho)$'' and then replacing the $\pi$ by $x$ (a term, because it's a variable)
+and also replacing the $\rho$ by $A$ (a term, because it's a variable).
+
+Hopefully you are now seeing how our tiny set of rules can generate very complicated strings of marks.
+Of course there's nothing here about the \emph{meanings} of any of these expressions.
+This is all just \emph{syntax}, not \emph{semantics}.
+All we've got here is a set of rules that tells us which strings of marks are well-formed,
+and whether a string of marks falls into the (currently meaningless) category of ``term'' or ``proposition.''
+
+\ex{
+For each of the following string of marks, decide whether it is well-formed (i.e. grammatically correct). 
+If yes, then state whether it is a term or a proposition, and give a complete explanation as to how it is so.
+\begin{enumerate}
+\item $\{(a + b)\}$
+\item $(a,a)$
+\item $\dom{(a\times(S\cup T))}$
+\item $\{x\,|\,(a=a)\}$
+\item $\{x\,|\,(x+b)\}$
+\item $\{3\,|\,(x\neq x)\}$
+\item $\{(f:x\rightarrow y)\}$
+\item $(f:2\rightarrow 3)$
+\end{enumerate}
+}
+
+Is $\{\pi\}$ a term?
+Technically, no it is not! It looks like a certain string of marks that terms were \emph{modeled} on, but
+it is not itself a term.
+In this development, we have opted to use greek letters as placeholders to be replaced by actual variables, constants, terms, and propositions.
+This served us well in describing how to build terms and propositions, but eventually we will no longer need greek letters for this purpose.
+Further, we may later wish to use greek letters for variables, if we find our current box of 52 variables to be insufficient.
+It would then be fine to go back and modify the language by adding in the greek letters as variables.
+
+In fact, people are constantly adding new variables and constants, as well as new ways to introduce terms and phrases.
+When you define a new notation, such as $\frac{df}{dx}$ for derivatives, you are modifying the original mathematical language by adding a new way to make terms.
+When you define a new concept, such as the concept of differentiability of a function, you are  modifying the original mathematical language by adding a new way to make propositions.
+This point will be more clear towards the end of the course.
+For now just keep in mind that, like natural languages, the language of mathematics is not fixed once and for all but rather evolves organically over time.
+
+% dom is a single mark, not to be confused with d o m. hmm no i won't say this. not worth the clutter
+
+Is $(x+y\in z)$ a proposition?
+At the moment, it is not a proposition due to missing parentheses!
+It almost looks like something of the form ``$(\pi\in\rho)$'',
+but the $\pi$ has been replaced by a copy of ``$x+y$'', which is not a term. A copy of ``$(x+y)$''
+would be a term, so $((x+y)\in z)$ is a proposition.
+Okay, but this is silly. There's only one way to parenthesize the string of marks ``$(x+y\in z)$''
+to make it grammatical. The parenthesization ``$(x+(y\in z))$'' would be ill-formed, because ``$(y\in z)$''
+is a proposition, and there is no rule that puts $(x+[\text{a proposition}])$ into any grammatical category.
+Since there is only one way to parenthesize ``$(x+y\in z)$'' to make it well-formed, we can accept
+``$(x+y\in z)$'' as a shorthand for ``$((x+y)\in z)$''. Similarly, we can accept ``$x+y\in z$'' as a shorthand for
+``$((x+y)\in z)$''. Let's tack on a new syntax rule for our mathematical language:
+\begin{center}\textit{It is okay to drop parentheses when there is only one grammatical way to put them back in.}\end{center}
+
+\ex{
+For each of the following strings of marks,
+is it well-formed given the new rule we just introduced?
+If yes, then show the single possible way to add parentheses.
+If no, then give a reason-- is it because there is no grammatical way to add parentheses, or is it because there's more than one way?
+\begin{enumerate}
+\item $x\subseteq y+z$
+\item $x:y\subseteq z \rightarrow x$
+\item $x\rightarrow x$
+\item $+++++++$
+\item $\{ y\,|\, y:y\rightarrow y \}$
+\item $a\cup b\cap c$
+\item $a + b + c$
+\end{enumerate}
+}
+
+
+\subsection{Formal Proofs vs Informal Proofs}
+
+% we are not doing formal proofs, but we should understand what they are to appreciate what it is we ARE doing
+
+% in the end it's all about the propositions. terms are only useful because they can be used to make proposiitons
+% propositions are supposed to SAY things, though we haven't given them meaning yet
+% explain what is an axiom and what is aproof and what is a theorem
+% look at an example of a formal proof (one that you can also write informally soon)
+% math is for HUMANS and so, while nice, this is just not where we want to be
+% we want some kind of sweet spot where we have the backing of the formal development, but we are still communicating proofs to each other in efficient (though crude and vague) human language
+% and so we want informal proofs. show how the previous example looks as an informal proof
+% now you can see what this course is about: while it is partly giving you some content like set theory, it's mainly about how to communicate proofs in that sweet spot
+
+\subsection{Logic in Informal Proofs}
+
+% run through the rules and some useful derived rules of logic
+% the focus is not formal derivation, but rather to make the rules intuitive and to examine how they influence *writing*
+% where truth tables can help make rules intuitive, bring them in. otherwise truth tables are not a main focus
+
+
+% a comment (maybe put this earlier) on how repetitiveness is okay for now, and better to fix it later. perhaps sian comments on how fix
+
+
+\section{Set Theory} % and still writing though...
+\label{sec:sets}
+
+
+% develop set theory along the lines of jacoby notes
+
+% some milestones to reach: relations, functions, induction, recursion, natural numbers
+
+% appendix: put some sample well written proofs and badly written proofs
+
+
+
+
+\end{document}
+
+
+
