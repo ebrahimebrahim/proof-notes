@@ -15,6 +15,7 @@
 % Other stuff
 \usepackage{hyperref}
 \usepackage{datetime} \usdate
+\usepackage{enumitem}
 
 
 % Some of Ebrahim's definitions
@@ -68,7 +69,7 @@ mention the value of forgetting what you knew before, but not really forgetting 
 
 
 
-\section{Logic and Writing Mathematical Arguments}
+\section{Mathematical Language}
 \label{sec:logic}
 
 This section will develop mathematical logic and show you how logical arguments factor into writing.
@@ -89,231 +90,115 @@ Mathematics is a language, and so it makes sense to build up its grammar (its \e
 Instead of pronouns, nouns, verbs, noun phrases, sentences, and so on, there are just four constitutuents in
 mathematics. Two are basic parts of speech and two are more complex constituents:
 \begin{itemize}
-\item \emph{Variables} are a basic part of speech
-\item \emph{Constants} are a basic part of speech
+\item \emph{Variables} are a basic part of speech.
+\item \emph{Constants} are a basic part of speech.
 \item \emph{Terms} can be built out of variables, constants, other terms, and propositions.
 \item \emph{Propositions} can be built out of variables, constants, terms, and other propositions.
 \end{itemize}
 
 Let's go through each of these in detail.
-When we are done, you should have a complete syntax in hand.
-This means that given any legible string of marks, you should be able to tell
-if it's mathematically ``grammatical,'' and if it is then you should be able to tell
-if it's a term or proposition.
 
-
+\def\sp{\hspace{1em}}
 \paragraph{Variables}
-Every copy of a mark from the following box is a \emph{variable}.
+Variables serve as placeholders, waiting to be replaced by other symbols.
+They are most like pronouns in English.
+For example the pronoun ``it'' is a placeholder referring to something in a discussion, but what it refers to depends on the context of the discussion.
+Variables are like that.
+Here are some variables:
 \begin{center}
-\fbox{
-\parbox{30em}{
-a b c d e f g h i j k l m n o p q r s t u v w x y z\\
-A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
-}
-}
+$a$ \sp $b$ \sp $A$ \sp $f$ \sp $q$ \sp $x$\sp $\alpha$\sp $\beta$
 \end{center}
-
+Note that we are often talking about elements of \emph{language}, and not about what those elements \emph{refer} to.
+Germany is not a noun, it's a country. ``Germany'' is, however, a noun. Similarly, we can say that $x$ is not a variable, but rather ``$x$'' is.
+Quotation marks can help us make the distinction between a symbol and what the symbol refers to.
+As symbols, variables are copies of letters coming from some alphabet, written in ink or pixels.
 
 
 \def\sp{\hspace{1em}}
 \paragraph{Constants}
-Every copy of a mark from the following box is a \emph{constant}.
+Constants are used as fixed names for specific mathematical objects.
+They are most like \emph{proper} nouns in English.
+Here are some constants:
 \begin{center}
-\fbox{
-\parbox{30em}{
 $0$ \sp $1$ \sp $2$ \sp $3$ \sp $4$ \sp $5$ \sp $6$ \sp $7$ \sp $8$ \sp $9$ \sp $\N$ \sp $\R$ \sp $\emptyset$
-}
-}
 \end{center}
 
 
 \def\sp{\hspace{1em}}
 \paragraph{Terms}
-Terms are strings of marks that are formed as follows:
-\begin{itemize}
-\item
-Every variable is a term.
-\item
-Every constant is a term.
-\item
-For each entry in the following box,
-if you replace each of $\pi$, $\rho$, and $\sigma$ with a term, then
-the resulting string of marks will be a term.
-\begin{center}
-\fbox{
-\parbox{30em}{
-$\{\pi\}$ \sp
-$\{\pi,\rho\}$ \sp
-$\{\pi,\rho,\sigma\}$ \sp
-$(\pi \cup \rho)$ \sp
-$(\pi \cap \rho)$ \sp
-$(\pi \setminus \rho)$ \sp
-$(\pi \circ \rho)$ \sp
-$(\pi \times \rho)$ \sp
-$(\pi \cdot \rho)$ \sp
-$(\pi + \rho)$ \sp
-$\powerset{\pi}$ \sp
-$\dom{\pi}$ \sp
-$\ran{\pi}$ \sp
-$\pi(\rho)$ \sp
-$\pi[\rho]$ \sp
-$\rev{\pi}$ \sp
-}
-}
-\end{center}
-\item
-For the string of marks in the following box,
-if you replace $\alpha$ with a variable and replace $\Phi$ with a proposition, then
-the resulting string of marks will be a term.
-\begin{center}\fbox{$\settext{\alpha}{$\Phi$}$}\end{center}
+Terms are strings of marks (expressions) that refer to \emph{mathematical objects}.
+Since variables and constants refer to mathematical objects, they are special cases of terms.
+But you can also have more complicated terms that are built out of simpler ones.
+Terms are most like \emph{noun phrases} in English.
+For example the phrase ``the cup that you drank from'' is a noun phrase;
+it doesn't make any assertion but rather it just refers to a \emph{thing}.
+Here are some terms:
+\begin{itemize}[label=\sp]
+\item $x$
+\item $7$
+\item $\{2,3,a,7\}$
+\item $f(x)$
+\item $\{(z,w)\} \circ g$
+\item $S\times Q$
+\item the square of the seventh prime number
+\item a triangle
+\item twelve dimensional euclidean space
+\item the collection of even integers
+\item $\settext{n}{$n\in\Z$ and $n$ is even}$
+\item $\settext{n}{$(n\in\Z)\AND (\exists k\,|\,(k\in\Z)\AND(2k=n))$}$
 \end{itemize}
-
+The last three terms actually refer to the same mathematical object; this will soon become clear
+when we get into \emph{how} the symbols refer to objects (semantics). For now we are only looking at
+\emph{which} strings of symbols \emph{can} refer to objects (syntax).
+You can see that some terms are more ``symbolic,'' while others are more ``Englishy.''
+The formal language of mathematics is purely symbolic,
+but we almost never use the language in its purest form.
+Typically, we communicate by some combination of English and mathematics.
 
 
 \def\sp{\hspace{1em}}
 \paragraph{Propositions}
-Propositions are strings of marks that are formed as follows:
-\begin{itemize}
-\item
-For each entry in the following box,
-if you replace each of $\pi$, $\rho$, and $\sigma$ with a term, then
-the resulting string of marks will be a proposition.
-\begin{center}
-\fbox{
-\parbox{30em}{
-$(\pi\in\rho)$ \sp
-$(\pi\notin\rho)$ \sp
-$(\pi=\rho)$ \sp
-$(\pi\neq\rho)$ \sp
-$(\pi\subseteq\rho)$ \sp
-$(\pi:\rho\rightarrow\sigma)$ \sp
-$(\pi:\rho\injrightarrow\sigma)$ \sp
-$(\pi:\rho\surjrightarrow\sigma)$ \sp
-$(\pi:\rho\bijrightarrow\sigma)$ \sp
-}
-}
-\end{center}
-\item
-For each entry in the following box,
-if you replace each $\Phi$ and $\Psi$ with a proposition, then
-the resulting string of marks will be a proposition.
-\begin{center}
-\fbox{
-$(\neg\Phi)$ \sp
-$(\Phi\AND\Psi)$ \sp
-$(\Phi\OR\Psi)$ \sp
-$(\Phi\Longrightarrow\Psi)$ \sp
-$(\Phi\Longleftrightarrow\Psi)$ \sp
-}
-\end{center}
-\item
-For each entry in the following box,
-if you replace $\alpha$ with a variable and replace $\Phi$ with a proposition, then
-the resulting string of marks will be a proposition.
-\begin{center}
-\fbox{
-$(\forall \alpha\, |\, \Phi)$ \sp
-$(\exists \alpha\, |\, \Phi)$ 
-}
-\end{center}
+Propositions are strings of marks (expressions) that \emph{make assertions}.
+They are most like \emph{sentences} in English (sentences in the indicative mood).
+Propositions can be true or false. 
+Here are some propositions:
+\begin{itemize}[label=\sp]
+\item $x\in S$.
+\item $5\notin x$.
+\item $0=2$.
+\item $(x\neq y) \AND (x\neq z) \AND (y\neq z)$.
+\item $x$, $y$, and $z$ are distinct.
+\item Either $A\subseteq P$ or $x\in S$, but not both.
+\item $f:X\rightarrow Y$.
+\item If $x\in S$, then we either have $x\notin W$ or we have $x\in\Z$.
+\item $\neg(X\times Y \subseteq Z)$.
+\item Every integer is even.
+\item $(\forall n \, | \, (n\in\Z)\Rightarrow (\exists k\,|\,(k\in\Z)\AND(2k=n)))$.
 \end{itemize}
+The last two propositions are actually saying the same thing, as we will see when we get into semantics.
+Again, you can see that some propositions are more ``symbolic,'' while others are more ``Englishy.''
+Typically, we make mathematical assertions by using some combination of English and mathematics.
+The English that we use is a crude, but human-friendly, stand-in for formal mathematical statements.
 
-\subsubsection{Examples}
 
-\def\sp{\hspace{1em}}
-To demonstrate how this grammar works, let's write down an assortment of terms. Here's one:
-$\{a\}.$
-This is a term because it can be obtained 
-by replacing the $\pi$ in ``$\{\pi\}$'' with a copy of ``$a$'', which is itself a term because
-it's a variable, and all variables are terms.
-
-Here's another term: $\{\{\{K\}\}\}$. This is a term because
-it can be obtained by replacing the $\pi$ in ``$\{\pi\}$'' with a copy of ``$\{\{K\}\}$'',
-which is a term because
-it can be obtained by replacing the $\pi$ in ``$\{\pi\}$'' with a copy of ``$\{K\}$'',
-which is a term because
-it can be obtained by replacing the $\pi$ in ``$\{\pi\}$'' with a copy of ``$K$'',
-which is a term because
-it's a variable and all variables are terms.
-
-Here's a proposition: $(\forall x\,|\, (x\in A))$.
-This is a proposition because it can be obtained by starting with
-``$(\forall\alpha\,|\,\Phi)$"" and replacing the $\alpha$ with a copy of ``$x$'' (a variable)
-and replacing the $\Phi$ with a copy of ``$(x\in A)$'', which is itself a proposition.
-The copy of ``$(x\in A)$'' is a proposition because it can be obtained by
-starting with ``$(\pi\in\rho)$'' and then replacing the $\pi$ by $x$ (a term, because it's a variable)
-and also replacing the $\rho$ by $A$ (a term, because it's a variable).
-
-Hopefully you are now seeing how our tiny set of rules can generate very complicated strings of marks.
-Of course there's nothing here about the \emph{meanings} of any of these expressions.
-This is all just \emph{syntax}, not \emph{semantics}.
-All we've got here is a set of rules that tells us which strings of marks are well-formed,
-and whether a string of marks falls into the (currently meaningless) category of ``term'' or ``proposition.''
 
 \ex{
-For each of the following string of marks, decide whether it is well-formed (i.e. grammatically correct). 
-If yes, then state whether it is a term or a proposition, and give a complete explanation as to how it is so.
+Determine whether each of the following is a term or a proposition.
 \begin{enumerate}
-\item $\{(a + b)\}$
-\item $(a,a)$
-\item $\dom{(a\times(S\cup T))}$
-\item $\{x\,|\,(a=a)\}$
-\item $\{x\,|\,(x+b)\}$
-\item $\{3\,|\,(x\neq x)\}$
-\item $\{(f:x\rightarrow y)\}$
-\item $(f:2\rightarrow 3)$
+\item $n$
+\item $1+1=0$
+\item $n$ is an odd integer
+\item an odd integer
+\item $f$ is a function with domain $S$
+\item $1+(2+3)$
+\item the empty set
+\item the sum of two vectors is another vector
+\item the zero vector
+\item the evenness of $2$ % this one is a trick, it's neither unless you are doing metamathematics
 \end{enumerate}
 }
 
-Is $\{\pi\}$ a term?
-Technically, no it is not! It looks like a certain string of marks that terms were \emph{modeled} on, but
-it is not itself a term.
-In this development, we have opted to use greek letters as placeholders to be replaced by actual variables, constants, terms, and propositions.
-This served us well in describing how to build terms and propositions, but eventually we will no longer need greek letters for this purpose.
-Further, we may later wish to use greek letters for variables, if we find our current box of 52 variables to be insufficient.
-It would then be fine to go back and modify the language by adding in the greek letters as variables.
-
-In fact, people are constantly adding new variables and constants, as well as new ways to introduce terms and phrases.
-When you define a new notation, such as $\frac{df}{dx}$ for derivatives, you are modifying the original mathematical language by adding a new way to make terms.
-When you define a new concept, such as the concept of differentiability of a function, you are  modifying the original mathematical language by adding a new way to make propositions.
-This point will be more clear towards the end of the course.
-For now just keep in mind that, like natural languages, the language of mathematics is not fixed once and for all but rather evolves organically over time.
-
-% dom is a single mark, not to be confused with d o m. hmm no i won't say this. not worth the clutter
-
-Is $(x+y\in z)$ a proposition?
-At the moment, it is not a proposition due to missing parentheses!
-It almost looks like something of the form ``$(\pi\in\rho)$'',
-but the $\pi$ has been replaced by a copy of ``$x+y$'', which is not a term. A copy of ``$(x+y)$''
-would be a term, so $((x+y)\in z)$ is a proposition.
-Okay, but this is silly. There's only one way to parenthesize the string of marks ``$(x+y\in z)$''
-to make it grammatical. The parenthesization ``$(x+(y\in z))$'' would be ill-formed, because ``$(y\in z)$''
-is a proposition, and there is no rule that puts $(x+[\text{a proposition}])$ into any grammatical category.
-Since there is only one way to parenthesize ``$(x+y\in z)$'' to make it well-formed, we can accept
-``$(x+y\in z)$'' as a shorthand for ``$((x+y)\in z)$''. Similarly, we can accept ``$x+y\in z$'' as a shorthand for
-``$((x+y)\in z)$''. Let's tack on a new syntax rule for our mathematical language:
-\begin{center}\textit{It is okay to drop parentheses when there is only one grammatical way to put them back in.}\end{center}
-
-\ex{
-For each of the following strings of marks,
-is it well-formed given the new rule we just introduced?
-If yes, then show the single possible way to add parentheses.
-If no, then give a reason-- is it because there is no grammatical way to add parentheses, or is it because there's more than one way?
-\begin{enumerate}
-\item $x\subseteq y+z$
-\item $x:y\subseteq z \rightarrow x$
-\item $x\rightarrow x$
-\item $+++++++$
-\item $\{ y\,|\, y:y\rightarrow y \}$
-\item $a\cup b\cap c$
-\item $a + b + c$
-\end{enumerate}
-}
-
-
-\subsection{Formal Proofs vs Informal Proofs}
-
-% we are not doing formal proofs, but we should understand what they are to appreciate what it is we ARE doing
+\subsection{Theorems and Proofs}
 
 % in the end it's all about the propositions. terms are only useful because they can be used to make proposiitons
 % propositions are supposed to SAY things, though we haven't given them meaning yet
@@ -324,7 +209,7 @@ If no, then give a reason-- is it because there is no grammatical way to add par
 % and so we want informal proofs. show how the previous example looks as an informal proof
 % now you can see what this course is about: while it is partly giving you some content like set theory, it's mainly about how to communicate proofs in that sweet spot
 
-\subsection{Logic in Informal Proofs}
+\subsection{Logic and Writing Mathematical Arguments}
 
 % run through the rules and some useful derived rules of logic
 % the focus is not formal derivation, but rather to make the rules intuitive and to examine how they influence *writing*
