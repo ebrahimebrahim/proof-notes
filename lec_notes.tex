@@ -2,7 +2,7 @@
 
 % Basic stuff
 \usepackage{fullpage}
-\usepackage{graphics}
+\usepackage{graphicx}
 \usepackage[parfill]{parskip}
 \usepackage[utf8]{inputenc}
 
@@ -16,6 +16,7 @@
 \usepackage{hyperref}
 \usepackage{datetime} \usdate
 \usepackage{enumitem}
+\usepackage{changepage}
 
 
 % Some of Ebrahim's definitions
@@ -108,10 +109,8 @@ Here are some variables:
 \begin{center}
 $a$ \sp $b$ \sp $A$ \sp $f$ \sp $q$ \sp $x$\sp $\alpha$\sp $\beta$
 \end{center}
-Note that we are often talking about elements of \emph{language}, and not about what those elements \emph{refer} to.
-Germany is not a noun, it's a country. ``Germany'' is, however, a noun. Similarly, we can say that $x$ is not a variable, but rather ``$x$'' is.
-Quotation marks can help us make the distinction between a symbol and what the symbol refers to.
-As symbols, variables are copies of letters coming from some alphabet, written in ink or pixels.
+Variables are copies of letters coming from an alphabet (usually Latin or Greek) and written in ink/chalk/pixels.
+
 
 
 \def\sp{\hspace{1em}}
@@ -122,6 +121,17 @@ Here are some constants:
 \begin{center}
 $0$ \sp $1$ \sp $2$ \sp $3$ \sp $4$ \sp $5$ \sp $6$ \sp $7$ \sp $8$ \sp $9$ \sp $\N$ \sp $\R$ \sp $\emptyset$
 \end{center}
+The difference between constants and variables is that constants are not meant to be substituted for.
+The constant ``$2$'' refers to a specific thing, rather than being a placeholder for something.
+
+
+Note that we are mainly talking about elements of \emph{language}, and not about what those elements \emph{refer} to.
+Germany is not a noun, it's a country. ``Germany'' is, however, a noun.
+Similarly, we can say that $2$ is not a constant, but rather ``$2$'' is.
+And $x$ is not a variable, but rather ``$x$'' is.
+Quotation marks help us make the distinction between a symbol and what the symbol refers to.
+
+
 
 
 \def\sp{\hspace{1em}}
@@ -200,14 +210,134 @@ Determine whether each of the following is a term or a proposition.
 
 \subsection{Theorems and Proofs}
 
-% in the end it's all about the propositions. terms are only useful because they can be used to make proposiitons
-% propositions are supposed to SAY things, though we haven't given them meaning yet
-% explain what is an axiom and what is aproof and what is a theorem
-% look at an example of a formal proof (one that you can also write informally soon)
-% math is for HUMANS and so, while nice, this is just not where we want to be
-% we want some kind of sweet spot where we have the backing of the formal development, but we are still communicating proofs to each other in efficient (though crude and vague) human language
-% and so we want informal proofs. show how the previous example looks as an informal proof
-% now you can see what this course is about: while it is partly giving you some content like set theory, it's mainly about how to communicate proofs in that sweet spot
+Mathematics is ultimately about propositions.
+Propositions \emph{say} things, sometimes true things and sometimes false things.
+Which propositions are true? What does ``true'' even mean?
+We will not exactly define ``true,'' but we will define ``provable,''
+and provability will be our notion of truth.
+
+The rules of logic allow us to make deductions and \emph{prove} new propositions
+from already proven propositions.
+Those already proven propositions themselves had to be proven via a sequence of logical deductions
+that was applied to other previously proven propositions.
+And so on...
+but where does it all start?
+
+\paragraph{Axioms}
+Some propositions are declared to be \emph{axioms},
+which makes then serve as starting points in our mathematical system.
+The next paragraph will clarify this.
+
+\paragraph{Proofs}
+A \emph{proof} is a sequence of propositions such that each proposition is either
+(1) an axiom, 
+(2) an already proven proposition,
+or, (3) the result of applying the rules of logic to \emph{previous} propositions in the sequence.
+A proposition that appears in a proof is said to be \emph{proven}.
+
+
+\paragraph{Theorems}
+A \emph{theorem} is a proposition which is asserted to have a proof.
+
+\subsubsection{Example of a Formal Proof}
+
+
+\def\ES{\settext{x}{$x\neq x$}}
+
+Below is an example of a proof of the proposition ``$(\forall x\,|\,x\notin\ES)$''.
+\begin{adjustwidth}{1cm}{}
+$(x\in\ES)\Longrightarrow (x\neq x)$\\ 
+$(x=x)\Longrightarrow (x\notin \ES)$\\
+$x=x$\\
+$x\notin\ES$\\
+$(\forall x\,|\,x\notin\ES)$
+\end{adjustwidth}
+Here I don't want you to worry about interpreting what the propositions are trying to \emph{say};
+I just want to demonstrate how a theorem arises as a result of applying the rules of logic
+to various axioms. What you see above is a sequence of five propositions, ending with the
+one I claimed to be proving, namely ``$(\forall x\,|\,x\notin\ES)$''.
+To really be convinced that we are looking at a proof, we would need a \emph{justification}
+for each of the five propositions-- for each proposition we need to either point out that it is
+an axiom, or we need to verify that it follows logically from the previous propositions.
+In this example, two of the propositions are axioms, and the other three are logical deductions;
+here is a schematic depiction of these relationships:
+\begin{center}
+\includegraphics[scale=0.25]{proofFlow.pdf}
+\end{center}
+Again, don't worry yet about understanding why this works.
+What I want you to take away from this is the general structure:
+we have axioms serving as starting propositions, and we use logic to ``flow'' out from
+the starting points and prove other propositions.
+
+Given a bunch of axioms to start with, what theorems can we deduce?
+That's math.
+
+\paragraph{Remark about Axioms}
+Axioms often serve to \emph{give meaning} to symbols.
+For example, the axiom $x=x$ (along with some other axioms related to equality)
+gives meaning to the symbol ``$=$''.
+Without the axiom, we would still be able to form propositions like $a=b$ but we would never be able to
+prove anything about them.
+Suppose you ``disagree'' with the axiom $x=x$ and instead use some other propositions related to ``$=$'' as axioms.
+That's perfectly fine-- you would just be giving a different meaning to the symbol ``$=$'' and it would serve a different purpose in your language.
+
+\paragraph{Math is for Humans}
+The five-line proof given above is a \emph{formal proof}-- it is written in pure mathematical language
+with absolutely no English.
+This is great if you want absolute rigor, but
+it is not friendly to read if you are not a computer.
+The main purpose of a mathematical proof is for it to convince a human that a theorem is true.
+But formal proofs make for really inefficient communication between humans.
+Thus we are faced with a trade-off: 
+we can sacrifice some rigor to gain efficiency of communication.
+
+\emph{Informal proofs} use a mixture of English and mathematics to make arguments.
+For an example, look at the end of this section for an informal version of the five-line proof above.
+
+We need to find a good balance between rigor and efficient communication.
+Finding that balance is one of the great challenges when you first learn how to write proofs.
+If we sacrifice too much rigor in an argument, then we can lose confidence in its correctness.
+Or worse, we can start to prove false things!
+When developing a new mathematical theory, it's generally good to err on the side of being more rigorous.
+Then, as the theory develops and common patterns of arguments become routine,
+one can slowly relax the rigor in favor of efficiency.
+
+Now you can see what this course is all about.
+While it is partly giving you some specific mathematical content like set theory,
+this course is mainly about how to communicate proofs in that balanced way-- rigorous, yet informal and efficient.
+
+Here is an informal version of the five-line proof from above.
+
+\paragraph{Theorem} The set $\ES$ has no elements.
+\paragraph{Proof}
+If $\ES$ did have an element, say $x$, then we would have $x\neq x$.
+But in fact it is an axiom that $x=x$. Thus $\ES$ cannot have any elements.
+\done
+
+The arguments are essesntially the same ones that appeared in the five-line formal proof.
+But now it's much easier to process the arguments, though I'm not expecting you to do so just yet.
+
+
+\ex{
+\note{
+lang with the following propositions: three by three grid with some squares containing a dot and some not.
+the following 2 logical rules: can rot by 90 degrees clockwise. can glom two props together which is like adding vectors in Z2.
+the following 2 axioms: top mid dot; right mid dot and bottom left dot
+
+questions:
+1 how many props in this language? how many props in math?
+2 completely formally and rigorously prove that
+- -
+---
+3 (open ended) can you think of a way to write an informal proof?
+something that captures the idea of your proof, 
+but communicates it more efficiently in English and doesn't show every step in detail.
+basically your informal proof is a description of the formal proof, or *instructions* for how to write the formal proof.
+4 (extra for fun and not relevant to main point) can you figure out how many propositions in this language are provable and how many are not?
+}
+}
+
+
 
 \subsection{Logic and Writing Mathematical Arguments}
 
