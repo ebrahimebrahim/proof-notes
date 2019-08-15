@@ -40,7 +40,7 @@
 \newcommand{\bijrightarrow}{\xrightarrow{\text{bij}}}
 \newcommand{\AND}{\wedge}
 \newcommand{\OR}{\vee}
-\newcommand{\ex}[1]{\paragraph{Exercise:}#1}
+\newcommand{\ex}[1]{\textbf{Exercise:}\begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
 
 
 
@@ -270,7 +270,7 @@ we have axioms serving as starting propositions, and we use logic to ``flow'' ou
 the starting points and prove other propositions.
 
 Given a bunch of axioms to start with, what theorems can we deduce?
-That's math.
+To answer this question is to do math.
 
 \paragraph{Remark about Axioms}
 Axioms often serve to \emph{give meaning} to symbols.
@@ -292,7 +292,7 @@ Thus we are faced with a trade-off:
 we can sacrifice some rigor to gain efficiency of communication.
 
 \emph{Informal proofs} use a mixture of English and mathematics to make arguments.
-For an example, look at the end of this section for an informal version of the five-line proof above.
+For an example, look ahead a few paragraphs for an informal version of the five-line proof above.
 
 We need to find a good balance between rigor and efficient communication.
 Finding that balance is one of the great challenges when you first learn how to write proofs.
@@ -315,26 +315,62 @@ But in fact it is an axiom that $x=x$. Thus $\ES$ cannot have any elements.
 \done
 
 The arguments are essesntially the same ones that appeared in the five-line formal proof.
-But now it's much easier to process the arguments, though I'm not expecting you to do so just yet.
+But, compared to the formal proof, it's much easier to process the arguments (though I'm still not expecting you to do so just yet).
 
-
+\newpage 
+\def\s{0.25}
+\newcommand{\rb}[1]{\raisebox{-0.2em}{#1}}
 \ex{
-\note{
-lang with the following propositions: three by three grid with some squares containing a dot and some not.
-the following 2 logical rules: can rot by 90 degrees clockwise. can glom two props together which is like adding vectors in Z2.
-the following 2 axioms: top mid dot; right mid dot and bottom left dot
-
-questions:
-1 how many props in this language? how many props in math?
-2 completely formally and rigorously prove that
-- -
----
-3 (open ended) can you think of a way to write an informal proof?
-something that captures the idea of your proof, 
-but communicates it more efficiently in English and doesn't show every step in detail.
-basically your informal proof is a description of the formal proof, or *instructions* for how to write the formal proof.
-4 (extra for fun and not relevant to main point) can you figure out how many propositions in this language are provable and how many are not?
-}
+In this exercise we will work with a made-up deductive language which works as follows:
+\begin{itemize}
+\item Propositions are the only part of speech. The propositions are $3\times 3$ grids in which each square is either blank or contains a dot. Here are three random example propositions:
+\begin{center}\includegraphics[scale=\s]{gridgame1.pdf}\end{center}
+\item There are two logical rules in this language.
+The first rule is that if a particular proposition holds, then
+its clockwise rotation by ninety degrees follows. So if 
+\rb{\includegraphics[scale=\s]{gridgame2.pdf}}
+holds, then you can deduce that
+\rb{\includegraphics[scale=\s]{gridgame3.pdf}}.
+The second rule is that if two propositions $\Phi$ and $\Psi$ hold, then you can deduce a third proposition
+which contains a dot in any square that has a dot in either $\Phi$ or $\Psi$, but not both.
+So for example if you have the two propositions
+\rb{\includegraphics[scale=\s]{gridgame6.pdf}}
+and
+\rb{\includegraphics[scale=\s]{gridgame7.pdf}},
+then you can deduce from them that
+\rb{\includegraphics[scale=\s]{gridgame5.pdf}}.
+\item There are only two axioms in this language, and they are as follows:
+\begin{center}
+\includegraphics[scale=\s]{gridgame8.pdf}
+\hspace{2em}
+\includegraphics[scale=\s]{gridgame9.pdf}
+\end{center}
+\end{itemize}
+As a demonstration of this deductive language, here is a proof that 
+\rb{\includegraphics[scale=\s]{gridgame11.pdf}}\ :
+\begin{center}
+\includegraphics[scale=\s]{gridgame10.pdf}
+\end{center}
+Can you see how this proof is correct?
+These annotations may help:
+\begin{center}
+\includegraphics[scale=\s]{gridgame12.pdf}
+\end{center}
+Now...
+\begin{enumerate}
+\item
+How many propositions are there in this language?
+How many propositions do you think there are in mathematics?
+How many sentences are there in English?
+\item
+Give a completely formal proof that 
+\rb{\includegraphics[scale=\s]{gridgame0.pdf}}.
+To help out your reader, annotate the proof with arrows like in the example above.
+\item (Open-ended) Can you think of a way to write an \emph{informal} version of your proof?
+It would be an English description of your proof that does not explain every detail but still captures the essence of your formal proof.
+%One way to think of an informal proof is: it somehow gives the reader \emph{instructions} for how to come up with the formal proof.
+\item (Irrelevant but fun) Can you figure out how many propositions in this language are provable and how many are not?
+\end{enumerate}
 }
 
 
