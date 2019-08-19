@@ -41,6 +41,18 @@
 \newcommand{\AND}{\wedge}
 \newcommand{\OR}{\vee}
 \newcommand{\ex}[1]{\textbf{Exercise:}\begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
+\newcommand{\RULE}[2]{\begin{adjustwidth}{2em}{}#1: #2\end{adjustwidth}}
+\newcommand{\THM}[2]{\textbf{Theorem:} #1\\\textit{Proof:} #2\done}
+\newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
+
+
+\def\pA{\Phi}
+\def\pB{\Psi}
+\def\pC{\Omega}
+\def\pD{\Sigma}
+\def\pE{\Gamma}
+\def\pF{\Delta}
+
 
 
 
@@ -169,7 +181,7 @@ Typically, we communicate by some combination of English and mathematics.
 \def\sp{\hspace{1em}}
 \paragraph{Propositions}
 Propositions are strings of marks (expressions) that \emph{make assertions}.
-They are most like \emph{sentences} in English (sentences in the indicative mood).
+They are most like \emph{sentences} in English (declarative sentences).
 Propositions can be true or false. 
 Here are some propositions:
 \begin{itemize}[label=\sp]
@@ -308,12 +320,10 @@ this course is mainly about how to communicate proofs in that balanced way-- rig
 
 Here is an informal version of the five-line proof from above.
 
-\paragraph{Theorem} The set $\ES$ has no elements.
-
-\textit{Proof:}
+\THM{The set $\ES$ has no elements.}{
 If $\ES$ did have an element, say $x$, then we would have $x\neq x$.
 But in fact it is an axiom that $x=x$. Thus $\ES$ cannot have any elements.
-\done
+}
 
 The arguments are essesntially the same ones that appeared in the five-line formal proof.
 But, compared to the formal proof, it's much easier to process the arguments (though I'm still not expecting you to do so just yet).
@@ -332,8 +342,8 @@ its clockwise rotation by ninety degrees follows. So if
 \rb{\includegraphics[scale=\s]{gridgame2.pdf}}
 holds, then you can deduce that
 \rb{\includegraphics[scale=\s]{gridgame3.pdf}}.
-The second rule is that if two propositions $\Phi$ and $\Psi$ hold, then you can deduce a third proposition
-which contains a dot in any square that has a dot in either $\Phi$ or $\Psi$, but not both.
+The second rule is that if two propositions $\pA$ and $\pB$ hold, then you can deduce a third proposition
+which contains a dot in any square that has a dot in either $\pA$ or $\pB$, but not both.
 So for example if you have the two propositions
 \rb{\includegraphics[scale=\s]{gridgame6.pdf}}
 and
@@ -378,12 +388,191 @@ It would be an English description of your proof that does not explain every det
 
 \subsection{Logic and Writing Mathematical Arguments}
 
-% the rest of the course is logic and set theory with the goal of being able to write balanced informal proofs
-% now that you know what a deduction system is, we will go through some of the rules of mathematical logic and look at the form they take in our written proofs.
+The rest of this course will introduce logic and set theory, starting with logic in this section.
+Our goal with logic is not only to understand the rules of deduction,
+but also to gain the ability to \emph{write} paragraph-style deductive arguments-- informal proofs.
+
+Logic is all about manipulating \emph{propositions}, so you will not see many \emph{terms} showing up in this section.
+In fact, we will find ourselves having to discuss proofs while having nothing in particular to prove anything about.
+Mathematical propositions are supposed to say things about mathematical objects;
+without any mathematical objects in hand, we cannot form any actual mathematical propositions.
+We will proceed with the discussion anyway, using two strategies:
+
+First, we will use capital Greek letters as placeholders for mathematical propositions. Examples include
+$$
+\pA,
+\pB,
+\pC,
+\pD,
+\pE,
+\pF.
+$$
+When you see these capital Greek letters, remember that they are \emph{not variables},
+at least not in the sense of mathematical variables. They are not to be replaced by mathematical \emph{objects}.
+Rather, they are meant to be replaced by \emph{propositions}.
+When they appear in English sentences, they will take the grammatical role of independent clauses.
+So, for example, we accept the following as grammatically correct English sentences:
+\begin{adjustwidth}{2em}{}
+I believe that $\pA$.\\
+They thought that $\pA$, but in fact $\pB$.\\
+$\pA$.
+\end{adjustwidth}
+
+Our second strategy
+%for discussing logic without the ability to form mathematical propositions 
+is to apply the rules of logic to English sentences.
+Even though $\pA$, $\pB$, etc. are supposed to stand for \emph{mathematical} propositions,
+we will allow ourselves to replace them by declarative sentences in \emph{English}.
+For example, replacing $\pA$ by ``Jim stole the car'' and $\pB$ by ``Jim is an upstanding guy'' in the above examples, we get the sentences
+\begin{adjustwidth}{2em}{}
+I believe that Jim stole the car.\\
+They thought that Jim stole the car, but in fact Jim is an upstanding guy.\\
+Jim stole the car.
+\end{adjustwidth}
+We will stop doing this as soon as we reach section \ref{sec:sets}. At that point, we will start to work with actual mathematical propositions.
+
+\ex{
+Which of the following are grammatically correct? Hint: replace Greek letters with English sentences and see what makes sense.
+\begin{enumerate}
+\item She said that $\pC$, and I think she's onto something.
+\item Take that, you accursed $\pA$!
+\item Why don't we just $\pB$?
+\item To $\pA$, or not to $\pA$, that is the question.
+\item Whether $\pC$ or $\pD$, it will always be the case that $\pA$.
+\item $\pD$ and $\pF$, but not $\pB$.
+\item Despite all the $\pE$, they still wanted to $\pF$.
+\item Whenever $\pC$, it turns out that $\pE$.
+\item It is not true that $\pA$.
+\end{enumerate}
+}
+
+
+
+\subsubsection{And, Or, and Not}
+
+Given propositions $\pA$ and $\pB$, we can form their \emph{conjunction}
+$$
+\pA \AND \pB,
+$$
+which is expressed in English as ``$\pA$ and $\pB$.''
+From the conjunction $\pA\AND\pB$, you can deduce $\pA$ and you can deduce $\pB$.
+In order to prove that $\pA\AND\pB$, you must prove both that $\pA$ and that $\pB$.
+
+
+Given propositions $\pA$ and $\pB$, we can form their \emph{disjunction}
+$$
+\pA \OR \pB,
+$$
+which is expressed in English as ``$\pA$ or $\pB$.''
+In order to prove that $\pA\OR\pB$, you can either prove that $\pA$ or you can prove that $\pB$.
+So if $\pA$ and $\pB$ happen to both hold, then you can still deduce that $\pA\OR\pB$
+(unlike the way ``or'' is sometimes used in English).
+
+If you know that $\pA\OR\pB$, then how can you use this fact in your arguments?
+You cannot deduce $\pA$ and you cannot deduce $\pB$, so how do you proceed if you want to prove some other proposition $\pC$?
+The rule that lets you proceed is called \emph{proof by cases}:
+\RULE{Proof by cases}{
+Suppose that you can prove $\pC$ by assuming $\pA$, and you can also prove $\pC$ by assuming $\pB$.
+Then you can deduce $\pC$ from $\pA\OR\pB$.
+}
+In a written proof, the format of a proof by cases ends up like this:
+
+\THM{Assuming that either $\pA$ or $\pB$ holds, we have $\pC$.}{
+Assume that either $\pA$ or $\pB$ holds.\\
+Case 1: Suppose that $\pA$ holds.
+\indented{[insert argument here convincing the reader that $\pC$ holds]}
+Case 2: Suppose that $\pB$ holds.
+\indented{[insert argument here convincing the reader that $\pC$ holds]}
+Since $\pC$ holds in both cases, we can conclude that $\pC$ holds.
+}
+
+Let's do an example using English sentences.
+Suppose you see a plant with three-leaf bunches and you're sure that it's either poison ivy or poison oak, but you don't know which.
+Well, you do know that poison ivy is poisonous and that poison oak is poisonous, so you can at least conclude that the plant you see is poisonous, even
+if you don't know which type of plant it is.
+That's a proof by cases.
+To make the proof structure apparent in
+the formatting given above, replace $\pA$ by ``The plant is poison ivy,'' replace $\pB$ by ``The plant is poison oak,'' and replace $\pC$ by ``The plant is poisonous.''
+
+%You get something like this:
+%\THM{Assuming that the plant is either poison ivy or poison oak, we can conclude that it is poisonous.}{
+%Assume that the plant is either poison ivy or poison oak.\\
+%Case 1: Suppose the plant is poison ivy.
+%\indented{[insert argument convincing the reader that poison ivy is poisonous.]}
+%Case 2: Suppose the plant is poison oak.
+%\indented{[insert argument convincing the reader that poison oak is poisonous.]}
+%Since the plant is poisonous either way, we can conclude that the plant is poisonous.
+%}
+
+Given a proposiiton $\pA$, we can form its \emph{negation}
+$$
+\neg \pA,
+$$
+which is expressed in English as ``It is not the case that $\pA$.''
+To prove $\neg\pA$ is to disprove $\pA$, and in fact this is simply what is meant by ``disprove.''
+
+%It should never be the case that a proposition holds while its negation also holds.
+%We hope, at least, that $\pA\AND\not\PA$ is not provable.
+A proposition of the form $\pA\AND\neg\pA$ is called a \emph{contradiction}.
+If something can both be and not be the case, then our entire deductive system is certainly broken.
+We hope that no contradiction is provable in our language.
+This leads us to accept the following as a way of proving a negation $\neg\pA$:
+%Further, we explicitly deem contradictions to be \emph{impossible}, in the sense that any assumption
+%that leads one to deduce a contradiction must be rejected as false.
+%In order to prove that $\neg\pA$, you can assume that $\pA$ does hold and then show that this leads to a contradiction.
+%This is called a \emph{proof by contradiction}:
+\RULE{Proof by contradiction}{
+If assuming $\pA$ allows you to deduce a contradiction, then it must be that $\neg\pA$.
+}
+In a written proof, the format of a proof by contradiction ends up like this:
+
+\THM{\neg\pA.}{
+Suppose, for the sake of obtaining a contradiction, that $\pA$ holds.
+\indented{[insert argument convincing reader that a contradiction, something of the form $\pB\AND\neg\pB$, now follows]}
+Since this is a contradiction, we conclude that $\neg\pA$.
+}
+
+Let's do an example using English sentences.
+% pf by contradiction
+% give written formatting of it
+% give english example
+
+%law of excluded middle
+
+
+
+% exercise that helps to understand how in english you can have inclusive and exclusive or, while math is inclusive.
+
+% exercise that shows how parentheses are needed in and-or combinations
+% in the same exercise you can show how and distributes over or and vice versa
+% maybe the ex can be structured like this: for each of the following deductions, decide whether it is valid or not. if not valid, then justify by... 
+  % uhhh truth table? or maybe you can give them some sample true and false english facts to put in, and do an example.
+
+% some kind of exercise involving demorgan's law. or maybe you should write about that above
+
+% maybe an exercise involving truth tables, having them fill one out for basic things and then for more complicated props
+
+
+\subsubsection{Implication and Double Implication}
+
+% double neg somewhere in here
+
+\subsubsection{Universal and Existential Quantifiers}
+
 
 % run through the rules and some useful derived rules of logic
 % the focus is not formal derivation, but rather to make the rules intuitive and to examine how they influence *writing*
 % where truth tables can help make rules intuitive, bring them in. otherwise truth tables are not a main focus
+% a section on and,or,not,implies,iff,forall,exists.
+% for each:
+  %what it makes prop mean. 
+  %what you get from having it and how to write that.
+  %how to prove it and how to write that.
+  %example using english props
+  %useful ways it interacts with previous ones.
+  %exercises
+
+% don't forget about excluded middle and other such rules... where do those go?
 
 
 % a comment (maybe put this earlier) on how repetitiveness is okay for now, and better to fix it later. perhaps sian comments on how fix
