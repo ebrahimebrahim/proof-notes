@@ -17,6 +17,7 @@
 \usepackage{datetime} \usdate
 \usepackage{enumitem}
 \usepackage{changepage}
+\usepackage{tcolorbox}
 
 
 % Some of Ebrahim's definitions
@@ -41,10 +42,11 @@
 \newcommand{\AND}{\wedge}
 \newcommand{\OR}{\vee}
 \newcommand{\ex}[1]{\textbf{Exercise:}\begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
-\newcommand{\RULE}[2]{\begin{adjustwidth}{2em}{}#1: #2\end{adjustwidth}}
-\newcommand{\THM}[2]{\textbf{Theorem:} #1\\\textit{Proof:} #2\done}
 \newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
 
+\newcommand{\THM}[2]{\textbf{Theorem:} #1\\[0.5em]\textit{Proof:} #2\qed}
+
+\newcommand{\RULE}[2]{\begin{tcolorbox}[title=#1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
 
 \def\pA{\Phi}
 \def\pB{\Psi}
@@ -492,7 +494,7 @@ Well, you do know that poison ivy is poisonous and that poison oak is poisonous,
 if you don't know which type of plant it is.
 That's a proof by cases.
 To make the proof structure apparent in
-the formatting given above, replace $\pA$ by ``The plant is poison ivy,'' replace $\pB$ by ``The plant is poison oak,'' and replace $\pC$ by ``The plant is poisonous.''
+the formatting given above, replace $\pA$ by ``the plant is poison ivy,'' replace $\pB$ by ``the plant is poison oak,'' and replace $\pC$ by ``the plant is poisonous.''
 
 %You get something like this:
 %\THM{Assuming that the plant is either poison ivy or poison oak, we can conclude that it is poisonous.}{
@@ -508,8 +510,9 @@ Given a proposiiton $\pA$, we can form its \emph{negation}
 $$
 \neg \pA,
 $$
-which is expressed in English as ``It is not the case that $\pA$.''
-To prove $\neg\pA$ is to disprove $\pA$, and in fact this is simply what is meant by ``disprove.''
+which is expressed in English as ``it is not the case that $\pA$.''
+To prove $\neg\pA$ is to disprove $\pA$, and in fact this is what ``disprove'' means.
+When $\pA$ holds we say that $\pA$ is \emph{true}, and when $\neg\pA$ holds we say that $\pA$ is \emph{false}.
 
 %It should never be the case that a proposition holds while its negation also holds.
 %We hope, at least, that $\pA\AND\not\PA$ is not provable.
@@ -526,18 +529,38 @@ If assuming $\pA$ allows you to deduce a contradiction, then it must be that $\n
 }
 In a written proof, the format of a proof by contradiction ends up like this:
 
-\THM{\neg\pA.}{
+\THM{$\neg\pA$.}{
 Suppose, for the sake of obtaining a contradiction, that $\pA$ holds.
 \indented{[insert argument convincing reader that a contradiction, something of the form $\pB\AND\neg\pB$, now follows]}
 Since this is a contradiction, we conclude that $\neg\pA$.
 }
 
 Let's do an example using English sentences.
-% pf by contradiction
-% give written formatting of it
-% give english example
+Say you're investigating a crime and you are considering a particular suspect.
+Assuming the suspect did commit the crime, you can deduce that the suspect must have been at the crime scene on that day.
+Upon questioning witnesses, you discover that the suspect was at work and could not have been at the crime scene that day.
+This contradiction leads you to reject the original assumption; the suspect must not have committed the crime.
+Making an assumption so that you can reject it after deducing an impossible situation-- that is a proof by contradiction.
+To make the proof structure apparent in
+the formatting given above, replace
+$\pA$ by ``the suspect committed the crime'' and replace $\pB$ by ``the suspect was at the crime scene that day''.
 
-%law of excluded middle
+
+The proof by contradiction rule rejects that a mathematical proposition can be both true and false.
+There's
+another rule involving negation which
+enforces that mathematical propositions must be either true or false:
+\RULE{Excluded middle}{
+$\pA\OR\neg\pA$
+}
+There is no ``middle ground'' in which a proposition is neither true nor false.
+
+
+
+
+
+
+% go back and do a better job presenting rules in terms of  formatting, and separatign susbsections perhaps with illustrated titles
 
 
 
@@ -549,13 +572,115 @@ Let's do an example using English sentences.
   % uhhh truth table? or maybe you can give them some sample true and false english facts to put in, and do an example.
 
 % some kind of exercise involving demorgan's law. or maybe you should write about that above
+% idea: a deduction of demorgan's law going one way, and have them prove it going the other way
 
 % maybe an exercise involving truth tables, having them fill one out for basic things and then for more complicated props
 
+\ex{
+The ``or'' of mathematical logic sometimes behaves differently from the English ``or.''
+Describe a situation in which
+\begin{center} ``The cake is flavored with either vanilla or chocolate.'' \end{center}
+would pretty much be considered false, while
+\begin{center} ``The cake is flavored with vanilla''\ $\OR$\ ``The cake is flavored with chocolate''. \end{center}
+would be true.
+}
 
-\subsubsection{Implication and Double Implication}
+
+
+
+\newcommand{\truthtablefour}[5]{
+\begin{tabular}{|c|c|c|}
+\hline
+$\pA$ & $\pB$ & #1 \\ \hline
+F     & F  & #2   \\ \hline
+F     & T  & #3   \\ \hline
+T     & F  & #4   \\ \hline
+T     & T  & #5   \\ \hline
+\end{tabular}
+}
+
+\newcommand{\truthtabletwo}[3]{
+\begin{tabular}{|c|c|}
+\hline
+$\pA$ & #1 \\ \hline
+F     & #2   \\ \hline
+T     & #3   \\ \hline
+\end{tabular}
+}
+
+
+\def\sp{\hspace{1em}}
+
+\ex{
+Thanks to the law of excluded middle, there are only two possibilities for a single proposiiton $\pA$: it is either true or false.
+For \emph{two} propositions $\pA$ and $\pB$, there are \emph{four} possibilities, which we can list in a nice table:
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+$\pA$ & $\pB$ \\ \hline
+F     & F     \\ \hline
+F     & T     \\ \hline
+T     & F     \\ \hline
+T     & T     \\ \hline
+\end{tabular}
+\end{center}
+For three propositions there are eight possibilities, and so on.
+This suggests a useful way to think about the logical operators $\AND$, $\OR$, and $\neg$:
+\begin{center}
+\truthtablefour{$\pA\AND\pB$}{F}{F}{F}{T}
+\sp
+\truthtablefour{$\pA\OR\pB$}{F}{T}{T}{T}
+\sp
+\truthtabletwo{$\neg\pA$}{T}{F}
+\end{center}
+Here we are simply listing all the possibilities for the component propositions $\pA$, $\pB$, etc.,
+and then we are indicating whether the complex proposition is true or false in each case. These are called \emph{truth tables}.
+\begin{enumerate}
+\item
+Write out a truth table for $\neg(\pA\AND\pB)$. It should have four rows.
+
+\item
+Write out a truth table for $(\pA\AND\pB)\AND\pC$, and also for $\pA\AND(\pB\AND\pC)$.
+The table should have eight rows, and you can feel free to make just one table in which 
+there is a column for $(\pA\AND\pB)\OR\pC$ and a column for $\pA\AND(\pB\OR\pC)$.
+
+\item
+Your answer to the above should convince you that it's a terrible idea to write something like ``$\pA\AND\pB\OR\pC$.''
+Replace $\pA$, $\pB$, and $\pC$ by English sentences in $\pA\AND\pB\OR\pC$ such that you get an ambiguous Enlgish sentence.
+Explain the ambiguity in your sentence.
+
+\item
+Write out a truth table for $(\pA\AND\pB)\OR\pC$, and also for $\pA\AND(\pB\OR\pC)$.
+The answer should convince you that there is no trouble at all with writing $\pA\AND\pB\AND\pC$,
+though you were probably convinced anyway since $\pA\AND\pB\AND\pC$ can obviously only mean:
+``$\pA$, $\pB$, and $\pC$ are all true.''
+
+\item
+Write out a truth table for $(\pA\AND\pB)\OR\pA$. This one should just have four rows.
+Looking at the table, do you see a way to ``simplify'' the complex proposition  $(\pA\AND\pB)\OR\pA$?
+
+\item
+Write out a truth table for $(\pA\AND\pB)\OR\pC$, and also for $(\pA\OR\pC)\AND(\pB\OR\pC)$.
+This should show you that $\OR$ can ``distribute'' over $\AND$.
+
+\item
+Write out a truth table for $(\pA\OR\pB)\AND\pC$, and also for $(\pA\AND\pC)\OR(\pB\AND\pC)$.
+This should show you that $\AND$ can ``distribute'' over $\OR$.
+\end{enumerate}
+}
+
+
+\ex{
+\note{demorgan's law exercise}
+}
+
+
+
+\subsubsection{If and Iff}
 
 % double neg somewhere in here
+
+% in an exercise: the iff for the version of demorgan's law that you didn't do in prev sec
 
 \subsubsection{Universal and Existential Quantifiers}
 
