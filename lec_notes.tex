@@ -459,6 +459,8 @@ $$
 which is expressed in English as ``$\pA$ and $\pB$.''
 From the conjunction $\pA\AND\pB$, you can deduce $\pA$ and you can deduce $\pB$.
 In order to prove that $\pA\AND\pB$, you must prove both that $\pA$ and that $\pB$.
+The following diagram, showing what you can deduce from $\pA\AND\pB$, kind of looks like the ``$\AND$'' symbol:
+\begin{center}\includegraphics[scale=0.5]{andDiagram.pdf}\end{center}
 
 
 Given propositions $\pA$ and $\pB$, we can form their \emph{disjunction}
@@ -469,6 +471,8 @@ which is expressed in English as ``$\pA$ or $\pB$.''
 In order to prove that $\pA\OR\pB$, you can either prove that $\pA$ or you can prove that $\pB$.
 So if $\pA$ and $\pB$ happen to both hold, then you can still deduce that $\pA\OR\pB$
 (unlike the way ``or'' is sometimes used in English).
+The following diagram, showing what you can use to deduce $\pA\OR\pB$, kind of looks like the ``$\OR$'' symbol:
+\begin{center}\includegraphics[scale=0.5]{orDiagram.pdf}\end{center}
 
 If you know that $\pA\OR\pB$, then how can you use this fact in your arguments?
 You cannot deduce $\pA$ and you cannot deduce $\pB$, so how do you proceed if you want to prove some other proposition $\pC$?
@@ -506,7 +510,7 @@ the formatting given above, replace $\pA$ by ``the plant is poison ivy,'' replac
 %Since the plant is poisonous either way, we can conclude that the plant is poisonous.
 %}
 
-Given a proposiiton $\pA$, we can form its \emph{negation}
+Given a proposition $\pA$, we can form its \emph{negation}
 $$
 \neg \pA,
 $$
@@ -612,7 +616,7 @@ T     & #3   \\ \hline
 \def\sp{\hspace{1em}}
 
 \ex{
-Thanks to the law of excluded middle, there are only two possibilities for a single proposiiton $\pA$: it is either true or false.
+Thanks to the law of excluded middle, there are only two possibilities for a single proposition $\pA$: it is either true or false.
 For \emph{two} propositions $\pA$ and $\pB$, there are \emph{four} possibilities, which we can list in a nice table:
 \begin{center}
 \begin{tabular}{|c|c|}
@@ -650,7 +654,7 @@ Replace $\pA$, $\pB$, and $\pC$ by English sentences in $\pA\AND\pB\OR\pC$ such 
 Explain the ambiguity in your sentence.
 
 \item
-Write out a truth table for $(\pA\AND\pB)\OR\pC$, and also for $\pA\AND(\pB\OR\pC)$.
+Write out a truth table for $(\pA\AND\pB)\AND\pC$, and also for $\pA\AND(\pB\AND\pC)$.
 The answer should convince you that there is no trouble at all with writing $\pA\AND\pB\AND\pC$,
 though you were probably convinced anyway since $\pA\AND\pB\AND\pC$ can obviously only mean:
 ``$\pA$, $\pB$, and $\pC$ are all true.''
@@ -671,7 +675,20 @@ This should show you that $\AND$ can ``distribute'' over $\OR$.
 
 
 \ex{
-\note{demorgan's law exercise}
+Starting from the assumption $\neg(\pA\AND\pB)$, prove that $(\neg\pA)\OR(\neg\pB)$.
+Write your proof using only the logic rules given in this section.
+Hints:
+The first hint is that excluded middle, proof by contradiction, and proof by cases are all helpful here.
+The second hint is to show you the backwards version of what you are being asked to do, just to give you a feeling for the way to write these arguments.
+Starting from the assumption $(\neg\pA)\OR(\neg\pB)$, here is a proof that $\neg(\pA\AND\pB)$:
+\indented{
+Assume $(\neg\pA)\OR(\neg\pB)$.
+Suppose, for the sake of contradiction, that $\pA\AND\pB$ holds.
+Then $\pA$ holds, and $\pB$ holds. Since we know that $(\neg\pA)\OR(\neg\pB)$ holds, there are two cases to consider:\\[0.5em]
+Case 1: Suppose that $\neg\pA$ holds. Then, since we already said that $\pA$ holds, we obtain the contradiction $\pA\AND\neg\pA$.\\[0.5em]
+Case 2: Suppose that $\neg\pB$ holds. Then, since we already said that $\pB$ holds, we obtain the contradiction $\pB\AND\neg\pB$.\\[0.5em]
+We obtain a contradiction either way, and so we are forced to reject that $\pA\AND\pB$. That is, we have $\neg(\pA\AND\pB)$.
+}
 }
 
 
