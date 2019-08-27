@@ -41,12 +41,15 @@
 \newcommand{\bijrightarrow}{\xrightarrow{\text{bij}}}
 \newcommand{\AND}{\wedge}
 \newcommand{\OR}{\vee}
+\newcommand{\ARR}{\Longrightarrow}
+\newcommand{\DARR}{\Longleftrightarrow}
 \newcommand{\ex}[1]{\textbf{Exercise:}\begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
 \newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
 
 \newcommand{\THM}[2]{\textbf{Theorem:} #1\\[0.5em]\textit{Proof:} #2\qed}
 
-\newcommand{\RULE}[2]{\begin{tcolorbox}[title=#1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
+\newcommand{\RULE}[2]{\begin{tcolorbox}[title=Rule: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
+\newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Rule: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
 
 \def\pA{\Phi}
 \def\pB{\Psi}
@@ -197,7 +200,7 @@ Here are some propositions:
 \item If $x\in S$, then we either have $x\notin W$ or we have $x\in\Z$.
 \item $\neg(X\times Y \subseteq Z)$.
 \item Every integer is even.
-\item $(\forall n \, | \, (n\in\Z)\Rightarrow (\exists k\,|\,(k\in\Z)\AND(2k=n)))$.
+\item $(\forall n \, | \, (n\in\Z)\ARR (\exists k\,|\,(k\in\Z)\AND(2k=n)))$.
 \end{itemize}
 The last two propositions are actually saying the same thing, as we will see when we get into semantics.
 Again, you can see that some propositions are more ``symbolic,'' while others are more ``Englishy.''
@@ -644,7 +647,7 @@ and then we are indicating whether the complex proposition is true or false in e
 Write out a truth table for $\neg(\pA\AND\pB)$. It should have four rows.
 
 \item
-Write out a truth table for $(\pA\AND\pB)\AND\pC$, and also for $\pA\AND(\pB\AND\pC)$.
+Write out a truth table for $(\pA\AND\pB)\OR\pC$, and also for $\pA\AND(\pB\OR\pC)$.
 The table should have eight rows, and you can feel free to make just one table in which 
 there is a column for $(\pA\AND\pB)\OR\pC$ and a column for $\pA\AND(\pB\OR\pC)$.
 
@@ -674,6 +677,10 @@ This should show you that $\AND$ can ``distribute'' over $\OR$.
 }
 
 
+\newpage
+
+\note{TODO: Move this exercise to the right place-- I am thinking we should put it later in a derived rules section.}
+
 \ex{
 Starting from the assumption $\neg(\pA\AND\pB)$, prove that $(\neg\pA)\OR(\neg\pB)$.
 Write your proof using only the logic rules given in this section.
@@ -691,9 +698,133 @@ We obtain a contradiction either way, and so we are forced to reject that $\pA\A
 }
 }
 
+\note{Here is solution to exercise. IDK what to do with it right now.}
+
+Assume $\neg(\pA\AND\pB)$.
+Due to excluded middle, either $\pA$ or $\neg\pA$.\\[0.5em]
+Case 1: Suppose that $\pA$ holds. Now if $\pB$ held we would obtain $\pA\AND\pB$, which leads to the contradiction $(\pA\AND\pB)\AND\neg(\pA\AND\pB)$.
+Therefore it must be that $\neg\pB$. From this it follows that $\neg\pA\OR\neg\pB$.\\[0.5em]
+Case 2: Suppose that $\neg\pA$ holds. Then it immediately follows that $\neg\pA\OR\neg\pB$.\\[0.5em]
+Since we ended up with $\neg\pA\OR\neg\pB$ in both cases, we can conclude that $\neg\pA\OR\neg\pB$.
+
+\newpage
 
 
 \subsubsection{If and Iff}
+
+Given propositions $\pA$ and $\pB$, we can form the \emph{implication}
+$$
+\pA\ARR\pB,
+$$
+which is expressed in English as ``if $\pA$, then $\pB$.''
+The ``$\pA$'' part of an implication $\pA\ARR\pB$ is called the \emph{hypothesis},
+and the ``$\pB$'' part is called the \emph{conclusion}.
+To prove $\pA\ARR\pB$,
+start by assuming $\pA$ and
+then give an argument that $\pB$ follows.
+That is, assume the hypotheses and then argue that the conclusion follows.
+Such a proof ends up structured like this:
+
+\THM{If $\pA$, then $\pB$.}{
+Assume that $\pA$.
+\indented{[insert argument convincing reader that $\pB$ holds]}
+Thus, $\pA\ARR\pB$.
+}
+
+The rule that allows us to use $\pA\ARR\pB$ is modus ponens:
+\RULE{Modus ponens}{
+Given $\pA\ARR\pB$ and $\pA$, you can deduce $\pB$.
+}
+Here is also another great rule for using an implication (this one can be derived from modus ponens via a proof by contradiction):
+\DRULE{Modus tollens}{
+Given $\pA\ARR\pB$ and $\neg\pB$, you can deduce $\neg\pA$.
+}
+
+Given  propositions $\pA$ and $\pB$, we can form the \emph{logical equivalence}
+$$
+\pA\DARR\pB,
+$$
+which is expressed in English as ``$\pA$ if and only if $\pB$,'' often shortened to ``$\pA$ iff $\pB$.''
+
+An equivalence holds when two propositions are forced to be true or false \emph{together}--
+that is, when they are either both true or both false.
+
+To prove an equivalence $\pA\DARR\pB$, simply prove both of the implications $\pA\ARR\pB$ and $\pB\ARR\pA$.
+The proof will be structured like this:
+
+\THM{$\pA\DARR\pB$.}{
+Assume that $\pA$.
+\indented{[insert argument convincing reader that $\pB$ holds]}
+Now assume that $\pB$.
+\indented{[insert argument convincing reader that $\pA$ holds]}
+}
+
+Using an equivalence works a lot like modus ponens, except it goes in both directions.
+If you know that $\pA\DARR\pB$, then you can deduce $\pA$ from $\pB$, $\neg\pA$ from $\neg\pB$,
+$\pB$ from $\pA$, and $\neg\pB$ from $\neg\pA$.
+
+
+
+\def\sp{\hspace{1em}}
+
+Here are the truth tables for $\ARR$ and $\DARR$:
+\begin{center}
+\truthtablefour{$\pA\ARR\pB$}{???}{???}{F}{T}
+\sp
+\truthtablefour{$\pA\DARR\pB$}{T}{F}{F}{T}
+\end{center}
+There should be nothing surprising there, except that I've left some question marks in position where I think you might be surprised.
+If $\pA$ is false, then what of the proposition $\pA\ARR\pB$?
+It has to be either true or false (excluded middle), so which is it?
+Put another way: Suppose you say ``If $3$ is even, then $3$ is divisible by $2$.''
+Knowing that $3$ is not even, are you a liar? Is your statement true or false?
+The answer is that it's \emph{true}!
+Here is the completed truth table for $\ARR$:
+\begin{center}
+\truthtablefour{$\pA\ARR\pB$}{T}{T}{F}{T}
+\end{center}
+Putting T there is not an arbitrary choice-- if you agreed with all the previous logical rules then you \emph{must} agree
+that $\pA\ARR\pB$ is \emph{true} when $\pA$ is false.
+Let me try and convince you. First we need to revisit contradictions.
+
+
+\def\vsp{\\[0.5em]}
+
+Recall how \emph{proof by contradiction} works:
+If an assumption leads to a contradiction, then the assumption is rejected as false.
+If you assume $\pB$, and then after some argumentation you deduce $\pA\AND\neg\pA$, then
+you can back out of your original assumption and conclude without a doubt that $\neg\pB$.
+Now let's think, hypothetically, what would happen if a contradiction $\pA\AND\neg\pA$ were actually \emph{true}?
+If $\pA\AND\neg\pA$ holds, then we can prove $\pB$ by contradiciton as follows:
+\indented{
+Suppose, for the sake of contradiction, that $\neg\pB$ holds.\vsp
+Since $\pA\AND\neg\pA$ has already been assumed to hold, we've already reached a contradiction.\vsp
+We conclude that $\neg\neg\pB$, and therefore $\pB$, must hold.
+}
+Let's be clear about what just happened: from the assumption $\pA\AND\neg\pA$, we were able to prove an \emph{arbitrary proposition}!
+This mechanism was always present in the proof by contradiction rule, but it is worth highlighting:
+
+\DRULE{Contradictions are powerful!}{
+From $\pA\AND\neg\pA$ you can deduce \emph{any} proposition $\pB$.
+}
+
+Now back to the question of how to treat $\pA\ARR\pB$ when $\pA$ is false.
+Recall that in order to prove $\pA\ARR\pB$, one can assume $\pA$ and then deduce $\pB$.
+If we know that $\pA$ is false to start with, then here is a proof that $\pA\ARR\pB$:
+\indented{
+Assume $\pA$.\vsp
+Since $\pA$ is known to be false, we now have a contradiction $\pA\AND\neg\pA$.\vsp
+Using ``contradictions are powerful,'' we can now deduce anything we want! In particular, we can deduce $\pB$.
+}
+Thus if you accept proofs by contradiction as valid, then you must accept that $\pA\ARR\pB$ is true when $\pA$ is false.
+An implication that is true because its hypothesis is false is sometimes said to be \emph{vacuously true}.
+
+
+
+
+% use jacoby notes as a guide, but also look at ``thinking about logic'', and also show a truth table and point out the weird part.
+% pull out my old psychology course final paper as well
+
 
 % double neg somewhere in here
 
