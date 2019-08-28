@@ -598,11 +598,11 @@ would be true.
 
 \ex{
 Suppose we know the following three facts:
-\begin{enumerate}
+\begin{itemize}
 \item Whenever it rains over night, the grass gets wet. 
 \item On a night that it doesn't rain, the sprinklers are run.
 \item Whenever sprinklers are run, the grass gets wet.
-\end{enumerate}
+\end{itemize}
 Now write a proof of the following statement: ``The grass got wet last night.''
 To make your argument, apply excluded middle to the statement ``It rained last night,''
 and then do a proof by cases.
@@ -612,12 +612,12 @@ Follow the formatting given in this section for proof by cases.
 
 \ex{
 Suppose we know the following four facts:
-\begin{enumerate}
+\begin{itemize}
 \item Whenever it rains over night, the grass gets wet. 
 \item On a night that it doesn't rain, the sprinklers are run.
 \item Whenever sprinklers are run, \emph{as long as they are not broken}, the grass gets wet.
 \item The grass was dry last night.
-\end{enumerate}
+\end{itemize}
 Now write a proof of the following statement: ``It did not rain last night and the sprinklers are broken.''
 To make your argument,
 do a proof by contradiction to establish ``it did not rain last night,''
@@ -860,6 +860,96 @@ Using ``contradictions are powerful,'' we can now deduce anything we want! In pa
 Thus if you accept proofs by contradiction as valid, then you must accept that $\pA\ARR\pB$ is true when $\pA$ is false.
 An implication that is true because its hypothesis is false is sometimes said to be \emph{vacuously true}.
 
+\ex{
+Assume that we know the following facts:
+\begin{itemize}
+\item Alice is an accountant and holds no other profession.
+\item Bob has brown hair.
+\item Charles loves chocolate and despises all other foods.
+\end{itemize}
+Determine whether each of the following is true or false.
+\begin{enumerate}
+
+
+\item %3
+If
+Bob's hair is purple
+then
+Charles loves chocolate.
+
+
+\item %2
+If
+Alice is an accountant
+then
+Charles likes green beans.
+
+
+\item %6
+Alice is an accountant
+if and only if
+Alice is a doctor.
+
+
+\item %1
+If
+Bob has brown hair
+then
+Charles loves chocolate.
+
+
+\item %7
+Charles likes baked salmon
+if and only if
+Bob has brown hair.
+
+
+\item %8
+Charles likes clam chowder
+if and only if
+Alice is a professional underwater welder.
+
+\item %4
+If
+Bob's hair is green
+then
+Bob's hair is white.
+
+\item %5
+Bob's hair is brown
+if and only if
+Charles loves chocolate.
+
+
+\end{enumerate}
+
+Notice how the implication of mathematical logic has nothing to do with causality.
+Some of the sentences above sound weird in English because we often use ``if... then...'' to 
+indicate that one state of affairs \emph{causes} another, as in the sentence
+\begin{center}``If you don't brush your teeth, then you will get cavities.''\end{center}
+In mathematical logic, that sentence is simply true if you either brush your teeth, or if you don't brush your teeth and end up getting cavities.
+Interestingly, that sentence is true even in a situation where you brush your teeth and still get cavities.
+That's quite different from the ``if... then...'' of conversational English!
+In conversation, we would expect there to be an implicit
+\begin{center}``(And if you do brush your teeth then you will not get cavities.)''\end{center}
+Be aware that this implicit additional statement is not there in mathematical logic; 
+an implication $\pA\ARR\pB$ doesn't give you any information in the case where you know that $\neg\pA$.
+}
+
+\ex{
+Write a truth table for $(\pA\ARR\pC)\AND(\pB\ARR\pC)$. It should have eight rows.
+In the same truth table, add a column for $(\pA\OR\pB)\ARR\pC$.
+Finally, in the same truth table, add a column for 
+$$((\pA\ARR\pC)\AND(\pB\ARR\pC))\ARR((\pA\OR\pB)\ARR\pC).$$
+The latter proposition could be called ``proof by cases,'' and so your truth table result should not be too surprising.
+}
+
+\subsubsection{Some Derived Logical Rules}
+
+In this section we will derive some logical rules from the basic ones given in previous sections.
+We still have no specific mathematical propositions to talk about and so we still use the placeholders $\pA$, $\pB$, etc.
+The arguments given in this section are useful logical patterns that can help us build other arguments later on.
+
 
 
 
@@ -867,9 +957,7 @@ An implication that is true because its hypothesis is false is sometimes said to
 % pull out my old psychology course final paper as well
 
 
-% double neg somewhere in here
 
-% in an exercise: the iff for the version of demorgan's law that you didn't do in prev sec
 
 \subsubsection{Universal and Existential Quantifiers}
 
@@ -890,6 +978,8 @@ An implication that is true because its hypothesis is false is sometimes said to
 
 
 % a comment (maybe put this earlier) on how repetitiveness is okay for now, and better to fix it later. perhaps sian comments on how fix
+
+\subsubsection{More Derived Logical Rules}
 
 
 \section{Set Theory} % and still writing though...
