@@ -331,7 +331,9 @@ But in fact it is an axiom that $x=x$. Thus $\ES$ cannot have any elements.
 }
 
 The arguments are essesntially the same ones that appeared in the five-line formal proof.
-But, compared to the formal proof, it's much easier to process the arguments (though I'm still not expecting you to do so just yet).
+But, compared to the formal proof, it's much easier to process the arguments
+in the informal proof
+(though I'm still not expecting you to do so just yet).
 
 \newpage 
 \def\s{0.25}
@@ -434,7 +436,8 @@ I believe that Jim stole the car.\\
 They thought that Jim stole the car, but in fact Jim is an upstanding guy.\\
 Jim stole the car.
 \end{adjustwidth}
-We will stop doing this as soon as we reach section \ref{sec:sets}. At that point, we will start to work with actual mathematical propositions.
+Later when we reach section
+\ref{sec:sets}, we will start to work with actual mathematical propositions.
 
 \ex{
 Which of the following are grammatically correct? Hint: replace Greek letters with English sentences and see what makes sense.
@@ -593,6 +596,38 @@ would be true.
 }
 
 
+\ex{
+Suppose we know the following three facts:
+\begin{enumerate}
+\item Whenever it rains over night, the grass gets wet. 
+\item On a night that it doesn't rain, the sprinklers are run.
+\item Whenever sprinklers are run, the grass gets wet.
+\end{enumerate}
+Now write a proof of the following statement: ``The grass got wet last night.''
+To make your argument, apply excluded middle to the statement ``It rained last night,''
+and then do a proof by cases.
+Follow the formatting given in this section for proof by cases.
+}
+
+
+\ex{
+Suppose we know the following four facts:
+\begin{enumerate}
+\item Whenever it rains over night, the grass gets wet. 
+\item On a night that it doesn't rain, the sprinklers are run.
+\item Whenever sprinklers are run, \emph{as long as they are not broken}, the grass gets wet.
+\item The grass was dry last night.
+\end{enumerate}
+Now write a proof of the following statement: ``It did not rain last night and the sprinklers are broken.''
+To make your argument,
+do a proof by contradiction to establish ``it did not rain last night,''
+and do another proof by contradiction to establsih ``the sprinklers are broken.''
+Once both are established you can conclude the conjunction.
+Follow the formatting given in this section for proof by contradiction.
+}
+
+
+
 
 
 \newcommand{\truthtablefour}[5]{
@@ -656,7 +691,7 @@ Your answer to the above should convince you that it's a terrible idea to write 
 Replace $\pA$, $\pB$, and $\pC$ by English sentences in $\pA\AND\pB\OR\pC$ such that you get an ambiguous Enlgish sentence.
 Explain the ambiguity in your sentence.
 
-\item
+\item \label{itm:truthtables:first_equiv}
 Write out a truth table for $(\pA\AND\pB)\AND\pC$, and also for $\pA\AND(\pB\AND\pC)$.
 The answer should convince you that there is no trouble at all with writing $\pA\AND\pB\AND\pC$,
 though you were probably convinced anyway since $\pA\AND\pB\AND\pC$ can obviously only mean:
@@ -673,7 +708,13 @@ This should show you that $\OR$ can ``distribute'' over $\AND$.
 \item
 Write out a truth table for $(\pA\OR\pB)\AND\pC$, and also for $(\pA\AND\pC)\OR(\pB\AND\pC)$.
 This should show you that $\AND$ can ``distribute'' over $\OR$.
+
+\item \label{itm:truthtables:last_equiv}
+Write out a truth table for $\neg(\pA\AND\pB)$, and also for $(\neg\pA)\OR(\neg\pB)$.
 \end{enumerate}
+In parts \ref{itm:truthtables:first_equiv} through \ref{itm:truthtables:last_equiv},
+you see that certain propositions are ``equivalent'' in some sense. The formal meaning of ``equivalent'' will be
+discussed in the next section.
 }
 
 
@@ -716,7 +757,7 @@ Given propositions $\pA$ and $\pB$, we can form the \emph{implication}
 $$
 \pA\ARR\pB,
 $$
-which is expressed in English as ``if $\pA$, then $\pB$.''
+which is expressed in English as ``$\pA$ implies $\pB$'' or ``if $\pA$, then $\pB$.''
 The ``$\pA$'' part of an implication $\pA\ARR\pB$ is called the \emph{hypothesis},
 and the ``$\pB$'' part is called the \emph{conclusion}.
 To prove $\pA\ARR\pB$,
@@ -775,7 +816,7 @@ Here are the truth tables for $\ARR$ and $\DARR$:
 \end{center}
 There should be nothing surprising there, except that I've left some question marks in position where I think you might be surprised.
 If $\pA$ is false, then what of the proposition $\pA\ARR\pB$?
-It has to be either true or false (excluded middle), so which is it?
+It has to be either true or false (due to excluded middle), so which is it?
 Put another way: Suppose you say ``If $3$ is even, then $3$ is divisible by $2$.''
 Knowing that $3$ is not even, are you a liar? Is your statement true or false?
 The answer is that it's \emph{true}!
