@@ -41,15 +41,17 @@
 \newcommand{\bijrightarrow}{\xrightarrow{\text{bij}}}
 \newcommand{\AND}{\wedge}
 \newcommand{\OR}{\vee}
-\newcommand{\ARR}{\Longrightarrow}
-\newcommand{\DARR}{\Longleftrightarrow}
+\newcommand{\ARR}{\Rightarrow}
+\newcommand{\DARR}{\Leftrightarrow}
 \newcommand{\ex}[1]{\textbf{Exercise:}\begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
 \newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
 
 \newcommand{\THM}[2]{\textbf{Theorem:} #1\\[0.5em]\textit{Proof:} #2\qed}
 
 \newcommand{\RULE}[2]{\begin{tcolorbox}[title=Rule: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
-\newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Rule: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
+\newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Derived Rule: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
+\newcommand{\DRULEPF}[3]{\begin{tcolorbox}[title=Derived Rule: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} {#3} \end{tcolorbox}}
+\newcommand{\DRULEPZ}[2]{\begin{tcolorbox}[title=Derived Rule: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} Exercise. \end{tcolorbox}}
 
 \def\pA{\Phi}
 \def\pB{\Psi}
@@ -467,6 +469,7 @@ From the conjunction $\pA\AND\pB$, you can deduce $\pA$ and you can deduce $\pB$
 In order to prove that $\pA\AND\pB$, you must prove both that $\pA$ and that $\pB$.
 The following diagram, showing what you can deduce from $\pA\AND\pB$, kind of looks like the ``$\AND$'' symbol:
 \begin{center}\includegraphics[scale=0.5]{andDiagram.pdf}\end{center}
+Order does not matter for $\AND$; we consider $\pA\AND\pB$ and $\pB\AND\pA$ to be the same.
 
 
 Given propositions $\pA$ and $\pB$, we can form their \emph{disjunction}
@@ -479,6 +482,7 @@ So if $\pA$ and $\pB$ happen to both hold, then you can still deduce that $\pA\O
 (unlike the way ``or'' is sometimes used in English).
 The following diagram, showing what you can use to deduce $\pA\OR\pB$, kind of looks like the ``$\OR$'' symbol:
 \begin{center}\includegraphics[scale=0.5]{orDiagram.pdf}\end{center}
+Order does not matter for $\OR$; we consider $\pA\OR\pB$ and $\pB\OR\pA$ to be the same.
 
 If you know that $\pA\OR\pB$, then how can you use this fact in your arguments?
 You cannot deduce $\pA$ and you cannot deduce $\pB$, so how do you proceed if you want to prove some other proposition $\pC$?
@@ -523,6 +527,7 @@ $$
 which is expressed in English as ``it is not the case that $\pA$.''
 To prove $\neg\pA$ is to disprove $\pA$, and in fact this is what ``disprove'' means.
 When $\pA$ holds we say that $\pA$ is \emph{true}, and when $\neg\pA$ holds we say that $\pA$ is \emph{false}.
+We consider $\neg\neg\pA$ to be the same as $\pA$.
 
 %It should never be the case that a proposition holds while its negation also holds.
 %We hope, at least, that $\pA\AND\not\PA$ is not provable.
@@ -949,6 +954,227 @@ The latter proposition could be called ``proof by cases,'' and so your truth tab
 In this section we will derive some logical rules from the basic ones given in previous sections.
 We still have no specific mathematical propositions to talk about and so we still use the placeholders $\pA$, $\pB$, etc.
 The arguments given in this section are useful logical patterns that can help us build other arguments later on.
+
+The following derived rule could be written as ``$((\pA\ARR\pB)\AND(\pB\ARR\pC))\ARR(\pA\ARR\pC)$'',
+but we instead mix in some English to cut down on the number of parentheses and to make things more pleasant to read.
+
+\DRULEPF{Transitivity of Implication}{
+If $\pA\ARR\pB$ and $\pB\ARR\pC$, then $\pA\ARR\pC$.
+}{
+Assume that $\pA\ARR\pB$ and $\pB\ARR\pC$.
+In order to prove that $\pA\ARR\pC$, let us assume $\pA$.
+(Our goal is now to prove $\pC$.)
+From $\pA$ and $\pA\ARR\pB$, it follows that $\pB$.
+From $\pB$ and $\pB\ARR\pC$, it follows that $\pC$.
+}
+
+In the above argument you can see two applications of modus ponens-- this is how implications can be put to use.
+And you can also see how an implication is proven, by assuming the hypotheses and arguing for the conclusion.
+
+\def\lsp{\\}
+
+\DRULEPF{Conjunction and Implication}{
+$(\pA\AND\pB)\ARR\pC$ if and only if $(\pA\ARR(\pB\ARR\pC))$
+}{
+Assume that $(\pA\AND\pB)\ARR\pC$.
+In order to prove $(\pA\ARR(\pB\ARR\pC))$, assume $\pA$.
+Now in order to prove $\pB\ARR\pC$, assume $\pB$.
+Since we have both $\pA$ and $\pB$, we have $\pA\AND\pB$.
+Since $(\pA\AND\pB)\ARR\pC$, we can now conclude $\pC$.\lsp
+
+Now assume that $(\pA\ARR(\pB\ARR\pC))$.
+In order to prove that $(\pA\AND\pB)\ARR\pC$,
+assume $\pA\AND\pB$.
+That is, we have assumed $\pA$ and we have assumed $\pB$.
+From $\pA$ and $\pA\ARR(\pB\ARR\pC)$, it follows that $\pB\ARR\pC$.
+From $\pB$ and $\pB\ARR\pC$, it follows that $\pC$.
+}
+
+The first thing to notice about the above argument is the way in which an ``if and only if'' statement gets proven.
+There are two parts to the proof, one for each of the two implications.
+The first half of the proof establishes 
+$$((\pA\AND\pB)\ARR\pC)\ARR((\pA\ARR(\pB\ARR\pC))),$$
+while the second half establishes
+$$((\pA\ARR(\pB\ARR\pC)))\ARR((\pA\AND\pB)\ARR\pC).$$
+Together, they allow us to conclude the ``if and only if'' statement
+$$((\pA\AND\pB)\ARR\pC)\DARR((\pA\ARR(\pB\ARR\pC))).$$
+Another thing to notice is the way in which $\AND$ is handled.
+In the first half of the argument, we establish that $\pA\AND\pB$ holds by establishing each of $\pA$ and $\pB$-- this is the way to prove a conjunction.
+In the second half, we get to assume that $\pA\AND\pB$ holds and this allows us to deduce both $\pA$ and $\pB$-- this is the way conjunctions get used.
+In typical proofs this handling of conjunctions happens very quickly; the distinction between
+\begin{center} ``Assume that $\pA\AND\pB$''\end{center}
+and
+\begin{center} ``Assume that $\pA$ and assume that $\pB$''\end{center}
+will be blurred completely.
+
+\ex{Prove that if $\pA\ARR\pB$ and $\pC\ARR\pD$, then $(\pA\AND\pC)\ARR(\pB\AND\pD)$.}
+
+\DRULEPF{Disjunction and Implication}{
+$(\pA\OR\pB)\ARR\pC$ if and only if $(\pA\ARR\pC)\AND(\pB\ARR\pC)$
+}{
+$\Rightarrow$:
+Assume that $(\pA\OR\pB)\ARR\pC$.
+\lsp
+
+In order to prove that $(\pA\ARR\pC)$, assume $\pA$.
+From $\pA$ it follows that $\pA\OR\pB$.
+From $\pA\OR\pB$ and $(\pA\OR\pB)\ARR\pC$, we can conclude that $\pC$.
+Thus we have proven that $\pA\ARR\pC$.
+\lsp
+
+We also need to prove that $\pB\ARR\pC$. To this end, assume $\pB$.
+From $\pB$ it follows that $\pA\OR\pB$.
+From $\pA\OR\pB$ and $(\pA\OR\pB)\ARR\pC$, we can conclude that $\pC$.
+Thus we have proven that $\pB\ARR\pC$.
+\lsp
+
+Since we proved $\pA\ARR\pC$ and $\pB\ARR\pC$, we can conclude that $(\pA\ARR\pC)\AND(\pB\ARR\pC)$.
+\lsp
+
+$\Leftarrow$: 
+Assume that $(\pA\ARR\pC)\AND(\pB\ARR\pC)$.
+That is, assume  $\pA\ARR\pC$ and assume $\pB\ARR\pC$.
+For the sake of proving $(\pA\OR\pB)\ARR\pC$, assume that $\pA\OR\pB$.
+\lsp
+
+Case 1: In the case that $\pA$ holds, it follows from $\pA\ARR\pC$ that $\pC$ holds.
+\lsp
+
+Case 2: In the case that $\pB$ holds, it follows from $\pB\ARR\pC$ that $\pC$ holds.
+\lsp
+
+Since $\pC$ holds in both cases, we conclude that $\pC$ holds.
+}
+
+Here the two halves of the ``if and only if'' proof are difficult to separate by paragraphs alone, since each half needed multiple paragraphs.
+So the two halves of the proof are headed by ``$\Rightarrow$'' and ``$\Leftarrow$''.
+You should always feel free to use headings to separate different components of your argument.
+
+Another thing to notice in the above argument is the way in which $\OR$ is handled.
+In the first half of the argument, we establish $\pA\OR\pB$ by deducing it from $\pA$, and we also establish it by deducing it from $\pB$.
+In the second half, we use an $\OR$ statement in pretty much the only way we can-- a proof by cases.
+
+\ex{Prove that if $\pA\ARR\pB$ and $\pC\ARR\pD$, then $(\pA\OR\pC)\ARR(\pB\OR\pD)$.}
+
+\DRULEPF{Alternative Eliminated}{
+If $\pA\OR\pB$ holds but $\pA$ does not hold, then $\pB$ must hold.
+In other words,
+$$((\pA\OR\pB)\AND(\neg\pA))\ARR\pB$$
+}{
+Assume that $\pA\OR\pB$ holds and $\neg\pA$ holds.
+\lsp
+
+Case 1: Suppose that $\pA$ holds.
+Then we have $\pA\AND\neg\pA$! From a contradiction we can conclude anything, in particular we can conclude that $\pB$ holds.
+\lsp
+
+Case 2: Suppose that $\pB$ holds... that's it for case 2.
+\lsp
+
+In both cases we conclude $\pB$, so we can conclude $\pB$.
+}
+
+In the above argument we've made use of the previously discussed rule ``contradictions are powerful!''
+
+
+\DRULEPF{Or Distributes over And}{
+$(\pA\OR(\pB\AND\pC))\DARR((\pA\OR\pB)\AND(\pA\OR\pC))$.
+}{
+$\Rightarrow$:
+Assume $\pA\OR(\pB\AND\pC)$.
+\lsp
+
+Case 1: Suppose $\pA$ holds. Then we can immediately conclude $\pA\OR\pB$ and $\pA\OR\pC$, and from these
+we can conclude $(\pA\OR\pB)\AND(\pA\OR\pC)$.
+\lsp
+
+Case 2: Suppose $\pB\AND\pC$ holds.
+Then $\pB$ holds, and $\pA\OR\pB$ then follows.
+Also $\pC$ holds, and $\pA\OR\pC$ then follows.
+Thus we conclude $(\pA\OR\pB)\AND(\pA\OR\pC)$.
+\lsp
+
+Since both cases lead to $(\pA\OR\pB)\AND(\pA\OR\pC)$, we conclude $(\pA\OR\pB)\AND(\pA\OR\pC)$.
+\lsp
+
+$\Leftarrow$: Assume $((\pA\OR\pB)\AND(\pA\OR\pC))$.
+That is, assume $\pA\OR\pB$ and assume $\pA\OR\pC$.
+Due to excluded middle, we know that either $\pA$ or $\neg\pA$ holds.
+\lsp
+
+Case 1: Suppose $\pA$ holds. It immediately follows that $\pA\OR(\pB\AND\pC)$.
+\lsp
+
+Case 2: Suppose that $\neg\pA$ holds. Using the rule ``alternative eliminated,''
+it then follows from $\pA\OR\pB$ that $\pB$ holds.
+Similarly, it follows from $\pA\OR\pC$ that $\pC$ holds. Thus $\pB\AND\pC$ holds.
+Finally, we conclude that $\pA\OR(\pB\AND\pC)$.
+\lsp
+
+Since both cases lead to $\pA\OR(\pB\AND\pC)$, we conclude $\pA\OR(\pB\AND\pC)$.
+}
+
+Observe that a proof by cases need not proceed from the exact $\OR$-proposition one has assumed;
+sometimes it is useful to do a proof by cases based on excluded middle.
+
+%\DRULEPZ{And Distributes over Or}{
+%$(\pA\AND(\pB\OR\pC))\DARR((\pA\AND\pB)\OR(\pA\AND\pC))$.
+%}
+%
+%The following rule was actually already used in an argument in the previous section.
+%It's interesting to see that this rule can be derived from prior rules.
+%
+%\DRULEPF{Double Negation}{
+%$\pA\DARR(\neg\neg\pA)$.
+%}{
+%Assume $\pA$. Assume, for the sake of obtaining a contradiction, that $\neg\pA$.
+%Then we immediately have a contradiction $\pA\AND\neg\pA$, and so we conclude that $\neg\neg\pA$.
+%\lsp
+%
+%Now assume $\neg\neg\pA$.
+%Our goal is to prove $\pA$.
+%Due to excluded middle, we have that $\pA\OR\neg\pA$.
+%In the case that $\pA$ holds, we are done with the proof. 
+%In the case that $\neg\pA$ holds, we have the contradiction 
+
+%% THIS IS CIRCULAR! The problem is that Contradictions are Powerful was supposed to be an axiom, and I'm using proof by contradiction as an axiom instead.
+%% Proof by contradiction only allows you to prove negations.
+
+%}
+
+
+
+
+
+
+
+
+% Define notions of converse, inverse, and contrapositive.
+
+% Prove that impliation holds iff contrapositive does.
+
+% Comment on how pf by contradiction appears as a great tool for disproving something.
+
+% Ex that converse holds iff inverse does
+
+% do LXXXIII ii
+
+% puzzle LXXXIII i
+
+% do LXXXVII i but make the forward direction a puzzle, with hint to use excluded middle
+
+% comment on the inutiitiveness of this as ``$\pB$, unless $\neg\pA$'', and on how it means implications were not needed
+
+% puzzle $\neg(\pA\ARR\pB)\DARR (\pA\AND\neg\pB)$
+
+% comment that it's important to understand this so that we know how to negate logical statements by ``pushing'' the $\neg$ inside things. demorgan tells us how to deal with $\AND$ and $\OR$.
+
+% final comment: the purpose of derived rules to show us common patterns of proofs and to strengthen our sense for mathematical logic.
+% typically we do not use these rules directly in a hyperrigid proof structure, but rather we rely on our sense for mathematical logic.
+% it is important that this sense be sufficiently developed to write correct proofs, especially important that we be aware how it's different from plain conversation.
+
+
+
 
 
 
