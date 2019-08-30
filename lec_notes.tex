@@ -43,7 +43,10 @@
 \newcommand{\OR}{\vee}
 \newcommand{\ARR}{\Rightarrow}
 \newcommand{\DARR}{\Leftrightarrow}
-\newcommand{\ex}[1]{\textbf{Exercise:}\begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
+
+\newcounter{exercise}[subsubsection]
+
+\newcommand{\ex}[1]{ \refstepcounter{exercise} \textbf{Exercise \thesubsubsection.\theexercise:}\begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
 \newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
 
 \newcommand{\THM}[2]{\textbf{Theorem:} #1\\[0.5em]\textit{Proof:} #2\qed}
@@ -51,7 +54,8 @@
 \newcommand{\RULE}[2]{\begin{tcolorbox}[title=Rule: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
 \newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Derived Rule: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
 \newcommand{\DRULEPF}[3]{\begin{tcolorbox}[title=Derived Rule: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} {#3} \end{tcolorbox}}
-\newcommand{\DRULEPZ}[2]{\begin{tcolorbox}[title=Derived Rule: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} Exercise. \end{tcolorbox}}
+\newcommand{\DRULEPZ}[2]{\begin{tcolorbox}[title=Derived Rule: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} 
+                         \refstepcounter{exercise} Exercise \thesubsubsection.\theexercise. \end{tcolorbox}}
 
 \def\pA{\Phi}
 \def\pB{\Psi}
@@ -723,39 +727,6 @@ discussed in the next section.
 }
 
 
-\newpage
-
-\note{TODO: Move this exercise to the right place-- I am thinking we should put it later in a derived rules section.}
-
-\ex{
-Starting from the assumption $\neg(\pA\AND\pB)$, prove that $(\neg\pA)\OR(\neg\pB)$.
-Write your proof using only the logic rules given in this section.
-Hints:
-The first hint is that excluded middle, proof by contradiction, and proof by cases are all helpful here.
-The second hint is to show you the backwards version of what you are being asked to do, just to give you a feeling for the way to write these arguments.
-Starting from the assumption $(\neg\pA)\OR(\neg\pB)$, here is a proof that $\neg(\pA\AND\pB)$:
-\indented{
-Assume $(\neg\pA)\OR(\neg\pB)$.
-Suppose, for the sake of contradiction, that $\pA\AND\pB$ holds.
-Then $\pA$ holds, and $\pB$ holds. Since we know that $(\neg\pA)\OR(\neg\pB)$ holds, there are two cases to consider:\\[0.5em]
-Case 1: Suppose that $\neg\pA$ holds. Then, since we already said that $\pA$ holds, we obtain the contradiction $\pA\AND\neg\pA$.\\[0.5em]
-Case 2: Suppose that $\neg\pB$ holds. Then, since we already said that $\pB$ holds, we obtain the contradiction $\pB\AND\neg\pB$.\\[0.5em]
-We obtain a contradiction either way, and so we are forced to reject that $\pA\AND\pB$. That is, we have $\neg(\pA\AND\pB)$.
-}
-}
-
-\note{Here is solution to exercise. IDK what to do with it right now.}
-
-Assume $\neg(\pA\AND\pB)$.
-Due to excluded middle, either $\pA$ or $\neg\pA$.\\[0.5em]
-Case 1: Suppose that $\pA$ holds. Now if $\pB$ held we would obtain $\pA\AND\pB$, which leads to the contradiction $(\pA\AND\pB)\AND\neg(\pA\AND\pB)$.
-Therefore it must be that $\neg\pB$. From this it follows that $\neg\pA\OR\neg\pB$.\\[0.5em]
-Case 2: Suppose that $\neg\pA$ holds. Then it immediately follows that $\neg\pA\OR\neg\pB$.\\[0.5em]
-Since we ended up with $\neg\pA\OR\neg\pB$ in both cases, we can conclude that $\neg\pA\OR\neg\pB$.
-
-\newpage
-
-
 \subsubsection{If and Iff}
 
 Given propositions $\pA$ and $\pB$, we can form the \emph{implication}
@@ -1150,29 +1121,154 @@ sometimes it is useful to do a proof by cases based on excluded middle.
 
 
 % Define notions of converse, inverse, and contrapositive.
+Given an implication $\pA\ARR\pB$, there are a few ``flipped'' implications one can write down:
+\indented{The \emph{converse} of $\pA\ARR\pB$ is $\pB\ARR\pA$.\\
+          The \emph{inverse} of $\pA\ARR\pB$ is $\neg\pA\ARR\neg\pB$.\\
+          The \emph{contrapositive} of $\pA\ARR\pB$ is $\neg\pB\ARR\neg\pA$.}
+It is a common mistake to think that the converse or the inverse of an implication follow from the implication.
+The confusion stems from the inconsistent ways in which ``if... then...'' can work in conversation.
+When a bank robber says
+\begin{center}
+``If you don't hand over the money, I'll shoot!'',
+\end{center}
+they implicitly also mean to say the inverse
+\begin{center}
+``If you do hand over the money, then I won't shoot!'',
+\end{center}
+and the converse
+\begin{center}
+``I'll shoot only if you don't hand over the money!''
+\end{center}
+If the bank robber were using strict mathematical logic (that is, if their original
+threat took the form ``you don't hand over the money''$\ARR$``I will shoot''), then
+they could, without lying, shoot even after the money is handed over.
+
+The \emph{contrapositive} of an implication, on the other hand, \emph{does} follow from the implication.
+An implication is always equivalent to its contrapositive.
+Since the converse of an implication is the contrapositive of its inverse, the converse and inverse of an implication are equivalent.
+
+
+
+
+
 
 % Prove that impliation holds iff contrapositive does.
+\DRULEPF{Contraposition}{$(\pA\ARR\pB)\DARR(\neg\pB\ARR\neg\pA)$}{
+Assume that $\pA\ARR\pB$.
+To prove that $\neg\pB\ARR\neg\pA$, assume that $\neg\pB$.
+Now assume $\pA$, for the sake of obtaining a contradiction.
+Since $\pA\ARR\pB$, we see that $\pB$ follows. We end up with the contradiction $\pB\AND\neg\pB$.
+Thus we reject the original assumption and conclude that $\neg\pA$.
+
+Now to prove the other direction, assume that $\neg\pB\ARR\neg\pA$.
+To prove that $\pA\ARR\pB$, assume $\pA$.
+For the sake of obtaining a contradiction, assume $\neg\pB$.
+From $\neg\pB\ARR\neg\pA$, it then follows that $\neg\pA$.
+But we've now reached the contradiction $\pA\AND\neg\pA$.
+Thus we reject the original assumption and conclude that $\neg\neg\pB$.
+In other words, $\pB$.
+}
 
 % Comment on how pf by contradiction appears as a great tool for disproving something.
+The above argument is a great demonstration of how proofs by contradiction work.
+Sometimes, in order to proceed with your argument, you need something \emph{more} to work with.
+Assuming that your desired conclusion doesn't hold can sometimes give you something more and help push your argument forward.
 
-% Ex that converse holds iff inverse does
+The above argument should make you feel that ``proof by contradiction'' and ``contraposition'' are very closely related.
+%The theorems you prove will most often take the form of an implication, something like
+%\begin{center}If $\pA$, $\pB$, and $\pC$, then $\pD$. \end{center}
+One can prove $\pA\ARR\pB$ by assuming $\pA$, then assuming $\neg\pB$ and trying to obtain a contradiction.
+Or, one can prove $\pA\ARR\pB$ by instead proving its contrapositive $\neg\pB\ARR\neg\pA$, which we now see is equivalent to the original implication.
+Both approaches amount to pretty much the same argument.
 
 % do LXXXIII ii
+\DRULEPF{De Morgan's Law 1}{$\neg(\pA\AND\pB)\ \DARR\ (\neg\pA\OR\neg\pB)$}{
+$\Rightarrow$: Assume $\neg(\pA\AND\pB)$.
+Due to excluded middle, either $\pA$ or $\neg\pA$.\lsp
+
+Case 1: Suppose that $\pA$ holds. Now if $\pB$ held we would obtain $\pA\AND\pB$, which leads to the contradiction $(\pA\AND\pB)\AND\neg(\pA\AND\pB)$.
+Therefore it must be that $\neg\pB$. From this it follows that $\neg\pA\OR\neg\pB$.\lsp
+
+Case 2: Suppose that $\neg\pA$ holds. Then it immediately follows that $\neg\pA\OR\neg\pB$.\lsp
+Since we ended up with $\neg\pA\OR\neg\pB$ in both cases, we can conclude that $\neg\pA\OR\neg\pB$.
+
+$\Leftarrow$: Assume $(\neg\pA)\OR(\neg\pB)$.
+Suppose, for the sake of contradiction, that $\pA\AND\pB$ holds.
+Then $\pA$ holds, and $\pB$ holds. Since we know that $(\neg\pA)\OR(\neg\pB)$ holds, there are two cases to consider:\lsp
+
+Case 1: Suppose that $\neg\pA$ holds. Then, since we already said that $\pA$ holds, we obtain the contradiction $\pA\AND\neg\pA$.\lsp
+
+Case 2: Suppose that $\neg\pB$ holds. Then, since we already said that $\pB$ holds, we obtain the contradiction $\pB\AND\neg\pB$.\lsp
+
+We obtain a contradiction either way, and so we are forced to reject that $\pA\AND\pB$. That is, we have $\neg(\pA\AND\pB)$.
+}
+
+
 
 % puzzle LXXXIII i
+\DRULEPZ{De Morgan's Law 2}{
+$\neg(\pA\OR\pB)\ \DARR\ (\neg\pA\AND\neg\pB)$
+}
+
 
 % do LXXXVII i but make the forward direction a puzzle, with hint to use excluded middle
+\DRULEPF{Implication in Terms of Disjunction}{
+$(\pA\ARR\pB)\DARR(\neg\pA\OR\pB)$
+}{
+$\Rightarrow$: The direction $(\pA\ARR\pB)\ARR(\neg\pA\OR\pB)$ is given as an exercise below.
+
+$\Leftarrow$: Assume that $\neg\pA\OR\pB$. With the goal of proving that $\pA\ARR\pB$, assume that $\pA$.
+Applying the previous rule ``alternative eliminated,''
+we can conclude $\pB$ from $\neg\pA\OR\pB$ and $\pA$.
+}
+
+\ex{
+Fill in the $\Rightarrow$ direction in the argument above. Hint: Use excluded middle.
+}
 
 % comment on the inutiitiveness of this as ``$\pB$, unless $\neg\pA$'', and on how it means implications were not needed
+The fact that $\pA\ARR\pB$ can be rewritten as $\neg\pA\OR\pB$ suggests that we never needed to formally introduce $\ARR$ into our language.
+Everytime we want to say ``if $\pA$, then $\pB$,'' we could instead say ``either $\pB$, or it's not the case that $\pA$.''
+But life is better when we can phrase things in terms of $\ARR$, and that is why we choose to have it.
 
 % puzzle $\neg(\pA\ARR\pB)\DARR (\pA\AND\neg\pB)$
+\DRULEPZ{Negating an Implication}{$\neg(\pA\ARR\pB)\DARR (\pA\AND\neg\pB)$}
 
 % comment that it's important to understand this so that we know how to negate logical statements by ``pushing'' the $\neg$ inside things. demorgan tells us how to deal with $\AND$ and $\OR$.
+The rule above and De Morgan's laws give you a way ``push'' a negation $\neg$ into complicated propositions. This will really come in handy later on!
+For example,
+negating $\pA\ARR(\pB\OR\pC)$
+initially yields $\neg(\pA\ARR(\pB\OR\pC))$, but after pushing the negation in it becomes 
+$\pA\AND\neg(\pB\OR\pC)$.
+After pushing the negation in further this becomes $\pA\AND\neg\pB\AND\neg\pC$.
+
+\ex{
+Negate each of the following propositions, and push the negation into the innermost component propositions.
+\begin{enumerate}
+\item
+$\pA\ARR(\pB\OR\pC)$
+\item
+$((\pA\OR\pB)\ARR\pC)\AND\pD$
+\item
+If you eat right and sleep well, then you are healthy and you will live long.
+\end{enumerate}
+}
+
 
 % final comment: the purpose of derived rules to show us common patterns of proofs and to strengthen our sense for mathematical logic.
 % typically we do not use these rules directly in a hyperrigid proof structure, but rather we rely on our sense for mathematical logic.
 % it is important that this sense be sufficiently developed to write correct proofs, especially important that we be aware how it's different from plain conversation.
+The main purpose of the derived rules in this section is to make us familiar with common patterns of proofs.
+Typically we do not reference these rules directly, but rather we rely on our intuitive sense for mathematical logic to enable us to read mathematical arguments and to
+construct our own arguments.
+A second purpose of this section is to help strengthen that intuitive sense for mathematical logic,
+which really must be sufficiently developed in order for us to write correct proofs.
+It is especially important to be aware of the ways in which mathematical logic differs from the sometimes ambiguous logic of everyday conversation.
 
+
+% introduce some kind of reasonable exercise numbering and formatting. Proofread.
+
+% consider putting a summary of "rules" somewhere...
 
 
 
