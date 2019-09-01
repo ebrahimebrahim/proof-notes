@@ -57,6 +57,8 @@
 %\newcommand{\SUBST}[3]{{#1}\left[{#2}\mapsto{#3}\right]}
 %\newcommand{\SUBST}[3]{{#1}_{{#2}\mapsto{#3}}}
 \newcommand{\SUBST}[3]{{#1}_{[{#2}\rightarrow{#3}]}}
+%\newcommand{\SUBST}[3]{{#1}\,\text{replacing}\,{#2}\,\text{by}\,{#3}}
+%\newcommand{\SUBST}[3]{{#1}\ \text{replacing}\ {#2}\ \text{by}\ {#3}}
 
 \newcounter{exercise}[subsubsection]
 \newcounter{rule}
@@ -1356,6 +1358,25 @@ For now, rest assured that the substitutions in the upcoming exercise are all st
 there will be no funny business with barbells.
 
 
+\ex{
+For each of the following, write the proposition that results from the substitution.
+\begin{enumerate}
+\item $\SUBST{\text{``\ $\frac{a+b}{x+y}>x^2$\ ''}}{x}{A+B}$
+\item $\SUBST{\text{``\ $B\neq B$\ ''}}{B}{y}$
+\item $\SUBST{\text{``\ $z\in\{\alpha,\beta,\gamma\}$\ ''}}{\beta}{\gamma^{-1}}$
+\item $\SUBST{\text{``\ $f\subseteq A\times B$\ ''}}{f}{g\circ f}$
+\item $\SUBST{\text{``\ $x\in y\ARR x\in z$\ ''}}{x}{3}$
+\item $\SUBST{\text{``\ $a=2\OR a=3$\ ''}}{b}{5}$
+\item $\SUBST{\pB}{b}{5}$, where $\pB$ is the proposition ``$b\times b\subseteq J$''
+\item $\SUBST{\text{``\ $n^2$ is even\ ''}}{n}{1}$
+\item $\SUBST{\text{``\ $n^2$ is even\ ''}}{n}{n+1}$
+\item $\SUBST{\SUBST{\text{``\ $n^2\sim k$\ ''}}{n}{j+k}}{k}{3}$
+\end{enumerate}
+}
+
+\ex{
+Is $\SUBST{\SUBST{\pA}{x}{y}}{y}{x}$ always the same as $\pA$? Explain.
+}
 
 
 
