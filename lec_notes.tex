@@ -45,17 +45,20 @@
 \newcommand{\DARR}{\Leftrightarrow}
 
 \newcounter{exercise}[subsubsection]
+\newcounter{rule}
+
+\def\putRuleNumber{\refstepcounter{rule}\therule}
 
 \newcommand{\ex}[1]{ \refstepcounter{exercise} \textbf{Exercise \thesubsubsection.\theexercise:}\begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
 \newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
 
 \newcommand{\THM}[2]{\textbf{Theorem:} #1\\[0.5em]\textit{Proof:} #2\qed}
 
-\newcommand{\RULE}[2]{\begin{tcolorbox}[title=Rule: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
-\newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Derived Rule: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
-\newcommand{\DRULEPF}[3]{\begin{tcolorbox}[title=Derived Rule: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} {#3} \end{tcolorbox}}
-\newcommand{\DRULEPZ}[2]{\begin{tcolorbox}[title=Derived Rule: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} 
-                         \refstepcounter{exercise} Exercise \thesubsubsection.\theexercise. \end{tcolorbox}}
+\newcommand{\RULE}[2]{\begin{tcolorbox}[title=Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
+\newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
+\newcommand{\DRULEPF}[3]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} {#3} \end{tcolorbox}}
+\newcommand{\DRULEPZ}[2]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} 
+                         \refstepcounter{exercise} \textbf{Exercise \thesubsubsection.\theexercise}. \end{tcolorbox}}
 
 \def\pA{\Phi}
 \def\pB{\Psi}
@@ -942,7 +945,7 @@ From $\pB$ and $\pB\ARR\pC$, it follows that $\pC$.
 In the above argument you can see two applications of modus ponens-- this is how implications can be put to use.
 And you can also see how an implication is proven, by assuming the hypotheses and arguing for the conclusion.
 
-\def\lsp{\\}
+\def\lsp{\\[-0.4em]}
 
 \DRULEPF{Conjunction and Implication}{
 $(\pA\AND\pB)\ARR\pC$ if and only if $(\pA\ARR(\pB\ARR\pC))$
@@ -978,7 +981,7 @@ and
 \begin{center} ``Assume that $\pA$ and assume that $\pB$''\end{center}
 will be blurred completely.
 
-\ex{Prove that if $\pA\ARR\pB$ and $\pC\ARR\pD$, then $(\pA\AND\pC)\ARR(\pB\AND\pD)$.}
+\DRULEPZ{}{If $\pA\ARR\pB$ and $\pC\ARR\pD$, then $(\pA\AND\pC)\ARR(\pB\AND\pD)$.}
 
 \DRULEPF{Disjunction and Implication}{
 $(\pA\OR\pB)\ARR\pC$ if and only if $(\pA\ARR\pC)\AND(\pB\ARR\pC)$
@@ -1025,12 +1028,12 @@ Another thing to notice in the above argument is the way in which $\OR$ is handl
 In the first half of the argument, we establish $\pA\OR\pB$ by deducing it from $\pA$, and we also establish it by deducing it from $\pB$.
 In the second half, we use an $\OR$ statement in pretty much the only way we can-- a proof by cases.
 
-\ex{Prove that if $\pA\ARR\pB$ and $\pC\ARR\pD$, then $(\pA\OR\pC)\ARR(\pB\OR\pD)$.}
+\DRULEPZ{}{If $\pA\ARR\pB$ and $\pC\ARR\pD$, then $(\pA\OR\pC)\ARR(\pB\OR\pD)$.}
 
 \DRULEPF{Alternative Eliminated}{
 If $\pA\OR\pB$ holds but $\pA$ does not hold, then $\pB$ must hold.
 In other words,
-$$((\pA\OR\pB)\AND(\neg\pA))\ARR\pB$$
+$$((\pA\OR\pB)\AND(\neg\pA))\ARR\pB.$$
 }{
 Assume that $\pA\OR\pB$ holds and $\neg\pA$ holds.
 \lsp
@@ -1060,9 +1063,9 @@ we can conclude $(\pA\OR\pB)\AND(\pA\OR\pC)$.
 \lsp
 
 Case 2: Suppose $\pB\AND\pC$ holds.
-Then $\pB$ holds, and $\pA\OR\pB$ then follows.
-Also $\pC$ holds, and $\pA\OR\pC$ then follows.
-Thus we conclude $(\pA\OR\pB)\AND(\pA\OR\pC)$.
+Then $\pB$ holds, and $\pA\OR\pB$ then follows from that.
+Also $\pC$ holds, and $\pA\OR\pC$ follows from that.
+Finally we conclude $(\pA\OR\pB)\AND(\pA\OR\pC)$.
 \lsp
 
 Since both cases lead to $(\pA\OR\pB)\AND(\pA\OR\pC)$, we conclude $(\pA\OR\pB)\AND(\pA\OR\pC)$.
@@ -1073,7 +1076,7 @@ That is, assume $\pA\OR\pB$ and assume $\pA\OR\pC$.
 Due to excluded middle, we know that either $\pA$ or $\neg\pA$ holds.
 \lsp
 
-Case 1: Suppose $\pA$ holds. It immediately follows that $\pA\OR(\pB\AND\pC)$.
+Case 1: Suppose that $\pA$ holds. It immediately follows that $\pA\OR(\pB\AND\pC)$.
 \lsp
 
 Case 2: Suppose that $\neg\pA$ holds. Using the rule ``alternative eliminated,''
@@ -1125,7 +1128,7 @@ Given an implication $\pA\ARR\pB$, there are a few ``flipped'' implications one 
 \indented{The \emph{converse} of $\pA\ARR\pB$ is $\pB\ARR\pA$.\\
           The \emph{inverse} of $\pA\ARR\pB$ is $\neg\pA\ARR\neg\pB$.\\
           The \emph{contrapositive} of $\pA\ARR\pB$ is $\neg\pB\ARR\neg\pA$.}
-It is a common mistake to think that the converse or the inverse of an implication follow from the implication.
+It is a common mistake to think that the converse or the inverse of an implication follows from the implication.
 The confusion stems from the inconsistent ways in which ``if... then...'' can work in conversation.
 When a bank robber says
 \begin{center}
@@ -1144,6 +1147,7 @@ threat took the form ``you don't hand over the money''$\ARR$``I will shoot''), t
 they could, without lying, shoot even after the money is handed over.
 
 The \emph{contrapositive} of an implication, on the other hand, \emph{does} follow from the implication.
+This rule is derived below.
 An implication is always equivalent to its contrapositive.
 Since the converse of an implication is the contrapositive of its inverse, the converse and inverse of an implication are equivalent.
 
@@ -1159,6 +1163,7 @@ To prove that $\neg\pB\ARR\neg\pA$, assume that $\neg\pB$.
 Now assume $\pA$, for the sake of obtaining a contradiction.
 Since $\pA\ARR\pB$, we see that $\pB$ follows. We end up with the contradiction $\pB\AND\neg\pB$.
 Thus we reject the original assumption and conclude that $\neg\pA$.
+\lsp
 
 Now to prove the other direction, assume that $\neg\pB\ARR\neg\pA$.
 To prove that $\pA\ARR\pB$, assume $\pA$.
@@ -1189,8 +1194,9 @@ Due to excluded middle, either $\pA$ or $\neg\pA$.\lsp
 Case 1: Suppose that $\pA$ holds. Now if $\pB$ held we would obtain $\pA\AND\pB$, which leads to the contradiction $(\pA\AND\pB)\AND\neg(\pA\AND\pB)$.
 Therefore it must be that $\neg\pB$. From this it follows that $\neg\pA\OR\neg\pB$.\lsp
 
-Case 2: Suppose that $\neg\pA$ holds. Then it immediately follows that $\neg\pA\OR\neg\pB$.\lsp
+Case 2: Suppose that $\neg\pA$ holds. Then it immediately follows that $\neg\pA\OR\neg\pB$.
 Since we ended up with $\neg\pA\OR\neg\pB$ in both cases, we can conclude that $\neg\pA\OR\neg\pB$.
+\\[1em]
 
 $\Leftarrow$: Assume $(\neg\pA)\OR(\neg\pB)$.
 Suppose, for the sake of contradiction, that $\pA\AND\pB$ holds.
@@ -1216,6 +1222,7 @@ $\neg(\pA\OR\pB)\ \DARR\ (\neg\pA\AND\neg\pB)$
 $(\pA\ARR\pB)\DARR(\neg\pA\OR\pB)$
 }{
 $\Rightarrow$: The direction $(\pA\ARR\pB)\ARR(\neg\pA\OR\pB)$ is given as an exercise below.
+\lsp
 
 $\Leftarrow$: Assume that $\neg\pA\OR\pB$. With the goal of proving that $\pA\ARR\pB$, assume that $\pA$.
 Applying the previous rule ``alternative eliminated,''
@@ -1250,7 +1257,7 @@ $\pA\ARR(\pB\OR\pC)$
 \item
 $((\pA\OR\pB)\ARR\pC)\AND\pD$
 \item
-If you eat right and sleep well, then you are healthy and you will live long.
+If you eat right and you sleep well, then you are healthy and you will live long.
 \end{enumerate}
 }
 
