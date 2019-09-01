@@ -30,7 +30,6 @@
 \def\e{\varepsilon}
 \def\d{\delta}
 \newcommand{\seq}[1]{\left(#1\right)_{n\in\N}}
-\newcommand{\settext}[2]{\left\{ #1\ |\ \text{#2} \right\}}
 \renewcommand{\emptyset}{\{\hspace{-2pt}\}}
 \newcommand{\powerset}[1]{\mathcal{P}(#1)}
 \newcommand{\dom}[1]{\operatorname{dom}(#1)}
@@ -43,6 +42,21 @@
 \newcommand{\OR}{\vee}
 \newcommand{\ARR}{\Rightarrow}
 \newcommand{\DARR}{\Leftrightarrow}
+
+\def\bbel{
+\,
+\raisebox{-2pt}{\includegraphics[scale=0.8]{bbel.pdf}}
+\,
+}
+
+\newcommand{\ALL}[2]{\left(\,\forall{#1}\,\bbel\,#2\,\right)}
+\newcommand{\EXIST}[2]{\left(\,\exists{#1}\,\bbel\,#2\,\right)}
+\newcommand{\COLL}[2]{\left\{\, {#1} \,\bbel\, {#2} \, \right\}}
+\newcommand{\settext}[2]{\COLL{#1}{\text{#2}}}
+
+%\newcommand{\SUBST}[3]{{#1}\left[{#2}\mapsto{#3}\right]}
+%\newcommand{\SUBST}[3]{{#1}_{{#2}\mapsto{#3}}}
+\newcommand{\SUBST}[3]{{#1}_{[{#2}\rightarrow{#3}]}}
 
 \newcounter{exercise}[subsubsection]
 \newcounter{rule}
@@ -105,6 +119,7 @@ Section \ref{sec:sets} will later give some mathematical objects to talk about, 
 content into the empty skeleton arguments of this section.
 
 \subsection{Parts of Speech}
+\label{sec:parts_of_speech}
 
 In a language, a \emph{part of speech} is a collection of words that share grammatical properties.
 For example here are some common English parts of speech: pronouns, nouns, verbs, adjectives, and adverbs.
@@ -209,7 +224,7 @@ Here are some propositions:
 \item If $x\in S$, then we either have $x\notin W$ or we have $x\in\Z$.
 \item $\neg(X\times Y \subseteq Z)$.
 \item Every integer is even.
-\item $(\forall n \, | \, (n\in\Z)\ARR (\exists k\,|\,(k\in\Z)\AND(2k=n)))$.
+\item $\ALL{n}{(n\in\Z)\ARR \EXIST{k}{(k\in\Z)\AND(2k=n)}}$.
 \end{itemize}
 The last two propositions are actually saying the same thing, as we will see when we get into semantics.
 Again, you can see that some propositions are more ``symbolic,'' while others are more ``Englishy.''
@@ -1285,6 +1300,63 @@ It is especially important to be aware of the ways in which mathematical logic d
 % use jacoby notes as a guide, but also look at ``thinking about logic'', and also show a truth table and point out the weird part.
 % pull out my old psychology course final paper as well
 
+\subsubsection{Substitution}
+
+Our entire discussion has so far been restricted to propositions, but for the next part \emph{variables} will have a role to play.
+Before moving on, review section
+\ref{sec:parts_of_speech} as needed to remind yourself about variables, constants, terms, and propositions.
+
+\newcommand{\eg}[4]{If $\pA$ is ``#1'' then $\SUBST{\pA}{#2}{#3}$ is ``#4''.}
+\def\lsp{\\[0.4em]}
+
+Given a proposition $\pA$, the notation
+$$
+\SUBST{\pA}{x}{T}
+$$
+stands for the proposition that is obtained by replacing each ``$x$'' in $\pA$ with a ``$T$''.
+In this notation, any variable can go in the position of ``$x$'' and any term can go in the position of ``$T$'':
+\begin{center}\includegraphics[scale=0.8]{subst.pdf}\end{center}
+Some examples:
+\indented{
+\eg{$x\in A\cup B$}{x}{y}{$y\in A\cup B$}\lsp
+\eg{$x\in A\cup B$}{A}{x}{$x\in x\cup B$}\lsp
+\eg{$z^2=z+y$}{z}{a+y}{$(a+y)^2=(a+y)+y$}\lsp
+\eg{$a+b\in B$}{c}{3}{$a+b\in B$}\lsp
+\eg{the product of $a$ and $b$ is even}{b}{c^2}{the product of $a$ and $c^2$ is even}
+}
+\paragraph{A Clarification}
+(If you find this remark to be more confusing than clarifying, then please feel free to skip this paragraph for now.)
+What \emph{is} the string of symbols ``$\SUBST{\pA}{x}{T}$''? What part of speech are we looking at here?
+It's almost a proposition, in that you get a proposition once you carry out the substitution that involves replacing $x$ by $T$.
+But the string of symbols ``$\SUBST{\pA}{x}{T}$'' is not itself a proposition.
+It's more like a set of \emph{instructions} telling you how to obtain a certain proposition.
+The string of symbols ``$\SUBST{\pA}{x}{T}$''
+has no part of speech because it is in fact not a part of the mathematical language at all!
+Instead, it is part of the language we are currently using to communicate. That is, it is a part of the English
+language in which this document is written, and it will help us in our mission to \emph{specify} the language of mathematics.
+You can think of ``$\SUBST{\pA}{x}{T}$'' as simply a shorthand for the instruction 
+\indented{
+\emph{Take the proposition ``$\pA$'' and replace all occurances of the variable ``$x$'' with the term ``$T$'', and then write the resulting proposition.}
+}
+
+\paragraph{More on substitution is coming later.}
+There is a little more to substitution than simple mechanical replacement of symbols.
+I've left out some important details in this section.
+Take a look at these examples:
+\indented{
+\eg{$\ALL{x}{x=2}$}{x}{y}{$\ALL{x}{x=2}$}\lsp
+\eg{$(x\in A)\AND\EXIST{x}{x=2}$}{x}{y}{$(y\in A)\AND\EXIST{x}{x=2}$}\lsp
+\eg{$a\in \COLL{a}{a^2=z}$}{a}{3}{$3\in \COLL{a}{a^2=z}$}
+}
+In these examples, substitution does not work as you might expect. 
+You might guess from the examples that the barbell symbol ``$\bbel$'' has a hand in the strange substitution rules.
+We are not ready to dig into these details just yet. Later
+in section \ref{sec:subst_again}, there will be more on ``$\bbel$'' and its effect on substitution.
+For now, rest assured that the substitutions in the upcoming exercise are all straightforward ones--
+there will be no funny business with barbells.
+
+
+
 
 
 
@@ -1310,6 +1382,12 @@ It is especially important to be aware of the ways in which mathematical logic d
 
 \subsubsection{More Derived Logical Rules}
 
+\subsubsection{Substitution Revisited}
+\label{sec:subst_again}
+
+% here include a version of how pronouns work
+
+% and also go into those details on bound vs free variables, and how barbells block substitution
 
 \section{Set Theory} % and still writing though...
 \label{sec:sets}
