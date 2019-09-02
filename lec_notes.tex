@@ -1482,6 +1482,157 @@ $$
 \EXIST{x}{\pA},
 $$
 which is expressed in English as ``there exists an $x$ such that $\pA$.''
+Here are some examples, along with their expressions in English:
+\indented{
+\begin{tabular}{ll}
+\EGENTRY{
+$\EXIST{x}{x=x}$
+}{
+There exists an $x$ such that $x=x$.
+}
+\EGENTRY{
+$\EXIST{n}{n>x}$
+}{
+There exists an $n$ such that $n>x$.
+}
+\EGENTRY{
+$\EXIST{y}{\text{($y$ is green)}\AND\text{($y$ is a flower)}}$
+}{
+There exists a $y$ such that $y$ is green and $y$ is a flower.
+}
+\EGENTRY{
+$\EXIST{y}{\text{($y$ is a flower)}\ARR\text{($y$ is green)}}$
+}{
+There exists a $y$ such that if $y$ is a flower then $y$ is green.
+}
+\end{tabular}
+}
+
+Again, the variable behind the ``$\bbel$'' is said to be \emph{quantified},
+and it serves as a mere placeholder in the proposition.
+It is always possible to express existentially quantified propositions in English
+\emph{without mentioning the quantified variable},
+as in the following renderings of the four examples from above:
+\indented{
+Something equals itself.\lsp
+Something is greater than $x$.\lsp
+There exists a green flower.\lsp
+There exists something with the property that if it is a flower, then it is green.
+}
+Now let's get into how ``$\exists$'' is used in proofs.
+
+\paragraph{Existential Generalization}
+To prove that $\EXIST{x}{\pA}$, all you need to do is
+prove $\pA$ or some variant of $\pA$ such as $\SUBST{\pA}{x}{T}$,
+in which a particular term $T$ sits in the place of $x$. In other
+words, to prove that ``there exists an $x$ such that $\pA$,''
+you must \emph{find} an $x$, such that $\pA$.
+
+Suppose someone tells you that there's no such thing as a spotted hamster.
+Disagreeing, you reach into your pocket and pull out a spotted hamster,
+proving that in fact there \emph{exists} a spotted hamster.
+That is existential generalization.
+
+\paragraph{Existential Instantiation}
+If you know that $\EXIST{x}{\pA}$ holds,
+then \emph{as long the variable $x$ was not previously used in your proof},
+you may bring $\pA$ into your argyment.
+That is, it is valid to assume $\pA$ for the rest of your argument.
+If the variable $x$ was already in use in your proof, then to avoid a conflict of variables you would have to
+introduce a brand new variable, say ``$y$'', and then from $\EXIST{x}{\pA}$ you may bring
+$\SUBST{\pA}{x}{y}$ into your argument.
+
+This is one of the trickiest manipulations with quantifiers, and it will take some getting used to.
+As an example, suppose you knew for a fact that $\EXIST{x}{\text{$x$ is green}}$,
+and you want to use this fact to argue that $\pC$.
+Then your argument could be formatted like this:
+\indented{
+Since we know that $\EXIST{x}{\text{$x$ is green}}$, it is possible
+to \emph{get} an $x$ such that $x$ is green.
+  \indented{
+  [insert argument using the fact that $x$ is green to deduce $\pC$]
+  }
+}
+You can think of it like this:
+If you and the person you are trying to convince both agree that there exists a green thing,
+then you can work with a \emph{hypothetical} green thing, without needing to specify it,
+in order to draw some conclusions to which you would both agree.
+The key word in the example formatting above is ``get.''
+It's almost like you're instructing the reader of your proof to
+``go get a green thing, and then come back so we can continue the argument using that green thing.''
+Except, no one ever really has to get an actual green thing; working with a hypothetical one called ``$x$''
+is sufficient to run the argument.
+
+\paragraph{Quantifying over Fewer Things}
+Sometimes you don't want to say that \emph{everything} is green, 
+but you want to say that everything of a certain \emph{type} is green.
+Maybe you want to say that all \emph{flowers} are green, rather than all \emph{things}.
+The way to express this with $\forall$ is to use $\ARR$, like this:
+$$ \ALL{x}{(\text{$x$ is a flower})\ARR(\text{$x$ is green})}. $$
+It is still the case that the quantified variable $x$ can be replaced by \emph{anything}.
+The quantified proposition still says
+``for all \emph{things}, if that thing is a flower then it is green.''
+However, the implication ``$(\text{$x$ is a flower})\ARR(\text{$x$ is green})$''
+only says something interesting when $x$ is a flower;
+otherwise it is \emph{vacuously} true.
+For this reason,
+``$ \ALL{x}{(\text{$x$ is a flower})\ARR(\text{$x$ is green})}. $'' is typically expressed in English as
+\begin{center}``All flowers are green.''\end{center}
+What if we wanted to say that 
+\emph{some} flower is green? Would
+``$
+\EXIST{x}{(\text{$x$ is a flower})\ARR(\text{$x$ is green})}
+$''
+work?
+Not at all! In fact, the latter proposition would be true as long as there is at least one non-flower.
+Instead of $\ARR$, to say ``some flower is green'' we should use $\AND$, like this:
+$$
+\EXIST{x}{(\text{$x$ is a flower})\AND(\text{$x$ is green})}.
+$$
+In summary: If you want to restrict the class of things you are quantifying over, then
+use $\ARR$ with $\forall$, and use $\AND$ with $\exists$.
+
+\ex{
+Express each of the following propositions in English without ever mentioning the quantified variable.
+Insisting that the quantified variable not be mentioned can make the phrasing awkward for some of the more complicated propositions, but so be it.
+\begin{enumerate}
+\item $\ALL{x}{\text{ $x$ is good }}$
+\item $\EXIST{x}{\text{ $x$ is good }}$
+\item $\ALL{x}{(\text{ $x$ is a human })\AND(\text{ $x$ is mortal })}$
+\item $\ALL{x}{(\text{ $x$ is a human })\OR (\text{ $x$ is mortal })}$
+\item $\ALL{x}{(\text{ $x$ is a human })\ARR(\text{ $x$ is mortal })}$
+\item $\ALL{x}{(\text{ $x$ is mortal  })\ARR(\text{ $x$ is a human })}$
+\item $\EXIST{x}{(\text{ $x$ is a human })\AND(\text{ $x$ is mortal })}$
+\item $\EXIST{x}{(\text{ $x$ is a human })\OR (\text{ $x$ is mortal })}$
+\item $\EXIST{x}{(\text{ $x$ is a human })\ARR(\text{ $x$ is mortal })}$
+\item $\ALL{x}{\neg(\text{ $x$ is good })}$
+\item $\neg\ALL{x}{\text{ $x$ is good }}$
+\item $\EXIST{x}{\neg(\text{ $x$ is good })}$
+\item $\neg\EXIST{x}{\text{ $x$ is good }}$
+\item $\ALL{x}{\text{ $x$ loves $y$ }}$
+\item $\EXIST{x}{\text{ $x$ loves $y$ }}$
+\item $\ALL{y}{\text{ $x$ loves $y$ }}$
+\item $\EXIST{y}{\text{ $x$ loves $y$ }}$
+\item $\ALL{x}{\EXIST{y}{\text{ $x$ loves $y$ }}}$\\
+Hint: Work from the inside towards the outside. So start by eliminating the mention of $y$, for example by writing it as $\ALL{x}{\text{$x$ loves something}}$.
+Then try to express that in English without mentioning $x$.
+\item $\EXIST{y}{\ALL{x}{\text{ $x$ loves $y$ }}}$
+\item $\ALL{x}{(\text{$x$ is a flower})\ARR\EXIST{y}{(\text{$y$ is a petal of $x$})\AND(\text{$y$ is green})}}$
+\item $\EXIST{x}{(\text{$x$ is a flower})\AND\ALL{y}{(\text{$y$ is a petal of $x$})\AND(\text{$y$ is green})}}$
+\end{enumerate}
+}
+
+
+
+\ex{
+Write each of the following using quantifier notation (i.e. using $\forall$ and $\exists$).
+\begin{enumerate}
+\item All birds can fly.
+\item Some bird can fly.
+\item Everything that can fly is a bird.
+\item All birds that can fly have wings.
+\end{enumerate}
+}
 
 
 
