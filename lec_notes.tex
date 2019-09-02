@@ -172,7 +172,8 @@ Note that we are mainly talking about elements of \emph{language}, and not about
 Germany is not a noun, it's a country. ``Germany'' is, however, a noun.
 Similarly, we can say that $2$ is not a constant, but rather ``$2$'' is.
 And $x$ is not a variable, but rather ``$x$'' is.
-Quotation marks help us make the distinction between a symbol and what the symbol refers to.
+Quotation marks help us make the distinction between a symbol and what the symbol refers to
+(though I will often be lazy and drop the quotation marks).
 
 
 
@@ -484,6 +485,7 @@ Which of the following are grammatically correct? Hint: replace Greek letters wi
 
 \subsubsection{And, Or, and Not}
 
+\paragraph{Conjunction}
 Given propositions $\pA$ and $\pB$, we can form their \emph{conjunction}
 $$
 \pA \AND \pB,
@@ -496,6 +498,7 @@ The following diagram, showing what you can deduce from $\pA\AND\pB$, kind of lo
 Order does not matter for $\AND$; we consider $\pA\AND\pB$ and $\pB\AND\pA$ to be the same.
 
 
+\paragraph{Disjunction}
 Given propositions $\pA$ and $\pB$, we can form their \emph{disjunction}
 $$
 \pA \OR \pB,
@@ -544,6 +547,7 @@ the formatting given above, replace $\pA$ by ``the plant is poison ivy,'' replac
 %Since the plant is poisonous either way, we can conclude that the plant is poisonous.
 %}
 
+\paragraph{Negation}
 Given a proposition $\pA$, we can form its \emph{negation}
 $$
 \neg \pA,
@@ -749,6 +753,7 @@ discussed in the next section.
 
 \subsubsection{If and Iff}
 
+\paragraph{Implication}
 Given propositions $\pA$ and $\pB$, we can form the \emph{implication}
 $$
 \pA\ARR\pB,
@@ -777,6 +782,7 @@ Here is also another great rule for using an implication (this one can be derive
 Given $\pA\ARR\pB$ and $\neg\pB$, you can deduce $\neg\pA$.
 }
 
+\paragraph{Logical Equivalence}
 Given  propositions $\pA$ and $\pB$, we can form the \emph{logical equivalence}
 $$
 \pA\DARR\pB,
@@ -1382,6 +1388,101 @@ Is $\SUBST{\SUBST{\pA}{x}{y}}{y}{x}$ always the same as $\pA$? Explain.
 
 
 \subsubsection{Universal and Existential Quantifiers}
+
+\def\lsp{\\[0.3em]}
+\newcommand{\EGENTRY}[2]{#1\hspace{1em} & #2\lsp}
+
+\paragraph{Universal Quantifiers}
+Given a proposition $\pA$ and a variable $x$, we can form
+the \emph{universally quantified} proposition
+$$
+\ALL{x}{\pA},
+$$
+which is expressed in English as ``for all $x$, $\pA$.''
+Typically the proposition $\pA$ would somehow involve the variable $x$.
+Here are some examples, along with their expressions in English:
+\indented{
+\begin{tabular}{ll}
+\EGENTRY{
+$\ALL{x}{x=x}$
+}{
+For all $x$, $x=x$.
+}
+\EGENTRY{
+$\ALL{n}{n>x}$
+}{
+For all $n$, $n>x$.
+}
+\EGENTRY{
+$\ALL{y}{\text{($y$ is green)}\AND\text{($y$ is a flower)}}$
+}{
+For all $y$, $y$ is green and $y$ is a flower.
+}
+\EGENTRY{
+$\ALL{y}{\text{($y$ is a flower)}\ARR\text{($y$ is green)}}$
+}{
+For all $y$, if $y$ is a flower then $y$ is green.
+}
+\end{tabular}
+}
+
+\def\BLANK{\underline{\hspace{8pt}}}
+
+In each proposition, the variable behind the ``$\bbel$'' is said to be \emph{quantified}.
+The quantified variable is special in that it's really just a placeholder.
+The proposition ``$\ALL{x}{x=x}$'' is no different from
+``$\ALL{y}{y=y}$''.
+We might as well write them both as as
+``$\ALL{\BLANK}{\BLANK=\BLANK}$'',
+with the understanding that the blanks all refer to the same thing.
+It is always possible to express universally quantified propositions in English
+\emph{without mentioning the quantified variable},
+as in the following renderings of the four examples from above:
+\indented{
+Everything equals itself.\lsp
+Everything is greater than $x$.\lsp
+Everything is a green flower.\lsp
+All flowers are green.
+}
+Now let's get into how ``$\forall$'' is used in proofs.
+
+\paragraph{Universal Instantiation}
+If you know that $\ALL{x}{\pA}$ holds, then
+you can deduce $\pA$.
+In fact, you can deduce \emph{any} proposition
+that results from the substitution $\SUBST{\pA}{x}{T}$,
+where ``$T$'' can be any term.
+For example,
+if you know that $\ALL{x}{\text{$x$ is even}}$, then
+you can deduce ``$x$ is even'', and you can also deduce
+things like ``$3$ is even'' and ``$A+B$ is even''.
+
+\paragraph{Universal Generalization}
+To \emph{prove} a universally quantified proposition $\ALL{x}{\pA}$,
+prove $\pA$ in a context in which you have made \emph{no assumptions} about the quantified variable $x$.
+In such a context, the variable $x$ is said to be \emph{arbitrary}.
+For example, let's say you are trying to prove that $\ALL{x}{\text{$x$ is green}}$.
+Your argument could be formatted something like this:
+\indented{
+Consider any $x$.
+\indented{
+[insert argument establishing that $x$ is green]
+}
+Since $x$ was arbitrary, we conclude that $\ALL{x}{\text{$x$ is green}}$.
+In other words, everything is green.
+}
+Upon reaching that first line, ``Consider any $x$,'' there are no assumptions about $x$.
+If there were previous assumptions about $x$ in the larger context of the proof, then
+they no longer apply after that line because \emph{this is a new and arbitrary $x$} that we are now talking about.
+
+\paragraph{Existential Quantifiers}
+Given a proposition $\pA$ and a variable $x$, we can form
+the \emph{existentially quantified} proposition
+$$
+\EXIST{x}{\pA},
+$$
+which is expressed in English as ``there exists an $x$ such that $\pA$.''
+
 
 
 % run through the rules and some useful derived rules of logic
