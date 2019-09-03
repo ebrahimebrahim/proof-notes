@@ -1803,6 +1803,10 @@ The $y$ loves \emph{that} particular $x$, and it does not make sense to generali
 %That was kind of subtle, right?
 %Of the rules UI, UG, EI, and EG, there are two subtle ones. UG is subtle, as we just saw, in that it requires that a variable really be arbitrary before
 %a generalization is made. The other subtle one is EI
+The error in appying UG was really subtle, and it would have been quite difficult to catch in stricly general proof written in terms of ``$\pA$''.
+This is why we will often include specific English propositions like ``$y$ loves $x$'' as an aide.
+It's actually fairly technical to work with quantifiers in a completely general pure logic setting.
+
 
 Besides the proof, there is also a lesson that we can draw from the derived rule itself:
 when multiple quantifiers are involved, be careful with the order in which you write them!
@@ -1855,14 +1859,207 @@ $\ALL{x,y}{\pA}$ will stand for $\ALL{x}{\ALL{y}{\pA}}$,
 and similarly
 $\EXIST{x,y}{\pA}$ will stand for $\EXIST{x}{\EXIST{y}{\pA}}$.
 
+Now that we've looked at how quantifiers interact with each other, the rest of this section
+explores the interaction between quantifiers and our old friends $\AND$, $\OR$, $\neg$, and $\ARR$.
+
+\DRULEPFalt{Quantifiers and Implication 1}{
+If $\ALL{x}{\pA\ARR\pB}$, then $\ALL{x}{\pA}\ARR\ALL{x}{\pB}$.
+}{
+If $\ALL{x}{\text{$x$ is a bird}\ARR\text{$x$ can fly}}$, then
+$\ALL{x}{\text{$x$ is a bird}}\ARR\ALL{x}{\text{$x$ can fly}}$.\\
+\textit{In other words:}\\
+If all birds can fly, then it must be that if everything is a bird then everything can fly.
+}{
+Assume that $\ALL{x}{\pA\ARR\pB}$.
+Assume that $\ALL{x}{\pA}$ (for the sake of proving that $\ALL{x}{\pB}$).
+Consider any $x$.
+Since $\ALL{x}{\pA}$, we have in particular that $\pA$. % UI
+Since $\ALL{x}{\pA\ARR\pB}$, we have in particular that $\pA\ARR\pB$. % UI
+From $\pA$ and $\pA\ARR\pB$, we conclude that $\pB$.
+Since $x$ remains arbitrary, we may generalize to conclude that $\ALL{x}{\pB}$. % UG
+}{
+Assume that all birds can fly.
+Assume that everything is a bird-- our goal is now to establish that everything can fly.
+Consider any $x$.
+Since everything is a bird, we have in particular that $x$ is a bird.
+Since all birds can fly, we have in particalar that if $x$ is a bird then $x$ can fly.
+Therefore $x$ can fly.
+Since $x$ remains arbitrary, we may generalize to conclude that \emph{everything} can fly. 
+}
+
+The above argument contains two uses of UI and one use of UG.
+
+\ex{
+The converse of the rule above cannot be established.
+In fact, in the real world in which we live, (1) it is true that
+if everything is a bird then everything can fly, but (2) it is false that all birds can fly.
+Explain how the assertions (1) and (2) hold for our reality.
+}
+
+
+\DRULEPFalt{Quantifiers and Implication 2}{
+If $\ALL{x}{\pA\ARR\pB}$, then $\EXIST{x}{\pA}\ARR\EXIST{x}{\pB}$.
+}{
+If $\ALL{x}{\text{$x$ is a bird}\ARR\text{$x$ can fly}}$, then
+$\EXIST{x}{\text{$x$ is a bird}}\ARR\EXIST{x}{\text{$x$ can fly}}$.\\
+\textit{In other words:}\\
+If all birds can fly, then it must be that if a bird exists then something can fly.
+}{
+Assume that $\ALL{x}{\pA\ARR\pB}$.
+Assume that $\EXIST{x}{\pA}$ (for the sake of proving that $\EXIST{x}{\pB}$).
+Then we can get an $x$ such that $\pA$. %EI
+Since $\ALL{x}{\pA\ARR\pB}$, we have in particular that $\pA\ARR\pB$. % UI
+From $\pA$ and $\pA\ARR\pB$, we conclude that $\pB$.
+Since we have found an $x$ such that $\pB$, we conclude that $\EXIST{x}{\pB}$. % EG
+}{
+Assume that all birds can fly.
+Assume that there exists a bird-- our goal is now to establish that there exists something that can fly.
+Since a bird exists, let's get one and call it $x$.
+Since all birds can fly, we have in particalar that if $x$ is a bird then $x$ can fly.
+Therefore $x$ can fly.
+Since we have found something $x$ that can fly, we conclude that \emph{something} can fly. 
+}
+
+The above argument contains a use of EI, a use of UI, and a use of EG.
+
+\ex{
+The converse of the rule above cannot be established.
+In fact, in the real world in which we live, (1) it is true that
+if there exists a bird then something can fly, but (2) it is false that all birds can fly.
+Explain how the assertions (1) and (2) hold for our reality.
+}
+
+\ex{
+There are at least two errors in the following foolish attempt to establish a converse to the rule above.
+Find at least one of them, and explain why it is an error. If you are stuck, consider reading a bit more of this section
+and then returning to this exercise.
+\indented{
+Assume that if $\EXIST{x}{\text{$x$ is a bird}}$, then $\EXIST{x}{\text{$x$ can fly}}$.
+We shall now attempt to prove that $\ALL{x}{\text{$x$ is a bird}\ARR\text{$x$ can fly}}$.
+Since $\EXIST{x}{\text{$x$ is a bird}}$, we can get a bird; call this bird $x$.
+Since $\EXIST{x}{\text{$x$ can fly}}$, we can get something that can fly; call this something $x$.
+Since $x$ is a bird and it can fly, we have proven that $\text{$x$ is a bird}\ARR\text{$x$ can fly}$.
+Since $x$ is arbitrary, we can generalize to conclude that $\ALL{x}{\text{$x$ is a bird}\ARR\text{$x$ can fly}}$. 
+}
+}
+
+\DRULEPFalt{Quantifiers and Conjunction 1}{
+If $\EXIST{x}{\pA\AND\pB}$, then $\EXIST{x}{\pA}\AND\EXIST{x}{\pB}$.
+}{
+If $\EXIST{x}{\text{$x$ is a flower}\AND\text{$x$ is green}}$, then $\EXIST{x}{\text{$x$ is a flower}}$ and $\EXIST{x}{\text{$x$ is green}}$.\\
+\textit{In other words:}\\
+If there exists a green flower, then something is a flower and something is green.
+}{
+Assume that $\EXIST{x}{\pA\AND\pB}$.
+Then we can get an $x$ such that $\pA\AND\pB$. % EI
+Since we have found an $x$ such that $\pA$, we can conclude that $\EXIST{x}{\pA}$. % EG
+Since we have found an $x$ such that $\pB$, we can conclude that $\EXIST{x}{\pB}$. % EG
+Thus $\EXIST{x}{\pA}$ and $\EXIST{x}{\pB}$.
+}{
+Assume that there exists a green flower. Then we can get a green flower, call it $x$.
+Since $x$ is a flower, we have found a flower and we can conclude that there exists a flower.
+Since $x$ is green, we have found a green thing and we can conclude that there exists a green thing.
+Thus something is a flower and something is green.
+}
+
+The above argument contains a use of EI and two uses of EG.
+
+It should be intuitive that the converse doesn't work.
+If a flower exists and a green thing exists, then we cannot necessarily conclude that a green flower exists.
+It could be that our world is full of non-green flowers and green non-flowers, but contains no green flowers.
+We can learn something by trying to prove the converse anyway, and looking for the error:
+\indented{
+Assume that $\EXIST{x}{\text{$x$ is a flower}}$ and $\EXIST{x}{\text{$x$ is green}}$.
+We shall now attempt to prove that $\EXIST{x}{\text{$x$ is a flower}\AND\text{$x$ is green}}$.
+Since $\EXIST{x}{\text{$x$ is a flower}}$, we can get (EI) a flower; let's call it $x$.
+Since also $\EXIST{x}{\text{$x$ is green}}$, we can get (EI) a green thing; let's call that $x$ as well.
+Since $x$ is a green flower, we have found a green flower and we can conclude (EG) that $\EXIST{x}{\text{$x$ is a flower}\AND\text{$x$ is green}}$.
+}
+
+Before reading on you might want to take a moment and consider what exact part of the argument feels wrong, and what is wrong with it.
+
+...
+
+
+\newpage
+
+
+The error is in the second use of EI. Recall that when you use EI to go from $\EXIST{x}{\pA}$ to $\pA$,
+the variable $x$ cannot already be in use. If it is in use, then you have to substitute in a new variable such as $y$, and then you can bring
+$\SUBST{\pA}{x}{y}$ into the argument.
+The critical error in the argument given here is in ``let's call that $x$ as well,'' which is where we decied to name the green thing $x$.
+We should have used a different name, like $y$,
+since we only knew that we could get \emph{some} green thing and we should not allow that to conflict with the name $x$ that we gave to our hypothetical flower.
+If we had called the flower $x$ and the green thing $y$, then there would be no way for the argument to proceed, and all's right with the world.
+
+
+\DRULEPFalt{Quantifiers and Conjunction 2}{
+$\ALL{x}{\pA\AND\pB}$ if and only if $\ALL{x}{\pA}\AND\ALL{x}{\pB}$.
+}{
+$\ALL{x}{\text{$x$ is large}\AND\text{$x$ is green}}$ if and only if $\ALL{x}{\text{$x$ is large}}$ and $\ALL{x}{\text{$x$ is green}}$.\\
+\textit{In other words:}\\
+Everything is large and green if and only if everything is large and everything is green.
+}{
+$\Rightarrow$: Assume that $\ALL{x}{\pA\AND\pB}$.
+Consider any $x$. Since $\ALL{x}{\pA\AND\pB}$, we have in particular that $\pA\AND\pB$ % UI
+Since $x$ is arbitrary and we have $\pA$, we conclude that $\ALL{x}{\pA}$. % UG
+Since $x$ is arbitrary and we have $\pB$, we conclude that $\ALL{x}{\pB}$. % UG
+Thus $\ALL{x}{\pA}\AND\ALL{x}{\pB}$.
+
+$\Leftarrow$: Assume that $\ALL{x}{\pA}\AND\ALL{x}{\pB}$.
+Consider any $x$.
+Since $\ALL{x}{\pA}$, we have in particular that $\pA$. % UI
+Since $\ALL{x}{\pB}$, we have in particular that $\pB$. % UI
+Since we now have $\pA\AND\pB$ and since $x$ is arbitrary, we may generalize to conclude that $\ALL{x}{\pA\AND\pB}$. % UG
+}{
+$\Rightarrow$: Assume that everything is large and green.
+Consider any $x$. Since everything is large and green, we know in particular that $x$ is large and green.
+Since $x$ is arbitrary and we showed that it is large, we may generalize to conclude that everything is large.
+Similarly, since $x$ is arbitrary and we showed that it is green, we may generalize to conclude that everything is green.
+Thus everything is large and everything is green.
+
+$\Leftarrow$: This direction is given as an exercise below.
+}
+
+\ex{
+Prove that if everything is large and everything is green, then it follows that everything is large and green.
+Hint: your argument should involve two uses of UI and one use of UG.
+}
+
+% LXXI ii do
+\DRULEPFalt{Quantifiers and Disjunction 1}{
+If $\ALL{x}{\pA}\OR\ALL{x}{\pB}$,
+then $\ALL{x}{\pA\OR\pB}$.
+}{
+t
+}{
+t
+}{
+t
+}
+
+
+% LXXI ii converse give wrong proof and make ex to find error.
+
+
+% LXXI i do, but leave one direction of englishy portion as an ex
+
+
+% LXXXIX iii and iv: do one, leave the entire other one as an exercise.
+
+
+% exercise: now that we know how to push neg into quantifiers, do it to a bunch of these (some are in english and some are more symbolic, one of them is the analysis one)
+
 
 
 \subsubsection{Substitution Revisited}
 \label{sec:subst_again}
 
 % here include a version of how pronouns work
+% how there's an implicit "for all" in a lot of theorem statements, but it's really not needed to say it due to how pronouns work
 
 % and also go into those details on bound vs free variables, and how barbells block substitution
+% (you can look at the crazy nested quantifiers special case in jacoby notes)
 
 \section{Set Theory} % and still writing though...
 \label{sec:sets}
