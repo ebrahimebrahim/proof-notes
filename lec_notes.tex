@@ -1215,7 +1215,7 @@ Both approaches amount to pretty much the same argument.
 
 \vspace{1em}
 
-\DRULEPF{Negating an Equivalence\label{drule:neg_equiv}}{
+\DRULEPF{Inverting an Equivalence\label{drule:neg_equiv}}{
 If $\pA\DARR\pB$, then $\neg\pA\DARR\neg\pB$.
 }{
 Assume that $\pA\DARR\pB$. Then $\pA\ARR\pB$ and $\pB\ARR\pA$.
@@ -1224,7 +1224,7 @@ Thus we have $\neg\pA\DARR\neg\pB$.
 }
 
 % do LXXXIII ii
-\DRULEPF{De Morgan's Law 1}{$\neg(\pA\AND\pB)\ \DARR\ (\neg\pA\OR\neg\pB)$}{
+\DRULEPF{De Morgan's Law 1\label{drule:demorgan1}}{$\neg(\pA\AND\pB)\ \DARR\ (\neg\pA\OR\neg\pB)$}{
 $\Rightarrow$: Assume $\neg(\pA\AND\pB)$.
 Due to excluded middle, either $\pA$ or $\neg\pA$.\lsp
 
@@ -1249,7 +1249,7 @@ We obtain a contradiction either way, and so we are forced to reject that $\pA\A
 
 
 % puzzle LXXXIII i
-\DRULEPZ{De Morgan's Law 2}{
+\DRULEPZ{De Morgan's Law 2\label{drule:demorgan2}}{
 $\neg(\pA\OR\pB)\ \DARR\ (\neg\pA\AND\neg\pB)$
 }
 
@@ -1272,7 +1272,7 @@ Everytime we want to say ``if $\pA$, then $\pB$,'' we could instead say ``either
 But life is better when we can phrase things in terms of $\ARR$, and that is why we choose to have it.
 
 % puzzle $\neg(\pA\ARR\pB)\DARR (\pA\AND\neg\pB)$
-\DRULEPZ{Negating an Implication}{$\neg(\pA\ARR\pB)\DARR (\pA\AND\neg\pB)$}
+\DRULEPZ{Negating an Implication\label{drule:neg_impl}}{$\neg(\pA\ARR\pB)\DARR (\pA\AND\neg\pB)$}
 
 % comment that it's important to understand this so that we know how to negate logical statements by ``pushing'' the $\neg$ inside things. demorgan tells us how to deal with $\AND$ and $\OR$.
 The rule above and De Morgan's laws give you a way ``push'' a negation $\neg$ into complicated propositions. This will really come in handy later on!
@@ -2217,7 +2217,7 @@ $\neg\EXIST{x}{\text{$x$ is \ADJA{}}}\DARR\ALL{x}{\text{$x$ is not \ADJA{}}}$\\
 }{
 Apply ``Quantifiers and Negation 1'' to the proposition $\neg\pA$ (putting $\neg\pA$ in place of $\pA$) to obtain
 $\neg\ALL{x}{\neg\pA}\DARR\EXIST{x}{\pA}$.
-Then negate this equivalence (see derived rule \ref{drule:neg_equiv}) to obtain the desired equivalence.
+Then invert this equivalence (see derived rule \ref{drule:neg_equiv}) to obtain the desired equivalence.
 }{
 \putExerciseHeading: Write this proof without relying on ``Quantifiers and Negation 1.''
 Your argument could look pretty similar to the argument that
@@ -2227,14 +2227,59 @@ which is given in ``Quantifiers and Negation 1.''
 
 
 
+\def\hsp{\hspace{1em}}
 
-
-
-
-
+The two rules above, along with derived rules
+\ref{drule:demorgan1},
+\ref{drule:demorgan2},
+and \ref{drule:neg_impl}
+form a complete toolkit
+for ``pushing'' $\neg$ into complicated propositions.
+For example, here are the stages of
+negating $\ALL{x}{\pA\ARR(\pB\OR\EXIST{y}{\pC})}$
+and pushing the negation inward:
+$$\begin{array}{ll}
+\neg\ALL{x}{\pA\ARR(\pB\OR\EXIST{y}{\pC})} \hsp &\DARR\\
+\EXIST{x}{\neg(\pA\ARR(\pB\OR\EXIST{y}{\pC}))} \hsp &\DARR\\
+\EXIST{x}{\pA\AND\neg(\pB\OR\EXIST{y}{\pC})} \hsp &\DARR\\
+\EXIST{x}{\pA\AND\neg\pB\AND\neg\EXIST{y}{\pC}} \hsp &\DARR\\
+\EXIST{x}{\pA\AND\neg\pB\AND\ALL{y}{\neg\pC}}. &
+\end{array}$$
+Here's the exact same procedure with $\pA$ replaced by ``$x$ is a flower'', $\pB$ replaced by ``$x$ is purple'', and $\pC$ replaced by ``$y$ is a green petal of $x$'':
+\begin{center}
+\begin{tabular}{ll}
+``It is not the case that all flowers are either purple or have a green petal'' \hsp &iff\\
+``There is something for which it is not the case that if it is a flower then &\\
+             \hspace{2em} it is either purple or it has a green petal '' \hsp &iff\\
+``There is some flower for which it is not the case that it is either purple&\\
+             \hspace{2em} or it has a green petal'' \hsp &iff\\
+``There is some non-purple flower which does not have a green petal'' \hsp &iff\\
+``There is some non-purple flower all of whose petals are non-green'' &
+\end{tabular}
+\end{center}
+Hopefully the overall negation feels intuitive, even if the individual steps in pushing the negation are a little awkward.
 
 
 % exercise: now that we know how to push neg into quantifiers, do it to a bunch of these (some are in english and some are more symbolic, one of them is the analysis one)
+% remind about derived rule that converts "unless" to "if" and to use that.
+
+% all and
+% all or
+% exist and
+% exist or
+% exist implies
+% all implies
+% an interesting all-exist,
+% an interesting exist-all
+% the analysis one 
+% same as all above above but English
+% (do some shuffling, but keep the ones with more quantifiers below ones with less)
+
+
+
+
+
+
 
 
 
