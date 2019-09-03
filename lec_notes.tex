@@ -18,6 +18,8 @@
 \usepackage{enumitem}
 \usepackage{changepage}
 \usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{xcolor}
 
 
 % Some of Ebrahim's definitions
@@ -947,6 +949,7 @@ The latter proposition could be called ``proof by cases,'' and so your truth tab
 }
 
 \subsubsection{Some Derived Logical Rules}
+\label{sec:derived1}
 
 In this section we will derive some logical rules from the basic ones given in previous sections.
 We still have no specific mathematical propositions to talk about and so we still use the placeholders $\pA$, $\pB$, etc.
@@ -1654,6 +1657,205 @@ Write each of the following using quantifier notation (i.e. using $\forall$ and 
 % a comment (maybe put this earlier) on how repetitiveness is okay for now, and better to fix it later. perhaps sian comments on how fix
 
 \subsubsection{More Derived Logical Rules}
+\label{sec:derived2}
+
+\setlength{\columnseprule}{1pt}
+
+\makeatletter
+\newcommand{\DrawLine}{%
+  \begin{tikzpicture}
+  \path[use as bounding box] (0,0) -- (\linewidth,0);
+  \draw[color=black,dashed,dash phase=2pt]
+        (0-\kvtcb@leftlower-\kvtcb@boxsep,0)--
+        (\linewidth+\kvtcb@rightlower+\kvtcb@boxsep,0);
+  \end{tikzpicture}%
+  }
+\makeatother
+
+% title, statement, statement alt, pf, pf alt
+\newcommand{\DRULEPFalt}[5]{
+  \begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white] 
+      {#2}\\
+  \DrawLine\\[0.5em]
+    \textbf{Proof:} {#4}\\
+  \DrawLine\\[0.5em]
+      \textit{A particular instance of the derived rule:}\\
+      {#3}\\
+  \DrawLine\\[0.5em]
+    \textbf{Proof:} {#5}
+  \end{tcolorbox}
+}
+
+% old side-by-side method that i'm tossing
+%\newcommand{\DRULEPFalt}[5]{
+%  \begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white] 
+%    \begin{multicols}{2}
+%      {#2}
+%    \vfill
+%    \columnbreak
+%      {#3}
+%    \end{multicols} 
+%  \tcblower 
+%    \begin{multicols}{2}
+%      \textbf{Proof:} {#4}
+%    \vfill
+%    \columnbreak
+%      \textbf{Proof:} {#5}
+%    \end{multicols} 
+%  \end{tcolorbox}
+%}
+
+
+\newcommand{\RELONEA}[1]{#1\text{ is green}}
+\newcommand{\RELTWOA}[2]{#1\text{ loves }#2}
+
+We now continue to derive logical rules, as we were doing in section
+\ref{sec:derived1}.
+This time, the rules involve quantifiers.
+Like in section 
+\ref{sec:derived1},
+we still want to work with actual mathematical propositions,
+instead favoring more general \emph{placeholders} for propositions, like $\pA$, $\pB$, etc.
+However, I think that the arguments in this section can become difficult to follow if we adhere strictly to this level of generality.
+For this reason, we will sometimes also include a version of the arguments that contains generic-sounding
+English propositions, like ``$\RELONEA{x}$,'' or ``$\RELTWOA{x}{y}$.''
+These will often appear alongside the strictly general derivations; you are welcome to follow
+whichever version you find to be more convenient.
+
+
+\DRULEPFalt{Global Existence Implies Local Existence}{
+$\EXIST{y}{\ALL{x}{\pA}}\ARR\ALL{x}{\EXIST{y}{\pA}}$
+}{
+$\EXIST{y}{\ALL{x}{\text{$y$ loves $x$}}}\ARR\ALL{x}{\EXIST{y}{\text{$y$ loves $x$}}}$\\
+(In other words: If there is something that loves everything, then everything is loved by something.)
+}{
+Assume that
+$\EXIST{y}{\ALL{x}{\pA}}$.
+Then we can get a $y$ such that
+$\ALL{x}{\pA}$.
+Now consider any $x$.
+Since $\ALL{x}{\pA}$, we know that in particular $\pA$ holds.
+Since we have found $y$ such that $\pA$ holds,
+we can conclude that $\EXIST{y}{\pA}$.
+Since $x$ was arbitrary, we can conclude that
+$\ALL{x}{\EXIST{y}{\pA}}$.
+}{
+Assume that $\EXIST{y}{\ALL{x}{\text{$y$ loves $x$}}}$.
+That is, assume that there is something that loves everything.
+Then we can get something that loves everything; call it $y$.
+Now consider any $x$.
+Since $y$ loves everything, we know in particular that that $y$ loves $x$.
+Thus \emph{something} loves $x$. That is,
+$\EXIST{y}{\text{$y$ loves $x$}}$.
+Since $x$ was arbitrary, we can conclude that
+\emph{everything} is loved by something.
+That is,
+$\ALL{x}{\EXIST{y}{\text{$y$ loves $x$}}}$.
+}
+
+\newcommand{\highlight}[1]{{\color{red}#1}}
+
+In the argument above you can see all four of the fundamental rules involving quantifiers: universal instantiation (UI),
+universal generalization (UG), existential instantiation (EI), and existential generalization (EG).
+Here is a repeat of the last argument with those rules pointed out:
+\indented{
+Assume that $\EXIST{y}{\ALL{x}{\text{$y$ loves $x$}}}$.
+That is, assume that there is something that loves everything.
+Then we can get \highlight{(EI)} something that loves everything; call it $y$.
+Now consider any $x$.
+Since $y$ loves everything, we know in particular \highlight{(UI)} that that $y$ loves $x$.
+Thus \emph{something} \highlight{(EG)} loves $x$. That is,
+$\EXIST{y}{\text{$y$ loves $x$}}$.
+Since $x$ was arbitrary, we can conclude \highlight{(UG)} that
+\emph{everything} is loved by something.
+That is,
+$\ALL{x}{\EXIST{y}{\text{$y$ loves $x$}}}$.
+}
+
+As you study the arguments in this section, try to identify exactly where UI, UG, EI, and EG are being used.
+
+Regarding the derived rule above, the coverse cannot be proven!
+It may be useful to look at what goes wrong if we attempt to prove it anyway:
+\indented{
+A failed attempt to prove that
+$\ALL{x}{\EXIST{y}{\text{$y$ loves $x$}}}\ARR\EXIST{y}{\ALL{x}{\text{$y$ loves $x$}}}$:\\[0.3em]
+Assume that $\ALL{x}{\EXIST{y}{\text{$y$ loves $x$}}}$.
+Consider any $x$.
+Since $\ALL{x}{\EXIST{y}{\text{$y$ loves $x$}}}$,
+we know in particular (UI) that $\EXIST{y}{\text{$y$ loves $x$}}$.
+Thus we can get (EI) a $y$ such that $y$ loves $x$.
+{\color{red} Since $x$ was arbitrary,
+we have established (UG)}
+that $\ALL{x}{\text{$y$ loves $x$}}$.
+That is, $y$ loves everything.
+Since we have found a $y$ that loves everything, we can conclude (EG)
+that 
+$\EXIST{y}{\ALL{x}{\text{$y$ loves $x$}}}$.
+}
+The error in the proof is colored in red. Do you see what is wrong with it?
+It should feel wrong to you-- before reading on you might want to take a moment and consider what it is that feels wrong in the argument.
+
+In order to generalize from a statement about $x$ to a statement about \emph{all} $x$, there must be no prior assumption attached to $x$.
+There must be nothing special about $x$. It must be that $x$ is truly \emph{arbitrary}.
+Here, however, the variable $x$ stopped being arbitrary as soon as we introduced a specific $y$ into the proof, a $y$ that loves $x$.
+The $y$ loves \emph{that} particular $x$, and it does not make sense to generalize from this fact and deduce that $y$ loves \emph{everything}.
+
+%That was kind of subtle, right?
+%Of the rules UI, UG, EI, and EG, there are two subtle ones. UG is subtle, as we just saw, in that it requires that a variable really be arbitrary before
+%a generalization is made. The other subtle one is EI
+
+Besides the proof, there is also a lesson that we can draw from the derived rule itself:
+when multiple quantifiers are involved, be careful with the order in which you write them!
+
+We do not need to worry about order when the same type of quantifier is repeated, as we will see in the next two rules.
+
+
+
+
+
+\DRULEPF{Irrelevance of order of $\forall$}{
+$\ALL{x}{\ALL{y}{\pA}}\ARR\ALL{y}{\ALL{x}{\pA}}$
+%}{
+%$\ALL{x}{\ALL{y}{\RELTWOA{x}{y}}}\ARR\ALL{y}{\ALL{x}{\RELTWOA{x}{y}}}$
+}{
+Assume that $\ALL{x}{\ALL{y}{\pA}}$.
+Consider any $y$.
+Consider any $x$.
+From $\ALL{x}{\ALL{y}{\pA}}$ we can conclude ${\ALL{y}{\pA}}$, and from that we can conclude $\pA$.
+Since we deduced $\pA$ while $x$ is arbitrary, we can conclude that ${\ALL{x}{\pA}}$.
+Since we deduced 
+${\ALL{x}{\pA}}$
+while $y$ is arbitrary, we can conclude that $\ALL{y}{\ALL{x}{\pA}}$.
+}
+
+It should be intuitive that $\ALL{x}{\ALL{y}{\text{$x$ loves $y$}}}$ is the same as
+$\ALL{y}{\ALL{x}{\text{$x$ loves $y$}}}$, since they both mean ``everything loves everything.''
+The same goes for ``something loves something,'' derived next:
+
+\DRULEPF{Irrelevance of order of $\exists$}{
+$\EXIST{x}{\EXIST{y}{\pA}}\ARR\EXIST{y}{\EXIST{x}{\pA}}$
+%}{
+%$\ALL{x}{\ALL{y}{\RELTWOA{x}{y}}}\ARR\ALL{y}{\ALL{x}{\RELTWOA{x}{y}}}$
+}{
+Assume that $\EXIST{x}{\EXIST{y}{\pA}}$.
+We can get an $x$ such that 
+$\EXIST{y}{\pA}$.
+Now we can get a $y$ such that
+$\pA$.
+Since we have found an $x$ such that $\pA$, we can conclude 
+$\EXIST{x}{\pA}$.
+Since we have found a $y$ such that
+$\EXIST{x}{\pA}$,
+we can conclude 
+$\EXIST{y}{\EXIST{x}{\pA}}$.
+}
+
+We will often use the following shorthand for repeated quantifiers:
+$\ALL{x,y}{\pA}$ will stand for $\ALL{x}{\ALL{y}{\pA}}$,
+and similarly
+$\EXIST{x,y}{\pA}$ will stand for $\EXIST{x}{\EXIST{y}{\pA}}$.
+
+
 
 \subsubsection{Substitution Revisited}
 \label{sec:subst_again}
