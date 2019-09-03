@@ -2026,20 +2026,49 @@ Prove that if everything is large and everything is green, then it follows that 
 Hint: your argument should involve two uses of UI and one use of UG.
 }
 
+\def\lsp{\\[-0.1em]}
+
 % LXXI ii do
 \DRULEPFalt{Quantifiers and Disjunction 1}{
 If $\ALL{x}{\pA}\OR\ALL{x}{\pB}$,
 then $\ALL{x}{\pA\OR\pB}$.
 }{
-t
+If $\ALL{x}{\text{$x$ is large}}\OR\ALL{x}{\text{$x$ is green}}$,
+then $\ALL{x}{\text{$x$ is large}\OR\text{$x$ is green}}$.\\
+\textit{In other words:}\\
+If either everything is large or everything is green, then everything is either large or green.
 }{
-t
+Assume that $\ALL{x}{\pA}\OR\ALL{x}{\pB}$.\lsp
+
+Case 1: Assume that $\ALL{x}{\pA}$. Consider any $x$.
+Since $\ALL{x}{\pA}$, it follows in particular that $\pA$. 
+Thus we have $\pA\OR\pB$, and since $x$ is arbitrary we may generalize and conclude that $\ALL{x}{\pA\OR\pB}$.\lsp
+
+Case 2: Assume that $\ALL{x}{\pB}$. Consider any $x$.
+Since $\ALL{x}{\pB}$, it follows in particular that $\pB$. 
+Thus we have $\pA\OR\pB$, and since $x$ is arbitrary we may generalize and conclude that $\ALL{x}{\pA\OR\pB}$.\lsp
+
+Since we ended up with $\ALL{x}{\pA\OR\pB}$ in both cases, we may conclude that $\ALL{x}{\pA\OR\pB}$.
 }{
-t
+Assume that either everything is large or everything is green.\lsp
+
+Case 1: Suppose that everything is large. Consider any $x$.
+Since everything is large, $x$, in particular, is large.
+Thus $x$ is large or it is green. Since $x$ is arbitrary, we may generalize and conclude that \emph{everything} is either large or green.\lsp
+
+Case 1: Suppose that everything is green. Consider any $x$.
+Since everything is green, $x$, in particular, is green.
+Thus $x$ is large or it is green. Since $x$ is arbitrary, we may generalize and conclude that \emph{everything} is either large or green.\lsp
+
+Since both cases lead us to conclude that everything is either large or green, we can go ahead and conclude that everything is either large or green.
 }
 
 
-% LXXI ii converse give wrong proof and make ex to find error.
+
+% consider going back and puttins subst everywhere in the hardcore pfs. why ``consider any x'' if you never use x?
+
+
+% LXXI ii (the above) converse give wrong proof and make ex to find error.
 
 
 % LXXI i do, but leave one direction of englishy portion as an ex
@@ -2049,6 +2078,7 @@ t
 
 
 % exercise: now that we know how to push neg into quantifiers, do it to a bunch of these (some are in english and some are more symbolic, one of them is the analysis one)
+
 
 
 
