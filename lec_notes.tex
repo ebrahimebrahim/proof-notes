@@ -65,6 +65,7 @@
 \newcounter{exercise}[subsubsection]
 \newcounter{rule}
 
+\def\putExerciseHeading{\refstepcounter{exercise} \textbf{Exercise \thesubsubsection.\theexercise}}
 \def\putRuleNumber{\refstepcounter{rule}\therule}
 
 \newcommand{\ex}[1]{ \refstepcounter{exercise} \textbf{Exercise \thesubsubsection.\theexercise:}\begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
@@ -76,7 +77,7 @@
 \newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
 \newcommand{\DRULEPF}[3]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} {#3} \end{tcolorbox}}
 \newcommand{\DRULEPZ}[2]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} 
-                         \refstepcounter{exercise} \textbf{Exercise \thesubsubsection.\theexercise}. \end{tcolorbox}}
+                         \putExerciseHeading. \end{tcolorbox}}
 
 \def\pA{\Phi}
 \def\pB{\Psi}
@@ -656,7 +657,7 @@ Suppose we know the following four facts:
 Now write a proof of the following statement: ``It did not rain last night and the sprinklers are broken.''
 To make your argument,
 do a proof by contradiction to establish ``it did not rain last night,''
-and do another proof by contradiction to establsih ``the sprinklers are broken.''
+and do another proof by contradiction to establish ``the sprinklers are broken.''
 Once both are established you can conclude the conjunction.
 Follow the formatting given in this section for proof by contradiction.
 }
@@ -1183,7 +1184,7 @@ Since the converse of an implication is the contrapositive of its inverse, the c
 
 
 % Prove that impliation holds iff contrapositive does.
-\DRULEPF{Contraposition}{$(\pA\ARR\pB)\DARR(\neg\pB\ARR\neg\pA)$}{
+\DRULEPF{Contraposition\label{drule:contraposition}}{$(\pA\ARR\pB)\DARR(\neg\pB\ARR\neg\pA)$}{
 Assume that $\pA\ARR\pB$.
 To prove that $\neg\pB\ARR\neg\pA$, assume that $\neg\pB$.
 Now assume $\pA$, for the sake of obtaining a contradiction.
@@ -1211,6 +1212,16 @@ The above argument should make you feel that ``proof by contradiction'' and ``co
 One can prove $\pA\ARR\pB$ by assuming $\pA$, then assuming $\neg\pB$ and trying to obtain a contradiction.
 Or, one can prove $\pA\ARR\pB$ by instead proving its contrapositive $\neg\pB\ARR\neg\pA$, which we now see is equivalent to the original implication.
 Both approaches amount to pretty much the same argument.
+
+\vspace{1em}
+
+\DRULEPF{Negating an Equivalence\label{drule:neg_equiv}}{
+If $\pA\DARR\pB$, then $\neg\pA\DARR\neg\pB$.
+}{
+Assume that $\pA\DARR\pB$. Then $\pA\ARR\pB$ and $\pB\ARR\pA$.
+By contraposition, it follows that $\neg\pB\ARR\neg\pA$ and $\neg\pA\ARR\neg\pB$.
+Thus we have $\neg\pA\DARR\neg\pB$.
+}
 
 % do LXXXIII ii
 \DRULEPF{De Morgan's Law 1}{$\neg(\pA\AND\pB)\ \DARR\ (\neg\pA\OR\neg\pB)$}{
@@ -1247,16 +1258,12 @@ $\neg(\pA\OR\pB)\ \DARR\ (\neg\pA\AND\neg\pB)$
 \DRULEPF{Implication in Terms of Disjunction}{
 $(\pA\ARR\pB)\DARR(\neg\pA\OR\pB)$
 }{
-$\Rightarrow$: The direction $(\pA\ARR\pB)\ARR(\neg\pA\OR\pB)$ is given as an exercise below.
+$\Rightarrow$: \putExerciseHeading: Prove that $(\pA\ARR\pB)\ARR(\neg\pA\OR\pB)$. Hint: Use excluded middle.
 \lsp
 
 $\Leftarrow$: Assume that $\neg\pA\OR\pB$. With the goal of proving that $\pA\ARR\pB$, assume that $\pA$.
 Applying the previous rule ``alternative eliminated,''
 we can conclude $\pB$ from $\neg\pA\OR\pB$ and $\pA$.
-}
-
-\ex{
-Fill in the $\Rightarrow$ direction in the argument above. Hint: Use excluded middle.
 }
 
 % comment on the inutiitiveness of this as ``$\pB$, unless $\neg\pA$'', and on how it means implications were not needed
@@ -2027,16 +2034,18 @@ Hint: your argument should involve two uses of UI and one use of UG.
 }
 
 \def\lsp{\\[-0.1em]}
+\def\ADJA{dry}
+\def\ADJB{hot}
 
 % LXXI ii do
 \DRULEPFalt{Quantifiers and Disjunction 1}{
 If $\ALL{x}{\pA}\OR\ALL{x}{\pB}$,
 then $\ALL{x}{\pA\OR\pB}$.
 }{
-If $\ALL{x}{\text{$x$ is large}}\OR\ALL{x}{\text{$x$ is green}}$,
-then $\ALL{x}{\text{$x$ is large}\OR\text{$x$ is green}}$.\\
+If $\ALL{x}{\text{$x$ is \ADJA{}}}\OR\ALL{x}{\text{$x$ is \ADJB{}}}$,
+then $\ALL{x}{\text{$x$ is \ADJA{}}\OR\text{$x$ is \ADJB{}}}$.\\
 \textit{In other words:}\\
-If either everything is large or everything is green, then everything is either large or green.
+If either everything is \ADJA{} or everything is \ADJB{}, then everything is either \ADJA{} or \ADJB{}.
 }{
 Assume that $\ALL{x}{\pA}\OR\ALL{x}{\pB}$.\lsp
 
@@ -2050,31 +2059,179 @@ Thus we have $\pA\OR\pB$, and since $x$ is arbitrary we may generalize and concl
 
 Since we ended up with $\ALL{x}{\pA\OR\pB}$ in both cases, we may conclude that $\ALL{x}{\pA\OR\pB}$.
 }{
-Assume that either everything is large or everything is green.\lsp
+Assume that either everything is \ADJA{} or everything is \ADJB{}.\lsp
 
-Case 1: Suppose that everything is large. Consider any $x$.
-Since everything is large, $x$, in particular, is large.
-Thus $x$ is large or it is green. Since $x$ is arbitrary, we may generalize and conclude that \emph{everything} is either large or green.\lsp
+Case 1: Suppose that everything is \ADJA{}. Consider any $x$.
+Since everything is \ADJA{}, $x$, in particular, is \ADJA{}.
+Thus $x$ is \ADJA{} or it is \ADJB{}. Since $x$ is arbitrary, we may generalize and conclude that \emph{everything} is either \ADJA{} or \ADJB{}.\lsp
 
-Case 1: Suppose that everything is green. Consider any $x$.
-Since everything is green, $x$, in particular, is green.
-Thus $x$ is large or it is green. Since $x$ is arbitrary, we may generalize and conclude that \emph{everything} is either large or green.\lsp
+Case 1: Suppose that everything is \ADJB{}. Consider any $x$.
+Since everything is \ADJB{}, $x$, in particular, is \ADJB{}.
+Thus $x$ is \ADJA{} or it is \ADJB{}. Since $x$ is arbitrary, we may generalize and conclude that \emph{everything} is either \ADJA{} or \ADJB{}.\lsp
 
-Since both cases lead us to conclude that everything is either large or green, we can go ahead and conclude that everything is either large or green.
+Since both cases lead us to conclude that everything is either \ADJA{} or \ADJB{}, we can go ahead and conclude that everything is either \ADJA{} or \ADJB{}.
+}
+
+
+The above argument contains a use of UI and two uses of UG.
+
+% LXXI ii (the above) converse give wrong proof and make ex to find error.
+It should be intuitive that the converse doesn't work.
+If everything is either \ADJA{} or \ADJB{}, then it does not necessarily follow
+that either everything is \ADJA{} or everything is \ADJB{}.
+There could still be some \ADJA{} things that aren't \ADJB{} as well as some \ADJB{} things that aren't \ADJA{}.
+
+\ex{
+Here is an attempt at arguing for the converse. What is the exact mistake?
+\indented{
+Assume that everything is either \ADJA{} or \ADJB{}.
+We will attempt to prove that either everything is \ADJA{}, or everything is \ADJB{}. 
+Consider any $x$. Since everything is \ADJA{} or it is \ADJB{}, we know that $x$, in particular, is either \ADJA{} or \ADJB{}.
+
+Case 1: Suppose that $x$ is \ADJA{}. Then, since $x$ is arbitrary, we may generalize and conclude that everything is \ADJA{}.
+It follows that either everything is \ADJA{} or everything is \ADJB{}.
+
+Case 2: Suppose that $x$ is \ADJB{}. Then, since $x$ is arbitrary, we may generalize and conclude that everything is \ADJB{}.
+It follows that either everything is \ADJA{} or everything is \ADJB{}.
+
+Since we concluded in both cases that everything is \ADJA{} or everything is \ADJB{}, we can go ahead and conclude that everything is \ADJA{} or everything is \ADJB{}.
+}
+}
+
+
+% LXXI i do, but leave one direction of englishy portion as an ex
+\DRULEPFalt{Quantifiers and Disjunction 2}{
+$\EXIST{x}{\pA\OR\pB}$ if and only if $\EXIST{x}{\pA}\OR\EXIST{x}{\pB}$.
+}{
+$\EXIST{x}{\text{$x$ is \ADJA{}}\OR\text{$x$ is \ADJB{}}}$ if and only if $\EXIST{x}{\text{$x$ is \ADJA{}}}\OR\EXIST{x}{\text{$x$ is \ADJB{}}}$.\\
+\textit{In other words:}\\
+``Something is either \ADJA{} or \ADJB{}'' is equivalent to ``Either something is \ADJA{}, or something is \ADJB{}.''
+}{
+$\Rightarrow$: Assume that $\EXIST{x}{\pA\OR\pB}$.
+We may then get an $x$ such that $\pA\OR\pB$.\lsp
+
+Case 1: Suppose that $\pA$. Since we have found an $x$ such that $\pA$, we may conclude that $\EXIST{x}{\pA}$.
+It follows that $\EXIST{x}{\pA}\OR\EXIST{x}{\pB}$.\lsp
+
+Case 2: Suppose that $\pB$. Since we have found an $x$ such that $\pB$, we may conclude that $\EXIST{x}{\pB}$.
+It follows that $\EXIST{x}{\pA}\OR\EXIST{x}{\pB}$.\lsp
+
+Since both cases led us to conclude that $\EXIST{x}{\pA}\OR\EXIST{x}{\pB}$, we may go ahead and conclude that $\EXIST{x}{\pA}\OR\EXIST{x}{\pB}$.\lsp
+
+$\Leftarrow$: \putExerciseHeading.
+}{
+$\Rightarrow$: Assume that something is either \ADJA{} or \ADJB{}.
+We may then get an $x$ which is either \ADJA{} or \ADJB{}.\lsp
+
+Case 1: Suppose that $x$ is \ADJA{}. Since we have found an $x$ that is \ADJA{}, we may conclude that \emph{something} is \ADJA{}.
+It follows that either something is \ADJA{} or something is \ADJB{}.\lsp
+
+Case 2: Suppose that $x$ is \ADJB{}. Since we have found an $x$ that is \ADJB{}, we may conclude that \emph{something} is \ADJB{}.
+It follows that either something is \ADJA{} or something is \ADJB{}.\lsp
+
+Since both cases led us to conclude that either something is \ADJA{} or something is \ADJB{}, we may go ahead and conclude that
+either something is \ADJA{} or something is \ADJB{}.
+
+$\Leftarrow$: \putExerciseHeading.
 }
 
 
 
-% consider going back and puttins subst everywhere in the hardcore pfs. why ``consider any x'' if you never use x?
 
 
-% LXXI ii (the above) converse give wrong proof and make ex to find error.
 
 
-% LXXI i do, but leave one direction of englishy portion as an ex
+
 
 
 % LXXXIX iii and iv: do one, leave the entire other one as an exercise.
+\def\ADJA{good}
+\DRULEPFalt{
+Quantifiers and Negation 1
+}{
+$\neg\ALL{x}{\pA}\DARR\EXIST{x}{\neg\pA}$
+}{
+$\neg\ALL{x}{\text{$x$ is \ADJA{}}}\DARR\EXIST{x}{\text{$x$ is not \ADJA{}}}$\\
+\textit{In other words:}
+``Not everything is \ADJA{}'' is equivalent to ``Something is not \ADJA{}.''
+}{
+$\Leftarrow$:
+Assume that $\EXIST{x}{\neg\pA}$.
+Suppose, for the sake of obtaining a contradiction, that $\ALL{x}{\pA}$.
+Since $\EXIST{x}{\neg\pA}$,
+we can get an $x$ such that $\neg\pA$.
+Since $\ALL{x}{\pA}$, we have in particular that $\pA$.
+Having arrived at the contradiction $\pA\AND\neg\pA$, we find that we must reject $\ALL{x}{\pA}$.
+That is, $\neg\ALL{x}{\pA}$.
+\lsp
+
+$\Rightarrow$:
+For this direction we will prove the contrapositive $\neg\EXIST{x}{\neg\pA}\ARR\ALL{x}{\pA}$
+(see derived rule \ref{drule:contraposition}).
+Assume that $\neg\EXIST{x}{\neg\pA}$.
+Consider any $x$.
+\lsp
+
+Suppose, for the sake of contradiction, that $\neg\pA$.
+Then we found an $x$ such that $\neg\pA$, so we may conclude that
+$\EXIST{x}{\neg\pA}$. We've reached the contradiction $\EXIST{x}{\neg\pA}\AND\neg\EXIST{x}{\neg\pA}$.
+Therefore we must reject $\neg\pA$ and we see that in fact $\pA$.\lsp
+
+Since we've established $\pA$ for an arbitrary $x$, we can generalize to conclude that $\ALL{x}{\pA}$.
+}{
+$\Leftarrow$:
+Assume that something is not \ADJA{}.
+Suppose, for the sake of obtaining a contradiction, that everything is \ADJA{}.
+Since something is not \ADJA{}, we can get a non-\ADJA{} thing and call it $x$.
+Since everything is \ADJA{}, we have in particular that $x$ is \ADJA{}.
+This is a contradiction-- $x$ cannot be both \ADJA{} and not \ADJA{}.
+Thus we reject the assumption that everything is \ADJA{}.
+That is, not everything is \ADJA{}.\lsp
+
+$\Rightarrow$:
+We would like to prove that if not everything is \ADJA{}, then something is not \ADJA{}.
+By contraposition, it suffices to prove that if it's \emph{not} the case that something is not \ADJA{}, then everything must be \ADJA{}.
+Assume that it's not the case that something is not \ADJA{}.
+Consider any $x$.
+\lsp
+
+Suppose, for the sake of contradiction, that $x$ is not \ADJA{}.
+Then we found an $x$ that is not \ADJA{}, so we may conclude that
+something is not \ADJA{}.
+But we now have a contradiction-- it both is and isn't the case that something is not \ADJA{}.
+Therefore we must reject $x$ is not \ADJA{} and we see that in fact $x$ must be \ADJA{}.
+\lsp
+
+Since we've established that $x$ is \ADJA{} for arbitrary $x$, we can generalize to conclude that \emph{everything} is \ADJA{}.
+}
+
+
+\DRULEPFalt{
+Quantifiers and Negation 2
+}{
+$\neg\EXIST{x}{\pA}\DARR\ALL{x}{\neg\pA}$
+}{
+$\neg\EXIST{x}{\text{$x$ is \ADJA{}}}\DARR\ALL{x}{\text{$x$ is not \ADJA{}}}$\\
+\textit{In other words:}
+``Nothing is \ADJA{}'' is equivalent to ``Everything is not \ADJA{}.''
+}{
+Apply ``Quantifiers and Negation 1'' to the proposition $\neg\pA$ (putting $\neg\pA$ in place of $\pA$) to obtain
+$\neg\ALL{x}{\neg\pA}\DARR\EXIST{x}{\pA}$.
+Then negate this equivalence (see derived rule \ref{drule:neg_equiv}) to obtain the desired equivalence.
+}{
+\putExerciseHeading: Write this proof without relying on ``Quantifiers and Negation 1.''
+Your argument could look pretty similar to the argument that
+``Not everything is \ADJA{}'' is equivalent to ``Something is not \ADJA{},''
+which is given in ``Quantifiers and Negation 1.''
+}
+
+
+
+
+
+
+
+
 
 
 % exercise: now that we know how to push neg into quantifiers, do it to a bunch of these (some are in english and some are more symbolic, one of them is the analysis one)
