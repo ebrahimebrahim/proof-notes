@@ -1255,7 +1255,7 @@ $\neg(\pA\OR\pB)\ \DARR\ (\neg\pA\AND\neg\pB)$
 
 
 % do LXXXVII i but make the forward direction a puzzle, with hint to use excluded middle
-\DRULEPF{Implication in Terms of Disjunction}{
+\DRULEPF{Implication in Terms of Disjunction\label{drule:unless}}{
 $(\pA\ARR\pB)\DARR(\neg\pA\OR\pB)$
 }{
 $\Rightarrow$: \putExerciseHeading: Prove that $(\pA\ARR\pB)\ARR(\neg\pA\OR\pB)$. Hint: Use excluded middle.
@@ -2276,6 +2276,86 @@ Hopefully the overall negation feels intuitive, even if the individual steps in 
 % (do some shuffling, but keep the ones with more quantifiers below ones with less)
 
 
+\ex{\label{ex:neg_quant1}
+Negate each of the following propositions, and push the negation into the innermost component propositions.
+Recall from derived rule \ref{drule:unless} that $\pA\OR\neg\pB$ can be rewritten as $\pB\ARR\pA$.
+When you encounter things like $\pA\OR\neg\pB$, you can rewrite them in terms of ``$\ARR$''
+in order to reduce the overall number of ``$\neg$'' symbols.
+\begin{enumerate}
+
+\item %1
+$\ALL{x}{\pA\AND\pB}$ 
+
+\item %2
+$\ALL{x}{\pA\OR\pB}$ 
+
+\item %3
+$\EXIST{x}{\pA\AND\pB}$ 
+
+\item %4
+$\EXIST{x}{\pA\OR\pB}$ 
+
+\item %5
+$\ALL{x}{\pA\ARR\pB}$ 
+
+\item %6
+$\EXIST{x}{\pA\ARR\pB}$ 
+
+\item %7
+$\ALL{x}{\pA\ARR\EXIST{y}{\pB\AND(\pC\OR\pD)}}$
+
+\item %8
+$\EXIST{x}{\pA\AND\pB\AND\ALL{y}{\pC\ARR\pD}}$
+
+\item %9
+$\ALL{x}{\pA\ARR\EXIST{y}{\pB\AND\ALL{z}{\pC\ARR\pD}}}$
+
+\end{enumerate}
+}
+
+\ex{\label{ex:neg_quant2}
+Again negate each of the following propositions, pushing the negation into the innermost component propositions.
+Whenever you see the English ``or'' being used, remember that it actually stands for the mathematical ``$\OR$''
+and not whatever sort of ``or'' would suit a conversational context.
+\begin{enumerate}
+
+\item %1e
+Everything is warm and fuzzy.
+
+\item %2e
+Everything is either good or it is bad.
+
+\item %3e
+Some bird can fly.
+
+\item %4e
+There is something which is either a dog or a wolf.
+
+\item %5e
+Every bird can fly.
+
+\item %6e
+There exists something with the property that if it is a bird, then it can fly.
+
+\item %7e
+Every person has a friend who is either very skinny or very fat. 
+
+\item %8e
+Some flower is green and has all of its petals being pointy.
+
+\item %9e
+Every company has at least one committee whose members are all loyal to the company.
+
+\end{enumerate}
+}
+
+\ex{
+Each proposition in Exercise \ref{ex:neg_quant2} just above is actually modeled on exactly one
+proposition from Exercise \ref{ex:neg_quant1}; ``modeled on'' in the sense that
+$\pA$, $\pB$, etc. have been replaced by some specific propositions in English.
+Can you match them up?
+For each proposition in Exercise \ref{ex:neg_quant1}, figure out which proposition in Exercise \ref{ex:neg_quant2} it was modeled on.
+}
 
 
 
