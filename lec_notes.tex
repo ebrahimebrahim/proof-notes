@@ -64,11 +64,12 @@
 
 \newcounter{exercise}[subsubsection]
 \newcounter{rule}
+\def\theexercise{\thesubsubsection.\arabic{exercise}}
 
-\def\putExerciseHeading{\refstepcounter{exercise} \textbf{Exercise \thesubsubsection.\theexercise}}
+\def\putExerciseHeading{\refstepcounter{exercise} \textbf{Exercise \theexercise}}
 \def\putRuleNumber{\refstepcounter{rule}\therule}
 
-\newcommand{\ex}[1]{ \refstepcounter{exercise} \textbf{Exercise \thesubsubsection.\theexercise:}\begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
+\newcommand{\ex}[1]{ \putExerciseHeading: \begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
 \newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
 
 \newcommand{\THM}[2]{\textbf{Theorem:} #1\\[0.5em]\textit{Proof:} #2\qed}
@@ -1603,7 +1604,7 @@ $$
 In summary: If you want to restrict the class of things you are quantifying over, then
 use $\ARR$ with $\forall$, and use $\AND$ with $\exists$.
 
-\ex{
+\ex{\label{ex:boundvars}
 Express each of the following propositions in English without ever mentioning the quantified variable.
 Insisting that the quantified variable not be mentioned can make the phrasing awkward for some of the more complicated propositions, but so be it.
 \begin{enumerate}
@@ -2411,17 +2412,76 @@ yields
 ``$\ALL{x}{\text{$x$ loves $x$}}$''.
 Again we find that a simple variable replacement has drastically changed the meaning of what's being asserted!
 This is not supposed to happen.
-To stop it from happening, we deem the 
-substitution to be... unacceptable. 
-We could start filling pages with formal rules regarding which substitutions are acceptable, but it's sufficient to leave a general warning for now:
-\textit{When you make a substitution, unless you really know what you're doing,
-do not replace a bound variable or even use a bound variable in a replacement.}
+In mathematical logic, certain substitutions are considered to be ``unacceptable.''
+All substitution troubles can be avoided if, 
+whenever you make a substitution,
+you \emph{never replace a bound variable} and you \emph{never use a bound variable in a replacement}.
+
+%To stop it from happening, we deem the 
+%substitution to be... unacceptable. 
+%We could start filling pages with formal rules regarding which substitutions are acceptable, but it's sufficient to leave a general warning for now:
+%\textit{When you make a substitution, unless you really know what you're doing,
+%do not replace a bound variable or even use a bound variable in a replacement.}
+
+\paragraph{Free and Bound Variables}
+When you read a mathematical proposition, it's a very good thing to be aware of which variables are free and which variables are bound. 
+Free variables are \emph{really there} in the proposition in which they appear,
+whereas bound variables are more like \emph{dummy} variables.
+For example, in the proposition ``$\EXIST{x}{\text{$x$ loves $y$}}$'' we have a free variable $y$ and a bound variable $x$.
+The proposition is really saying something about $y$; it says that there is something that loves $y$, something that specifically loves $y$.
+But it says nothing about $x$. The proposition doesn't really involve $x$, even though an ``$x$'' symbol is physically present.
+As you saw in Exercise \ref{ex:boundvars}, a proposition with bound variables can be expressed in English without mentioning any of the bound variables--
+that's because it's just not saying anything about those variables.
+
+The terminology of ``free'' and ``bound'' variables also gives us an interesting way to think about how UI, UG, EI, and EG
+work in written proofs.
+When you use EI to go from
+``$\EXIST{x}{\text{$x$ loves $y$}}$''
+to
+``$x$ loves $y$''
+in a proof, you are in some sense \emph{freeing} the bound variable $x$.
+You go from ``\emph{something} loves $y$'' to ``$x$ loves $y$''.
+You go from some unspecified unnamed thing that loves $y$, to a specific thing called $x$ that loves $y$.
+In written proofs, EI and UI free up bound variables, while EG and UG \emph{bind} free variables.
+
+\paragraph{Implicit Universal}
+Suppose you prove a theorem with some free variables in it.
+Say you've proven ``If $x$ and $y$ are odd, then $x+y$ is even.''
+This has $x$ and $y$ as free variables, so it looks like it's making a statement specifically about $x$ and $y$.
+But they are still \emph{variables}, and they are \emph{arbitrary}; that's because they appear in a standalone theorem statement
+with no external assumptions.
+Thus UG applies and you can generalize to deduce
+\begin{equation}\label{eq:implicitU1}
+\ALL{x,y}{\text{if $x$ and $y$ are odd, then $x+y$ is even}}.
+\end{equation}
+Now there are no free variables, and indeed the theorem can be expressed in an English sentence that has no variables:
+``The sum of two odd things is even.''
+Mathematicians are actually more likely to state the theorem as 
+\begin{equation}\label{eq:implicitU2}
+\text{if $x$ and $y$ are odd, then $x+y$ is even}.
+\end{equation}
+with free $x$ and $y$, rather than explicitly including the ``$\forall x,y$'' as in (\ref{eq:implicitU1}).
+It's just easier to write this way, and everyone understands that since $x$ and $y$ are arbitrary, there's sort of an
+implicit ``$\forall x,y$'' that could be included.
+
+Recall that UI allows you to deduce $\SUBST{\pA}{x}{T}$ from $\ALL{x}{\pA}$, for any term $T$ that you'd like to replace $x$.
+For example you can deduce
+\begin{equation}\label{eq:implicitU3}
+\text{if $5$ and $z+1$ are odd, then $5+(z+1)$ is even}
+\end{equation}
+from (\ref{eq:implicitU1}),
+which itself was deduced from (\ref{eq:implicitU2}).
+The bottom line is that if you've proven $\pA$ as a theorem, then you can substitute any terms you like for the free variables in $\pA$, and you would also
+have proven the resulting proposition:
+\DRULE{Variable Substitution}{
+Given $\pA$, if $x$ is arbitrary then you can deduce $\SUBST{\pA}{x}{T}$,
+where any term can sit in the position of the ``T''.
+(For example, all variables would be arbitrary if $\pA$ is already proven as a standalone theorem.)
+}
 
 
 
-
-
-
+% Variables live to serve. Their purpose in life is to either be bound, or to be free and to eventually be replaced in a substition.
 
 
  
