@@ -360,7 +360,7 @@ If $\ES$ did have an element, say $x$, then we would have $x\neq x$.
 But in fact it is an axiom that $x=x$. Thus $\ES$ cannot have any elements.
 }
 
-The arguments are essesntially the same ones that appeared in the five-line formal proof.
+The arguments are essentially the same ones that appeared in the five-line formal proof.
 But, compared to the formal proof, it's much easier to process the arguments
 in the informal proof
 (though I'm still not expecting you to do so just yet).
@@ -1319,6 +1319,7 @@ It is especially important to be aware of the ways in which mathematical logic d
 % pull out my old psychology course final paper as well
 
 \subsubsection{Substitution}
+\label{sec:subst}
 
 Our entire discussion has so far been restricted to propositions, but for the next part \emph{variables} will have a role to play.
 Before moving on, review section
@@ -2370,6 +2371,61 @@ For each proposition in Exercise \ref{ex:neg_quant2}, figure out which propositi
 \subsubsection{Substitution Revisited}
 \label{sec:subst_again}
 
+Now that we've thoroughly explored quantifiers, we can better understand the anomalous substitution examples
+from the end of section \ref{sec:subst}. Here is one of those anomalous substitutions:
+\indented{
+\eg{$\ALL{x}{\text{$x$ is good}}$}{x}{y}{$\ALL{x}{\text{$x$ is good}}$}
+}
+Why didn't the $x$ symbol physically get replaced by $y$ when the substitution was carried out?
+Well, the proposition $\ALL{x}{\text{$x$ is good}}$ simply says that everything is good.
+If we do physically replace every ``$x$'' mark with a ``$y$'' then it still says that everything is good.
+Since the meaning doesn't change anyway, substitution does not need to affect the $x$. If we \emph{did} allow the substitution to affect the $x$,
+this would cause problems in examples like the following:
+$$
+\ALL{x}{\text{$x$ loves $y$}}.
+$$
+This proposition asserts that everything loves $y$. If we now replace each physical $x$ mark by a $y$, then we end up with 
+$$
+\ALL{y}{\text{$y$ loves $y$}},
+$$
+which asserts something totally different: everything loves \emph{itself}!
+Formally, we design our substitution rules so that the barbell ``$\bbel$'' protects the variable preceding it from being replaced in a substitution.
+A variable that is guarded by a barbell is said to be a \emph{bound} variable of the proposition that it is in.
+Otherwise it is said to be a \emph{free} variable.
+Free variables can get affected by substitution; for example making the substitution
+$[y\rightarrow z]$
+in
+``$\ALL{x}{\text{$x$ loves $y$}}$''
+yields 
+``$\ALL{x}{\text{$x$ loves $z$}}$.''
+This works as intended: if you take ``everything loves $y$'' and replace $y$ with a $z$ you should get ``everything loves $z$.''
+
+However, there is yet another subtlety involving substitutions which can lead to unintended consequences.
+Consider the substitution
+$[y\rightarrow x]$
+in
+``$\ALL{x}{\text{$x$ loves $y$}}$''.
+This time $y$ is free variable, and there is no ``$\bbel$'' to protect it from being replaced,
+so the substitution
+yields
+``$\ALL{x}{\text{$x$ loves $x$}}$''.
+Again we find that a simple variable replacement has drastically changed the meaning of what's being asserted!
+This is not supposed to happen.
+To stop it from happening, we deem the 
+substitution to be... unacceptable. 
+We could start filling pages with formal rules regarding which substitutions are acceptable, but it's sufficient to leave a general warning for now:
+\textit{When you make a substitution, unless you really know what you're doing,
+do not replace a bound variable or even use a bound variable in a replacement.}
+
+
+
+
+
+
+
+
+ 
+
 % here include a version of how pronouns work
 % how there's an implicit "for all" in a lot of theorem statements, but it's really not needed to say it due to how pronouns work
 
@@ -2389,7 +2445,7 @@ For each proposition in Exercise \ref{ex:neg_quant2}, figure out which propositi
 
 % develop set theory along the lines of jacoby notes
 
-% some milestones to reach: relations, functions, induction, recursion, natural numbers
+% some milestones to reach: relations, functions, induction, recursion, natural numbers, partial orderings, concepts like sup and inf in ordered sets, cardinality
 
 % appendix: put some sample well written proofs and badly written proofs
 
