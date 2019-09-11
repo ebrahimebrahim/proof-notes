@@ -71,15 +71,19 @@
 %\newcounter{exercise}[subsubsection]
 \newcounter{exercise}
 \newcounter{rule}
+\newcounter{theorem}
 %\def\theexercise{\thesubsubsection.\arabic{exercise}}
 
 \def\putExerciseHeading{\refstepcounter{exercise} \textbf{Exercise \theexercise}}
 \def\putRuleNumber{\refstepcounter{rule}\therule}
+\def\putThmNumber{\refstepcounter{theorem}\thetheorem}
 
 \newcommand{\ex}[1]{ \putExerciseHeading: \begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
 \newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
 
-\newcommand{\THM}[2]{\textbf{Theorem:} #1\\[0.5em]\textit{Proof:} #2\qed}
+\newcommand{\THMMOCK}[2]{\textbf{Theorem:} #1\\[0.5em]\textit{Proof:} #2\qed}
+\newcommand{\THM}[2]{\textbf{Theorem \putThmNumber:} #1\\[0.5em]\textit{Proof:} #2\qed}
+\newcommand{\AXIOM}[1]{\textbf{Axiom \putThmNumber:} #1}
 
 \newcommand{\RULE}[2]{\begin{tcolorbox}[title=Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
 \newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
@@ -363,7 +367,7 @@ this course is mainly about how to communicate proofs in that balanced way-- rig
 
 Here is an informal version of the five-line proof from above.
 
-\THM{The set $\ES$ has no elements.}{
+\THMMOCK{The set $\ES$ has no elements.}{
 If $\ES$ did have an element, say $x$, then we would have $x\neq x$.
 But in fact it is an axiom that $x=x$. Thus $\ES$ cannot have any elements.
 }
@@ -535,7 +539,7 @@ Then you can deduce $\pC$ from $\pA\OR\pB$.
 }
 In a written proof, the format of a proof by cases ends up like this:
 
-\THM{Assuming that either $\pA$ or $\pB$ holds, we have $\pC$.}{
+\THMMOCK{Assuming that either $\pA$ or $\pB$ holds, we have $\pC$.}{
 Assume that either $\pA$ or $\pB$ holds.\\
 Case 1: Suppose that $\pA$ holds.
 \indented{[insert argument here convincing the reader that $\pC$ holds]}
@@ -587,7 +591,7 @@ If assuming $\pA$ allows you to deduce a contradiction, then it must be that $\n
 }
 In a written proof, the format of a proof by contradiction ends up like this:
 
-\THM{$\neg\pA$.}{
+\THMMOCK{$\neg\pA$.}{
 Suppose, for the sake of obtaining a contradiction, that $\pA$ holds.
 \indented{[insert argument convincing reader that a contradiction, something of the form $\pB\AND\neg\pB$, now follows]}
 Since this is a contradiction, we conclude that $\neg\pA$.
@@ -782,7 +786,7 @@ then give an argument that $\pB$ follows.
 That is, assume the hypotheses and then argue that the conclusion follows.
 Such a proof ends up structured like this:
 
-\THM{If $\pA$, then $\pB$.}{
+\THMMOCK{If $\pA$, then $\pB$.}{
 Assume that $\pA$.
 \indented{[insert argument convincing reader that $\pB$ holds]}
 Thus, $\pA\ARR\pB$.
@@ -810,7 +814,7 @@ that is, when they are either both true or both false.
 \hypertarget{hl:DARRPV}{To} prove an equivalence $\pA\DARR\pB$, simply prove both of the implications $\pA\ARR\pB$ and $\pB\ARR\pA$.
 The proof will be structured like this:
 
-\THM{$\pA\DARR\pB$.}{
+\THMMOCK{$\pA\DARR\pB$.}{
 Assume that $\pA$.
 \indented{[insert argument convincing reader that $\pB$ holds]}
 Now assume that $\pB$.
@@ -2570,6 +2574,7 @@ for some $x$, $\pA$ &
 
 \section{Set Theory} % and still writing though...
 \label{sec:sets}
+
 
 
 % develop set theory along the lines of jacoby notes
