@@ -81,9 +81,14 @@
 \newcommand{\ex}[1]{ \putExerciseHeading: \begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
 \newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
 
-\newcommand{\THMMOCK}[2]{\textbf{Theorem:} #1\\[0.5em]\textit{Proof:} #2\qed}
-\newcommand{\THM}[2]{\textbf{Theorem \putThmNumber:} #1\\[0.5em]\textit{Proof:} #2\qed}
-\newcommand{\AXIOM}[1]{\textbf{Axiom \putThmNumber:} #1}
+
+\def\thmcolonspace{\hspace{1em}}
+\newcommand{\thmbox}[1]{\fbox{\parbox{\textwidth}{{#1}}}}
+\newcommand{\THMMOCK}[2]{\thmbox{\textbf{Theorem:} \thmcolonspace #1} \\[0.5em]\textit{Proof:} #2\qed}
+\newcommand{\THM}[2]{\thmbox{\textbf{Theorem \putThmNumber:} \thmcolonspace #1} \\[0.5em]\textit{Proof:} #2\qed}
+\newcommand{\THMN}[3]{\thmbox{\textbf{Theorem \putThmNumber\ (#1):} \thmcolonspace #2} \\[0.5em]\textit{Proof:} #3\qed}
+\newcommand{\AXIOM}[1]{\thmbox{\textbf{Axiom \putThmNumber:} \thmcolonspace #1}}
+\newcommand{\AXIOMN}[2]{\thmbox{\textbf{Axiom \putThmNumber\ (#1):} \thmcolonspace #2}}
 
 \newcommand{\RULE}[2]{\begin{tcolorbox}[title=Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
 \newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
@@ -2041,14 +2046,13 @@ Consider any $x$. Since everything is large and green, we know in particular tha
 Since $x$ is arbitrary and we showed that it is large, we may generalize to conclude that everything is large.
 Similarly, since $x$ is arbitrary and we showed that it is green, we may generalize to conclude that everything is green.
 Thus everything is large and everything is green.
+\lsp
 
-$\Leftarrow$: This direction is given as an exercise below.
-}
-
-\ex{
+$\Leftarrow$: \putExerciseHeading:
 Prove that if everything is large and everything is green, then it follows that everything is large and green.
 Hint: your argument should involve two uses of UI and one use of UG.
 }
+
 
 \def\lsp{\\[-0.1em]}
 \def\ADJA{dry}
@@ -2576,6 +2580,13 @@ for some $x$, $\pA$ &
 \label{sec:sets}
 
 
+\subsection{Membership, Inclusion, and Equality}
+
+\AXIOMN{Reflexiveness for equality}{$x=x$.}
+
+\AXIOMN{Equality used}{
+If $x=y$, then $\SUBST{\pA}{z}{x}\DARR\SUBST{\pA}{z}{y}$.
+}
 
 % develop set theory along the lines of jacoby notes
 
