@@ -2675,7 +2675,7 @@ and replacing $x$ by $y$ in a \emph{term} gives an \emph{equal} term.
 The axioms so far give us a mechanism for using and manipulating equalities.
 But where can we get some equalities to play with in the first place (other than ones like $x=x$)?
 How can we \emph{prove} an interesting equality?
-This will be addressed shortly; we first need to get membership into the picture.
+This will be addressed shortly in Axiom \ref{ax:eq_gain}; we first need to get membership into the picture.
 
 \paragraph{Notation}
 The proposition ``$a\in b$'' is read as ``$a$ is in $b$'' or ``$a$ is an element of $b$.''
@@ -2734,15 +2734,23 @@ Here are some ways to read ``$a\subseteq b$'' in English:
 \indented{
 $a$ is a subset of $b$\\
 $a$ is contained in $b$\\
-$b$ contains $a$\\
+$a$ is included in $b$
 }
-\vspace{-1em}
 For $a$ to be a subset of $b$, every element of $a$ must be an element of $b$.
 Do not confuse this with ``$a$ is in $b$,'' which is actually a way of saying ``$a\in b$''!
 Explicitly using the symbols ``$\in$'' and ``$\subseteq$'', or explicitly saying ``element'' and ``subset''
 can help to avoid confusion.
 
-
+\paragraph{On Definitions}
+Definitions are like axioms in that they serve as starting points.
+But we distinguish them from axioms because all they do is provide a convenient \emph{name}
+for something by introducing new symbols or terminology.
+Definitions don't assert anything truly new, so they don't allow us to prove anything truly new.
+More precisely, the only things a definition allows us to prove are the same things we proved before, but with old names
+replaced by new names.
+Definitions could be omitted from our entire framework without changing which theorems can be proven, just changing
+how we are able to state those theorems.
+Having too many axioms is undesirable, but there is nothing wrong with having lots of definitions.
 % On defns: they are like axioms in that they serve as starting points.
 % but we distinguish them from axioms because all they do conveniently *name* some new symbols in terms of old symbols
 % they don't really assert anything, so they don't allow us to prove anything truly new
@@ -2750,14 +2758,84 @@ can help to avoid confusion.
 % definitions could be omitted completely without changing which theorems can be proven
 % having too many axioms is undesirable, but there's nothing wrong with having lots of definitions
 
+\THMN{\label{thm:refl_trans_incl}Reflexivity and Transitivity for Inclusion}{
+\begin{enumerate}
+\item\label{thm:refl_trans_incl1}
+$a\subseteq a$.
+\item\label{thm:refl_trans_incl2}
+If $a\subseteq b$ and $b\subseteq c$, then $a\subseteq c$.
+\end{enumerate}
+}
+\proofnewline
+\textit{Proof of \ref{thm:refl_trans_incl1}:}
+If $z\in a$ then $z\in a$, so we have $\ALL{z}{z\in a\ARR z\in a}$.
+In other words, $a\subseteq a$.
+\done
+\proofsep
+\textit{Proof of \ref{thm:refl_trans_incl2}:}
+Assume that $a\subseteq b$ and $b\subseteq c$.
+To prove that $a\subseteq c$, consider any $z\in a$.
+Since $a\subseteq b$, it follows that $z\in b$.
+Since $b\subseteq c$, it follows further that $z\in c$.
+Since we showed that $z\in c$ for an arbitrary $z\in a$, we have shown $\ALL{z}{z\in a\ARR z\in c}$.
+In other words, $a\subseteq c$.
+\done
 
+In the proof of \ref{thm:refl_trans_incl2}, you should be able to spot two uses of \hyperlink{hl:UI}{UI} and one use of \hyperlink{hl:UG}{UG}.
 
+If $a=b$, then by Axiom \ref{ax:eq_used} we have $z\in a\DARR z\in b$, for all $z$.
+So the equality $a=b$ gives both inclusions $a\subseteq b$ and $b\subseteq a$.
+In other words, if $a$ and $b$ are equal then they must have exactly the same elements. 
+We will take this to be the full \emph{meaning}
+of equality, by taking on the converse as an axiom.
 
+\AXIOMN{Equality Gained{\label{ax:eq_gain}}}{
+If $\ALL{z}{z\in a\DARR z\in b}$, then $a=b$.
+}
 
+This makes it so that anything and everything that we can refer to in our mathematical language is nothing more than its elements.
+In other words, \emph{everything is a set}:
 
+\THMP{
+$y=\COLL{z}{z\in y}$.
+}{
+We will show that $\ALL{w}{w\in y\DARR w\in\COLL{z}{z\in y}}$. Then we will be finished, due to Axiom \ref{ax:eq_gain}.
 
+Consider any $w$.
+Axiom \ref{ax:in} tells us that $w\in\COLL{z}{z\in y}$ holds if and only if $\SUBST{\text{``$z\in y$''}}{z}{w}$ holds.
+In other words, $w\in\COLL{z}{z\in y}$ if and only if $w\in y$.
+Since $w$ was arbitrary, we are done.
+}
 
+\THMNP{Equality as Double Inclusion\label{thm:eq_incl}}{
+$a=b$ if and only if $a\subseteq b$ and $b\subseteq a$.
+}{
+$\Rightarrow$:
+Assume that $a=b$.
+Then by Axiom \ref{ax:eq_used} we have $z\in a\DARR z\in b$, for all $z$.
+From $z\in a\ARR z\in b$ we can generalize to conclude that $\ALL{z}{z\in a\ARR z\in b}$.
+In other words, $a\subseteq b$.
+Similarly, from $z\in b\ARR z\in a$ we can generalize to conclude that $b\subseteq a$.
 
+$\Leftarrow$:
+Assume that $a\subseteq b$ and $b\subseteq a$.
+We will show that $\ALL{z}{z\in a\DARR z\in b}$. Then we will be finished, due to Axiom \ref{ax:eq_gain}.
+
+Consider any $z$.
+From $a\subseteq b$ we have $z\in a\ARR z\in b$, and
+from $b\subseteq a$ we have $z\in b\ARR z\in a$.
+It follows that $z\in a\DARR z\in b$. Since $z$ is arbitrary, we are done.
+}
+
+Since equality is equivalent to two inclusions, proofs of equality are often split into two parts, with each part dedicated to proving one of the inclusions.
+
+\subsection{Empty Set, Singletons, and More}
+
+\subsection{Intersection, Union, and Relative Complement}
+
+\subsection{Power Sets}
+
+\subsection{Pairs and Cartesian Products}
 
 
 
