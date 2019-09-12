@@ -83,12 +83,20 @@
 
 
 \def\thmcolonspace{\hspace{1em}}
+\def\proofnewline{\\[0.75em]} % Separates theorem box from proof, no new paragraph expected.
+\def\proofsep{\\[-0.5em]} % Separates different proofs (e.g. to diff parts of same theorem). No new paragraph expected.
+\renewcommand\qedsymbol{$\blacksquare$}
+\def\done{\qed\\[0em]} % QED with newline so that QED symbol is flushed to the right. IDK why newline is needed for this to happen.
 \newcommand{\thmbox}[1]{\fbox{\parbox{\textwidth}{{#1}}}}
-\newcommand{\THMMOCK}[2]{\thmbox{\textbf{Theorem:} \thmcolonspace #1} \\[0.5em]\textit{Proof:} #2\qed}
-\newcommand{\THM}[2]{\thmbox{\textbf{Theorem \putThmNumber:} \thmcolonspace #1} \\[0.5em]\textit{Proof:} #2\qed}
-\newcommand{\THMN}[3]{\thmbox{\textbf{Theorem \putThmNumber\ (#1):} \thmcolonspace #2} \\[0.5em]\textit{Proof:} #3\qed}
+\newcommand{\THMMOCK}[2]{\thmbox{\textbf{Theorem:} \thmcolonspace #1} \proofnewline \textit{Proof:} #2\done}
+\newcommand{\THMP}[2]{\thmbox{\textbf{Theorem \putThmNumber:} \thmcolonspace #1} \proofnewline\textit{Proof:} #2\done}
+\newcommand{\THMNP}[3]{\thmbox{\textbf{Theorem \putThmNumber\ (#1):} \thmcolonspace #2} \proofnewline\textit{Proof:} #3\done}
+\newcommand{\THM}[1]{\thmbox{\textbf{Theorem \putThmNumber:} \thmcolonspace #1}}
+\newcommand{\THMN}[2]{\thmbox{\textbf{Theorem \putThmNumber\ (#1):} \thmcolonspace #2}}
 \newcommand{\AXIOM}[1]{\thmbox{\textbf{Axiom \putThmNumber:} \thmcolonspace #1}}
 \newcommand{\AXIOMN}[2]{\thmbox{\textbf{Axiom \putThmNumber\ (#1):} \thmcolonspace #2}}
+\newcommand{\DEFN}[2]{\thmbox{\textbf{Definition \putThmNumber\ (#1):} \thmcolonspace #2}}
+
 
 \newcommand{\RULE}[2]{\begin{tcolorbox}[title=Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
 \newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
@@ -127,6 +135,7 @@
 %perhaps include a discussion levels of rigor and formality, with one level relegating the rigor to other levels.
 %mention the importance of writing and the roughness of this transition for many people.
 %mention the value of forgetting what you knew before, but not really forgetting it all.}
+%an illustration containing two towers, one of the math t hey built up till now, and one new tower starting here of the math they are now building
 
 \note{Write the general intro later, maybe last.}
 
@@ -871,7 +880,7 @@ We conclude that $\neg\neg\pB$, and therefore $\pB$, must hold.
 Let's be clear about what just happened: from the assumption $\pA\AND\neg\pA$, we were able to prove an \emph{arbitrary proposition}!
 This mechanism was always present in the proof by contradiction rule, but it is worth highlighting:
 
-\DRULE{Contradictions are powerful!}{
+\DRULE{\label{rule:contradictions}Contradictions are powerful!}{
 From $\pA\AND\neg\pA$ you can deduce \emph{any} proposition $\pB$.
 }
 
@@ -2579,21 +2588,195 @@ for some $x$, $\pA$ &
 \section{Set Theory} % and still writing though...
 \label{sec:sets}
 
+Recall that the game of mathematics consists of starting points, which are the axioms,
+and ways of generating new results from the starting points, which are the rules of deduction.
+In the previous section, we established all the rules of deduction.
+In this section, we will introduce axioms and genarate some results from them.
+
+
+
 
 \subsection{Membership, Inclusion, and Equality}
 
-\AXIOMN{Reflexiveness for equality}{$x=x$.}
+\AXIOMN{Reflexiveness for Equality\label{ax:refl_eq}}{$x=x$.}
 
-\AXIOMN{Equality used}{
-If $x=y$, then $\SUBST{\pA}{z}{x}\DARR\SUBST{\pA}{z}{y}$.
+\AXIOMN{Equality Used\label{ax:eq_used}}{
+If $x=y$, then $\SUBST{\pA}{a}{x}\DARR\SUBST{\pA}{a}{y}$.
 }
+
+\THMN{Symmetry and Transitivity for Equality\label{thm:sym_trans_eq}}{
+\begin{enumerate}
+\item\label{thm:sym_trans_eq1}
+If $x=y$, then $y=x$.
+\item\label{thm:sym_trans_eq2}
+If $x=y$ and $y=z$, then $x=z$.
+\end{enumerate}
+}
+\proofnewline
+\textit{Proof of \ref{thm:sym_trans_eq1}:}
+Assume that $x=y$.
+Applying Axiom \ref{ax:eq_used}
+to the proposition ``$a=x$'' shows us that $x=x$ if and only if $y=x$.
+Since $x=x$ by Axiom \ref{ax:refl_eq}, it follows that $y=x$.
+\done
+\proofsep
+\textit{Proof of \ref{thm:sym_trans_eq2}:}
+Assume that $x=y$ and $y=z$.
+Apply Axiom \ref{ax:eq_used}
+to the proposition ``$a=z$'' and the equality $x=y$.
+This gives us that $x=z$ if and only if $y=z$.
+Since $y=z$ by hypothesis, it follows that $x=z$.
+\done
+
+\paragraph{Fewer Axioms is Better}
+Why should ``$x=x$'' be an axiom while symmetry and transitivity are theorems?
+Are symmetry and transitivity not just as fundamental to the meaning of equality as reflexiveness?
+Well, we could have set up Theorem \ref{thm:sym_trans_eq} as an axiom instead, and then we wouldn't
+have needed to bother with a proof.
+But we prefer to keep the axioms to a minimum.
+If we \emph{can} derive a result from previous results, then we choose to do so.
+
+Otherwise, why not just make everything an axiom and save some effort?
+To do so would be terribly boring.
+The interesting part of mathematics is in seeing what \emph{follows} from one's assumptions.
+It is somehow satisfying to know that equality \emph{must} be symmetric and transitive
+if it is to satisfy $x=x$ and allow for substitution.
+It would not have been possible to set up the rules of the game so as to exclude symmetry and transitivity for equality.
+
+Another motivation for having fewer axioms is \emph{consistency}.
+If it is possible to prove a contradiction within our mathematical framework, then
+the entire framework is said to be \emph{inconsistent}.
+This would be absolutely disastrous; recall Rule \ref{rule:contradictions}.
+We really \emph{hope} that it is impossible to prove a contradiction from our axioms,
+but the more axioms we introduce the worse our confidence becomes that it is impossible to prove a contradiction.
+
+One can also think about it in strategic terms.
+When you make an argument to convince someone of your view,
+it only works if they agree
+with the premises of your argument.
+This is more likely when there are fewer premises.
+If mathematics is one giant argument that is being made,
+then the axioms are the premises of that argument.
+
+\paragraph{Using Equality on Propositions and Terms}
+Axiom \ref{ax:eq_used} tells us that if we know $x=y$, then we can replace $x$ by $y$ in any proposition to obtain an
+equivalent proposition.
+Axiom \ref{ax:eq_used} also allows for variable replacements in \emph{terms} and not just propositions.
+If $x=y$ then here is how Axiom \ref{ax:eq_used} allows us to argue that $x^2=y^2$:
+Assume that $x=y$ and apply Axiom \ref{ax:eq_used} to the proposition ``$a^2=y^2$''.
+We get that $x^2=y^2$ if and only if $y^2=y^2$. Since $y^2=y^2$ due to Axiom \ref{ax:refl_eq},
+it follows that $x^2=y^2$.
+
+In summary:
+If $x=y$, then replacing $x$ by $y$ in a \emph{proposition} gives a \emph{logically equivalent} proposition,
+and replacing $x$ by $y$ in a \emph{term} gives an \emph{equal} term.
+
+\paragraph{How to Gain Equality?}
+The axioms so far give us a mechanism for using and manipulating equalities.
+But where can we get some equalities to play with in the first place (other than ones like $x=x$)?
+How can we \emph{prove} an interesting equality?
+This will be addressed shortly; we first need to get membership into the picture.
+
+\paragraph{Notation}
+The proposition ``$a\in b$'' is read as ``$a$ is in $b$'' or ``$a$ is an element of $b$.''
+The term ``$\COLL{x}{\pA}$'' is read as ``the set of $x$ such that $\pA$.''
+The appearance of ``$\bbel$'' suggests that ``$x$'' is \emph{bound} variable in the term ``$\COLL{x}{\pA}$'',
+and indeed it is! Terms of this form can be expressed in English without any mention of the bound variable.
+For example $\COLL{x}{\text{$x$ is green}}$ could be referred to as ``the set of green things,'' with no mention of $x$.
+Also, the bound variable can be replaced without any change in meaning: the term ``$\COLL{y}{\text{$y$ is green}}$''
+refers just as much to ``the set of green things.''
+The following axiom establishes how $\in$ and $\COLL{x}{\pA}$ work.
+
+\AXIOMN{\label{ax:in}Membership}{
+$a\in\COLL{x}{\pA}\DARR\SUBST{\pA}{x}{a}$.\\
+\textit{Warning: this axiom is broken.}
+}
+
+The notation $\COLL{x}{\pA}$ serves to ``collect'' together all the $x$'s for which $\pA$ holds.
+A set $\COLL{x}{\pA}$ is like an exclusive club, and $\pA$ is the condition for membership in that club.
+Various propositions could go in the position of $\pA$ to create collections like the following:
+\indented{
+$\COLL{x}{\text{$x$ is a person} \AND\EXIST{y}{\text{$y$ is a friend of $x$}}}$
+\hspace*{1em}\hfill
+The set of of people who have a friend.\\
+$\COLL{n}{3<n^2<4+x}$\hfill
+The set of things whose square is strictly between $3$ and $4+x$.
+}
+Axiom \ref{ax:in} says that $a$ is an element of $\COLL{x}{\text{$x$ is a person} \AND\EXIST{y}{\text{$y$ is a friend of $x$}}}$
+if and only if $a$ is a person and $\EXIST{y}{\text{$y$ is a friend of $a$}}$.
+Axiom \ref{ax:in} says that 
+$b\in\COLL{n}{3<n^2<4+x}$ if and only if $3<b^2<4+x$.
+
+\paragraph{Broken?}
+We should talk about that warning.
+Axiom \ref{ax:in} is the way people at one point thought they could set up set theory.
+But it all came crashing down.
+It turns out to be broken in the worst possible way-- Axiom \ref{ax:in} allows us to prove a contradiction.
+The trouble is in allowing $\pA$ to really be \emph{any} proposition;
+certain choices of $\pA$ are somehow bad.
+So what do we do about this?
+People have eradicated the bug in various ways by modifying Axiom \ref{ax:in}.
+Different approaches have led to different types of set theory.
+We can also choose to \emph{ignore} the bug and move on.
+Then we would be doing what is called \emph{naive set theory}.
+This is what we choose to do for now, while just bearing in mind that
+there are some propositions $\pA$ on which Axiom \ref{ax:in} should not be used.
+There will be more comments later on how to fix the bug;
+most of what we do is not affected much by the fix.
+ 
+Moving on.
+
+\DEFN{Inclusion}{
+$a\subseteq b\DARR \ALL{z}{z\in a\ARR z\in b}$.
+}
+
+Here are some ways to read ``$a\subseteq b$'' in English:
+\indented{
+$a$ is a subset of $b$\\
+$a$ is contained in $b$\\
+$b$ contains $a$\\
+}
+\vspace{-1em}
+For $a$ to be a subset of $b$, every element of $a$ must be an element of $b$.
+Do not confuse this with ``$a$ is in $b$,'' which is actually a way of saying ``$a\in b$''!
+Explicitly using the symbols ``$\in$'' and ``$\subseteq$'', or explicitly saying ``element'' and ``subset''
+can help to avoid confusion.
+
+
+% On defns: they are like axioms in that they serve as starting points.
+% but we distinguish them from axioms because all they do conveniently *name* some new symbols in terms of old symbols
+% they don't really assert anything, so they don't allow us to prove anything truly new
+% the only things they allow us to prove are the same things we proved before, but with old names replaced by new names.
+% definitions could be omitted completely without changing which theorems can be proven
+% having too many axioms is undesirable, but there's nothing wrong with having lots of definitions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 % develop set theory along the lines of jacoby notes
 
-% some milestones to reach: relations, functions, induction, recursion, natural numbers, partial orderings, concepts like sup and inf in ordered sets, cardinality
+% some milestones to reach: relations, functions, induction, recursion, natural numbers, partial orderings, concepts like sup and inf in ordered sets, cardinality, category theory ideas
 
 % appendix: put some sample well written proofs and badly written proofs
 
+% appendix: fixing the broken axiom how collectors work?
 
 
 
