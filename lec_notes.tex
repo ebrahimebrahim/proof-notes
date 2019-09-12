@@ -68,11 +68,11 @@
 %\newcommand{\SUBST}[3]{{#1}\,\text{replacing}\,{#2}\,\text{by}\,{#3}}
 %\newcommand{\SUBST}[3]{{#1}\ \text{replacing}\ {#2}\ \text{by}\ {#3}}
 
-%\newcounter{exercise}[subsubsection]
+%\newcounter{exercise}[subsection]
 \newcounter{exercise}
 \newcounter{rule}
 \newcounter{theorem}
-%\def\theexercise{\thesubsubsection.\arabic{exercise}}
+%\def\theexercise{\thesubsection.\arabic{exercise}}
 
 \def\putExerciseHeading{\refstepcounter{exercise} \textbf{Exercise \theexercise}}
 \def\putRuleNumber{\refstepcounter{rule}\therule}
@@ -312,12 +312,12 @@ A proposition that appears in a proof is said to be \emph{proven}.
 \paragraph{Theorems}
 A \emph{theorem} is a proposition which is asserted to have a proof.
 
-\subsubsection{Example of a Formal Proof}
 
 
 \def\ES{\settext{x}{$x\neq x$}}
 
-Below is an example of a proof of the proposition ``$(\forall x\,|\,x\notin\ES)$''.
+\paragraph{Example}
+Here is an example of a proof of the proposition ``$(\forall x\,|\,x\notin\ES)$'':
 \begin{adjustwidth}{1cm}{}
 $(x\in\ES)\Longrightarrow (x\neq x)$\\ 
 $(x=x)\Longrightarrow (x\notin \ES)$\\
@@ -325,7 +325,7 @@ $x=x$\\
 $x\notin\ES$\\
 $(\forall x\,|\,x\notin\ES)$
 \end{adjustwidth}
-Here I don't want you to worry about interpreting what the propositions are trying to \emph{say};
+Do not worry about interpreting what the propositions are trying to \emph{say};
 I just want to demonstrate how a theorem arises as a result of applying the rules of logic
 to various axioms. What you see above is a sequence of five propositions, ending with the
 one I claimed to be proving, namely ``$(\forall x\,|\,x\notin\ES)$''.
@@ -449,7 +449,7 @@ It would be an English description of your proof that does not explain every det
 
 
 
-\subsection{Logic and Writing Mathematical Arguments}
+\section{Logic and Writing Mathematical Arguments}
 
 The rest of this course will introduce logic and set theory, starting with logic in this section.
 Our goal with logic is not only to understand the rules of deduction,
@@ -516,7 +516,7 @@ Which of the following are grammatically correct? Hint: replace Greek letters wi
 
 
 
-\subsubsection{And, Or, and Not}
+\subsection{And, Or, and Not}
 
 \paragraph{Conjunction}
 \hypertarget{hl:AND}{Given} propositions $\pA$ and $\pB$, we can form their \emph{conjunction}
@@ -784,7 +784,7 @@ discussed in the next section.
 }
 
 
-\subsubsection{If and Iff}
+\subsection{If and Iff}
 
 \paragraph{Implication}
 \hypertarget{hl:ARR}{Given} propositions $\pA$ and $\pB$, we can form the \emph{implication}
@@ -979,7 +979,7 @@ $$((\pA\ARR\pC)\AND(\pB\ARR\pC))\ARR((\pA\OR\pB)\ARR\pC).$$
 The latter proposition could be called ``proof by cases,'' and so your truth table result should not be too surprising.
 }
 
-\subsubsection{Some Derived Logical Rules}
+\subsection{Some Derived Logical Rules}
 \label{sec:derived1}
 
 In this section we will derive some logical rules from the basic ones given in previous sections.
@@ -1348,7 +1348,7 @@ It is especially important to be aware of the ways in which mathematical logic d
 % use jacoby notes as a guide, but also look at ``thinking about logic'', and also show a truth table and point out the weird part.
 % pull out my old psychology course final paper as well
 
-\subsubsection{Substitution}
+\subsection{Substitution}
 \label{sec:subst}
 
 Our entire discussion has so far been restricted to propositions, but for the next part \emph{variables} will have a role to play.
@@ -1428,7 +1428,7 @@ Is $\SUBST{\SUBST{\pA}{x}{y}}{y}{x}$ always the same as $\pA$? Explain.
 
 
 
-\subsubsection{Universal and Existential Quantifiers}
+\subsection{Universal and Existential Quantifiers}
 
 \def\lsp{\\[0.3em]}
 \newcommand{\EGENTRY}[2]{#1\hspace{1em} & #2\lsp}
@@ -1694,7 +1694,7 @@ Write each of the following using quantifier notation (i.e. using $\forall$ and 
 
 % a comment (maybe put this earlier) on how repetitiveness is okay for now, and better to fix it later. perhaps sian comments on how fix
 
-\subsubsection{More Derived Logical Rules}
+\subsection{More Derived Logical Rules}
 \label{sec:derived2}
 
 \setlength{\columnseprule}{1pt}
@@ -2397,7 +2397,7 @@ For each proposition in Exercise \ref{ex:neg_quant2}, figure out which propositi
 
 
 
-\subsubsection{Substitution Revisited}
+\subsection{Substitution Revisited}
 \label{sec:subst_again}
 
 Now that we've thoroughly explored quantifiers, we can better understand the anomalous substitution examples
@@ -2520,7 +2520,7 @@ where any term can sit in the position of the ``T''.
 % and also go into those details on bound vs free variables, and how barbells block substitution
 % (you can look at the crazy nested quantifiers special case in jacoby notes)
 
-\subsubsection{Logic Summary}
+\subsection{Logic Summary}
 \label{sec:logic_summary}
 
 % here put a table with each of the logical operators, including quantifiers, along with columns such as:
@@ -2722,7 +2722,7 @@ Then we would be doing what is called \emph{naive set theory}.
 This is what we choose to do for now, while just bearing in mind that
 there are some propositions $\pA$ on which Axiom \ref{ax:in} should not be used.
 There will be more comments later on how to fix the bug;
-most of what we do is not affected much by the fix.
+most of what we do is not affected much by the fix. 
  
 Moving on.
 
@@ -2829,7 +2829,61 @@ It follows that $z\in a\DARR z\in b$. Since $z$ is arbitrary, we are done.
 
 Since equality is equivalent to two inclusions, proofs of equality are often split into two parts, with each part dedicated to proving one of the inclusions.
 
+\ex{
+For each of the following, determine if it is a term, a proposition, or nothing because it is ill-formed.
+\begin{enumerate}
+\item $\COLL{a}{a\in a}$
+\item $\COLL{x}{x}$
+\item $\COLL{y}{\ALL{z}{z\subseteq y}}$
+\item $x+y\in z$
+\item $a=(b\in c)$
+\item $3\subseteq P$
+\end{enumerate}
+}
+
+\ex{
+Express each of the following sets in English without mentioning any bound variables.
+\begin{enumerate}
+\item $\COLL{x}{\text{$x$ is good}}$
+\item $\COLL{x}{\text{$x$ loves $y$}}$
+\item $\COLL{y}{\text{$x$ loves $y$}}$
+\item $\COLL{z}{z\subseteq p}$
+\item $\COLL{z}{\ALL{x}{x\subseteq p\ARR z\in x}}$
+\end{enumerate}
+}
+
+\ex{
+Prove that $a\in\COLL{k}{k=a}$.
+}
+
+\ex{
+Prove that if $\COLL{k}{k=a}\subseteq m$, then $a=m$.
+}
+
+\ex{
+Let $B=\COLL{a}{a\subseteq \COLL{k}{k=b}}$. Prove that if $j\in z$ and $z\in B$, then $j=b$.
+}
+
+\ex{For this exercise, let
+$$ s=\COLL{x}{\EXIST{a}{x\in a\AND a\in y}} $$
+and let
+$$ t=\COLL{a}{\EXIST{x}{x\in a\AND a\in y}}. $$
+\begin{enumerate}
+\item \label{ex:st_membership:first_s}Which variables are free in the definition of $s$ and which are bound?
+\item Describe $s$ in English without mentioning any bound variables.
+\item What does it mean for $z$ to be an element of $s$? (Use Axiom \ref{ax:in}.)
+\item \label{ex:st_membership:last_s}What does it mean for $y$ to be an element of $s$? 
+Express your answer in English without mentioning any bound variables.
+\item Answer questions \ref{ex:st_membership:first_s}-\ref{ex:st_membership:last_s} for $t$ instead of $s$.
+\item Assume that every element of $y$ has an element. That is, assume that $$\ALL{z}{z\in y\ARR\EXIST{w}{w\in z}}.$$
+Prove that $t=y$.
+\end{enumerate}
+}
+
+
 \subsection{Empty Set, Singletons, and More}
+
+%ex idea: pv that if y={b}, then big union (spelled out) of y equals b.
 
 \subsection{Intersection, Union, and Relative Complement}
 
