@@ -78,7 +78,7 @@
 \def\putRuleNumber{\refstepcounter{rule}\therule}
 \def\putThmNumber{\refstepcounter{theorem}\thetheorem}
 
-\newcommand{\ex}[1]{ \putExerciseHeading: \begin{adjustwidth}{2em}{}#1\end{adjustwidth}}
+\newcommand{\ex}[1]{ \putExerciseHeading: #1}
 \newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
 
 
@@ -136,6 +136,7 @@
 %mention the importance of writing and the roughness of this transition for many people.
 %mention the value of forgetting what you knew before, but not really forgetting it all.}
 %an illustration containing two towers, one of the math t hey built up till now, and one new tower starting here of the math they are now building
+%a comment on hyperlinks in this document and the usefulness of having a back button
 
 \note{Write the general intro later, maybe last.}
 
@@ -187,7 +188,7 @@ Variables are copies of letters coming from an alphabet (usually Latin or Greek)
 
 \def\sp{\hspace{1em}}
 \paragraph{Constants}
-Constants are used as fixed names for specific mathematical objects.
+\hypertarget{hl:constants}{Constants} are used as fixed names for specific mathematical objects.
 They are most like \emph{proper} nouns in English.
 Here are some constants:
 \begin{center}
@@ -859,7 +860,7 @@ Here is the completed truth table for $\ARR$:
 \begin{center}
 \truthtablefour{$\pA\ARR\pB$}{T}{T}{F}{T}
 \end{center}
-Putting T there is not an arbitrary choice-- if you agreed with all the previous logical rules then you \emph{must} agree
+\hypertarget{hl:vacuous}{Putting} T there is not an arbitrary choice-- if you agreed with all the previous logical rules then you \emph{must} agree
 that $\pA\ARR\pB$ is \emph{true} when $\pA$ is false.
 Let me try and convince you. First we need to revisit contradictions.
 
@@ -1205,7 +1206,7 @@ they could, without lying, shoot even after the money is handed over.
 
 The \emph{contrapositive} of an implication, on the other hand, \emph{does} follow from the implication.
 This rule is derived below.
-An implication is always equivalent to its contrapositive.
+\hypertarget{hl:contraposition}{An} implication is always equivalent to its contrapositive.
 Since the converse of an implication is the contrapositive of its inverse, the converse and inverse of an implication are equivalent.
 
 
@@ -2473,7 +2474,7 @@ You go from some unspecified unnamed thing that loves $y$, to a specific thing c
 In written proofs, EI and UI free up bound variables, while EG and UG \emph{bind} free variables.
 
 \paragraph{Implicit Universal}
-Suppose you prove a theorem with some free variables in it.
+\hypertarget{hl:implicitU}{Suppose} you prove a theorem with some free variables in it.
 Say you've proven ``If $x$ and $y$ are odd, then $x+y$ is even.''
 This has $x$ and $y$ as free variables, so it looks like it's making a statement specifically about $x$ and $y$.
 But they are still \emph{variables}, and they are \emph{arbitrary}; that's because they appear in a standalone theorem statement
@@ -2781,7 +2782,7 @@ Since we showed that $z\in c$ for an arbitrary $z\in a$, we have shown $\ALL{z}{
 In other words, $a\subseteq c$.
 \done
 
-In the proof of \ref{thm:refl_trans_incl2}, you should be able to spot two uses of \hyperlink{hl:UI}{UI} and one use of \hyperlink{hl:UG}{UG}.
+In the proof of Theorem \ref{thm:refl_trans_incl2}, you should be able to spot two uses of \hyperlink{hl:UI}{UI} and one use of \hyperlink{hl:UG}{UG}.
 
 If $a=b$, then by Axiom \ref{ax:eq_used} we have $z\in a\DARR z\in b$, for all $z$.
 So the equality $a=b$ gives both inclusions $a\subseteq b$ and $b\subseteq a$.
@@ -2883,7 +2884,163 @@ Prove that $t=y$.
 
 \subsection{Empty Set, Singletons, and More}
 
-%ex idea: pv that if y={b}, then big union (spelled out) of y equals b.
+\DEFN{Empty Set}{
+$\emptyset = \COLL{x}{x\neq x}$
+}
+
+Here we have defined the first \hyperlink{hl:constants}{constant} of our language.
+
+The notation $a\notin b$
+is a shorthand for $\neg(a\in b)$,
+and similarly $a\neq b$ is short for $\neg(a=b)$.
+
+\THMNP{Empty Set is Empty\label{thm:emptyset_empty}}{
+$x\notin\emptyset$.
+}{
+If $x\in \emptyset$
+then $x\neq x$, but this would contradict Axiom \ref{ax:refl_eq}.
+}
+
+\THMN{Minimality of the Empty Set\label{thm:emptyset_minimal}}{
+\begin{enumerate}
+\item \label{thm:emptyset_minimal1} $\emptyset\subseteq a$.
+\item \label{thm:emptyset_minimal2} If $a\subseteq\emptyset$, then $a=\emptyset$.
+\end{enumerate}
+}
+\proofnewline
+\textit{Proof of \ref{thm:emptyset_minimal1}:}
+Consider any $z$.
+Since $z\notin\emptyset$ (Theorem \ref{thm:emptyset_empty}),
+it is \hyperlink{hl:vacuous}{vacuously true} that $z\in\emptyset\ARR z\in a$.
+\done
+\proofsep
+\textit{Proof of \ref{thm:emptyset_minimal2}:}
+Assume that $a\subseteq\emptyset$.
+We already have $a\subseteq\emptyset$
+from part \ref{thm:emptyset_minimal1}.
+Since we got both inclusions, we have proven the equality $a=\emptyset$ (Theorem \ref{thm:eq_incl}).
+\done
+
+\THMNP{Only the Empty Set is Empty\label{thm:emptyset_unique}}{
+If $x\notin a$ for all $x$, then $a=\emptyset$.
+}{
+Assume that $\ALL{x}{x\notin a}$.
+Consider any $z$.
+Since $z\notin a$
+by hypothesis,
+it is vacuously true that $z\in a\ARR z\in\emptyset$.
+Since $z$ is arbitrary, we may conclude that $a\subseteq\emptyset$.
+It follows that $a=\emptyset$ (Theorem \ref{thm:emptyset_minimal}).
+}
+
+In the proof of Theorem \ref{thm:emptyset_unique}, you should be able to spot one use of \hyperlink{hl:UI}{UI} and one use of \hyperlink{hl:UG}{UG}.
+
+Theorem \ref{thm:emptyset_unique} is an example of a \emph{uniqueness theorem}.
+If you know that $g$ is green and you want to assert that $g$ is the only green thing in existence, then the way to assert that is
+$$
+\ALL{a}{\text{$a$ is green}\ARR a=g}.
+$$
+If we read ``$\ALL{x}{x\notin a}$'' as ``$a$ is empty,'' then Theorem \ref{thm:emptyset_unique} looks like this:
+$$
+\ALL{a}{\text{$a$ is empty}\ARR a=\emptyset}.
+$$
+The universal quantifier ``$\forall a$'' does not show up explicitly in the statement of Theorem \ref{thm:emptyset_unique},
+but remember that \hyperlink{hl:implicitU}{it is sort of implicitly there}.
+
+\THMNP{Nonemptiness\label{thm:nonempty}}{
+$a\neq\emptyset\DARR\EXIST{x}{x\in a}$.
+}{
+$\Rightarrow$:
+This implication can be established by considering the \hyperlink{hl:contraposition}{contraposition}
+$$
+\neg\EXIST{x}{x\in a}\ARR a=\emptyset
+$$
+and \hyperlink{hl:NOTUSE}{pushing the negation in} to see that it is equivalent to Theorem \ref{thm:emptyset_unique}.
+
+$\Leftarrow$:
+Assume that $\EXIST{x}{x\in a}$.
+Then we can get some $x$ such that $x\in a$.
+Now we cannot have $a=\emptyset$, for if we did then $x\in a$ would contradict Theorem \ref{thm:emptyset_empty}.
+}
+
+In the proof of Theorem \ref{thm:nonempty}, you should be able to spot one use of \hyperlink{hl:EI}{EI}.
+
+\DEFN{Singleton}{
+$\{x\}=\COLL{a}{a=x}$.
+}
+
+This definition gives us an object $\{x\}$ with the property that any $a$ is an element of $\{x\}$ if and only if $a=x$.
+In other words, $x$ is an element of $\{x\}$ and it is the \emph{unique} element of $\{x\}$.
+
+\DEFN{Doubleton}{
+$\{x,y\}=\COLL{a}{(a=x)\OR (a=y)}$.
+}
+
+You can probably guess how $\{x,y,z\}$ and longer ``lists of elements'' are defined.
+Of course we are restricted to finite lists, because we can only write finite lists
+with our finite ink and finite paper.
+
+\THMP{$\{x,y\}=\{y,x\}$}{
+This essentially follows from the logical rule $\pA\OR\pB\DARR\pB\OR\pA$. Here are the details.
+
+Consider any $z$.
+We have
+\begin{align*}
+z\in\{x,y\} &\DARR (z=x)\OR (z=y)\\
+&\DARR (z=y)\OR (z=x)\\
+&\DARR z\in\{y,x\}.
+\end{align*}
+From $z\in\{x,y\} \DARR z\in\{y,x\}$ we generalize to conclude that $\{x,y\}=\{y,x\}$.
+}
+
+\THMP{
+$\{x\}=\{y\}$ if and only if $x=y$.
+}{
+PEUP
+}
+
+
+
+\ex{
+Prove that
+$\{x\}\subseteq\{x,y\}$.
+}
+
+
+\THMP{
+$\{x,y\}=\{u\}$ if and only if $x=y=u$.
+}{
+\putExerciseHeading.
+}
+
+
+
+
+
+\ex{Prove that
+$\{\emptyset\}\neq \emptyset$.
+}
+
+
+\ex{Prove that
+$\{\{\emptyset\}\}\neq \{\emptyset\}$.
+}
+
+
+\THMP{
+If $\{x,y\}=\{u,v\}$, then either $x=u$ and $y=v$, or $x=v$ and $y=u$.
+}{
+\putExerciseHeading.
+}
+
+
+\ex{
+Prove that 
+if $y=\{b\}$, then
+$\COLL{z}{\EXIST{x}{(z\in x)\AND(x\in y)}}=b$.
+}
+
+
 
 \subsection{Intersection, Union, and Relative Complement}
 
