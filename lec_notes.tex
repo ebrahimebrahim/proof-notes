@@ -61,6 +61,7 @@
 \newcommand{\EXIST}[2]{\left(\,\exists{#1}\,\bbel\,#2\,\right)}
 \newcommand{\COLL}[2]{\left\{\, {#1} \,\bbel\, {#2} \, \right\}}
 \newcommand{\settext}[2]{\COLL{#1}{\text{#2}}}
+\newcommand{\SUB}[1]{\mathcal{P}(#1)}
 
 %\newcommand{\SUBST}[3]{{#1}\left[{#2}\mapsto{#3}\right]}
 %\newcommand{\SUBST}[3]{{#1}_{{#2}\mapsto{#3}}}
@@ -2981,6 +2982,21 @@ You can probably guess how $\{x,y,z\}$ and longer ``lists of elements'' are defi
 Of course we are restricted to finite lists, because we can only write finite lists
 with our finite ink and finite paper.
 
+\THMNP{\label{thm:singleton_subset}Singleton and Inclusion}{
+$x\in S$ if an only if $\{x\}\subseteq S$.
+}{
+$\Rightarrow$:
+Assume that $x\in S$.
+Consider any $z\in\{x\}$. Then $z=x$, so we have $z\in S$.
+Since $z$ was arbitrary, we may conclude that $\{x\}\subseteq S$.
+
+$\Leftarrow$:
+Assume that $\{x\}\subseteq S$.
+We have  $x\in \{x\}$ (since $x=x$).
+Therefore we have $x\in S$. 
+}
+
+
 \THMP{$\{x,y\}=\{y,x\}$}{
 This essentially follows from the logical rule $\pA\OR\pB\DARR\pB\OR\pA$. Here are the details.
 
@@ -3342,6 +3358,64 @@ Prove these fun facts about relative complements:
 
 
 \subsection{Power Sets}
+
+The set of all subsets of a given set $x$ is called the \emph{power set} of $x$, denoted by $\SUB{x}$.
+
+\DEFN{Power Set}{
+$\SUB{x}=\COLL{y}{y\subseteq x}.$
+}
+
+\ex{
+Prove that the empty set is both an element of and a subset of $\SUB{x}$.
+}
+
+\ex{Prove that $\{x\}\subseteq\SUB{x}$.}
+
+\ex{Prove that $\SUB{\emptyset}=\{\emptyset\}$}
+
+\THMP{ $\SUB{\{x\}} = \{\emptyset,\{x\}\}$. }{
+$\supseteq$:
+Consider any $z\in \{\emptyset,\{x\}\}$.
+Either $z=\emptyset$ or $z=\{x\}$.
+
+Case 1: Suppose that $z=\emptyset$. Then $z\subseteq \{x\}$ (Theorem \ref{thm:emptyset_minimal}\ref{thm:emptyset_minimal1}).
+
+Case 2: Suppose that $z=\{x\}$. Then $z\subseteq \{x\}$ (Theorem \ref{thm:refl_trans_incl}\ref{thm:refl_trans_incl1}).
+
+Since $z\subseteq \{x\}$ in both cases, we have $z\subseteq\{x\}$.
+It follows that $z\in \SUB{\{x\}}$.
+
+$\subseteq$:
+Consider any $z\in\SUB{\{x\}}$.
+Then $z\subseteq \{x\}$.
+Either $z$ is $\emptyset$ or it is not.
+
+Case 1: If $z=\emptyset$, then $z\in\{\emptyset,\{x\}\}$ and we are done.
+
+Case 2: If $z\neq\emptyset$, then $z$ must have an element (Theorem \ref{thm:nonempty}).
+So we can get a $y$ such that  $y\in z$.
+Since $z\subseteq \{x\}$, it follows that $y\in\{x\}$, and so in fact $y=x$.
+Now we have $x\in z$.
+It follows that $\{x\}\subseteq z$ (Theorem \ref{thm:singleton_subset}),
+and combining this with $z\subseteq \{x\}$ gives us $z=\{x\}$.
+Thus we finally have $z\in\{\emptyset,\{x\}\}$ and we are done.
+
+}
+
+\ex{Prove that $\SUB{\{x,y\}} = \{\emptyset,\{x\},\{y\},\{x,y\}\}$.}
+
+\ex{If a set $x$ has $n$ elements, then how many elements do you think its power set $\SUB{x}$ has?
+Make your best guess. No proof or justification is needed here (nor is it possible-- we have
+yet to even define numbers or what it means for a set to have a certain number of elements).}
+
+\ex{
+Prove that $\SUB{x}\cap\SUB{y}=\SUB{x\cap y}$.
+}
+
+\ex{
+Prove that if $x\neq y$, then $\SUB{x}\cup\SUB{y}\neq\SUB{x\cup y}$.
+}
+
 
 \subsection{Pairs and Cartesian Products}
 
