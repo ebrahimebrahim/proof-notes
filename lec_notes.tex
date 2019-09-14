@@ -15,7 +15,7 @@
 % Other stuff
 \usepackage{hyperref}
 \usepackage{datetime} \usdate
-\usepackage{enumitem}
+\usepackage[shortlabels]{enumitem}
 \usepackage{changepage}
 \usepackage{tcolorbox}
 \usepackage{tikz}
@@ -84,6 +84,7 @@
 
 \def\thmcolonspace{\hspace{1em}}
 \def\proofnewline{\\[0.75em]} % Separates theorem box from proof, no new paragraph expected.
+\def\thmStartNewline{\\[0.3em]} % Vertically separates theorem heading from theorem statement, sometimes used.
 \def\proofsep{\\[-0.5em]} % Separates different proofs (e.g. to diff parts of same theorem). No new paragraph expected.
 \renewcommand\qedsymbol{$\blacksquare$}
 \def\done{\qed\\[0em]} % QED with newline so that QED symbol is flushed to the right. IDK why newline is needed for this to happen.
@@ -808,11 +809,11 @@ Thus, $\pA\ARR\pB$.
 }
 
 \hypertarget{hl:ARRUSE}{The} rule that allows us to use $\pA\ARR\pB$ is modus ponens:
-\RULE{Modus ponens}{
+\RULE{Modus Ponens\label{rule:mp}}{
 Given $\pA\ARR\pB$ and $\pA$, you can deduce $\pB$.
 }
 Here is also another great rule for using an implication (this one can be derived from modus ponens via a proof by contradiction):
-\DRULE{Modus tollens}{
+\DRULE{Modus Tollens}{
 Given $\pA\ARR\pB$ and $\neg\pB$, you can deduce $\neg\pA$.
 }
 
@@ -990,7 +991,7 @@ The arguments given in this section are useful logical patterns that can help us
 The following derived rule could be written as ``$((\pA\ARR\pB)\AND(\pB\ARR\pC))\ARR(\pA\ARR\pC)$'',
 but we instead mix in some English to cut down on the number of parentheses and to make things more pleasant to read.
 
-\DRULEPF{Transitivity of Implication}{
+\DRULEPF{Transitivity of Implication\label{DRULE:trans_impl}}{
 If $\pA\ARR\pB$ and $\pB\ARR\pC$, then $\pA\ARR\pC$.
 }{
 Assume that $\pA\ARR\pB$ and $\pB\ARR\pC$.
@@ -1088,7 +1089,7 @@ In the second half, we use an $\OR$ statement in pretty much the only way we can
 
 \DRULEPZ{}{If $\pA\ARR\pB$ and $\pC\ARR\pD$, then $(\pA\OR\pC)\ARR(\pB\OR\pD)$.}
 
-\DRULEPF{Alternative Eliminated}{
+\DRULEPF{Alternative Eliminated\label{DRULE:alt_elim}}{
 If $\pA\OR\pB$ holds but $\pA$ does not hold, then $\pB$ must hold.
 In other words,
 $$((\pA\OR\pB)\AND(\neg\pA))\ARR\pB.$$
@@ -1753,7 +1754,7 @@ We now continue to derive logical rules, as we were doing in section
 This time, the rules involve quantifiers.
 Like in section 
 \ref{sec:derived1},
-we still want to work with actual mathematical propositions,
+we will still not work with actual mathematical propositions,
 instead favoring more general \emph{placeholders} for propositions, like $\pA$, $\pB$, etc.
 However, I think that the arguments in this section can become difficult to follow if we adhere strictly to this level of generality.
 For this reason, we will sometimes also include a version of the arguments that contains generic-sounding
@@ -2606,7 +2607,7 @@ If $x=y$, then $\SUBST{\pA}{a}{x}\DARR\SUBST{\pA}{a}{y}$.
 }
 
 \THMN{Symmetry and Transitivity for Equality\label{thm:sym_trans_eq}}{
-\begin{enumerate}
+\begin{enumerate}[(1)]
 \item\label{thm:sym_trans_eq1}
 If $x=y$, then $y=x$.
 \item\label{thm:sym_trans_eq2}
@@ -2709,7 +2710,7 @@ Axiom \ref{ax:in} says that
 $b\in\COLL{n}{3<n^2<4+x}$ if and only if $3<b^2<4+x$.
 
 \paragraph{Broken?}
-We should talk about that warning.
+\hypertarget{hl:bug}{We} should talk about that warning.
 Axiom \ref{ax:in} is the way people at one point thought they could set up set theory.
 But it all came crashing down.
 It turns out to be broken in the worst possible way-- Axiom \ref{ax:in} allows us to prove a contradiction.
@@ -2760,7 +2761,7 @@ Having too many axioms is undesirable, but there is nothing wrong with having lo
 % having too many axioms is undesirable, but there's nothing wrong with having lots of definitions
 
 \THMN{\label{thm:refl_trans_incl}Reflexivity and Transitivity for Inclusion}{
-\begin{enumerate}
+\begin{enumerate}[(1)]
 \item\label{thm:refl_trans_incl1}
 $a\subseteq a$.
 \item\label{thm:refl_trans_incl2}
@@ -2902,7 +2903,7 @@ then $x\neq x$, but this would contradict Axiom \ref{ax:refl_eq}.
 }
 
 \THMN{Minimality of the Empty Set\label{thm:emptyset_minimal}}{
-\begin{enumerate}
+\begin{enumerate}[(1)]
 \item \label{thm:emptyset_minimal1} $\emptyset\subseteq a$.
 \item \label{thm:emptyset_minimal2} If $a\subseteq\emptyset$, then $a=\emptyset$.
 \end{enumerate}
@@ -2996,15 +2997,18 @@ From $z\in\{x,y\} \DARR z\in\{y,x\}$ we generalize to conclude that $\{x,y\}=\{y
 \THMP{
 $\{x\}=\{y\}$ if and only if $x=y$.
 }{
-PEUP
+$\Rightarrow$:
+Assume that $\{x\}=\{y\}$.
+We have $x\in\{x\}$, since $x=x$. Thus we have $x\in\{y\}$, and from this we get $x=y$.
+
+$\Leftarrow$:
+Assume that $x=y$.
+Consider any $z$.
+We have $z=x\DARR z=y$,
+so $z\in\{x\}\DARR z\in\{y\}$.
+Thus $\{x\}=\{y\}$.
 }
 
-
-
-\ex{
-Prove that
-$\{x\}\subseteq\{x,y\}$.
-}
 
 
 \THMP{
@@ -3012,6 +3016,21 @@ $\{x,y\}=\{u\}$ if and only if $x=y=u$.
 }{
 \putExerciseHeading.
 }
+
+
+
+\THMP{
+If $\{x,y\}=\{u,v\}$, then either $x=u$ and $y=v$, or $x=v$ and $y=u$.
+}{
+\putExerciseHeading.
+}
+
+
+\ex{
+Prove that
+$\{x\}\subseteq\{x,y\}$.
+}
+
 
 
 
@@ -3027,12 +3046,6 @@ $\{\{\emptyset\}\}\neq \{\emptyset\}$.
 }
 
 
-\THMP{
-If $\{x,y\}=\{u,v\}$, then either $x=u$ and $y=v$, or $x=v$ and $y=u$.
-}{
-\putExerciseHeading.
-}
-
 
 \ex{
 Prove that 
@@ -3043,6 +3056,290 @@ $\COLL{z}{\EXIST{x}{(z\in x)\AND(x\in y)}}=b$.
 
 
 \subsection{Intersection, Union, and Relative Complement}
+
+\def\vsp{\vspace{0.3em}}
+
+\DEFN{Intersection and Union}{
+\vsp
+\begin{enumerate}[(1)]
+\item $a\cap b = \COLL{x}{(x\in a)\AND(x\in b)}$
+\item $a\cup b = \COLL{x}{(x\in a)\OR (x\in b)}$
+\end{enumerate}
+\vsp
+}
+
+\newcommand{\thmline}[2]{
+\item \hspace*{1em} #1 \hfill (#2) \hspace*{2em}
+}
+\newcommand{\thmlineL}[3]{
+\item #3 \hspace*{1em} #1 \hfill (#2) \hspace*{2em}
+}
+
+\def\hsp{\hspace{0.8em}}
+
+\THMN{Algebraic Properties of Intersection and Union\label{thm:cupcap_props}}{
+\vsp
+\begin{enumerate}[(1)]
+\thmlineL{$a\cap b=b\cap a$}{commutativity of $\cap$}{\label{thm:cupcap_props1}}
+\thmline{$a\cup b=b\cup a$}{commutativity of $\cup$}
+\thmline{$(a\cap b)\cap c=a\cap (b\cap c)$}{associativity of $\cap$}
+\thmline{$(a\cup b)\cup c=a\cup (b\cup c)$}{associativity of $\cup$}
+\thmlineL{$a\cup (b\cap c)=(a\cup b)\cap(a\cup c)$}{$\cup$ distributes over $\cap$}{\label{thm:cupcap_props2}}
+\thmline{$a\cap (b\cup c)=(a\cap b)\cup(a\cap c)$}{$\cap$ distributes over $\cup$}
+\thmline{$a\cap a=a$}{idempotence of $\cap$}
+\thmline{$a\cup a=a$}{idempotence of $\cup$}
+\thmlineL{$a\cup \emptyset=a$}{$\emptyset$ is an identity for $\cup$}{\label{thm:cupcap_props3}}
+\item \hspace*{1em} $a\cap\emptyset=\emptyset$
+\end{enumerate}
+\vsp
+}
+\proofnewline
+\textit{Proof of \ref{thm:cupcap_props1}:}
+For any given $z$, we have
+$$
+z\in a\cap b
+\hsp\DARR\hsp
+(z\in a)\AND(z\in b)
+\hsp\DARR\hsp
+(z\in b)\AND(z\in a)
+\hsp\DARR\hsp
+z\in b\cap a.
+$$
+\done
+\proofsep
+\textit{Proof of \ref{thm:cupcap_props2}:}
+For any given $z$, we have
+\begin{align*}
+z\in a\cup (b\cap c)
+&\hsp\DARR\hsp
+(z\in a) \OR (z\in b\cap c)\\
+&\hsp\DARR\hsp
+(z\in a) \OR ((z\in b)\AND(z\in c))\\
+&\hsp\DARR\hsp
+((z\in a)\OR(z\in b))\AND((z\in a)\OR(z\in c))\\
+&\hsp\DARR\hsp
+(z\in a\cup b)\AND(z\in a\cup c)\\
+&\hsp\DARR\hsp
+z\in (a\cup b)\cap(a\cup c).
+\end{align*}
+\done
+\proofsep
+\textit{Proof of \ref{thm:cupcap_props3}:}
+$\supseteq$:
+Consider any $z\in a$. Then we have $(z\in a)\OR(z\in\emptyset)$, so $z\in a\cup\emptyset$.
+
+$\subseteq$:
+Consider any $z\in a\cup\emptyset$.
+Then we have either $z\in a$ or $z\in\emptyset$.
+Since $z\notin\emptyset$, it must be that $z \in a$ (Rule \ref{DRULE:alt_elim}).
+\done
+\proofsep
+Proving the rest of them is \putExerciseHeading.
+
+In the proofs given above, you can see some different ways of proving an equality.
+In the first two proofs, the pattern is to estbalish a chain of ``$\DARR$'' and then gain an equality like $A=B$
+by having proven $\ALL{z}{z\in A\DARR z\in B}$.
+This is relying on Axiom \ref{ax:eq_gain}.
+In the third proof, the pattern is to gain $A=B$ by establishing $A\subseteq B$ and $B\subseteq A$.
+This is relying on Theorem \ref{thm:eq_incl}.
+The latter pattern, gaining equality via double inclusion, is far more commonly used and it will ultimately be much more useful for you.
+Chains of ``$\DARR$'' really only show up in the basics of set theory-- they become very unwieldy when things get the slightest bit complicated.
+
+\THMNP{Maximality of Intersection\label{thm:cap_max}}{
+\thmStartNewline
+The set $b\cap c$ is a subset of both $b$ and $c$,
+and it contains anything that is a subset of both $b$ and $c$.
+That is,
+\begin{enumerate}[(1)]
+\item $b\cap c\subseteq b$ \label{thm:cap_max1}
+\item $b\cap c\subseteq c$ \label{thm:cap_max2}
+\item If $a\subseteq b$ and $a\subseteq c$, then $a\subseteq b\cap c$. \label{thm:cap_max3}
+\end{enumerate}
+}{
+To prove \ref{thm:cap_max1},
+consider any $z\in b\cap c$.
+Then $z\in b$ and $z\in c$. In particular, $z\in b$.
+
+The proof of \ref{thm:cap_max2} is similar.
+
+To prove \ref{thm:cap_max3}, assume that $a\subseteq b$ and $a\subseteq c$.
+Consider any $z\in a$.
+Due to our hypothesis we have $z\in b$ and $z\in c$, so
+$z\in b\cap c$. Since $z$ is arbitrary, we may conclude that $a\subseteq b\cap c$.
+}
+
+\THMNP{Minimality of Union\label{thm:cup_min}}{
+\thmStartNewline
+The set $b\cup c$  contains both $b$ and $c$, and it is a subset of any set that contains both $b$ and $c$.
+That is,
+\begin{enumerate}[(1)]
+\item $b\subseteq b\cup c$ \label{thm:cup_min1}
+\item $c\subseteq b\cup c$ \label{thm:cup_min2}
+\item If $b\subseteq a$ and $c\subseteq a$, then $b\cup c\subseteq a$. \label{thm:cup_min3}
+\end{enumerate}
+}{
+\putExerciseHeading. A proof by cases is needed in \ref{thm:cup_min3}.
+}
+
+\THMNP{Inclusion in Terms of $\cap$ and $\cup$\label{thm:incl_capcup}}{
+\thmStartNewline
+The following are equivalent:
+\begin{enumerate}[(1)]
+\item \label{thm:incl_capcup1} $a\subseteq b$
+\item \label{thm:incl_capcup2} $a\cap b=a$
+\item \label{thm:incl_capcup3} $a\cup b = b$
+\end{enumerate}
+}{
+$\ref{thm:incl_capcup1}\ARR\ref{thm:incl_capcup2}$:
+Assume that $a\subseteq b$.
+We already have $a\cap b\subseteq a$ by Theorem \ref{thm:cap_max},
+so it remains for us to prove that $a\subseteq a\cap b$.
+Consider any $z\in a$. Since $a\subseteq b$, we have $z\in b$.
+Now since $z\in a$ and $z\in b$, it follows that $z\in a\cap b$.
+
+$\ref{thm:incl_capcup2}\ARR\ref{thm:incl_capcup3}$:
+Assume that $a\cap b=a$.
+We already have $b\subseteq a\cup b$ by Theorem \ref{thm:cup_min},
+so it remains for us to prove that $a\cup b \subseteq b$.
+Consider any $z\in a\cup b$. Now either $z\in a$ or $z\in b$.
+
+Case 1: Suppose that $z\in a$. Then, since $a=a\cap b$, we have $z\in a\cap b$.
+This gives $z\in a$ and $z\in b$.
+
+Case 2: Suppose that $z\in b$. That's all for case 2.
+
+In both cases we got $z\in b$, so we are done.
+
+$\ref{thm:incl_capcup3}\ARR\ref{thm:incl_capcup1}$:
+\putExerciseHeading.
+}
+
+When a theorem gives a list of assertions, be attentive to precisely what the theorem is saying about the list.
+In Theorem \ref{thm:cup_min}, for example, the assertion is a conjunction $\ref{thm:cup_min1}\AND\ref{thm:cup_min2}\AND\ref{thm:cup_min3}$.
+In Theorem \ref{thm:incl_capcup}, on the other hand, the assertion is a chain of equivalences $\ref{thm:incl_capcup1}\DARR\ref{thm:incl_capcup2}\DARR\ref{thm:incl_capcup3}$.
+In the proof above, we see a typical strategy for proving a chain of equivalences: prove a ``cycle'' of implications
+$\ref{thm:incl_capcup1}\ARR\ref{thm:incl_capcup2}\ARR\ref{thm:incl_capcup3}\ARR\ref{thm:incl_capcup1}$.
+With several applications of the transitivity of implication (Rule \ref{DRULE:trans_impl}), the cycle of implications yields the chain of equivalences.
+
+\DEFN{Relative Complement\label{def:rel_comp}}{
+$a\setminus b = \COLL{x}{(x\in a)\AND(x\notin b)}$
+}
+
+\THMN{De Morgan's Law - Set Theory Version\label{thm:demorgan_sets}}{
+\begin{enumerate}[(1)]
+\item \label{thm:demorgan_sets1}
+$ a\setminus (b\cap c) = (a\setminus b)\cup (a\setminus c) $
+\item \label{thm:demorgan_sets2}
+$ a\setminus (b\cup c) = (a\setminus b)\cap (a\setminus c) $
+\end{enumerate}
+}
+\proofnewline
+\textit{Proof of \ref{thm:demorgan_sets1}:}
+$\subseteq$:
+Consider any $z\in a\setminus (b\cap c)$.
+We have $z\in a$ and $z\notin (b\cap c)$.
+Writing $z\notin (b\cap c)$ as $\neg(z\in b \AND z\in c)$,
+we can apply the logical version of De Morgan's law (Rule \ref{drule:demorgan1})
+to see that we have either $z\notin b$ or $z\notin c$.
+
+Case 1: If $z\notin b$, then since $z\in a$ we have $z\in (a\setminus b)$.
+It follows that $z\in (a\setminus b)\cup (a\setminus c)$ simply because $a\setminus b$
+is a subset of $(a\setminus b)\cup (a\setminus c)$ (Theorem \ref{thm:cup_min}).
+
+Case 2: If $z\notin c$, then since $z\in a$ we have $z\in (a\setminus c)$.
+Again it follows that $z\in (a\setminus b)\cup (a\setminus c)$ because $a\setminus c$
+is a subset of $(a\setminus b)\cup (a\setminus c)$.
+
+In both cases we have $z\in (a\setminus b)\cup (a\setminus c)$, so we are done proving
+that $a\setminus (b\cap c) \subseteq (a\setminus b)\cup (a\setminus c)$.
+
+$\supseteq$:
+Consider any $z\in (a\setminus b)\cup (a\setminus c)$.
+We have either $z\in (a\setminus b)$ or $z\in (a\setminus c)$.
+
+Case 1: Suppose that $z\in (a\setminus b)$. Then $z\in a$ and $z\notin b$.
+If we had $z\in b\cap c$, then we would in particular have $z\in b$, which gives a contradiction.
+So it must be that $z\notin b\cap c$.
+Therefore, since $z\in a$ and $z\notin b\cap c$, we have $z\in a\setminus(b\cap c)$.
+
+Case 2: Suppose that $z\in (a\setminus c)$. Then $z\in a$ and $z\notin c$.
+If we had $z\in b\cap c$, then we would in particular have $z\in c$, so it must be that $z\notin b\cap c$.
+Therefore, since $z\in a$ and $z\notin b\cap c$, we have $z\in a\setminus(b\cap c)$.
+
+In both cases we have $z\in a\setminus(b\cap c)$, so we are done proving
+that $(a\setminus b)\cup (a\setminus c)\subseteq a\setminus(b\cap c)$.
+\done
+\proofsep
+\textit{Proof of \ref{thm:demorgan_sets2}:}
+\putExerciseHeading
+\done
+
+
+\THMNP{Iterated Relative Complement\label{thm:double_relcomp}}{
+$a\setminus (a\setminus b) = a\cap b$.
+}{
+$\subseteq:$
+Consider any $z\in a\setminus (a\setminus b)$.
+Then $z\notin a$ and $z\notin a\setminus b$.
+
+Suppose, for the sake of contradiction, that $z\notin b$.
+Then $z\in a$ and $z\notin b$, so $z\in a\setminus b$.
+This is a contradiction, so it must be that in fact $z\in b$.
+
+Since $z\in a$ and $z\in b$, we have $z\in a\cap b$.
+
+$\supseteq:$
+Assume that $z\in a\cap b$.
+Then $z\in a$ and $z\in b$,
+so it is not the case that $z\in a$ and $z\notin b$.
+That is, $z\notin a\setminus b$.
+Since $z\in a$ and $z\notin a\setminus b$, we have $z\in a\setminus(a\setminus b)$.
+}
+\proofsep
+\textit{Alternative proof of Theorem \ref{thm:double_relcomp}:}
+Consider any $z$. We have
+$$\begin{array}{llll}
+z\in a\setminus (a\setminus b) 
+& \DARR &  (z\in a)\AND(z\notin a\setminus b)   \hspace{6em} & \text{(Definition \ref{def:rel_comp})} \\
+& \DARR &  (z\in a)\AND\neg((z\in a)\AND (z\notin b))  & \text{(Definition \ref{def:rel_comp})} \\
+& \DARR &  (z\in a)\AND((z\notin a)\OR (z\in b))  & \text{(Rule \ref{drule:demorgan1})}  \\
+& \DARR &  (z\in a)\AND((z\in a)\ARR (z\in b))  & \text{(Rule \ref{drule:unless})} \\
+& \ARR  &  z\in b  & \text{(Rule \ref{rule:mp})} .
+\end{array}$$
+
+$\subseteq$: Assume that $z\in a\setminus (a\setminus b)$. We immediately get $z\in a$ and from the reasoning above we also get $z\in b$. Thus we get $z\in a\cap b$.
+
+$\supseteq$: Assume that $z\in a\cap b$. Then $z\in a$ and $z\in b$. Since $z\in b$, we have $(z\notin a)\OR (z\in b)$.
+So we have $(z\in a)\AND ((z\notin a)\OR (z\in b))$. As seen in the reasoning above, this is sufficient to conclude that $z\in a\setminus (a\setminus b) $.
+\done
+
+It is tempting to define some sort of ``absolute'' complement like this: $a^c=\COLL{x}{x\notin a}$.
+However, for reasons related to repairing the \hyperlink{hl:bug}{bug mentioned earlier},
+such a definition would not behave in the way that you would expect.
+So it is best to avoid it altogether. In practice, the sets one works with are almost always subsets of some big common ``background set,''
+and complements taken relative to the background set are sufficient.
+
+\ex{
+Prove that $a\cup b=\emptyset$ if and only if $a=\emptyset$ and $b=\emptyset$.
+}
+
+\ex{
+Prove that $\{x,y\} = \{x\}\cup\{y\}$.
+}
+
+\ex{
+Prove these fun facts about relative complements:
+\begin{enumerate}
+\item $a\setminus b\subseteq a$.
+\item $a\setminus a=\emptyset$.
+\item $a\cap b=\emptyset$ if and only if $a\setminus b=a$.
+\item $a\subseteq b$ if and only if $a\setminus b =\emptyset$.
+\item $(a\setminus b)\cup b = a\cup b$.
+\item $(a\setminus b)\cap b = \emptyset$.
+\item $a\setminus (b\cup c) = (a\setminus b)\setminus c$.
+\end{enumerate}
+}
+
 
 \subsection{Power Sets}
 
