@@ -13,6 +13,7 @@
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
 
 % Other stuff
+\usepackage{stmaryrd}
 \usepackage{hyperref}
 \usepackage{datetime} \usdate
 \usepackage[shortlabels]{enumitem}
@@ -92,12 +93,14 @@
 \newcommand{\thmbox}[1]{\fbox{\parbox{\textwidth}{{#1}}}}
 \newcommand{\THMMOCK}[2]{\thmbox{\textbf{Theorem:} \thmcolonspace #1} \proofnewline \textit{Proof:} #2\done}
 \newcommand{\THMP}[2]{\thmbox{\textbf{Theorem \putThmNumber:} \thmcolonspace #1} \proofnewline\textit{Proof:} #2\done}
+\newcommand{\THMPL}[3]{\thmbox{\textbf{Theorem \putThmNumber{#3}:} \thmcolonspace #1} \proofnewline\textit{Proof:} #2\done}
 \newcommand{\THMNP}[3]{\thmbox{\textbf{Theorem \putThmNumber\ (#1):} \thmcolonspace #2} \proofnewline\textit{Proof:} #3\done}
 \newcommand{\THM}[1]{\thmbox{\textbf{Theorem \putThmNumber:} \thmcolonspace #1}}
 \newcommand{\THMN}[2]{\thmbox{\textbf{Theorem \putThmNumber\ (#1):} \thmcolonspace #2}}
 \newcommand{\AXIOM}[1]{\thmbox{\textbf{Axiom \putThmNumber:} \thmcolonspace #1}}
 \newcommand{\AXIOMN}[2]{\thmbox{\textbf{Axiom \putThmNumber\ (#1):} \thmcolonspace #2}}
 \newcommand{\DEFN}[2]{\thmbox{\textbf{Definition \putThmNumber\ (#1):} \thmcolonspace #2}}
+\newcommand{\DEF}[1]{\thmbox{\textbf{Definition \putThmNumber:} \thmcolonspace #1}}
 
 
 \newcommand{\RULE}[2]{\begin{tcolorbox}[title=Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
@@ -125,7 +128,16 @@
 
 \tableofcontents
 
-\section{Introduction}
+\paragraph{Layout}
+Section \ref{sec:logic} will develop mathematical logic and show you how logical arguments factor into writing.
+We will not yet have anything to argue \emph{about}, so our ``proofs'' in section \ref{sec:logic} will be about nothing in particular.
+Section \ref{sec:sets} will then give some mathematical objects to talk about, and we will then put
+content into the empty skeleton arguments of section \ref{sec:logic}.
+Section \ref{sec:sets} will take you from the axioms of set theory up through a construction of the natural numbers and more.
+We start in section \ref{sec:lang} with an introduction to formal axiomatic systems and informal proofs.
+
+\section{Mathematical Language}
+\label{sec:lang}
 
 %\note{what to put here:
 %this course is about both set theory and writing.
@@ -140,17 +152,12 @@
 %an illustration containing two towers, one of the math t hey built up till now, and one new tower starting here of the math they are now building
 %a comment on hyperlinks in this document and the usefulness of having a back button
 
-\note{Write the general intro later, maybe last.}
+
+\note{Write the general intro here later.}
 
 
 
-\section{Mathematical Language}
-\label{sec:logic}
 
-This section will develop mathematical logic and show you how logical arguments factor into writing.
-We do not yet have anything to argue \emph{about}, so our ``proofs'' will be about nothing in particular.
-Section \ref{sec:sets} will later give some mathematical objects to talk about, and we will then put
-content into the empty skeleton arguments of this section.
 
 \subsection{Parts of Speech}
 \label{sec:parts_of_speech}
@@ -453,6 +460,7 @@ It would be an English description of your proof that does not explain every det
 
 
 \section{Logic and Writing Mathematical Arguments}
+\label{sec:logic}
 
 The rest of this course will introduce logic and set theory, starting with logic in this section.
 Our goal with logic is not only to understand the rules of deduction,
@@ -1248,7 +1256,7 @@ Both approaches amount to pretty much the same argument.
 
 \vspace{1em}
 
-\DRULEPF{Inverting an Equivalence\label{drule:neg_equiv}}{
+\DRULEPF{\hypertarget{hl:invertEquiv}{Inverting} an Equivalence\label{drule:neg_equiv}}{
 If $\pA\DARR\pB$, then $\neg\pA\DARR\neg\pB$.
 }{
 Assume that $\pA\DARR\pB$. Then $\pA\ARR\pB$ and $\pB\ARR\pA$.
@@ -2949,6 +2957,9 @@ $$
 The universal quantifier ``$\forall a$'' does not show up explicitly in the statement of Theorem \ref{thm:emptyset_unique},
 but remember that \hyperlink{hl:implicitU}{it is sort of implicitly there}.
 
+Theorem \ref{thm:emptyset_unique} tells us that ``being empty'' is the same thing as ``being equal to $\emptyset$.''
+When a set is described ``nonempty,'' that is the same as saying that the set is not equal to $\emptyset$.
+
 \THMNP{Nonemptiness\label{thm:nonempty}}{
 $a\neq\emptyset\DARR\EXIST{x}{x\in a}$.
 }{
@@ -2997,7 +3008,7 @@ Therefore we have $x\in S$.
 }
 
 
-\THMP{$\{x,y\}=\{y,x\}$}{
+\THMPL{$\{x,y\}=\{y,x\}$}{
 This essentially follows from the logical rule $\pA\OR\pB\DARR\pB\OR\pA$. Here are the details.
 
 Consider any $z$.
@@ -3008,9 +3019,9 @@ z\in\{x,y\} &\DARR (z=x)\OR (z=y)\\
 &\DARR z\in\{y,x\}.
 \end{align*}
 From $z\in\{x,y\} \DARR z\in\{y,x\}$ we generalize to conclude that $\{x,y\}=\{y,x\}$.
-}
+}{\label{thm:dton_unord}}
 
-\THMP{
+\THMPL{
 $\{x\}=\{y\}$ if and only if $x=y$.
 }{
 $\Rightarrow$:
@@ -3023,23 +3034,23 @@ Consider any $z$.
 We have $z=x\DARR z=y$,
 so $z\in\{x\}\DARR z\in\{y\}$.
 Thus $\{x\}=\{y\}$.
-}
+}{\label{thm:eq_ston}}
 
 
 
-\THMP{
+\THMPL{
 $\{x,y\}=\{u\}$ if and only if $x=y=u$.
 }{
 \putExerciseHeading.
-}
+}{\label{thm:dton_eq_ston}}
 
 
 
-\THMP{
+\THMPL{
 If $\{x,y\}=\{u,v\}$, then either $x=u$ and $y=v$, or $x=v$ and $y=u$.
 }{
 \putExerciseHeading.
-}
+}{\label{thm:eq_dton}}
 
 
 \ex{
@@ -3419,25 +3430,248 @@ Prove that if $x\neq y$, then $\SUB{x}\cup\SUB{y}\neq\SUB{x\cup y}$.
 
 \subsection{Pairs and Cartesian Products}
 
+\DEFN{Ordered Pair}{
+$(x,y)=\{\{x\},\{x,y\}\}$.
+}
+
+The purpose of this mysterious definition is revealed by the following theorem.
+
+\THMNP{Essence of Pairs\label{thm:pairs}}{
+\vspace{0.5em}
+\begin{center}
+$(x,y)=(u,v)$ if and only if $x=u$ and $y=v$.
+\end{center}
+\vspace{0.5em}
+}{
+The implication ``$\Leftarrow$'' is just Axiom \ref{ax:eq_used},
+so it only remains to prove ``$\Rightarrow$''.
+Assume that $(x,y)=(u,v)$.
+According to Theorem \ref{thm:eq_dton},
+we have $\{x\}=\{u\}$ and $\{x,y\}=\{u,v\}$,
+or we have $\{x\}=\{u,v\}$ and $\{x,y\}=\{u\}$.
+
+Case 1: Suppose that  $\{x\}=\{u\}$ and $\{x,y\}=\{u,v\}$.
+From $\{x\}=\{u\}$ it follows that $x=u$ (Theorem \ref{thm:eq_ston}).
+Since $y\in\{x,y\}=\{u,v\}$, we know that either $y=u$ or $y=v$.
+
+\indented{
+Case 1.1: Suppose that $y=u$.
+Then since $x=u=y$,
+we have $\{x,y\}=\{u\}$ (Theorem \ref{thm:dton_eq_ston}).
+Since we had assumed $\{x,y\}=\{u,v\}$, we now have $\{u,v\}=\{u\}$.
+It follows that $u=v$ (again using Theorem \ref{thm:dton_eq_ston}),
+and so $y=v$.
+
+Case 1.2: If $y=v$, then the proof is done.
+}
+
+Case 2: Suppose that $\{x\}=\{u,v\}$ and $\{x,y\}=\{u\}$.
+By Theorem \ref{thm:dton_eq_ston} it follows that $u=v=x$ and $x=y=u$.
+In other words, $x=y=u=v$, so in particular $x=u$ and $y=v$.
+}
+
+Compare this result to Theorem \ref{thm:dton_unord}.
+Thanks to Theorem \ref{thm:pairs}, pairs have a ``first entry'' and a ``second entry.''
+For this reason they are often called \emph{ordered} pairs.
+
+\DEF{
+We call $x$ a \emph{pair} if and only if $x$ has the form $(a,b)$ for some $a$ and $b$.
+That is, we call $x$ a pair if and only if
+$$
+\EXIST{a,b}{x=(a,b)}.
+$$
+A set $s$ is called a \emph{set of pairs} or a \emph{relation} if every element of $s$ is a pair.
+}
+
+This definition is an instance of a general pattern:
+When things are said to have a certain \emph{form}, there is an implicit
+existential assertion being made. For example when an integer is called ``a square,''
+what this means is that the integer is the square of \emph{some} integer.
+
+\DEFN{Cartesian Product\label{def:prod}}{$$A\times B = \COLL{x}{\EXIST{a,b}{x=(a,b)\,\AND\, a\in A\,\AND\, b\in B}}.$$}
+
+Observe that the cartesian product $A\times B$ of two sets $A$ and $B$ is a \emph{set of pairs}.
+The product $A\times B$ is the collection of all pairs whose first entry is an element of $A$ and whose second entry is an element of $B$.
+There is a shorthand for writing
+$$
+\COLL{x}{\EXIST{a,b}{x=(a,b)\,\AND\,\pA}}
+$$
+which is to simply write
+$$
+\COLL{(a,b)}{\pA}.
+$$
+So a cartesian product can be described like this: $A\times B = \COLL{(a,b)}{a\in A\,\AND\, b\in B}$.
+That's a new bit of notation for us.
+Up until now, we had only allowed \emph{variables} to appear behind a ``$\bbel$''.
+The appearance of a more complex \emph{term} behind the ``$\bbel$'' indicates that
+we are collecting into a set all things of a particular \emph{form}, in this case the form of a pair.
+Note the implicit existential quantifier.
+The following theorem seems obvious, but it's worth looking at how the existential quantifier gets handled.
+
+\THMNP{Essence of Cartesian Product\label{thm:ess_prod}}{
+\vspace{0.5em}\begin{center}
+$(y,z)\in A\times B$ if and only if $y\in A$ and $z\in B$.
+\end{center}\vspace{0.5em}
+}{
+$\Rightarrow$:
+Assume that $(y,z)\in A\times B$. Then \hyperlink{hl:EI}{we can get} some $a\in A$ and $b\in B$ such that $(y,z)=(a,b)$.
+By Theorem \ref{thm:pairs}, we have $y=a$ and $z=b$. It follows that $y\in A$ and $z\in B$.
+
+$\Leftarrow$:
+Assume that $y\in A$ and $z\in B$.
+Define $x=(y,z)$.
+We have $x=(y,z)$, $y\in A$, and $z\in B$, so \hyperlink{hl:EG}{we can conclude} that $\EXIST{y,z}{x=(y,z)\,\AND\,y\in A\,\AND\,z\in B}$.
+Therefore $x\in \times B$. In other words, $(y,z)\in A\times B$.
+}
+
+The intermediate label ``$x$'' was introduced in that proof just to help clarify how the existential generalization took place--
+normally this extraneous label would not be introduced.
+In fact, the standard practice is to start from a definition written in the form
+``$A\times B = \COLL{(a,b)}{a\in A\,\AND\, b\in B}$,''
+and then to immediately accept 
+Theorem \ref{thm:ess_prod} 
+as the way for membership to work in the set $A\times B$.
+
+\ex{
+For this exercise we define a useless doubleton-based version of cartesian product:
+$$ A\ovee B = \{\{a,b\}\bbel a\in A\,\AND\,b\in B\}. $$
+\begin{enumerate}
+\item Expand the shorthand out into its full form, with the existential quantifier included.
+\item Mimicking Theorem \ref{thm:ess_prod}, try to prove that if $\{y,z\}\in A\ovee B$, then $y\in A$ and $z\in B$.
+Exactly what goes wrong?
+\end{enumerate}
+}
+
+\THMNP{Cartesian Products and Emptiness\label{thm:prod_empty}}{
+\begin{enumerate}[(1)]
+\item \label{thm:prod_empty1}
+$A\times B$ is nonempty if and only if $A$ and $B$ are both nonempty.
+\item \label{thm:prod_empty2}
+$A\times B$ is empty if and only if either $A$ is empty or $B$ is empty.
+\end{enumerate}
+}{
+Since \ref{thm:prod_empty2} is an inversion of \ref{thm:prod_empty1}, it suffices to just prove \ref{thm:prod_empty1} (Rule \ref{drule:neg_equiv}).
+
+$\Rightarrow:$ Assume that $A\times B$ is nonempty. 
+Then we can get some $x\in A\times B$ (Theorem \ref{thm:nonempty}).
+Using Definition \ref{def:prod}, we can now get some $a\in A$ and $b\in B$ such that $x=(a,b)$.
+Since we have exhibited an element of $A$ and an element of $B$, we conclude that $A$ and $B$ are nonempty
+(Theorem \ref{thm:nonempty}).
+
+$\Leftarrow:$ Assume that $A$ and $B$ are both nonempty.
+Then we can get some $a\in A$ and $b\in B$.
+We have $(a,b)\in A\times B$ (Theorem \ref{thm:ess_prod}), so we conclude that $A\times B$ is nonempty (Theorem \ref{thm:nonempty}).
+}
+
+\THMP{If $A\subseteq B$ and $C\subseteq D$, then $A\times C\subseteq B\times D$.}{
+Assume that $A\subseteq B$ and $B\subseteq C$.
+Consider any $z\in A\times C$.
+Since $$\EXIST{a,c}{z=(a,c)\,\AND\,a\in A\,\AND\,c\in C},$$
+we can get some $a\in A$ and $c\in C$ such that $z=(a,c)$.
+Since $A\subseteq B$, we have $a\in B$.
+Similarly, since $C\subseteq D$, we have $c\in D$.
+Thus $(a,c)\in B\times D$, by Theorem \ref{thm:ess_prod}.
+That is, $z\in B\times D$.
+}
+\proofsep
+\textit{Shorter way of writing the same proof:}
+Assume that $A\subseteq B$ and $B\subseteq C$.
+Consider any $(a,c)\in A\times C$.
+We have $a\in A$ and $c\in C$, by Theorem \ref{thm:ess_prod}.
+Since $A\subseteq B$, we have $a\in B$.
+Similarly, since $C\subseteq D$, we have $c\in D$.
+Thus $(a,c)\in B\times D$, again by Theorem \ref{thm:ess_prod}.
+\done
+
+The ``shorter'' proof really is the same proof, but it's skipping some repetitive steps that would look the same in any proof that a cartesian product
+is contained in some other set.
+Pay special attention to the line ``Consider any $(a,c)\in A\times C$.''
+This is sort of like the line ``Consider any $z$...'' that sets a proof up
+for a \hyperlink{hl:UG}{UG},
+but a pair $(a,c)$ is introduced instead of a \emph{variable} like $z$.
+This step is only valid for the UG because \emph{every} element of $A\times C$ has the form of a pair.
+
+\THMP{$$(A\times C)\cap (B\times D) \subseteq (A\cap B)\times (C\cap D).$$}{
+Consider any $(x,y)\in (A\times C)\cap (B\times D)$.
+Then we have $(x,y)\in A\times C$ and $(x,y)\in (B\times D)$.
+It follows from these that $x\in A$, $y\in C$, $x\in B$, and $y\in D$.
+Since $x\in A$ and $x\in B$, we have $x\in A\cap B$.
+Since $y\in C$ and $y\in D$, we have $y\in C\cap D$.
+Therefore $(x,y)\in (A\cap B)\times (C\cap D)$.
+}
+
+\THMP{If $A$ is nonempty and $A\times C\subseteq B\times D$, then $C\subseteq D$.}{
+\putExerciseHeading. Make sure it's clear where you use the hypothesis that $A$ is nonempty.
+}
+
+\ex{
+Prove that $\{x\}\times\{y\}=\{(x,y)\}$.
+}
+
+\ex{Assuming that $a,b,c,d,e$ are distinct,
+list all the elements of $\{a,b,c\}\times\{d,e\}$.
+You do not need to prove anything.}
+
+\ex{
+If $A$ has $n$ elements and $B$ has $m$ elements, then how many elements do you think $A\times B$ has?
+(Do not give a proof or justification-- we have not even defined numbers, let alone the concept of a set having a certain number of elements.)
+}
+
+\DEFN{Domain and Range}{
+Let $S$ be a set of pairs.
+The \emph{domain} and the \emph{range} of $S$ are denoted respectively by $\dom{S}$ and $\ran{S}$, and they are defined as follows:
+$$\begin{array}{lcl}
+\dom{S} &=& \COLL{x}{\EXIST{y}{(x,y)\in S}}\\
+\ran{S} &=& \COLL{y}{\EXIST{x}{(x,y)\in S}}
+\end{array}$$
+}
+
+The definition above contains an \emph{assumption}, that $S$ is a set of pairs.
+When a definition contains an assumption, the definition is only meant to be used under the conditions of the assumption.
+No one will stop you from trying to use the definition outside the conditions of the assumption, but the definition may not behave in the intended way.
+
+\ex{Let $S=\{(a,a),(b,c),(a,d)\}$.
+Prove that the domain of $S$ is $\{a,b\}$ and the range of $S$ is $\{a,c,d\}$.} 
+
+\ex{Assuming that $S\subseteq T\subseteq A\times B$, prove that $\dom{S}\subseteq\dom{T}$.}
+
+\ex{Assuming that $S$ and $T$ are both sets of pairs, prove that $\dom{S\cup T}=\dom{S}\cup\dom{T}$.}
 
 
+\subsection{Functions}
 
+\subsection{Composition, Reversal, and Image}
 
+\subsection{Natural Numbers}
 
+\subsection{Recursion}
 
+\subsection{Addition}
 
+\subsection{Relations}
 
+% defining Z using equiv reln?
 
+% partial orderings
 
+% sup and inf?
 
-% develop set theory along the lines of jacoby notes
+\subsection{Cardinality}
 
-% some milestones to reach: relations, functions, induction, recursion, natural numbers, partial orderings, concepts like sup and inf in ordered sets, cardinality, category theory ideas
+% hmm
 
-% appendix: put some sample well written proofs and badly written proofs
+\appendix
 
-% appendix: fixing the broken axiom how collectors work?
+\section{Fixing the Bug}
 
+\section{Maps}
+
+% "codomain" and morphisms and the category viewpoint
+
+\section{Philosophy}
+
+% was everything really a set this whole time and we were just ignorant? um no
+% benacerraf points from "what numbers could not be"
 
 
 \end{document}
