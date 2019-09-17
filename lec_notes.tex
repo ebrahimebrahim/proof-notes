@@ -63,6 +63,7 @@
 \newcommand{\COLL}[2]{\left\{\, {#1} \,\bbel\, {#2} \, \right\}}
 \newcommand{\settext}[2]{\COLL{#1}{\text{#2}}}
 \newcommand{\SUB}[1]{\mathcal{P}(#1)}
+\newcommand{\occ}[1]{\operatorname{occ}(#1)}
 
 %\newcommand{\SUBST}[3]{{#1}\left[{#2}\mapsto{#3}\right]}
 %\newcommand{\SUBST}[3]{{#1}_{{#2}\mapsto{#3}}}
@@ -2892,7 +2893,7 @@ Prove that $t=y$.
 }
 
 
-\subsection{Empty Set, Singletons, and More}
+\subsection{Empty Set, Singletons, and Uniqueness}
 
 \DEFN{Empty Set}{
 $\emptyset = \COLL{x}{x\neq x}$
@@ -2978,7 +2979,7 @@ Now we cannot have $a=\emptyset$, for if we did then $x\in a$ would contradict T
 
 In the proof of Theorem \ref{thm:nonempty}, you should be able to spot one use of \hyperlink{hl:EI}{EI}.
 
-\DEFN{Singleton}{
+\DEFN{\label{def:singleton}Singleton}{
 $\{x\}=\COLL{a}{a=x}$.
 }
 
@@ -3080,7 +3081,104 @@ if $y=\{b\}$, then
 $\COLL{z}{\EXIST{x}{(z\in x)\AND(x\in y)}}=b$.
 }
 
+\DEFN{Being a Singleton\label{def:be_singleton}}{
+A set is said to be a \emph{singleton} iff it has the form $\{x\}$ for some $x$.
+That is, we call $s$ a singleton iff
+$\EXIST{x}{s=\{x\}}.$
+}
 
+A singleton characterized by the fact that it contains a unique element:
+
+\THMNP{Existence and Uniqueness in Terms of Singleton\label{thm:singleton_uniqueness}}{
+
+A set $s$ is a singleton if and only if it has a unique element.
+That is, $s$ is a singleton if and only if
+$$
+\EXIST{x}{x\in s\AND \ALL{y}{y\in s\ARR y=x}}.
+$$}{
+$\Rightarrow:$
+Assume that $s$ is a singleton. Then we can get an $x$ such that $s=\{x\}$.
+We have $x\in s$, by Definition \ref{def:singleton}, and it remains to prove that $\ALL{y}{y\in s\ARR y=x}$.
+Consider any $y\in s=\{x\}$. Definition \ref{def:singleton} immediately gives $y=x$.
+
+$\Leftarrow:$
+Now assume that $\EXIST{x}{x\in s\AND \ALL{y}{y\in s\ARR y=x}}$.
+Get an $x\in s$ such that \[\ALL{y}{y\in s\ARR y=x}.\tag{$\ast$}\label{eqn:singleton_unique}\]
+We claim that $s=\{x\}$.
+Since $x\in s$, we have $\{x\}\subseteq s$ by Theorem \ref{thm:singleton_subset}.
+Since $y=x\DARR y\in\{x\}$, the condition (\ref{eqn:singleton_unique})
+can be rewritten as ``$\ALL{y}{y\in s\ARR y\in\{x\}}$,'' which is the definition of ``$s\subseteq\{x\}$.''
+Thus, having proven both inclusions, we have $s=\{x\}$.
+}
+
+\paragraph{``Getting'' Unique Things}
+Often in mathematics we know that there exists a unique thing with certain properties.
+How can we \emph{refer} to it?
+For example, let's say we know that there exists a unique green thing.
+In English, we would refer to it by saying ``\emph{the} green thing.''
+Is there a mathematical version of ``the'' that can allow us to write down a \emph{term}
+which refers to ``the unique such-and-such''?
+
+If we know that $\EXIST{x}{\text{$x$ is green}}$, then we can always use \hyperlink{hl:EI}{EI}
+to ``get'' a gren thing $x$.
+But that would just be a \emph{hypothetical} green thing that was can use for the sake of arguments.
+We can use it to draw conclusions, but ``$x$'' would still not refer to any \emph{specific} green thing.
+It would be ``a green thing'' and not ``the green thing.''
+However, if we knew that there were a \emph{unique} green thing, i.e. if we knew
+$$
+\EXIST{x}{\text{$x$ is green}\AND\ALL{y}{\text{$y$ is green}\ARR y=x}},
+$$
+then by Theorem \ref{thm:singleton_uniqueness} we would know that 
+$$
+\COLL{x}{\text{$x$ is green}}
+$$
+is a \emph{singleton}.
+This means that $\COLL{x}{\text{$x$ is green}}=\{g\}$ for some $g$, and then if we ``pluck'' $g$ out of $\{g\}$, that's
+``\emph{the} green thing.''
+
+It is therefore useful to have a formal mechanism for ``plucking'' the single occupant of a signleton out from between the curly braces.
+The following definition provides this, although this may not be clear until Theorem \ref{thm:occ}.
+
+
+\DEFN{Occupant\label{def:occ}}{
+Let $s$ be a singleton.
+The \emph{occupant} of $s$ is denoted by $\occ{s}$ and defined by
+$$
+\occ{s}=\COLL{z}{\ALL{x}{x\in s\ARR z\in x}}.
+$$
+}
+
+The definition above contains an \emph{assumption}, that $s$ is a singleton.
+When a definition contains an assumption, the definition is only meant to be used under the conditions of the assumption.
+If you try to use the definition without first verifying that those conditions hold, then the definition may behave in unintended ways.
+We can declare the notation to be ``undefined'' in such cases, and reject any argument that breaches into undefined territory.
+We just don't talk about $\occ{s}$ unless $s$ is already known to be a singleton.
+
+\THMNP{\label{thm:occ}(Essence of Occupant)}{$\occ{\{g\}}=g.$}{
+$\subseteq$:
+Assume that $z\in \occ{\{g\}}$.
+Then for every $x\in \{g\}$, we have $z\in x$.
+In particular $g\in \{g\}$, so we have $z\in g$.
+
+$\supseteq$:
+Assume that $z\in g$.
+Now we must prove that $z$ is an element of every $x\in \{g\}$.
+Consider any $x\in \{g\}$.
+Then $x=g$, so $z\in g$ gives $z\in x$.
+}
+
+Now we have an explicit way to refer to ``the green thing,''
+when we know that there is a unique green thing:
+$$
+\occ{\COLL{x}{\text{$x$ is green}}}.
+$$
+In practice, this is achieved by writing something like
+\begin{center}
+{Let $g$ denote the unique green thing.}
+\end{center}
+
+\ex{Determine what is $\occ{\COLL{x}{\ALL{y}{y\notin x}}}$, and prove your claim. If it is ``undefined,'' then say so.
+Hint: Theorem \ref{thm:emptyset_unique}}.
 
 \subsection{Intersection, Union, and Relative Complement}
 
@@ -3475,7 +3573,7 @@ Thanks to Theorem \ref{thm:pairs}, pairs have a ``first entry'' and a ``second e
 For this reason they are often called \emph{ordered} pairs.
 
 \DEF{
-We call $x$ a \emph{pair} if and only if $x$ has the form $(a,b)$ for some $a$ and $b$.
+A set is called a \emph{pair} if and only if it has the form $(a,b)$ for some $a$ and $b$.
 That is, we call $x$ a pair if and only if
 $$
 \EXIST{a,b}{x=(a,b)}.
@@ -3487,6 +3585,7 @@ This definition is an instance of a general pattern:
 When things are said to have a certain \emph{form}, there is an implicit
 existential assertion being made. For example when an integer is called ``a square,''
 what this means is that the integer is the square of \emph{some} integer.
+Definition \ref{def:be_singleton} was another example of this pattern.
 
 \DEFN{Cartesian Product\label{def:prod}}{$$A\times B = \COLL{x}{\EXIST{a,b}{x=(a,b)\,\AND\, a\in A\,\AND\, b\in B}}.$$}
 
@@ -3626,9 +3725,6 @@ $$\begin{array}{lcl}
 \end{array}$$
 }
 
-The definition above contains an \emph{assumption}, that $S$ is a set of pairs.
-When a definition contains an assumption, the definition is only meant to be used under the conditions of the assumption.
-No one will stop you from trying to use the definition outside the conditions of the assumption, but the definition may not behave in the intended way.
 
 \ex{Let $S=\{(a,a),(b,c),(a,d)\}$.
 Prove that the domain of $S$ is $\{a,b\}$ and the range of $S$ is $\{a,c,d\}$.} 
@@ -3639,6 +3735,232 @@ Prove that the domain of $S$ is $\{a,b\}$ and the range of $S$ is $\{a,c,d\}$.}
 
 
 \subsection{Functions}
+
+\DEFN{Function\label{def:fn}}{
+A set $f$ is said to be a \emph{function} iff $f$ is a set of pairs and
+$$
+\ALL{x,y,z}{(x,y),(x,z)\in f \,\ARR\, y =z}.
+$$
+}
+
+The notation $(x,y),(x,z)\in f$ is short for $((x,y)\in f)\AND((x,z)\in f)$.
+
+The quantified statement in Definition \ref{def:fn} should feel a bit like a uniqueness statement,
+especially if written in this equivalent way:
+$$
+\ALL{x,y}{(x,y)\in f\,\ARR\,\ALL{z}{(x,z)\in f\,\ARR\,y=z}}.
+$$
+It says that if a pair shows up as an element of $f$ with its first entry being $x$,
+then the second entry of the pair is uniquely determined.
+
+\THMPL{If $f$ is a function and $x\in\dom{f}$, then 
+$$ \COLL{y}{(x,y)\in f} $$
+is a singleton.}{
+Assume that $f$ is a function and $x\in\dom{f}$.
+By Theorem \ref{thm:singleton_uniqueness},
+we just need to show that $ \COLL{y}{(x,y)\in f} $ has a unique element.
+Since $x\in\dom{f}$, we can get a $y$ such that $(x,y)\in f$.
+We thus have $y\in \COLL{y}{(x,y)\in f}$.
+Now we must show that $y$ is unique. Suppose that $z\in \COLL{y}{(x,y)\in f}$.
+Then $(x,z)\in f$. Since $f$ is a function and $(x,y),(x,z)\in f$, we conclude that $y=z$.
+}{\label{thm:eval_singleton}}
+
+\DEFN{Function Evaluation\label{def:eval}}{
+Let $f$ be a function and let $x\in\dom{f}$.
+By Theorem \ref{thm:eval_singleton}, there is a unique $y$ such that $(x,y)\in f$.
+We denote this unique $y$ by ``$f(x)$'', and we call it \emph{the value of $f$ at $x$}.
+Formally, we are making the definition
+$$
+f(x) = \occ{\COLL{y}{(x,y)\in f}}.
+$$
+}
+
+When $f$ is a function, one thinks of $x\in\dom{f}$ as an ``input'' 
+and one thinks of $f(x)$ as the ``output'' to which $f$ ``maps'' $x$.
+Thus a function is a set of input-output pairs.
+
+\THMNP{\label{thm:ess_eval}Essence of Evaluation}{
+If $f$ is a function and $x\in\dom{f}$,
+then
+\begin{enumerate}[(1)]
+\item \label{thm:ess_eval1} $(x,f(x))\in f$.
+\item \label{thm:ess_eval2} If $(x,y)\in f$, then $y=f(x)$.
+\end{enumerate}
+}{
+Assume that $f$ is a function and $x\in\dom{f}$.
+
+According to Theorem \ref{thm:eval_singleton},
+then set $\COLL{y}{(x,y)\in f}$ is a singleton.
+Thus we can get some $z$ so that $\COLL{y}{(x,y)\in f}=\{z\}$.
+Now, using Theorem \ref{thm:occ},
+$$f(x) = \occ{\COLL{y}{(x,y)\in f}} = \occ{\{z\}} = z. $$
+Thus we have
+$$ f(x)\in\{z\} = \COLL{y}{(x,y)\in f}. $$
+That is, we have $(x,f(x))\in f$, proving \ref{thm:ess_eval1}.
+
+To prove \ref{thm:ess_eval2}, assume that $(x,y)\in f$.
+Since $f$ if a function and $(x,y),(x,f(x))\in f$, we have $y=f(x)$.
+}
+
+\THMPL{If $f$ is a function, then $y\in\ran{f}$ if and only if $y=f(x)$ for some $x\in\dom{f}$.}{
+Assume that $f$ is a function.
+
+$\Rightarrow$:
+Assume that $y\in\ran{f}$.
+Then we can get some $x$ so that $(x,y)\in f$.
+By Theorem \ref{thm:ess_eval}, part \ref{thm:ess_eval2}, it follows that $y=f(x)$.
+Since $(x,y)\in f$, we have $\EXIST{y}{(x,y)\in f}$. That is, $x\in\dom{f}$.
+
+$\Leftarrow:$
+Now assume that  $y=f(x)$ and $x\in\dom{f}$.
+By Theorem \ref{thm:ess_eval}, part \ref{thm:ess_eval1}, it follows that $(x,y)\in f$.
+Thus we have $\EXIST{x}{(x,y)\in f}$. That is, $y\in\ran{f}$.
+}{\label{thm:ran}}
+
+\THMNP{Equality of Functions\label{thm:fn_eq}}{
+If $f$ and $g$ are functions, then $f=g$ if and only if
+$\dom{f}=\dom{g}$ and $f(x)=g(x)$ for all $x\in\dom{f}$.
+}{
+\putExerciseHeading. Be careful in your proof to not attempt an evaluation before verifying 
+that the input is in the domain of the function.
+}
+
+The notation $f:X\rightarrow Y$ is a proposition, read as ``$f$ maps $X$ to $Y$''
+and defined as follows:
+
+\DEFN{\label{def:mapping}Mapping}{
+$$
+\begin{array}{llll}
+f:X\rightarrow Y \ \ \DARR\ & ( & \text{$f$ is a function} & \AND \\
+                          &   & \dom{f}=X                & \AND \\
+                          &   & \ran{f}\subseteq Y       & \hspace{1.2em}).
+\end{array}
+$$
+}
+
+Pay special attention to the role of $Y$ in this definition.
+Since $X$ is the domain of $f$ when $f:X\rightarrow Y$, it is tempting
+to think that $Y$ is the range of $f$-- but it is often not so.
+In the context of ``$f:X\rightarrow Y$'',
+the $Y$ is referred to as a \emph{codomain}.
+
+\ex{
+\begin{enumerate}
+\item Prove that if $f:X\rightarrow Y$, then $f\subseteq X\times Y$.
+\item (Open-ended) Why doesn't the converse hold in general?
+\end{enumerate}
+}
+
+\ex{\label{ex:fn1}
+Assume that $x,y,z,u,v,w$ are distinct,
+and that non of them is a pair.
+For each of the following, determine whether it is a function.
+If it is, write a true statement of the form ``$f:X\rightarrow Y$.''
+If it is not, explain why not. The first two are done for you.
+\begin{enumerate}
+\item $f = \{(x,y),(v,w)\}$
+\indented{Answer: $f:\{x,v\}\rightarrow \{y,w\}$.}
+\item $f = \{(x,y),(x,w)\}$
+\indented{Answer: $f$ is not a function, because $(x,y)$ and $(x,w)$ are in $f$ while $y\neq w$.}
+\item $f = \{
+  (x,y),(y,z),(z,w)
+  \}$
+\item $f = \{
+  (x,x),(y,y),(v,v)
+  \}$
+\item $f = \{
+  (x,y),(y,x)
+  \}$
+\item $f = \{
+  (x,y),(z,w),(u,w)
+  \}$
+\item $f = \{
+  (x,x),(y,x)(x,y)
+  \}$
+\item $f = \{
+  x,(y,z)
+  \}$
+\item $f = \{
+  (u,v)
+  \}$
+\item $f = \emptyset$
+\end{enumerate}
+}
+
+\ex{
+Prove that if $f$ and $g$ are functions and $\dom{f}\cap\dom{g}=\emptyset$, then $f\cup g$ is a function.
+}
+
+\DEFN{Injectivity, Surjectivity, and Bijectivity\label{def:ivity}}{
+
+Assume that $f:X\rightarrow Y$.
+\begin{enumerate}[(1)]
+\item $f$ is \emph{injective} iff for all $x,y\in X$, we have $f(x)=f(y)\ARR x=y$.
+\item $f$ is \emph{surjective onto $Y$} iff $\ran{f}=Y$.
+\item $f$ is \emph{bijective onto $Y$} iff $f$ is both injective and surjective onto $Y$.
+\end{enumerate}
+}
+
+\paragraph{Injectivity}
+To understand injectivity, it may help to look at a contraposed version of the definition:
+$f$ is injective iff
+$$
+\ALL{x,y}{(x,y\in\dom{f}\,\AND\,x\neq y)\,\,\ARR\,\,(f(x)\neq f(y))}.
+$$
+For an injective function, \emph{different} inputs are always mapped to \emph{different} outputs.
+For a non-injective function, two different inputs can get mapped to the same output.
+
+\paragraph{Surjectivity}
+When $f:X\rightarrow Y$, it is already known that $\ran{f}\subseteq Y$.
+To say that $f$ is surjective onto $Y$ is then to say that $Y\subseteq f$,
+which is to say that every element of the codomain $Y$ is arises as an output of the function $f$.
+For a function $f:X\rightarrow Y$ to \emph{not} be surjective onto $Y$, there would have to be some element of $Y$ that never arises as the output $f(x)$
+for any $x\in X$.
+
+When talking about surjectivity, people will sometimes omit the ``surjective'' and just say ``$f$ maps $X$ onto $Y$,''
+where the use of ``\emph{on}to'' rather than ``to'' indicates surjectivity.
+Also, people will sometimes omit the ``onto $Y$'' and just say ``$f$ is surjective,''
+leaving you to guess the codomain $Y$ from context.
+
+\THMP{Assume that $f:X\rightarrow Y$.
+Then $f$ is injective if and only if
+$$
+\ALL{x,y,z}{(x,y),(z,y)\in f \,\ARR\, x=z}.
+$$
+}{
+Assume that $f:X\rightarrow Y$.
+
+$\Rightarrow$:
+Assume that $f$ is injective.
+Consider any $x,y,z$ such that $(x,y),(z,y)\in f$.
+We clearly have $x,z\in\dom{f}=X$, and so we may apply Theorem \ref{thm:ess_eval}
+and conclude that $y=f(x)$ and $y=f(z)$.
+Since $f$ is injective and 
+$f(x)=f(z)$, we have $x=z$.
+
+$\Leftarrow$:
+Assume that for all $x,y,z$ such that $(x,y),(z,y)\in f$, we have $x=z$.
+To show that $f$ is injective, consider any $x,y\in X$ such that $f(x)=f(y)$.
+Using Theorem \ref{thm:ess_eval}, we have $(x,f(x)),(y,f(y))\in f$.
+Since $f(x)=f(y)$,
+we actually have $(x,f(x)),(y,f(x))\in f$.
+Applying our assumption, it follows that $x=y$.
+}
+
+Thus injectivity is very similar to functionhood (Definition \ref{def:fn}), except that the pairs have been flipped around.
+
+\THMP{Assume that $f:X\rightarrow Y$. Then $f$ is surjective onto $Y$ if and only if
+$$
+\ALL{y}{y\in Y\,\ARR\,\EXIST{x}{x\in X\,\AND\,f(x)=y}}.
+$$}{
+\putExerciseHeading.
+}
+
+\ex{
+For each of the functions in Exercise \ref{ex:fn1},
+determine whether it is injective.
+}
+
 
 \subsection{Composition, Reversal, and Image}
 
