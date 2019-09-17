@@ -3780,15 +3780,16 @@ and one thinks of $f(x)$ as the ``output'' to which $f$ ``maps'' $x$.
 Thus a function is a set of input-output pairs.
 
 \THMNP{\label{thm:ess_eval}Essence of Evaluation}{
-If $f$ is a function and $x\in\dom{f}$,
+If $f$ is a function
 then
 \begin{enumerate}[(1)]
-\item \label{thm:ess_eval1} $(x,f(x))\in f$.
+\item \label{thm:ess_eval1} If $x\in\dom{f}$, then $(x,f(x))\in f$.
 \item \label{thm:ess_eval2} If $(x,y)\in f$, then $y=f(x)$.
 \end{enumerate}
 }{
-Assume that $f$ is a function and $x\in\dom{f}$.
+Assume that $f$ is a function.
 
+To prove \ref{thm:ess_eval1}, assume that $x\in\dom{f}$.
 According to Theorem \ref{thm:eval_singleton},
 then set $\COLL{y}{(x,y)\in f}$ is a singleton.
 Thus we can get some $z$ so that $\COLL{y}{(x,y)\in f}=\{z\}$.
@@ -3799,6 +3800,8 @@ $$ f(x)\in\{z\} = \COLL{y}{(x,y)\in f}. $$
 That is, we have $(x,f(x))\in f$, proving \ref{thm:ess_eval1}.
 
 To prove \ref{thm:ess_eval2}, assume that $(x,y)\in f$.
+Since there exists a $y$ such that $(x,y)\in f$, we have $x\in\dom{f}$, and so we may apply part \ref{thm:ess_eval1}
+and conclude that $(x,f(x))\in f$.
 Since $f$ if a function and $(x,y),(x,f(x))\in f$, we have $y=f(x)$.
 }
 
@@ -3949,20 +3952,197 @@ Applying our assumption, it follows that $x=y$.
 
 Thus injectivity is very similar to functionhood (Definition \ref{def:fn}), except that the pairs have been flipped around.
 
-\THMP{Assume that $f:X\rightarrow Y$. Then $f$ is surjective onto $Y$ if and only if
+\THMPL{Assume that $f:X\rightarrow Y$. Then $f$ is surjective onto $Y$ if and only if
 $$
 \ALL{y}{y\in Y\,\ARR\,\EXIST{x}{x\in X\,\AND\,f(x)=y}}.
 $$}{
 \putExerciseHeading.
-}
+}{\label{thm:surj_exist}}
 
 \ex{
 For each of the functions in Exercise \ref{ex:fn1},
-determine whether it is injective.
+determine whether it is injective. If not, then explain why not.
+}
+
+\paragraph{Bijectivity}
+As Theorem \ref{thm:surj_exist} suggests, surjectivity is a sort of existence statement.
+If $f:X\rightarrow Y$ and $f$ is surjective onto $Y$, then for each $y\in Y$ there \emph{exists}
+an $x\in X$ that maps to $y$.
+Injectivity, on the other hand, is a uniqueness statement.
+If $f$ is injective, then when $f(x)=y$ we know that $x$ is the \emph{unique} thing that maps to $y$.
+Bijectivity is then existence and uniqueness together: If $f$ is bijective,
+then for each $y\in Y$ \emph{there exists a unique} $x\in X$ that maps to $y$.
+
+When $f:X\rightarrow Y$ and $f$ is bijective onto $Y$,
+we say that $f$ gives a \emph{one-to-one correspondence} between the elements of $X$ and the elements of $Y$.
+
+\ex{Prove that if $f$ is an injective function and $g\subseteq f$, then $g$ is an injective function.}
+
+\ex{Let $f=\{(a,c),(b,d)\}$ and assume that $a\neq b$.
+Prove that $f:\{a,b\}\rightarrow\{c,d\}$ and $f$ is bijective onto $\{c,d\}$.
+}
+
+\ex{Assume that $a\neq b$ and $f:\{a,b\}\rightarrow\{c\}$.
+Prove that $f$ cannot be injective.}
+
+\ex{Assume that $a\neq b$ and $f:\{c\}\rightarrow\{a,b\}$.
+Prove that $f$ cannot be surjective onto $\{a,b\}$.}
+
+\ex{
+Assume that $x,y,z,u,v,w$ are distinct.
+Let $S$ be a the cartesian product
+$$
+\{x,y,z\}\times \{u,v,w\}.
+$$
+In this exercise, we will use pictures like the following to describe various subsets of $S$.
+\begin{center}
+\includegraphics[scale=1]{beans1.pdf}
+\end{center}
+The subset of $S$ being described in this example is $\{(x,u),(z,u)\}$.
+Each line joining two dots represents a pair which is being included in the subset of $S$.
+For each of the following, provide a picture that describes a subset of $S$ that meets the given specifications.
+\begin{enumerate}
+\item not a function
+\item a function with domain $\{y,z\}$
+\item a function with range $\{v\}$
+\item a non-function with domain $\{y\}$ and range $\{u,v\}$
+\item a function mapping $\{x,y,z\}$ to $\{u,w\}$ which is surjective onto $\{u,w\}$
+\item a function mapping $\{x,y,z\}$ to $\{u,w\}$ which is not surjective onto $\{u,w\}$
+\item a function mapping $\{x,y\}$ to $\{u,v,w\}$ which is injective
+\item a function mapping $\{x,y\}$ to $\{u,v,w\}$ which is not injective
+\item a function mapping $\{x,y,z\}$ to $\{u,v,w\}$ which is bijective onto $\{u,v,w\}$ and whose value at $x$ is $w$
+\end{enumerate}
 }
 
 
+
+
 \subsection{Composition, Reversal, and Image}
+\DEFN{Composite\label{def:comp}}{
+$$
+S\circ T = 
+\COLL{(x,z)}{\EXIST{y}{(x,y)\in T\,\AND\,(y,z)\in S}}.
+$$
+}
+
+Recall that the right hand side above is a shorthand for
+$$
+\COLL{p}{\EXIST{x,z}{ p=(x,z) \,\AND\, \EXIST{y}{(x,y)\in T\,\AND\,(y,z)\in S} }}.
+$$
+
+\THMNP{Associativity of Composition\label{thm:assoc_comp}}{
+$ S\circ (T\circ U) = (S\circ T)\circ U $
+}{
+$\subseteq$:
+Consider any $(x,w)\in S\circ (T\circ U)$.
+Get $y$ such that $(x,y)\in T\circ U$ and $(y,w)\in S$.
+Since $(x,y)\in T\circ U$, we can also get $z$ such that $(x,z)\in U$ and $(z,y)\in T$.
+Now we have found a $y$ satisfying $(z,y)\in T$ and $(y,w)\in S$, so we have shown that $(z,w)\in S\circ T$.
+Having found a $z$ such that $(x,z)\in U$ and $(z,w)\in S\circ T$, we conclude that $(x,w)\in (S\circ T)\circ U$.
+
+$\supseteq$:
+\putExerciseHeading:
+Prove that $(S\circ T)\circ U\subseteq S\circ (T\circ U)$.
+}
+
+\THMN{Domain and Range of Composite\label{thm:domran_comp}}{
+\begin{enumerate}[(1)]
+\item\label{thm:domran_comp1}
+If $\ran{T}\subseteq\dom{S}$, then $\dom{S\circ T}=\dom{T}$.
+\item\label{thm:domran_comp2}
+$\ran{S\circ T}\subseteq \ran{S}$
+\end{enumerate}
+}
+\proofnewline
+\textit{Proof of \ref{thm:domran_comp1}}
+Assume that $\ran{T}\subseteq\dom{S}$.
+
+$\subseteq$:
+Consider any $x\in \dom{S\circ T}$.
+Get $z$ such that $(x,z)\in S\circ T$.
+Get $y$ such that $(x,y)\in T$ and $(y,z)\in S$.
+We have found a $y$ such that $(x,y)\in T$.
+It follows that $x\in\dom{T}$.
+
+$\supseteq$:
+Consider any $x\in\dom{T}$.
+Get $y$ such that $(x,y)\in T$.
+Since there exists an $x$ such that $(x,y)\in T$, we have $y\in\ran{T}$.
+From our assumption $\ran{T}\subseteq\dom{S}$, it follows that $y\in\dom{S}$.
+Get $z$ such that $(y,z)\in S$.
+We have found a $y$ such that $(x,y)\in T$ and $(y,z)\in S$.
+It follows that $(x,z)\in S\circ T$,
+so we have found a $z$ such that $(x,z)\in S\circ T$.
+It follows that $x\in \dom{S\circ T}$.
+\done
+\proofsep
+Proving \ref{thm:domran_comp2} is \putExerciseHeading.
+
+
+\THMN{Essence of Composition\label{thm:ess_comp}}{
+\begin{enumerate}[(1)]
+\item \label{thm:ess_comp1}
+If $f$ and $g$ are functions, then $g\circ f$ is a function and 
+$$(g\circ f)(x) = g(f(x)) $$
+for all $x\in \dom{g\circ f}$.
+\item \label{thm:ess_comp2}
+If $f:X\rightarrow Y$ and $g:Y\rightarrow Z$, then $g\circ f:X\rightarrow Z$.
+\end{enumerate}
+}
+\proofnewline
+\textit{Proof of \ref{thm:ess_comp1}:}
+Assume that $f$ and $g$ are functions.
+
+From Definition \ref{def:comp}, it is clear that every element of $g\circ f$ is a pair.
+Thus $g\circ f$ is a set of pairs.
+
+Consider any $x,y,z$ such that $(x,y)$ and $(x,z)$ are in $g\circ f$.
+Using the fact that $(x,y)\in g\circ f$,
+we can get $a$ such that $(x,a)\in f$ and $(a,y)\in g$.
+Using the fact that $(x,z)\in g\circ f$,
+we can get $b$ such that $(x,b)\in f$ and $(b,z)\in g$.
+Since $(x,a)$ and $(x,b)$ are both in the function $f$, we must have $a=b$.
+Since $(a,y)$ and $(b,z)=(a,z)$ are both in the function $g$, we must have $y=z$.
+
+We have argued that $g\circ f$ is a set of pairs, and that whenever $(x,y),(x,z)\in g\circ f$, it follows that $y=z$.
+Thus we have shown that $g\circ f$ is a function.
+
+Now consider any $x\in\dom{g\circ f}$.
+Get $z$ such that $(x,z)\in g\circ f$.
+Get $y$ such that $(x,y)\in f$ and $(y,z)\in g$.
+We will now make several uses of Theorem \ref{thm:ess_eval}.
+From $(x,y)\in f$ and $(y,z)\in g$, we conclude that $y=f(x)$ and $z=g(y)$.
+From $(x,z)\in g\circ f$ (and the just-established fact that $g\circ f$ is a function), we conclude that $z=(g\circ f)(x)$.
+Thus we have 
+\[
+(g\circ f)(x)=z=g(y)=g(f(x)).
+\tag*{\qedsymbol}
+\]
+\proofsep
+\textit{Proof of \ref{thm:ess_comp2}:}
+Assume that $f:X\rightarrow Y$ and $g:Y\rightarrow Z$.
+To show that $g\circ f:X\rightarrow Z$,
+we must argue that $g\circ f$ is a function,
+that its domain is $X$,
+and that it's range is contained in $Z$.
+We already know that $g\circ f$ is a function due to part \ref{thm:ess_comp1} and the fact that $f$ and $g$ are functions.
+
+To see that $\dom{g\circ f}=X$, we will use Theorem \ref{thm:domran_comp}.
+We have
+$$
+\ran{f} \subseteq Y = \dom{g},
+$$
+so part \ref{thm:domran_comp1} of Theorem \ref{thm:domran_comp} applies and we conclude that $\dom{g\circ f}=\dom{f}=X$.
+
+The fact that $\ran{g\circ f}\subseteq Z$ is a consequence
+of part \ref{thm:domran_comp2} of Theorem \ref{thm:domran_comp}:
+\[
+\ran{g\circ f}\subseteq \ran{g} \subseteq Z.
+\tag*{\qedsymbol}
+\]
+
+The composite $g\circ f$ can be thought of as the function that, when given an input, applies $f$ and then applies $g$.
+
 
 \subsection{Natural Numbers}
 
