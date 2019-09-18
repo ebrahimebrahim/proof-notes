@@ -85,7 +85,7 @@
 \newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
 
 
-\def\thmcolonspace{\hspace{1em}}
+\def\thmcolonspace{\hspace{0.2em}}
 \def\proofnewline{\\[0.75em]} % Separates theorem box from proof, no new paragraph expected.
 \def\thmStartNewline{\\[0.3em]} % Vertically separates theorem heading from theorem statement, sometimes used.
 \def\proofsep{\\[-0.5em]} % Separates different proofs (e.g. to diff parts of same theorem). No new paragraph expected.
@@ -3487,9 +3487,9 @@ $\supseteq$:
 Consider any $z\in \{\emptyset,\{x\}\}$.
 Either $z=\emptyset$ or $z=\{x\}$.
 
-Case 1: Suppose that $z=\emptyset$. Then $z\subseteq \{x\}$ (Theorem \ref{thm:emptyset_minimal}\ref{thm:emptyset_minimal1}).
+Case 1: Suppose that $z=\emptyset$. Then $z\subseteq \{x\}$ (Theorem \ref{thm:emptyset_minimal} part \ref{thm:emptyset_minimal1}).
 
-Case 2: Suppose that $z=\{x\}$. Then $z\subseteq \{x\}$ (Theorem \ref{thm:refl_trans_incl}\ref{thm:refl_trans_incl1}).
+Case 2: Suppose that $z=\{x\}$. Then $z\subseteq \{x\}$ (Theorem \ref{thm:refl_trans_incl} part \ref{thm:refl_trans_incl1}).
 
 Since $z\subseteq \{x\}$ in both cases, we have $z\subseteq\{x\}$.
 It follows that $z\in \SUB{\{x\}}$.
@@ -3847,12 +3847,16 @@ to think that $Y$ is the range of $f$-- but it is often not so.
 In the context of ``$f:X\rightarrow Y$'',
 the $Y$ is referred to as a \emph{codomain}.
 
-\ex{
-\begin{enumerate}
-\item Prove that if $f:X\rightarrow Y$, then $f\subseteq X\times Y$.
-\item (Open-ended) Why doesn't the converse hold in general?
-\end{enumerate}
-}
+
+%\ex{
+%\begin{enumerate}
+%\item Prove that if $f:X\rightarrow Y$, then $f\subseteq X\times Y$.
+%\item (Open-ended) Why doesn't the converse hold in general?
+%\end{enumerate}
+%}
+\THMPL{If $f$ is a function, then $f:X\rightarrow Y$ if and only if $f\subseteq X\times Y$ and $X\subseteq\dom{f}$.}{
+\putExerciseHeading.}{
+\label{thm:mapping_convenience}}
 
 \ex{\label{ex:fn1}
 Assume that $x,y,z,u,v,w$ are distinct,
@@ -4014,6 +4018,7 @@ For each of the following, provide a picture that describes a subset of $S$ that
 \end{enumerate}
 }
 
+\ex{Prove that if $X\times Y$ is a function, then either $X\times Y$ must be $\emptyset$ or $Y$ must be a singleton.}
 
 
 
