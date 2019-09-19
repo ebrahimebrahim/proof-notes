@@ -43,7 +43,7 @@
 \newcommand{\powerset}[1]{\mathcal{P}(#1)}
 \newcommand{\dom}[1]{\operatorname{dom}(#1)}
 \newcommand{\ran}[1]{\operatorname{ran}(#1)}
-\newcommand{\rev}[1]{(#1)^{\dashv}}
+\newcommand{\rev}[1]{{#1}^{\dashv}}
 \newcommand{\injrightarrow}{\xrightarrow{\text{inj}}}
 \newcommand{\surjrightarrow}{\xrightarrow{\text{surj}}}
 \newcommand{\bijrightarrow}{\xrightarrow{\text{bij}}}
@@ -64,6 +64,7 @@
 \newcommand{\settext}[2]{\COLL{#1}{\text{#2}}}
 \newcommand{\SUB}[1]{\mathcal{P}(#1)}
 \newcommand{\occ}[1]{\operatorname{occ}(#1)}
+\newcommand{\id}[1]{\textrm{id}_{#1}}
 
 %\newcommand{\SUBST}[3]{{#1}\left[{#2}\mapsto{#3}\right]}
 %\newcommand{\SUBST}[3]{{#1}_{{#2}\mapsto{#3}}}
@@ -2724,10 +2725,10 @@ $b\in\COLL{n}{3<n^2<4+x}$ if and only if $3<b^2<4+x$.
 Axiom \ref{ax:in} is the way people at one point thought they could set up set theory.
 But it all came crashing down.
 It turns out to be broken in the worst possible way-- Axiom \ref{ax:in} allows us to prove a contradiction.
-The trouble is in allowing $\pA$ to really be \emph{any} proposition;
-certain choices of $\pA$ are somehow bad.
+Allowing $\pA$ to really be \emph{any} proposition does not work;
+certain choices of $\pA$ seem to cause trouble.
 So what do we do about this?
-People have eradicated the bug in various ways by modifying Axiom \ref{ax:in}.
+People have handled the bug in various ways by modifying Axiom \ref{ax:in}.
 Different approaches have led to different types of set theory.
 We can also choose to \emph{ignore} the bug and move on.
 Then we would be doing what is called \emph{naive set theory}.
@@ -4022,7 +4023,7 @@ For each of the following, provide a picture that describes a subset of $S$ that
 
 
 
-\subsection{Composition, Reversal, and Image}
+\subsection{Composition and Inverse}
 \DEFN{Composite\label{def:comp}}{
 $$
 S\circ T = 
@@ -4148,6 +4149,78 @@ of part \ref{thm:domran_comp2} of Theorem \ref{thm:domran_comp}:
 
 The composite $g\circ f$ can be thought of as the function that, when given an input, applies $f$ and then applies $g$.
 
+\DEFN{Identity Function}{
+The \emph{identity function on $A$} is denoted by $\id{A}$ and defined by
+$$
+\id{A}=\COLL{(x,x)}{x\in A}.
+$$
+}
+
+Note that the right hand side above is short for
+$$
+\COLL{p}{\EXIST{x}{p=(x,x)\,\AND\, x\in A}}.
+$$
+
+\THMNP{Facts about $\id{A}$\label{thm:ess_id}}{
+\begin{enumerate}[(1)]
+\item \label{thm:ess_id1} $\id{A}:A\rightarrow A$.
+\item \label{thm:ess_id2} $\id{A}(x)=x$ for all $x\in A$.
+\item \label{thm:ess_id3} If $f:A\rightarrow B$, then $f\circ \id{A}=f$.
+\item \label{thm:ess_id4} If $g:B\rightarrow A$, then $\id{A}\circ g = g$.
+\end{enumerate}
+}{
+Proving \ref{thm:ess_id1}, \ref{thm:ess_id2}, and \ref{thm:ess_id3} is \putExerciseHeading.
+We prove \ref{thm:ess_id4} here.
+
+Assume that $g:B\rightarrow A$.
+Since $\id{A}:A\rightarrow A$ by part \ref{thm:ess_id1}, 
+we have $\id{A}\circ g:B\rightarrow A$ (Theorem \ref{thm:ess_comp} part \ref{thm:ess_comp2}).
+In particular, the functions $\id{A}\circ g$ and $g$ have the same domain, $B$.
+For any $x\in B$, we have
+$$
+\begin{array}{lll}
+(\id{A}\circ g)(x) & = \id{A}(g(x))  \hspace{3em} &\text{(Theorem \ref{thm:ess_comp} part \ref{thm:ess_comp1})} \\
+ & = g(x). &  \text{(part \ref{thm:ess_id2} of this theorem)} 
+\end{array}
+$$
+It follows from Theorem \ref{thm:fn_eq} that $\id{A}\circ g=g$.
+}
+
+\DEFN{Reverse\label{def:rev}}{
+The \emph{reverse} of $S$ is denoted by $\rev{S}$ and defined by
+$$
+\rev{S}=\COLL{(y,x)}{(x,y)\in S}.
+$$
+}
+
+Note that the right hand side above is short for
+$$
+\COLL{p}{\EXIST{x,y}{p=(y,x)\,\AND\, (x,y)\in S}}.
+$$
+
+\THMNP{Essence of Reversal\label{thm:ess_rev}}{
+$(x,y)\in S \DARR (y,x)\in \rev{S}.$
+}{
+$\Rightarrow$:
+Assume that $(x,y)\in S$.
+We want to prove that $(y,x)\in\rev{S}$.
+This seems obvious but let us do it very carefully to avoid confusion.
+The proposition $(y,x)\in\rev{S}$ is equivalent to 
+\[ \EXIST{a,b}{(y,x)=(b,a)\,\AND\, (a,b)\in S}. \label{eqn:ess_rev}\tag{$\ast$}\]
+Letting $b=y$ and $a=x$, we get $(y,x)=(b,a)$ and $(a,b)=(x,y)\in S$.
+We conclude (by an \hyperlink{hl:EG}{EG}) that the condition (\ref{eqn:ess_rev}) holds
+and therefore that $(y,x)\in\rev{S}$.
+
+
+$\Leftarrow$:
+Assume that $(y,x)\in \rev{S}$.
+Get $a$ and $b$ such that $(y,x)=(b,a)$ and $(a,b)\in S$
+(carefully check that this is a correct use of Definition \ref{def:rev}).
+Then $y=b$ and $x=a$, so $(x,y)\in S$.
+}
+
+
+\subsection{Image}
 
 \subsection{Natural Numbers}
 
