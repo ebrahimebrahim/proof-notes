@@ -44,6 +44,7 @@
 \newcommand{\dom}[1]{\operatorname{dom}(#1)}
 \newcommand{\ran}[1]{\operatorname{ran}(#1)}
 \newcommand{\rev}[1]{{#1}^{\dashv}}
+\newcommand{\drev}[1]{{#1}^{\dashv\dashv}}
 \newcommand{\injrightarrow}{\xrightarrow{\text{inj}}}
 \newcommand{\surjrightarrow}{\xrightarrow{\text{surj}}}
 \newcommand{\bijrightarrow}{\xrightarrow{\text{bij}}}
@@ -4217,6 +4218,65 @@ Assume that $(y,x)\in \rev{S}$.
 Get $a$ and $b$ such that $(y,x)=(b,a)$ and $(a,b)\in S$
 (carefully check that this is a correct use of Definition \ref{def:rev}).
 Then $y=b$ and $x=a$, so $(x,y)\in S$.
+}
+
+
+\THMNP{Double Reversal\label{thm:double_rev}}{
+If $S$ is a set of pairs, then
+$$
+\drev{S}=S.
+$$
+}{
+Assume that $S$ is a set of pairs.
+We will make several uses of Theorem \ref{thm:ess_rev}.
+
+$\subseteq$:
+Consider any $(x,y)\in\drev{S}$.
+It follows that $(y,x)\in\rev{S}$, and from this it follows that $(x,y)\in S$.
+
+$\supseteq$:
+Consider any $(x,y)\in S$.
+It follows that $(y,x)\in\rev{S}$, and from this it follows that $(x,y)\in \drev{S}$.
+}
+
+\ex{
+Why is the assumption that $S$ is a set of pairs needed in Theorem \ref{thm:double_rev}?
+Exactly what step of the proof would be in error if we did not have this assumption?
+}
+
+\THMNP{Reversal, Domain, and Range\label{thm:rev_domran}}{
+\begin{enumerate}[(1)]
+\item \label{thm:rev_domran1}
+$\dom{\rev{S}}=\ran{S}$.
+\item \label{thm:rev_domran2}
+$\ran{\rev{S}}=\dom{S}$.
+\end{enumerate}
+}{
+Proving \ref{thm:rev_domran2} is \putExerciseHeading.
+We prove \ref{thm:rev_domran1} here.
+
+$\subseteq$:
+Consider any $z\in \dom{\rev{S}}$.
+Get $a$ such that $(z,a)\in\rev{S}$.
+Then $(a,z)\in S$.
+It follows that $z\in\ran{S}$.
+
+$\supseteq$:
+Consider any $z\in\ran{S}$.
+Get $a$ such that $(a,z)\in S$.
+Then $(z,a)\in\rev{S}$.
+It follows that $z\in\dom{\rev{S}}$.
+}
+
+\THMNP{Reversal and Composition\label{thm:rev_comp}}{$\rev{(S\circ T)}=\rev{T}\circ\rev{S}$.}{
+Proving that $\rev{(S\circ T)}\subseteq\rev{T}\circ\rev{S}$ is \putExerciseHeading.
+
+We will prove that $\rev{T}\circ\rev{S}\subseteq\rev{(S\circ T)}$.
+Consider any $(z,w)\in \rev{T}\circ\rev{S}$.
+Get $a$ such that $(z,a)\in\rev{S}$ and $(a,w)\in\rev{T}$.
+Then we have $(w,a)\in T$ and $(a,z)\in S$.
+It follows that $(w,z)\in S\circ T$,
+and from this it follows that $(z,w)\in\rev{(S\circ T)}$.
 }
 
 
