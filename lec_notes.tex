@@ -4158,7 +4158,7 @@ The composite $g\circ f$ can be thought of as the function that, when given an i
 \def\tagA{$(\ast)$}
 \def\tagB{$(\ast\ast)$}
 
-\ex{Let $X=\{x,y,z\}$, 
+\ex{\label{ex:beans2}Let $X=\{x,y,z\}$, 
 let $U=\{u,v,w\}$, and let
 $A=\{a,b,c,d\}$.
 Assume that $x,y,z,u,v,w,a,b,c,d$ are distinct.
@@ -4555,7 +4555,76 @@ then $f$ is surjective onto $Y$.}{
 \putExerciseHeading.
 }
 
-\note{exercise goes here}
+
+\ex{\label{ex:beans3}Let
+$S=\{x,y,z\}\times\{u,v,w,a\}$.
+Assume that $x,y,z,u,v,w,a$ are distinct.
+Define the following subsets of $S$:
+$$\begin{array}{lll}
+h&=&\{
+(x,w),(z,w),(y,v)
+\}\\
+i&=&\{
+(x,v),(y,w),(z,a),(y,u)
+\}\\
+j&=&\{
+(x,v),(y,w),(z,a)
+\}
+\end{array}$$
+\begin{enumerate}
+\item Depict each of $h,i,j$ using a picture in the manner of Exercise \ref{ex:beans1}.
+As an example, here is a depiction of $h$:
+\begin{center}
+\includegraphics[scale=1]{beans7.pdf}
+\end{center}
+\item One of $h,i,j$ is injective.
+Which one?
+\item\label{ex:beans3:redo}
+For the injection, find a left-inverse.
+That is, find a function $g:\{u,v,w,a\}\rightarrow\{x,y,z\}$ such that
+$$ g\circ (\text{the injection}) = \id{\{x,y,z\}}. $$
+Depict this composition by joining pictures in the manner of Exercise \ref{ex:beans2}.
+\item
+Redo question \ref{ex:beans3:redo}, but this time find a \emph{different} left-inverse.
+\item How many left inverses do you think there are?
+\end{enumerate}
+}
+
+\ex{\label{ex:beans4}Let
+$S=\{x,y,z,a\}\times\{u,v,w\}$.
+Assume that $x,y,z,u,v,w,a$ are distinct.
+Define the following subsets of $S$:
+$$\begin{array}{lll}
+h&=&\{
+(x,u),(x,v),(y,w),(z,w),(a,w)
+\}\\
+i&=&\{
+(x,u),(y,u),(z,v),(a,w)
+\}\\
+j&=&\{
+(x,u),(y,u),(z,w),(a,w)
+\}
+\end{array}$$
+\begin{enumerate}
+\item Depict each of $h,i,j$ using a picture in the manner of Exercise \ref{ex:beans1}.
+As an example, here is a depiction of $h$:
+\begin{center}
+\includegraphics[scale=1]{beans6.pdf}
+\end{center}
+\item One of $h,i,j$ is surjective onto $\{u,v,w\}$.
+Which one?
+\item\label{ex:beans4:redo}
+For the surjection, find a right-inverse.
+That is, find a function $g:\{u,v,w\}\rightarrow\{x,y,z,a\}$ such that
+$$ (\text{the surjection})\circ g = \id{\{u,v,w\}}. $$
+Depict this composition by joining pictures in the manner of Exercise \ref{ex:beans2}.
+\item
+Redo question \ref{ex:beans4:redo}, but this time find a \emph{different} right-inverse.
+\item How many right inverses do you think there are?
+\end{enumerate}
+}
+
+\vspace{2em}
 
 Theorems \ref{thm:inj_leftinv} and \ref{thm:leftinv} tell us
 that left-invertibility is \emph{equivalent} to injectivity.
@@ -4564,7 +4633,7 @@ You may now be wondering... are surjective functions always right-invertible?
 
 If $f:X\rightarrow Y$ is surjective, then is there some $g:Y\rightarrow X$ such that $f\circ g=\id{Y}$?
 Letting $g=\rev{f}$ would not work, because $\rev{f}$ is probably not a function.
-So if a $g$ is to exist, then how can it be produced?
+If a $g$ is to exist, then how can it be produced?
 Imposing various special conditions on $Y$ can make it possible to construct $g$.
 However, there is no hope for a general theorem. What is needed for the general statement is an axiom:
 
@@ -4572,7 +4641,7 @@ However, there is no hope for a general theorem. What is needed for the general 
 there exists a function $g:Y\rightarrow X$ such that $f\circ g=\id{Y}$.
 }
 
-We will not use Axiom \ref{ax:choice} here, but it is absolutely essential for much of modern mathematics.
+We will not use Axiom \ref{ax:choice}, but it is absolutely essential for much of modern mathematics.
 
 Putting together Theorems \ref{thm:leftinv} and \ref{thm:rightinv} gives us a nice characterization of bijectivity in terms of composition:
 
@@ -4596,7 +4665,13 @@ And there exists $g:Y\rightarrow X$
 such that $f\circ g=\id{Y}$, so $f$ is surjective onto $Y$ by Theorem \ref{thm:rightinv}.
 }
 
-\note{exercise here}
+\ex{(Challenging, skippable)
+Prove that if $f:X\rightarrow Y$, $f$ is injective, and $X$ is nonempty, then there exists
+some $g:Y\rightarrow X$ such that $g\circ f=\id{X}$.
+(This is what it should really mean for $f$ to be ``left-invertible,'' rather
+than what is asserted by Theorem \ref{thm:inj_leftinv}.)
+}
+
 
 \ex{Prove that $\id{\dom{B}}\subseteq \rev{B}\circ B$. Not a thrilling result, but good for practice with definitions.}
 
@@ -4607,6 +4682,11 @@ such that $f\circ g=\id{Y}$, so $f$ is surjective onto $Y$ by Theorem \ref{thm:r
 
 
 \subsection{Image}
+
+
+
+
+
 
 \subsection{Natural Numbers}
 
