@@ -4683,9 +4683,169 @@ than what is asserted by Theorem \ref{thm:inj_leftinv}.)
 
 \subsection{Image}
 
+\DEFN{Image\label{def:img}}{The
+\emph{image of $A$ under $S$} is denoted by $S[A]$ and defined by
+$$ S[A]=\COLL{y}{\EXIST{x}{x\in A\,\AND\,(x,y)\in S}}.$$
+}
+
+If $S$ is a set of pairs, then $S[A]$
+collects together the second entries of all the pairs in $S$ whose first entry is an element of $A$.
+
+\ex{Prove that $S[\dom{S}]=\ran{S}$}
+
+\ex{Prove that $S[\emptyset]=\emptyset$}
+
+\ex{Prove that if $f:X\rightarrow Y$, then $\rev{f}[Y]=X$.}
+
+\vspace{1em}
+
+The set $\rev{f}[B]$ appearing below is often called the \emph{preimage} or the \emph{inverse image} of $B$.
+
+\THMN{Image for Functions\label{thm:img_fn}}{Assume that $f:X\rightarrow Y$.
+\begin{enumerate}[(1)]
+\item \label{thm:img_fn1}
+If $A\subseteq X$, then 
+$$f[A]=\COLL{f(a)}{a\in A}.$$
+In other words,
+$$ y\in f[A]\ \DARR\ \EXIST{a}{y=f(a)\,\AND\,a\in A}. $$
+\item \label{thm:img_fn2}
+$$\rev{f}[B]=\COLL{x}{x\in X\,\AND\, f(x)\in B}.$$
+So if $x\in X$, then
+$$ x\in \rev{f}[B]\ \DARR\ f(x)\in B. $$
+\end{enumerate}
+}
+
+\textit{Proof of \ref{thm:img_fn1}:}
+Assume that $f:X\rightarrow Y$ and $A\subseteq X$.
+
+$\subseteq$:
+Consider any $z\in f[A]$.
+Get $a\in A$ such that $(a,z)\in f$.
+By Theorem \ref{thm:ess_eval}, we have $z=f(a)$.
+We have shown that there exists an $a\in A$ for which $z=f(a)$,
+so $z\in \COLL{f(a)}{a\in A}$.
+
+$\supseteq$:
+Consider any $z\in \COLL{f(a)}{a\in A}$.
+Get $a\in A$ such that $z=f(a)$.
+Observe that $a\in\dom{f}$, since $A\subseteq X$, so we are not breaching into undefined territory!
+By Theorem \ref{thm:ess_eval}, we have $(a,z)\in f$.
+We have shown that there exists an $a\in A$ for which $(a,z)\in f$,
+so $z\in f[A]$.
+\done
+\proofsep
+\textit{Proof of \ref{thm:img_fn2}:}
+Assume that $f:X\rightarrow Y$.
+
+$\subseteq$:
+Consider any $z\in \rev{f}[B]$.
+Get $b\in B$ such that $(b,z)\in\rev{f}$.
+Then $(z,b)\in f$.
+It follows that $f(z)=b$.
+And of course from $(z,b)\in f$ we know that $z\in \dom{f}=X$, so we have
+$$z\in\COLL{x}{x\in X\,\AND\, f(x)\in B}.$$
+
+$\supseteq$:
+Consider any $z\in X$ such that $f(z)\in B$.
+We have $(z,f(z))\in f$,
+so $(f(z),z)\in\rev{f}$.
+Taking $x=f(z)$, we've shown there exists an $x\in B$ such that $(x,z)\in\rev{f}$.
+Therefore $z\in \rev{f}[B]$.
+\done
+
+In the context of Theorem \ref{thm:img_fn}, 
+where the set of pairs $f$ is a function, it is tempting to refer to $\rev{f}$ as an ``inverse,'' but this would be a terrible mistake.
+The set of pairs $\rev{f}$ need not be a function, and so we just refer to it as the ``reverse'' of $f$.
 
 
+\ex{Prove that if $f:X\rightarrow Y$ and $x\in X$, then $f[\{x\}]=\{f(x)\}$.}
 
+\ex{Prove that if $f:X\rightarrow Y$ and $A\subseteq B\subseteq Y$, then $\rev{f}[A]\subseteq \rev{f}[B]$.}
+
+\ex{Prove that if $f:X\rightarrow Y$ and $A\subseteq B\subseteq X$, then $f[A]\subseteq f[B]$.}
+
+\THMNP{Image and Composition\label{thm:img_comp}}{
+$ (g\circ f)[A] = g[f[A]]. $
+}{
+$\subseteq$:
+Consider any $z\in (g\circ f)[A]$.
+Get $a\in A$ such that $(a,z)\in g\circ f$.
+Get $c$ such that $(a,c)\in f$ and $(c,z)\in g$.
+From $a\in A$ and $(a,c)\in f$, it follows that $c\in f[A]$.
+From $c\in f[A]$ and $(c,z)\in g$, it follows that $z\in g[f[A]]$.
+
+$\supseteq$:
+\putExerciseHeading: Prove that $g[f[A]]\subseteq (g\circ f)[A]$.
+}
+
+\ex{Prove that if $f:X\rightarrow Y$, then $f$ is injective
+if and only if for all $y\in Y$, $\rev{f}[\{y\}]$ is either empty or it is a singleton.}
+
+\ex{Prove that if $f:X\rightarrow Y$, then $f$ is surjective onto $Y$ if and only if for all $y\in Y$,
+$\rev{f}[\{y\}]$ is nonempty.}
+
+\THMPL{Assume that $f:X\rightarrow Y$, $A\subseteq X$, and $B\subseteq Y$.
+\begin{enumerate}[(1)]
+\item \label{thm:img_facts1}
+$f[\rev{f}[B]]\subseteq B$.
+\item \label{thm:img_facts2}
+$A\subseteq \rev{f}[f[A]]$.
+\item \label{thm:img_facts3}
+If $B\subseteq\ran{f}$, then $f[\rev{f}[B]] = B$.
+\item \label{thm:img_facts4}
+If $f$ is injective, then $\rev{f}[f[A]]=A$.
+\end{enumerate}
+}{
+Proving parts \ref{thm:img_facts1} and \ref{thm:img_facts4} is \putExerciseHeading.
+We prove \ref{thm:img_facts2} and \ref{thm:img_facts3}.
+We will be relying on the descriptions of image and preimage that are given in Theorem \ref{thm:img_fn}.
+
+To prove \ref{thm:img_facts2}, consider any $a\in A$.
+By Theorem \ref{thm:img_fn} part \ref{thm:img_fn1}, we have $f(a)\in f[A]$.
+By Theorem \ref{thm:img_fn} part \ref{thm:img_fn2}, it follows that $a\in \rev{f}[f[A]]$.
+
+To prove \ref{thm:img_facts3}, assume that $B\subseteq\ran{f}$.
+Note that we have one inclusion from part \ref{thm:img_facts1},
+so we only need to prove
+that $B\subseteq f[\rev{f}[B]]$.
+Consider any $b\in B$.
+Then by our assumption we have $b\in\ran{f}$.
+Get $x$ such that $(x,b)\in f$. Then $f(x)=b\in B$.
+By Theorem \ref{thm:img_fn} part \ref{thm:img_fn2}, the fact that $f(x)\in B$ gives us $x\in \rev{f}[B]$.
+By Theorem \ref{thm:img_fn} part \ref{thm:img_fn1}, the fact that $x\in\rev{f}[B]$ gives us $f(x)\in f[\rev{f}[B]]$.
+In other words, $b\in f[\rev{f}[B]]$.
+}{\label{thm:img_facts}}
+
+\newcommand{\preimgNiceLine}[1]{$\rev{f}[A{#1}B]=\rev{f}[A]{#1}\rev{f}[B]$}
+
+\THMNP{Preimage Plays Nice\label{thm:preimg_nice}}{Assume that
+$f:X\rightarrow Y$, $A\subseteq Y$, and $B\subseteq Y$.
+\begin{enumerate}[(1)]
+\item \label{thm:preimg_nice1} \preimgNiceLine{\,\cup\,}
+\item \label{thm:preimg_nice2} \preimgNiceLine{\,\cap\,}
+\item \label{thm:preimg_nice3} \preimgNiceLine{\,\setminus\,}
+\end{enumerate}
+}{
+Proving \ref{thm:preimg_nice2} and \ref{thm:preimg_nice3} is \putExerciseHeading. We prove \ref{thm:preimg_nice1} here.
+Assume that $f:X\rightarrow Y$, $A\subseteq Y$, and $B\subseteq Y$.
+
+$\subseteq$:
+Consider any $z\in \rev{f}[A\cup B]$.
+Then $z\in X$ and $f(z)\in A\cup B$.
+So either $f(z)\in A$ or $f(z)\in B$.
+
+Case 1: If $f(z)\in A$, then $z\in \rev{f}[A]\subseteq  \rev{f}[A]\,\cup\,\rev{f}[B]$.
+
+Case 2: If $f(z)\in B$, then $z\in \rev{f}[B]\subseteq  \rev{f}[A]\,\cup\,\rev{f}[B]$.
+
+$\supseteq$:
+Consider any $z\in \rev{f}[A]\,\cup\,\rev{f}[B]$.
+Then either $z\in \rev{f}[A]$ or $z\in \rev{f}[B]$.
+
+Case 1: If $z\in \rev{f}[A]$, then $z\in X$ and $f(z)\in A\subseteq A\cup B$, so $z\in \rev{f}[A\cup B]$.
+
+Case 2: If $z\in \rev{f}[B]$, then $z\in X$ and $f(z)\in B\subseteq A\cup B$, so $z\in \rev{f}[A\cup B]$.
+}
 
 
 \subsection{Natural Numbers}
