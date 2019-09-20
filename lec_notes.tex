@@ -3787,6 +3787,7 @@ then
 \begin{enumerate}[(1)]
 \item \label{thm:ess_eval1} If $x\in\dom{f}$, then $(x,f(x))\in f$.
 \item \label{thm:ess_eval2} If $(x,y)\in f$, then $y=f(x)$.
+\item \label{thm:ess_eval3} If $x\in\dom{f}$, then $(x,y)\in f\DARR y=f(x)$.
 \end{enumerate}
 }{
 Assume that $f$ is a function.
@@ -3805,6 +3806,8 @@ To prove \ref{thm:ess_eval2}, assume that $(x,y)\in f$.
 Since there exists a $y$ such that $(x,y)\in f$, we have $x\in\dom{f}$, and so we may apply part \ref{thm:ess_eval1}
 and conclude that $(x,f(x))\in f$.
 Since $f$ if a function and $(x,y),(x,f(x))\in f$, we have $y=f(x)$.
+
+Finally, \ref{thm:ess_eval3} is simply a combination of \ref{thm:ess_eval1} and \ref{thm:ess_eval2}.
 }
 
 \THMPL{If $f$ is a function, then $y\in\ran{f}$ if and only if $y=f(x)$ for some $x\in\dom{f}$.}{
@@ -3884,7 +3887,7 @@ If it is not, explain why not. The first two are done for you.
   (x,y),(z,w),(u,w)
   \}$
 \item $f = \{
-  (x,x),(y,x)(x,y)
+  (x,x),(y,x),(x,y)
   \}$
 \item $f = \{
   x,(y,z)
@@ -3931,7 +3934,7 @@ where the use of ``\emph{on}to'' rather than ``to'' indicates surjectivity.
 Also, people will sometimes omit the ``onto $Y$'' and just say ``$f$ is surjective,''
 leaving you to guess the codomain $Y$ from context.
 
-\THMP{Assume that $f:X\rightarrow Y$.
+\THMPL{Assume that $f$ is a function.
 Then $f$ is injective if and only if
 $$
 \ALL{x,y,z}{(x,y),(z,y)\in f \,\ARR\, x=z}.
@@ -3942,19 +3945,19 @@ Assume that $f:X\rightarrow Y$.
 $\Rightarrow$:
 Assume that $f$ is injective.
 Consider any $x,y,z$ such that $(x,y),(z,y)\in f$.
-We clearly have $x,z\in\dom{f}=X$, and so we may apply Theorem \ref{thm:ess_eval}
+We clearly have $x,z\in\dom{f}$, and so we may apply Theorem \ref{thm:ess_eval}
 and conclude that $y=f(x)$ and $y=f(z)$.
 Since $f$ is injective and 
 $f(x)=f(z)$, we have $x=z$.
 
 $\Leftarrow$:
 Assume that for all $x,y,z$ such that $(x,y),(z,y)\in f$, we have $x=z$.
-To show that $f$ is injective, consider any $x,y\in X$ such that $f(x)=f(y)$.
+To show that $f$ is injective, consider any $x,y\in \dom{f}$ such that $f(x)=f(y)$.
 Using Theorem \ref{thm:ess_eval}, we have $(x,f(x)),(y,f(y))\in f$.
 Since $f(x)=f(y)$,
 we actually have $(x,f(x)),(y,f(x))\in f$.
 Applying our assumption, it follows that $x=y$.
-}
+}{\label{thm:inj_xyz}}
 
 Thus injectivity is very similar to functionhood (Definition \ref{def:fn}), except that the pairs have been flipped around.
 
@@ -3994,7 +3997,7 @@ Prove that $f$ cannot be injective.}
 \ex{Assume that $a\neq b$ and $f:\{c\}\rightarrow\{a,b\}$.
 Prove that $f$ cannot be surjective onto $\{a,b\}$.}
 
-\ex{
+\ex{\label{ex:beans1}
 Assume that $x,y,z,u,v,w$ are distinct.
 Let $S$ be a the cartesian product
 $$
@@ -4150,6 +4153,76 @@ of part \ref{thm:domran_comp2} of Theorem \ref{thm:domran_comp}:
 
 The composite $g\circ f$ can be thought of as the function that, when given an input, applies $f$ and then applies $g$.
 
+\ex{Prove that if $S\subseteq A\times B$ and $T\subseteq B\times C$, then $T\circ S\subseteq A\times C$.}
+
+\def\tagA{$(\ast)$}
+\def\tagB{$(\ast\ast)$}
+
+\ex{Let $X=\{x,y,z\}$, 
+let $U=\{u,v,w\}$, and let
+$A=\{a,b,c,d\}$.
+Assume that $x,y,z,u,v,w,a,b,c,d$ are distinct.
+In this exercise, we will depict subsets of $X\times U$, $U\times A$, and $X\times A$
+in the manner of Exercise \ref{ex:beans1}.
+This can give a helpful visual for composition.
+Let's do an example.
+\indented{
+Let $f=\{(x,v),(y,u),(z,v),(z,w)\}$.
+Then $f\subseteq X\times U$ and $f$ can be depicted by
+\begin{center}
+\includegraphics[scale=1]{beans2.pdf}
+\end{center}
+Let $g=\{(u,b),(w,d)\}$.
+Then $g\subseteq U\times A$ and $g$ can be depicted by
+\begin{center}
+\includegraphics[scale=1]{beans3.pdf}
+\end{center}
+Now $g\circ f\subseteq X\times A$, and we can depict the composition by joining the two pictures together:
+\begin{center}
+\hfill\includegraphics[scale=1]{beans4.pdf} \hfill \raisebox{2em}{\tagA}
+\end{center}
+Then $g\circ f$ can be determined to have the picture
+\begin{center}
+\hfill\includegraphics[scale=1]{beans5.pdf} \hfill \raisebox{2em}{\tagB}
+\end{center}
+which is $\{(y,b),(z,d)\}$.
+Do you see how to get the picture \tagB{} from \tagA?
+}
+\begin{enumerate}
+\item Prove that if $f$ and $g$ are defined as in the example just given, then $\{(y,b),(z,d)\}\subseteq g\circ f$.
+No pictures allowed-- give a real proof.
+You can also prove the reverse inclusion if you want, but it's... less fun.
+\item For each $f$ and $g$ below, determine $g\circ f$ by producing images like \tagA{} and \tagB.
+Your answer for each part below should include an image like \tagA{}, and image like \tagB{}, and a
+list of pairs that describes $g\circ f$.
+\begin{enumerate}
+\item $f=\{
+(x,u),(y,v),(z,w)
+\}$ and $g=\{
+(u,c),(v,a),(w,c)
+\}$
+\item $f=\{
+(x,v),(y,v),(z,v)
+\}$ and $g=\{
+(u,a),(v,b),(w,d),(v,c)
+\}$
+\item $f=\{
+(x,u),(y,w),(z,v)
+\}$ and $g=\{
+(v,b),(w,d)
+\}$
+\item $f=\{
+(x,v),(y,v),(z,v)
+\}$ and $g=\{
+(u,c),(w,c)
+\}$
+\end{enumerate}
+\end{enumerate}
+}
+
+\vspace{3em}
+
+
 \DEFN{Identity Function}{
 The \emph{identity function on $A$} is denoted by $\id{A}$ and defined by
 $$
@@ -4278,6 +4351,259 @@ Then we have $(w,a)\in T$ and $(a,z)\in S$.
 It follows that $(w,z)\in S\circ T$,
 and from this it follows that $(z,w)\in\rev{(S\circ T)}$.
 }
+
+\DEFN{Invertibility}{
+If $f$ is a function, then when $\rev{f}$ is also a function we say that $f$ is \emph{invertible},
+and we then refer to $\rev{f}$ as \emph{the inverse} of $f$.
+}
+
+\THMNP{Invertibility of Injections\label{thm:inj_inv}}{If $f$ is a function, then $\rev{f}$ is a function if and only if $f$ is injective.}{
+Assume that $f$ is a function.
+
+Suppose that $\rev{f}$ is a function. 
+We will use the criterion given in Theorem \ref{thm:inj_xyz} to demonstrate that $f$ is injective.
+%Consider any $x,y\in\dom{f}$ such that $f(x)=f(y)$.
+Consider any $x,y,z$ such that $(x,y),(z,y)\in f$.
+By Theorem \ref{thm:ess_rev}, we have $(y,x),(y,z)\in \rev{f}$.
+Since $\rev{f}$ is a function, it follows that $x=z$.
+Thus we have proven that $f$ is injective.
+
+Conversely, suppose that $f$ is injective.
+It is clear from Definition \ref{def:rev} that $\rev{f}$ is a set of pairs.
+To see that $\rev{f}$ is a function, suppose that $(x,y),(x,z)\in\rev{f}$.
+By Theorem \ref{thm:ess_rev}, we have $(y,x),(z,x)\in f$.
+By Theorem \ref{thm:inj_xyz} and the fact that $f$ is injective, it follows that $y=z$.
+Thus we have proven that $\rev{f}$ is a function.
+}
+
+Note the role of the word ``conversely'' when it is used to introduce a paragraph.
+It serves to separate the ``$\Rightarrow$'' and ``$\Leftarrow$'' portions of the proof.
+
+\THMPL{If $f:X\rightarrow Y$ and $f$ is injective, then $\rev{f}:\ran{f}\rightarrow X$.}{
+\putExerciseHeading.
+}{\label{thm:inj_inv2}}
+
+\THMPL{If $f$ is an invertible function, $x\in\dom{f}$, and $y\in\ran{f}$, then
+$$
+f(x)=y\ \DARR\ x=\rev{f}(y)
+$$}{
+Assume that $f$ is an invertible function, $x\in\dom{f}$, and $y\in\ran{f}$.
+Theorem \ref{thm:inj_inv2} tells us that $\ran{f}=\dom{\rev{f}}$, so $y\in\dom{\rev{f}}$
+and we are in a position to apply Theorem \ref{thm:ess_eval} as follows:
+\[\begin{array}{llll}
+f(x) = y & \DARR & (x,y)\in f \hspace{1.5em} & \text{(Theorem \ref{thm:ess_eval})} \\
+         & \DARR & (y,x)\in \rev{f}          & \text{(Theorem \ref{thm:ess_rev})}  \\
+         & \DARR & \rev{f}(y)=x.             & \text{(Theorem \ref{thm:ess_eval})} 
+\end{array}\]
+}{\label{thm:inv_equiv}}
+
+
+\THMPL{If $f:X\rightarrow Y$ and $f$ is a bijection onto $Y$, then $\rev{f}:Y\rightarrow X$ and $\rev{f}$ is a bijection onto $X$.}{
+Assume that $f:X\rightarrow Y$ and $f$ is a bijection onto $Y$.
+Since $f$ is injective, Theorem \ref{thm:inj_inv2} tells us that $\rev{f}:\ran{f}\rightarrow X$.
+Since $f$ is surjective onto $Y$, we have $\ran{f}=Y$, and so $\rev{f}:Y\rightarrow X$.
+It remains for us to argue that $\rev{f}$ is bijective onto $X$.
+
+We know that $\rev{f}$ is surjective onto $X$ because $\ran{\rev{f}}=\dom{f} = X$, by Theorem \ref{thm:rev_domran}.
+
+Finally, we will use Theorem \ref{thm:inj_inv} 
+to argue that $\rev{f}$ is injective.
+We already know that $\rev{f}$ is a function, and we also know that $\drev{f}$, which is $f$ by Theorem \ref{thm:double_rev}, is a function.
+It follows from Theorem \ref{thm:inj_inv} that $\rev{f}$ is injective.
+}{\label{thm:bij_inv}}
+
+\THMPL{If $f:X\rightarrow Y$ and $f$ is injective, then $\rev{f}\circ f=\id{X}$.}{
+Assume that $f:X\rightarrow Y$ and $f$ is injective.
+From Theorem \ref{thm:inj_inv2}
+we know that $\rev{f}:\ran{f}\rightarrow X$.
+To prove that $\rev{f}\circ f=\id{X}$,
+we will use Theorem \ref{thm:fn_eq}.
+This means we must show that the domains of $\rev{f}\circ f$ and $\id{X}$ are equal, and that
+$\rev{f}\circ f$ and $\id{X}$ take the same value on all elements of the common domain.
+We have
+$\dom{\id{X}}=X=\dom{\rev{f}\circ f}$ by Theorem \ref{thm:ess_id} part \ref{thm:ess_id1} and Theorem \ref{thm:ess_comp} part \ref{thm:ess_comp2}.
+
+Now consider any $x\in X$.
+Our basic argument is as follows:
+$$
+\begin{array}{llll}
+(\rev{f}\circ f)(x) & = & \rev{f}(f(x)) \hspace{1.5em} & \text{(Theorem \ref{thm:ess_comp} part \ref{thm:ess_comp1})} \\
+                    & = & x                            & \text{(Theorem \ref{thm:inv_equiv})}                         \\
+                    & = & \id{X}(x)                    & \text{(Theorem \ref{thm:ess_id} part \ref{thm:ess_id2})}.
+\end{array}
+$$
+However, some comments are needed to justify the middle line.
+Applying Theorem \ref{thm:inv_equiv} to $\rev{f}$ gives us
+\[\rev{f}(f(x)) = x\ \DARR\ f(x)=\drev{f}(x),\tag{$\ast$}\label{eqn:inj_leftinv}\]
+but we should first check that the hypotheses of Theorem \ref{thm:inv_equiv} are satisfied.
+Note that $\rev{f}$ is an invertible function because $\drev{f}=f$ is a function.
+And note that $f(x)\in \ran{f}=\dom{\rev{f}}$ and $x\in X=\dom{f}=\ran{\rev{f}}$.
+Now Theorem \ref{thm:inv_equiv} applies and we have (\ref{eqn:inj_leftinv}).
+The right hand side of (\ref{eqn:inj_leftinv}) holds thanks to Theorem \ref{thm:double_rev},
+so we have $\rev{f}(f(x)) = x$ and our argument above is justified.
+
+We have now proven that $(\rev{f}\circ f)(x)=\id{X}(x)$ for all $x\in X$. 
+By Theorem \ref{thm:fn_eq}, we have proven that $\rev{f}\circ f=\id{X}$.
+}{\label{thm:inj_leftinv}}
+
+\THMNP{Inverse and Composition\label{thm:inv_comp}}{If $f:X\rightarrow Y$ and $f$ is a bijection onto $Y$, then
+\begin{enumerate}[(1)]
+\item \label{thm:inv_comp1}
+$f\circ\rev{f}=\id{Y}$.
+\item \label{thm:inv_comp2}
+$\rev{f}\circ f=\id{X}$.
+\end{enumerate}
+}{
+Assume that $f:X\rightarrow Y$ and $f$ is a bijection onto $Y$.
+
+Since $f$ is injective,
+part \ref{thm:inv_comp2}
+is Theorem \ref{thm:inj_leftinv}.
+
+By Theorem \ref{thm:bij_inv}, we know that $\rev{f}:Y\rightarrow X$ and $\rev{f}$ is a bijection onto $X$.
+Since $\rev{f}$ is injective, we may apply Theorem \ref{thm:inj_leftinv}
+to conclude that $\drev{f}\circ\rev{f}=\id{Y}$.
+Using Theorem \ref{thm:double_rev} to rewrite this as $f\circ\rev{f}=\id{Y}$, we have proven part \ref{thm:inv_comp1}.
+}
+
+\THMNP{Composition, Injectivity, and Surjectivity}{
+
+Assume
+that $f:X\rightarrow Y$ and $g:Y\rightarrow Z$.
+\begin{enumerate}[(1)]
+\item If $f$ and $g$ are injective, then $g\circ f$ is injective.
+\item If $g\circ f$ is injective, then $f$ is injective.
+\item If $f$ is surjective onto $Y$ and $g$ is surjective onto $Z$,
+then $g\circ f$ is surjective onto $Z$.
+\item If $g\circ f$ is surjective onto $Z$, then $g$ is surjective onto $Z$.
+\item If $f$ is bijective onto $Y$ and $g$ is bijective onto $Z$, then $g\circ f$ is bijective onto $Z$.
+\end{enumerate}
+}{
+\putExerciseHeading.
+}
+
+The notation ``$f,g:X\rightarrow Y$'' below is short for ``$f:X\rightarrow Y\ \AND\ g:X\rightarrow Y$''.
+
+\THMNP{\label{thm:comp_cancel}Cancellation of Composite}{Assume
+that $f,g:X\rightarrow Y$.
+\begin{enumerate}[(1)]
+\item\label{thm:comp_cancel1}
+If $h:Y\rightarrow Z$, $h$ is injectve,
+and $h\circ f=h\circ g$, then $f=g$.
+\item\label{thm:comp_cancel2}
+If $h:Z\rightarrow X$, $h$ is surjective onto $X$,
+and $f\circ h=g\circ h$, then $f=g$.
+\end{enumerate}
+}{
+Part \ref{thm:comp_cancel1} is \putExerciseHeading.
+We prove \ref{thm:comp_cancel2} here.
+
+Assume that
+$f,g:X\rightarrow Y$,
+$h:Z\rightarrow X$, 
+$h$ is surjective onto $X$,
+and $f\circ h=g\circ h$.
+Since $f$ and $g$ have the same domain $X$, all we need to do is prove that $f(x)=g(x)$ for all $x\in X$.
+Then we will be done by Theorem \ref{thm:fn_eq}.
+
+Consider any $x\in X$.
+Since $h$ is surjective onto $X$, there is some $z\in Z$ such that $h(z)=x$ (Theorem \ref{thm:surj_exist}).
+Note that $\dom{f\circ h}=Z$ (Theorem \ref{thm:ess_comp}), so we may evaluate $f\circ h$ at $z$.
+We have
+$$
+\begin{array}{llll}
+f(h(z)) & = & (f\circ h)(z) \hspace{1.5em} & \text{(Theorem \ref{thm:ess_comp})} \\
+        & = & (g\circ h)(z)                & \text{(since $f\circ h=g\circ h$)}  \\
+        & = & g(h(z))                      & \text{(Theorem \ref{thm:ess_comp})} .
+\end{array}
+$$
+That is, $f(x)=g(x)$.
+} 
+
+Theorem \ref{thm:comp_cancel}
+says that injective functions can be cancelled when they are on the left side of a composition,
+and surjective functions can be cancelled when they are on the right.
+These properties actually \emph{characterize} injectivity and surjectivity.
+That is, a function is injective if and only if it is left-cancellable, and it is surjective if and only if it is right-cancellable.
+Proving this is \putExerciseHeading, which is challenging and skippable.
+The precise assertion is this:
+If $h:Y\rightarrow Z$, then $h$ is injective iff $h\circ f=h\circ g\ARR f=g$ for all $f,g:X\rightarrow Y$,
+and $h$ is surjective onto $Z$ iff $f\circ h=g \circ h \ARR f=g$ for all $f,g:X\rightarrow Y$.
+
+Theorem \ref{thm:inj_leftinv} tells us that injective functions are ``left-invertible.''
+Precisely, this means that they can be composed with something on the left to yield a suitable identity function.
+What follows is a sort of converse to Theorem \ref{thm:inj_leftinv}.
+
+\THMNP{Left-Invertible Functions\label{thm:leftinv}}{Assume
+that $f:X\rightarrow Y$.
+If $$\EXIST{g}{g:Y\rightarrow X\ \AND\ g\circ f=\id{X}},$$
+then $f$ is injective.
+}{
+Assume that $f:X\rightarrow Y$ and that there is some $g$ such that $g:Y\rightarrow X$ and $g\circ f=\id{X}$.
+Get such a $g$.
+Consider any $x,x'\in X$ such that $f(x)=f(x')$.
+Then 
+$$x=\id{X}(x)=(g\circ f)(x) = g(f(x))=g(f(x'))=(g\circ f)(x')=\id{X}(x')=x'.$$
+}
+
+It is pleasing to know that there is a similar result for right-invertibility and surjectivity:
+
+\THMNP{Right-Invertible Functions\label{thm:rightinv}}{Assume
+that $f:X\rightarrow Y$.
+If $$\EXIST{g}{g:Y\rightarrow X\ \AND\ f\circ g=\id{Y}},$$
+then $f$ is surjective onto $Y$.}{
+\putExerciseHeading.
+}
+
+\note{exercise goes here}
+
+Theorems \ref{thm:inj_leftinv} and \ref{thm:leftinv} tell us
+that left-invertibility is \emph{equivalent} to injectivity.
+Theorem \ref{thm:rightinv} tells us that right-invertibility \emph{implies} surjectivity.
+You may now be wondering... are surjective functions always right-invertible?
+
+If $f:X\rightarrow Y$ is surjective, then is there some $g:Y\rightarrow X$ such that $f\circ g=\id{Y}$?
+Letting $g=\rev{f}$ would not work, because $\rev{f}$ is probably not a function.
+So if a $g$ is to exist, then how can it be produced?
+Imposing various special conditions on $Y$ can make it possible to construct $g$.
+However, there is no hope for a general theorem. What is needed for the general statement is an axiom:
+
+\AXIOMN{Axiom of Choice\label{ax:choice}}{If $f:X\rightarrow Y$ and $f$ is surjective onto $Y$, then
+there exists a function $g:Y\rightarrow X$ such that $f\circ g=\id{Y}$.
+}
+
+We will not use Axiom \ref{ax:choice} here, but it is absolutely essential for much of modern mathematics.
+
+Putting together Theorems \ref{thm:leftinv} and \ref{thm:rightinv} gives us a nice characterization of bijectivity in terms of composition:
+
+\THMNP{Bijectivity and Isomorphism}{Assume
+that $f:X\rightarrow Y$.
+Then $f$ is a bijection onto $Y$ if and only if
+$$
+\EXIST{g}{g:Y\rightarrow X\ \AND\ g\circ f=\id{X}\ \AND\ f\circ g=\id{Y}}.
+$$
+}{
+Assume that $f:X\rightarrow Y$.
+
+If $f$ is a bijection onto $Y$, then letting $g=\rev{f}$ should work due to
+Theorems \ref{thm:bij_inv} and \ref{thm:inv_comp}.
+
+Conversely, assume that there exists $g:Y\rightarrow X$
+such that $g\circ f=\id{X}$ and $f\circ g=\id{Y}$.
+Then there exists $g:Y\rightarrow X$
+such that $g\circ f=\id{X}$, so $f$ is injective by Theorem \ref{thm:leftinv}.
+And there exists $g:Y\rightarrow X$
+such that $f\circ g=\id{Y}$, so $f$ is surjective onto $Y$ by Theorem \ref{thm:rightinv}.
+}
+
+\note{exercise here}
+
+\ex{Prove that $\id{\dom{B}}\subseteq \rev{B}\circ B$. Not a thrilling result, but good for practice with definitions.}
+
+
+
+
+
 
 
 \subsection{Image}
