@@ -5020,7 +5020,6 @@ We will do this by doing an induction on $n$ in the proposition
 $$
 n\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,n=\next{m}}.
 $$
-
 \BChead{}
 It is vacuously true that
 $
@@ -5049,9 +5048,9 @@ By induction (Theorem \ref{thm:ind}), we have proven (\ref{eqn:pred}).
 \end{enumerate}
 }
 
-\ex{Prove that $x<\next{y}\ \DARR\ x\leq y$. We use this fact freely below.}
+\ex{Prove that $x<\next{y}\ \DARR\ x\leq y$. We will use this fact freely.}
 
-\THMN{About $0$\label{thm:aboutzero}}{
+\THMNP{About $0$\label{thm:aboutzero}}{
 If $n\in\N$, then
 \begin{enumerate}[(1)]
 \item $0<\next{n}$.\label{thm:aboutzero1}
@@ -5059,57 +5058,44 @@ If $n\in\N$, then
 \item $0\neq\next{n}$.\label{thm:aboutzero3}
 \end{enumerate}
 }
-\proofnewline
-\textit{Proof of \ref{thm:aboutzero1}:}
-We will prove that $0<\next{n}$ for all natural numbers $n$, by doing induction on $n$.
+{
+We will prove that $0<\next{n}$ for all $n\in\N$, by doing induction on $n$.
 
 \BChead{}
-We have $0<\next{0}$ because we obviously have $0\in0\cup\{0\}$.
+We have $0<\next{0}$ because it is equivalent to $0\leq 0$.
 
 \IShead{}
 Suppose that $n\in\N$ and $0<\next{n}$.
-We must now show that $0<\next{\next{n}}$.
-Since 
-$$\next{\next{n}}=\next{n}\cup\{\next{n}\},$$
-we have $\next{n}\subseteq\next{\next{n}}$.
-Therefore, since we know that $0\in \next{n}$, we have $0\in\next{\next{n}}$.
-That is, $0<\next{\next{n}}$.
+Then $0\leq \next{n}$.
+It follows that $0<\next{\next{n}}$.
 
 By induction, we have proven that $0<\next{n}$ for every natural number $n$.
-\done
-\proofsep
-\textit{Proof of \ref{thm:aboutzero2}:}
-Assume that $n\in\N$. Observe that
-$$ 0\leq n\  \DARR\  (0\in n\,\OR\,0=n)\ \DARR\ (n\neq 0\ARR0\in n),$$
-so we may prove $n\neq 0\ARR0\in n$.
-Assume that $n\neq 0$.
-By Theorem \ref{thm:pred}, we can get an $m\in\N$ such that $n=\next{m}$.
-By part \ref{thm:aboutzero1} of the present theorem, we have $0\in\next{m}=n$.
-\done
-\proofsep
-\textit{Proof of \ref{thm:aboutzero3}:}
-Assume that $n\in\N$.
+This completes the proof of part \ref{thm:aboutzero1}.
+
+Part \ref{thm:aboutzero2} is equivalent to part \ref{thm:aboutzero1}.
+
+To prove part \ref{thm:aboutzero3}, assume that $n\in\N$ and
 Suppose for the sake of contradiction that $0=\next{n}$.
 Then it follows from part \ref{thm:aboutzero1} that $0\in 0$.
 But $0=\emptyset$ is empty.
-\done
+}
 
-\THMN{Succession Preserves Order\label{thm:succ_ord}}{Assume that $n\in\N$.
+\THMNP{Succession Preserves Order\label{thm:succ_ord}}{Assume that $n\in\N$.
 \begin{enumerate}[(1)]
 \item\label{thm:succ_ord1} 
 If $m<n$, then $\next{m}\leq n$.
 \item\label{thm:succ_ord2} 
 If $m<n$, then $\next{m}<\next{n}$.
 \end{enumerate}
-}
-\proofnewline
-\textit{Proof of \ref{thm:succ_ord1}:}
+}{
+Part \ref{thm:succ_ord2} is equivalent to part \ref{thm:succ_ord1}. We prove part \ref{thm:succ_ord1}.
+
 We will prove
 $$m<n\ \ARR\ \next{m}\leq n$$
 for all $n\in\N$ by doing induction on $n$.
 
 \BChead{}
-Since $\neq(m<0)$, we have
+Since $\neg(m<0)$, we have
 $$m<0\ \ARR\ \next{m}\leq 0$$
 and the base case is done.
 
@@ -5117,27 +5103,15 @@ and the base case is done.
 Suppose that $n\in\N$ and
 \[m<n\ \ARR\ \next{m}\leq n.\label{eqn:succ_ord}\tag{$\ast$}\]
 Now assume that $m<\next{n}$; we must prove that $\next{m}\leq\next{n}$.
-Our assumption $m\in\next{n}=n\cup\{n\}$ implies that either $m\in n$ or $m=n$.
+Our assumption $m<\next{n}$ implies that $m \leq n$.
 
-Case 1: Suppose that $m\in n$. Then $\next{m}\leq n$ by the induction hypothesis (\ref{eqn:succ_ord}).
-So either $\next{m}\in n$ or $\next{m}=n$.
-
-Case 1.1: Suppose that $\next{m}\in n$.
-Then $\next{m}\in n\cup\{n\}=\next{n}$, so $\next{m}\leq\next{n}$.
-
-Case 1.2: Suppose that $\next{m}=n$. 
-Then, again,  $\next{m}\in n\cup\{n\}=\next{n}$, so $\next{m}\leq\next{n}$.
+Case 1: Suppose that $m < n$. Then $\next{m}\leq n$ by the induction hypothesis (\ref{eqn:succ_ord}).
+It follows that $\next{m}<\next{n}$, and therefore that $\next{m}\leq\next{n}$.
 
 Case 2: Suppose that $m=n$. Then $\next{m}=\next{n}$, so we again have $\next{m}\leq\next{n}$.
-\done
+}
 
 Note the use of the words ``induction hypothesis'' to refer to the proposition that was assumed for the sake of establishing an induction step.
-
-\textit{Proof of \ref{thm:succ_ord2}:}
-Assume that $n\in\N$ and $m<n$.
-Then $\next{m}\leq n$, by part \ref{thm:succ_ord1}.
-Either $\next{m}\in n$, or $\next{m}=n$. Therefore $\next{m}\in n\cup\{n\}=\next{n}$.
-\done
 
 \THMNP{Transitivity for Order on $\N$\label{thm:trans_N}}{Assume that $n,m,k\in\N$.
 \begin{enumerate}[(1)]
@@ -5167,22 +5141,22 @@ $$ (n<m\ \AND\ m<k)\ \ARR\ n<k. $$
 We will prove that 
 $$ (n<m\ \AND\ m<\next{k})\ \ARR\ n<\next{k}. $$
 Assume that $n<m$ and $m<\next{k}$.
-Since $m\in k\cup\{k\}$, we have either $m\in k$ or $m = k$.
+Then $m\leq k$.
 
-Case 1: Suppose that $m\in k$.
+Case 1: Suppose that $m< k$.
 Then we have both $n<m$ and $m<k$, so it follows from the induction hypothesis that $n<k$.
 
 Case 2: Suppose that $m = k$.
 Then, since $n<m$, we have $n<k$.
 
 In both cases we obtained $n<k$, so it must be that $n<k$.
-It follows that $n\in k\cup\{k\} = \next{k}$. In other words, $n<\next{k}$.
+It follows that $n\leq k$, and therefore that $n<\next{k}$.
 This completes the induction step.
 }
 
-\THMPL{If $n\in m$ and $m\in\N$, then $n\in\N$.}{
+\THMPL{If $n < m$ and $m\in\N$, then $n\in\N$.}{
 \putExerciseHeading.
-Hint: Do an induction on $m$ to prove ``$n\in m\ARR n\in\N$'' for all $m\in\N$.
+Hint: Do an induction on $m$ to prove ``$n < m\ARR n\in\N$'' for all $m\in\N$.
 }{\label{thm:N_closed}}
 
 \ex{Prove that if $m\in\N$ then $m\subseteq\N$.}
@@ -5196,11 +5170,11 @@ $\neg(0<0)$ holds because it is equivalent to $\emptyset\notin\emptyset$.
 \IShead{}
 Suppose that $n\in\N$ and $\neg(n<n)$.
 Suppose, for the sake of obtaining a contradiction, that $\next{n}<\next{n}$.
-Then $\next{n}\in n\cup\{n\}$, so we have either $\next{n}\in n$ or $\next{n}=n$.
+Then $\next{n}\leq n$.
 
 Case 1: If $\next{n}=n$ then $\next{n}<\next{n}$ gives us $n<n$, which contradicts the induction hypothesis.
 
-Case 2: Suppose that $\next{n}\in n$.
+Case 2: Suppose that $\next{n}< n$.
 Then since $n<\next{n}$ and $\next{n}<n$, it follows by transitivity (Theorem \ref{thm:trans_N}) that $n<n$.
 This contradicts the induction hypothesis.
 }
@@ -5261,6 +5235,10 @@ $\neg(m<n\ \AND\ n<m)$.
 Assume 
 }
 
+
+
+
+\ex{Prove that $2<5$. Prove that $4 \neq 7$.}
 
 \subsection{Recursion}
 
