@@ -5233,12 +5233,115 @@ $\neg(m<n\ \AND\ n<m)$.
 \end{enumerate}
 }{
 Assume 
+that $m\in\N$.
+We will prove that
+$$
+\ALL{n}{n\in\N\ \ARR\ ((m=n)\ \OR\ (m<n)\ \OR\ (n<m))}
+$$
+by doing induction on $n$.
+
+\BChead{}
+We have 
+$$(m=0)\ \OR\ (m<0)\ \OR\ (0<m)$$
+because we have $0\leq m$ from Theorem \ref{thm:aboutzero}.
+
+\IShead{}
+Suppose that $n\in\N$ and 
+$$(m=n)\ \OR\ (m<n)\ \OR\ (n<m).$$
+\putExerciseHeading: Complete the proof of \ref{thm:tri_N1} from here
+by proving that
+$$(m=\next{n})\ \OR\ (m<\next{n})\ \OR\ (\next{n}<m)$$
+in each of the three cases.
+
+Proving \ref{thm:tri_N2}, \ref{thm:tri_N3}, and \ref{thm:tri_N4} is \putExerciseHeading.
 }
 
+\ex{Prove that if $n,m\in\N$, then $(n\leq m \  \AND\  m\leq n)\ \ARR\ n=m$.}
 
-
+\ex{Prove that if $n,m\in\N$, then $\neg(n\leq m)\ \DARR\ m<n$.\label{ex:notleq}}
 
 \ex{Prove that $2<5$. Prove that $4 \neq 7$.}
+
+\DEFN{Minumum}{Given
+$A\subseteq\N$, we say that $n$ \emph{is a minumum of} $A$ if and only if $n\in A$ and
+$\ALL{a}{a\in A\ \ARR\ n\leq a}$.
+}
+
+\ex{Prove that if a subset $A$ of $\N$ has $n$ and $m$ as minima, then it follows that $n=m$.
+This justifies saying ``the minimum of $A$'' rather than ``a minimum of $A$,'' when a minimum is known to exist.}
+
+\ex{Assume that $A\subseteq \N$. To say that $A$ has a minimum is to say
+that $\EXIST{n}{n\in A\ \AND\ \ALL{a}{a\in A\ARR n\leq a}}$.
+Write down what it means for $A$ to \emph{not} have a minimum.
+Do this by \hyperlink{hl:NOTUSE}{pushing} the negation in all the way and applying the result from Exercise \ref{ex:notleq}.}
+
+
+\THMNP{Well-Ordering of $\N$\label{thm:wellord}}{Every
+nonempty  set of natural numbers has a minimum. That is, if $A\subseteq\N$ then
+$$
+A\neq \emptyset \ARR \EXIST{n}{n\in A\ \AND\ \ALL{a}{a\in A\ARR n\leq a}}.
+$$
+}{
+Assume that $A\subseteq \N$. We will prove the contrapositive of the theorem:
+if $A$ does not have a minimum, then $A$ must be empty. 
+Assume that $A$ does not have a minimum.
+
+We will now do an induction on $k$ to prove that
+\[
+\ALL{m}{(m\in\N\ \AND\ m\leq k)\ \ARR\ m\notin A}
+\label{eq:wellord}\tag{$\ast$}\]
+for all $k\in\N$. Then we will be done, as you will check in the following exercise.
+
+\putExerciseHeading: Prove that if (\ref{eq:wellord}) holds for all $k\in\N$, then $A$ is empty.
+
+\BChead{}
+We must show that
+$$ \ALL{m}{(m\in\N\ \AND\ m\leq 0)\ \ARR\ m\notin A}. $$
+Consider any $m\in\N$ such that $m\leq 0$.
+Suppose, for the sake of contradiction, that $m\in A$.
+Consider any $a\in A$. We have $0\leq a$ by Theorem \ref{thm:aboutzero}.
+From $m\leq 0 \leq a$ we get $m\leq a$.
+Since $a$ is an arbitrary element of $A$, we have shown that $\ALL{a}{a\in A\ARR m\leq a}$.
+In other words, $m$ is a minimum of $A$. This contradicts our assumption that $A$ has no minimum.
+
+\IShead{}
+Suppose that 
+$$ \ALL{m}{(m\in\N\ \AND\ m\leq k)\ \ARR\ m\notin A}. $$
+We must show that 
+$$ \ALL{m}{(m\in\N\ \AND\ m\leq \next{k})\ \ARR\ m\notin A}. $$
+Consider any $m\in\N$ such that $m\leq \next{k}$.
+Suppose, for the sake of contradiction, that $m\in A$.
+Consider any $a\in A$.
+By the induction hypothesis, we have $a\leq k\ARR a\notin A$.
+Therefore we must have $\neg(a\leq k)$.
+By trichotomy (Theorem \ref{thm:tri_N}), it follows that $k<a$ (see also Exercise \ref{ex:notleq}).
+By Theorem \ref{thm:succ_ord}, we obtain $\next{k}\leq a$.
+From $m\leq\next{k}\leq a$ we get $m\leq a$.
+Since $a$ is an arbitrary element of $A$, we
+have shown that $\ALL{a}{a\in A\ARR m\leq a}$.
+In other words, $m$ is a minimum of $A$. This contradicts our assumption that $A$ has no minimum. 
+}
+
+\ex{(Open-ended) Why did (\ref{eq:wellord}) have to be so complicated in the proof of Theorem \ref{thm:wellord}?
+Why couldn't it just have been ``$k\notin\N$''? Try carrying out the proof with (\ref{eq:wellord})
+replaced by ``$k\notin\N$'' and observe what blocks the proof from working.}
+
+The well-ordering theorem, Theorem \ref{thm:wellord}, provides a new and sometime more powerful way to carry out a proof by induction.
+Suppose you want to prove that all natural numbers are green. Then instead of proving a base case and an induction step, you can frame
+your argument like this:
+
+\THMMOCK{All natural numbers are green.}{
+Define $A$ to be the set of non-green natural numbers.
+Suppose, for the sake of contradiction, that $A$ is nonempty.
+Then by well-ordering (Theorem \ref{thm:wellord}), there is a minumum element $n$ of $A$.
+That is, there is a minimum non-green natural number $n$.
+\indented{[insert argument convincing reader that there exists $m<n$ such that $m$ is non-green]}
+The fact that $m<n$ and $m\in A$ contradicts that $n$ was the minimum of $A$.
+}
+
+%\ex{ Assume that $J$ is an inductive set. We know from Theorem \ref{thm:ess_N} that $\N\subseteq J$. Prove that $\N\subseteq J$ from well-ordering only.
+%}
+
 
 \subsection{Recursion}
 
