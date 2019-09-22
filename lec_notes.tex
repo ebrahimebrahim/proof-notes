@@ -66,6 +66,7 @@
 \newcommand{\SUB}[1]{\mathcal{P}(#1)}
 \newcommand{\occ}[1]{\operatorname{occ}(#1)}
 \newcommand{\id}[1]{\textrm{id}_{#1}}
+\renewcommand{\next}[1]{\operatorname{next}({#1})}
 
 %\newcommand{\SUBST}[3]{{#1}\left[{#2}\mapsto{#3}\right]}
 %\newcommand{\SUBST}[3]{{#1}_{{#2}\mapsto{#3}}}
@@ -4847,7 +4848,7 @@ Case 1: If $z\in \rev{f}[A]$, then $z\in X$ and $f(z)\in A\subseteq A\cup B$, so
 Case 2: If $z\in \rev{f}[B]$, then $z\in X$ and $f(z)\in B\subseteq A\cup B$, so $z\in \rev{f}[A\cup B]$.
 }
 
-\ex{Assume that $f:X\rightarrow Y$ and $A$ and $B$ are subsets of $X$. One of the following two assertions has a proof, while the other does not.
+\ex{Assume that $f:X\rightarrow Y$ and that $A$ and $B$ are subsets of $X$. One of the following two assertions has a proof, while the other does not.
 \indented{
 $f[A\cup B] = f[A]\,\cup\, f[B]$\\
 $f[A\cap B] = f[A]\,\cap\, f[B]$
@@ -4856,6 +4857,410 @@ Prove the one that has a proof. You should somehow find yourself blocked from pr
 
 
 \subsection{Natural Numbers}
+
+Given any term $T$, the string ``$\next{T}$'' forms a term, defined as follows.
+
+\DEFN{Successor}{
+$\next{x}=x\cup\{x\}$.
+}
+
+We now introduce ten new constants into our language.
+
+\DEF{
+$$
+\begin{array}{ll}
+0 = \emptyset \hspace{6em} & 5=\next{4} \\
+1 = \next{0}  & 6=\next{5} \\
+2 = \next{1}  & 7=\next{6} \\
+3 = \next{2}  & 8=\next{7} \\
+4 = \next{3}  & 9=\next{8} \\
+\end{array}
+$$
+}
+
+\DEFN{Inductive\label{def:ind}}{A
+set $J$ is said to be \emph{inductive} if it contains $0$ and it contains $\next{n}$ for every $n$ that it contains.
+That is,
+$$
+\text{$J$ is inductive}\ \DARR\ (0\in J\,\AND\,\ALL{n}{n\in J\ARR\next{n}\in J})
+$$
+}
+
+We now define the \hyperlink{hl:constants}{constant} $\N$.
+Elements of $\N$ are called \emph{natural numbers}.
+
+\DEF{
+$\N=\COLL{n}{\ALL{J}{\text{$J$ is inductive}\,\ARR\,n\in J}}$.
+}
+
+The set $\N$ of natural numbers can be thought of as the ``smallest'' inductive set:
+
+\THMN{Essence of $\N$\label{thm:ess_N}}{
+\begin{enumerate}[(1)]
+\item $\N$ is inductive. \label{thm:ess_N1}
+\item If $J$ is inductive, then $\N\subseteq J$. \label{thm:ess_N2}
+\end{enumerate}
+}
+\proofnewline
+\textit{Proof of \ref{thm:ess_N1}:}
+We must show that $0\in\N$ and that 
+$\ALL{n}{n\in\N\ARR\next{n}\in\N}$.
+
+Consider any inductive set $J$.
+By definition, $0\in J$.
+Thus
+$\ALL{J}{\text{$J$ is inductive}\,\ARR\,0\in J}$.
+In other words, $0\in\N$.
+
+Now we prove that $\ALL{n}{n\in\N\ARR\next{n}\in\N}$.
+Consider any $n\in\N$.
+Consider any inductive set $J$.
+Since $n\in\N$, we know that $n$ is in every inductive set.
+In particular, $n\in J$.
+Sine $J$ is inductive, it follows that $\next{n}\in J$.
+Having shown that $\next{n}\in J$ for an arbitrary inductive $J$,
+we conclude that 
+$\ALL{J}{\text{$J$ is inductive}\,\ARR\,\next{n}\in J}$.
+In other words, $\next{n}\in\N$.
+\done
+\proofsep
+\textit{Proof of \ref{thm:ess_N2}:}
+Assume that $J$ is inductive.
+Consider any $n\in\N$.
+Since $n$ is an element of every inductive set, we have in particular that $n\in J$.
+\done
+
+
+\THMNP{Mathematical Induction\label{thm:ind}}{
+
+If 
+$$\SUBST{\pA}{x}{0}$$
+and
+$$\ALL{n}{n\in\N\ \ARR\ (\SUBST{\pA}{x}{n}\,\ARR\,\SUBST{\pA}{x}{\next{n}})}$$
+both hold,
+then it follows that
+$$
+\ALL{n}{n\in\N\,\ARR\,\SUBST{\pA}{x}{n}}.
+$$
+}{
+Assume that $\SUBST{\pA}{x}{0}$ and that $\ALL{n}{n\in\N\ \ARR\ (\SUBST{\pA}{x}{n}\,\ARR\,\SUBST{\pA}{x}{\next{n}})}$.
+Define
+$$
+J=\COLL{x}{(x\in\N)\,\AND\,\pA}.
+$$
+We argue that $J$ is inductive.
+
+First, we must show that $0\in J$.
+This is equivalent to $(0\in\N)\,\AND\,\SUBST{\pA}{x}{0}$.
+We know that $0\in\N$ since $\N$ is inductive (Theorem \ref{thm:ess_N} part \ref{thm:ess_N1}).
+And we know that $\SUBST{\pA}{x}{0}$ holds because we assumed it.
+Therefore we have $0\in J$.
+
+Next, we must show that $\ALL{n}{n\in J\ARR\next{n}\in J}$.
+Consider any $n\in J$.
+We have $n\in\N$ and $\SUBST{\pA}{x}{n}$.
+By our assumption, it follows that $\SUBST{\pA}{x}{\next{n}}$.
+Since $\N$ is inductive and $n\in\N$, we have $\next{n}\in\N$.
+From
+$$
+(\next{n}\in\N)\,\AND\,\SUBST{\pA}{x}{\next{n}}
+$$
+we see that $\next{n}\in J$.
+Thus we have established that $J$ is inductive.
+
+By Theorem \ref{thm:ess_N} part \ref{thm:ess_N2}, it follows that $\N\subseteq J$.
+So
+$$
+\ALL{n}{n\in \N\ARR n\in J}.
+$$
+Since $n\in J$ is equivalent to $(n\in\N)\AND\SUBST{\pA}{x}{n}$,
+this proves our theorem.
+}
+
+\paragraph{Induction}
+Theorem \ref{thm:ind} is often used to prove things about natural numbers.
+The technique is called \emph{mathematical induction}.
+Suppose you want to prove that all natural numbers are green.
+Then you can first prove that $0$ is green; this is called the \emph{base case}.
+Then prove that whenever a natural number $n$ is green, it follows that $\next{n}$ is also green;
+this is called the \emph{induction step}.
+Then mathematical induction allows you to conclude that all natural numbers are green.
+Specifically, this would be an application of Theorem \ref{thm:ind} with $\pA$ being ``$x$ is green''.
+One says that one is \emph{doing induction on $x$}, since $x$ is the variable that gets replaced by
+$0$, $n$, and $\next{n}$ in the application of Theorem \ref{thm:ind}.
+
+To help you with reading and writing proofs that use induction, 
+here is a base template applied to the nonsensical ``all natural numbers are green'' example:
+
+\def\BChead{\textit{Base Case:}}
+\def\IShead{\textit{Induction Step:}}
+
+\THMMOCK{All natural numbers are green. In other words, $\ALL{n}{n\in\N\ARR\text{$n$ is green}}$.}{
+We will prove this by doing induction on $n$ in the proposition ``$n$ is green''.
+
+\BChead{}
+\indented{[insert argument convincing reader that $0$ is green]}
+
+\IShead{}
+Suppose that $n\in\N$ and $n$ is green.
+\indented{[insert argument convincing reader that $\next{n}$ is green]}
+
+By induction (Theorem \ref{thm:ind}), it follows that $\ALL{n}{n\in\N\ARR\text{$n$ is green}}$.
+}
+
+\THMNP{Predecessor\label{thm:pred}}{If
+$n\in\N$ and $n\neq 0$, then $n=\next{m}$ for some $m\in\N$.
+}{
+We must prove that
+\[
+\ALL{n}{n\in\N\ARR(n\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,n=\next{m}})}.
+\tag{$\ast$}\label{eqn:pred}
+\]
+We will do this by doing an induction on $n$ in the proposition
+$$
+n\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,n=\next{m}}.
+$$
+
+\BChead{}
+It is vacuously true that
+$
+0\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,0=\next{m}}.
+$
+
+\IShead{}
+Suppose that $n\in\N$ and $
+n\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,n=\next{m}}.
+$
+We must now show that
+$$
+\next{n}\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,\next{n}=\next{m}}.
+$$
+Assume that $\next{n}\neq 0$.
+Taking $m=n$ gives $m\in\N$ and $\next{n}=\next{m}$, so
+$\EXIST{m}{m\in\N\,\AND\,\next{n}=\next{m}}$. This completes the induction step.
+
+By induction (Theorem \ref{thm:ind}), we have proven (\ref{eqn:pred}).
+}
+
+\DEFN{Order for $\N$}{
+\begin{enumerate}[(1)]
+\item $x<y\ \DARR\ x\in y$.
+\item $x\leq y\ \DARR\ (x\in y\,\OR\,x=y)$.
+\end{enumerate}
+}
+
+\ex{Prove that $x<\next{y}\ \DARR\ x\leq y$. We use this fact freely below.}
+
+\THMN{About $0$\label{thm:aboutzero}}{
+If $n\in\N$, then
+\begin{enumerate}[(1)]
+\item $0<\next{n}$.\label{thm:aboutzero1}
+\item $0\leq n$.\label{thm:aboutzero2}
+\item $0\neq\next{n}$.\label{thm:aboutzero3}
+\end{enumerate}
+}
+\proofnewline
+\textit{Proof of \ref{thm:aboutzero1}:}
+We will prove that $0<\next{n}$ for all natural numbers $n$, by doing induction on $n$.
+
+\BChead{}
+We have $0<\next{0}$ because we obviously have $0\in0\cup\{0\}$.
+
+\IShead{}
+Suppose that $n\in\N$ and $0<\next{n}$.
+We must now show that $0<\next{\next{n}}$.
+Since 
+$$\next{\next{n}}=\next{n}\cup\{\next{n}\},$$
+we have $\next{n}\subseteq\next{\next{n}}$.
+Therefore, since we know that $0\in \next{n}$, we have $0\in\next{\next{n}}$.
+That is, $0<\next{\next{n}}$.
+
+By induction, we have proven that $0<\next{n}$ for every natural number $n$.
+\done
+\proofsep
+\textit{Proof of \ref{thm:aboutzero2}:}
+Assume that $n\in\N$. Observe that
+$$ 0\leq n\  \DARR\  (0\in n\,\OR\,0=n)\ \DARR\ (n\neq 0\ARR0\in n),$$
+so we may prove $n\neq 0\ARR0\in n$.
+Assume that $n\neq 0$.
+By Theorem \ref{thm:pred}, we can get an $m\in\N$ such that $n=\next{m}$.
+By part \ref{thm:aboutzero1} of the present theorem, we have $0\in\next{m}=n$.
+\done
+\proofsep
+\textit{Proof of \ref{thm:aboutzero3}:}
+Assume that $n\in\N$.
+Suppose for the sake of contradiction that $0=\next{n}$.
+Then it follows from part \ref{thm:aboutzero1} that $0\in 0$.
+But $0=\emptyset$ is empty.
+\done
+
+\THMN{Succession Preserves Order\label{thm:succ_ord}}{Assume that $n\in\N$.
+\begin{enumerate}[(1)]
+\item\label{thm:succ_ord1} 
+If $m<n$, then $\next{m}\leq n$.
+\item\label{thm:succ_ord2} 
+If $m<n$, then $\next{m}<\next{n}$.
+\end{enumerate}
+}
+\proofnewline
+\textit{Proof of \ref{thm:succ_ord1}:}
+We will prove
+$$m<n\ \ARR\ \next{m}\leq n$$
+for all $n\in\N$ by doing induction on $n$.
+
+\BChead{}
+Since $\neq(m<0)$, we have
+$$m<0\ \ARR\ \next{m}\leq 0$$
+and the base case is done.
+
+\IShead{}
+Suppose that $n\in\N$ and
+\[m<n\ \ARR\ \next{m}\leq n.\label{eqn:succ_ord}\tag{$\ast$}\]
+Now assume that $m<\next{n}$; we must prove that $\next{m}\leq\next{n}$.
+Our assumption $m\in\next{n}=n\cup\{n\}$ implies that either $m\in n$ or $m=n$.
+
+Case 1: Suppose that $m\in n$. Then $\next{m}\leq n$ by the induction hypothesis (\ref{eqn:succ_ord}).
+So either $\next{m}\in n$ or $\next{m}=n$.
+
+Case 1.1: Suppose that $\next{m}\in n$.
+Then $\next{m}\in n\cup\{n\}=\next{n}$, so $\next{m}\leq\next{n}$.
+
+Case 1.2: Suppose that $\next{m}=n$. 
+Then, again,  $\next{m}\in n\cup\{n\}=\next{n}$, so $\next{m}\leq\next{n}$.
+
+Case 2: Suppose that $m=n$. Then $\next{m}=\next{n}$, so we again have $\next{m}\leq\next{n}$.
+\done
+
+Note the use of the words ``induction hypothesis'' to refer to the proposition that was assumed for the sake of establishing an induction step.
+
+\textit{Proof of \ref{thm:succ_ord2}:}
+Assume that $n\in\N$ and $m<n$.
+Then $\next{m}\leq n$, by part \ref{thm:succ_ord1}.
+Either $\next{m}\in n$, or $\next{m}=n$. Therefore $\next{m}\in n\cup\{n\}=\next{n}$.
+\done
+
+\THMNP{Transitivity for Order on $\N$\label{thm:trans_N}}{Assume that $n,m,k\in\N$.
+\begin{enumerate}[(1)]
+\item \label{thm:trans_N1}
+If $n<m$ and $m<k$, then $n<k$.
+\item \label{thm:trans_N2}
+If $n\leq m$ and $m<k$, then $n<k$.
+\item \label{thm:trans_N3}
+If $n<m$ and $m\leq k$, then $n<k$.
+\item \label{thm:trans_N4}
+If $n\leq m$ and $m\leq k$, then $n\leq k$.
+\end{enumerate}
+}{
+Parts \ref{thm:trans_N2}, \ref{thm:trans_N3}, and \ref{thm:trans_N4} follow from part \ref{thm:trans_N1}; showing this
+is \putExerciseHeading. We prove \ref{thm:trans_N1} here. Assume that $n,m\in\N$.
+We will show that
+$$ (n<m\ \AND\ m<k)\ \ARR\ n<k $$
+for all $k\in\N$, by doing induction on $k$.
+
+\BChead{}
+We have 
+$ (n<m\,\AND\,m<0)\,\ARR\,n<0 $ simply because $\neg(m<0)$.
+
+\IShead{}
+Suppose that $k\in\N$ and 
+$$ (n<m\ \AND\ m<k)\ \ARR\ n<k. $$
+We will prove that 
+$$ (n<m\ \AND\ m<\next{k})\ \ARR\ n<\next{k}. $$
+Assume that $n<m$ and $m<\next{k}$.
+Since $m\in k\cup\{k\}$, we have either $m\in k$ or $m = k$.
+
+Case 1: Suppose that $m\in k$.
+Then we have both $n<m$ and $m<k$, so it follows from the induction hypothesis that $n<k$.
+
+Case 2: Suppose that $m = k$.
+Then, since $n<m$, we have $n<k$.
+
+In both cases we obtained $n<k$, so it must be that $n<k$.
+It follows that $n\in k\cup\{k\} = \next{k}$. In other words, $n<\next{k}$.
+This completes the induction step.
+}
+
+\THMPL{If $n\in m$ and $m\in\N$, then $n\in\N$.}{
+\putExerciseHeading.
+Hint: Do an induction on $m$ to prove ``$n\in m\ARR n\in\N$'' for all $m\in\N$.
+}{\label{thm:N_closed}}
+
+\ex{Prove that if $m\in\N$ then $m\subseteq\N$.}
+
+\THMNP{Irreflexivity for Order on $\N$\label{thm:irr_N}}{If $n\in\N$, then $\neg(n<n)$}{
+We will use induction to prove that $\ALL{n}{n\in\N\ARR\neg(n<n)}$.
+
+\BChead{}
+$\neg(0<0)$ holds because it is equivalent to $\emptyset\notin\emptyset$.
+
+\IShead{}
+Suppose that $n\in\N$ and $\neg(n<n)$.
+Suppose, for the sake of obtaining a contradiction, that $\next{n}<\next{n}$.
+Then $\next{n}\in n\cup\{n\}$, so we have either $\next{n}\in n$ or $\next{n}=n$.
+
+Case 1: If $\next{n}=n$ then $\next{n}<\next{n}$ gives us $n<n$, which contradicts the induction hypothesis.
+
+Case 2: Suppose that $\next{n}\in n$.
+Then since $n<\next{n}$ and $\next{n}<n$, it follows by transitivity (Theorem \ref{thm:trans_N}) that $n<n$.
+This contradicts the induction hypothesis.
+}
+
+\ex{Prove that $\N\notin\N$. Hint: There is a very short proof.}
+
+\THMNP{Successor Cancels\label{thm:succ_canc}}{Assume that $n,m\in\N$.
+\begin{enumerate}[(1)]
+\item\label{thm:succ_canc1}
+If $\next{m}<\next{n}$, then $m<n$
+\item\label{thm:succ_canc2}
+If $\next{m}=\next{n}$, then $m=n$.
+\end{enumerate}
+}{
+Assume that $n,m\in\N$.
+
+To prove \ref{thm:succ_canc1}, assume that $\next{m}<\next{n}$.
+Then $\next{m}\leq n$, so we have
+$$
+m<\next{m}\leq n.
+$$
+By transitivity (Theorem \ref{thm:trans_N}), it follows that $m<n$.
+
+Now we prove \ref{thm:succ_canc2}.
+Assume that $\next{m}=\next{n}$.
+Since $m\in\next{m}=\next{n}$, we have $m\leq n$. Similarly, we have $n\leq m$.
+We will show that $m\subseteq n$ and $n\subseteq m$.
+
+$\subseteq$:
+Consider any $k\in m$.
+By Theorem \ref{thm:N_closed}, it follows that $k\in\N$.
+We now have $k<m\leq n$ and we may apply transitivity to conclude that $k<n$.
+In other words, $k\in n$.
+
+$\supseteq$:
+Consider any $k\in n$.
+By Theorem \ref{thm:N_closed}, it follows that $k\in\N$.
+We now have $k<n\leq m$ and we may apply transitivity to conclude that $k<m$.
+In other words, $k\in m$.
+}
+
+\THMNP{\label{thm:tri_N}Trichotomy for Order on $\N$}{Assume
+that $n,m\in\N$.
+Then either $m<n$, $n<m$, or $m=n$,
+and only \emph{one} of these conditions holds.
+That is,
+\begin{enumerate}[(1)]
+\item\label{thm:tri_N1}
+$(m=n)\ \OR\ (m<n)\ \OR\ (n<m)$.
+\item\label{thm:tri_N2}
+$\neg(m=n\ \AND\ m<n)$.
+\item\label{thm:tri_N3}
+$\neg(m=n\ \AND\ n<m)$.
+\item\label{thm:tri_N4}
+$\neg(m<n\ \AND\ n<m)$.
+\end{enumerate}
+}{
+Assume 
+}
+
 
 \subsection{Recursion}
 
