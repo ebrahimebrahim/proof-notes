@@ -67,6 +67,12 @@
 \newcommand{\occ}[1]{\operatorname{occ}(#1)}
 \newcommand{\id}[1]{\textrm{id}_{#1}}
 \renewcommand{\next}[1]{\operatorname{next}({#1})}
+\newcommand{\addone}{\ddag}
+
+\DeclareFontFamily{OT1}{pzc}{}
+\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.10] pzcmi7t}{}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\add}{\mathpzc{ADD}}
 
 %\newcommand{\SUBST}[3]{{#1}\left[{#2}\mapsto{#3}\right]}
 %\newcommand{\SUBST}[3]{{#1}_{{#2}\mapsto{#3}}}
@@ -2517,7 +2523,7 @@ which itself was deduced from (\ref{eq:implicitU2}).
 The bottom line is that if you've proven $\pA$ as a theorem, then you can substitute any terms you like for the free variables in $\pA$, and you would also
 have proven the resulting proposition.
 \DRULE{Variable Substitution}{
-Given $\pA$, if $x$ is arbitrary then you can deduce $\SUBST{\pA}{x}{T}$,
+Given $\pA$, if $x$ is \emph{arbitrary} then you can deduce $\SUBST{\pA}{x}{T}$,
 where any term can sit in the position of the ``T''.
 (For example, all variables would be arbitrary if $\pA$ is already proven as a standalone theorem.)
 }
@@ -5579,9 +5585,200 @@ $g(0)=x$ and $g(\next{n})=r'(g(n))$.
 
 \subsection{Addition}
 
-\note{Define addition and prove some of its properties in this section.
-The main objective of this section is to recognize the recursion machine that is always running quietly in the background,
-and also to enjoy the fruits of previous labor.}
+\DEFN{Adding One\label{def:addone}}{
+$\addone=\COLL{(n,\next{n})}{n\in\N}$.
+}
+
+\ex{
+\begin{enumerate}
+\item
+Prove that $\addone:\N\rightarrow\N$.
+\item
+Prove that $\addone$ is injective
+\item
+Prove that $\addone$ is not surjective onto $\N$.
+\end{enumerate}
+}
+
+\DEFN{Adding $n$\label{def:addn}}{
+Define $\add:\N\rightarrow\COLL{f}{f:\N\rightarrow\N}$
+to be the unique function that satisfies
+\begin{itemize}
+\item $\add(0)=\id{\N}$ \ \ and
+\item $\add(\next{n})=\addone\circ (\add(n))$ \ \ for all $n\in\N$.
+\end{itemize}
+}
+
+\ex{The
+definition above is using Theorems
+\ref{thm:rec_exist}
+and
+\ref{thm:rec_unique},
+but some hypotheses need to be verified in order for those theorems to apply.
+Let $X=\COLL{f}{f:\N\rightarrow\N}$.
+Define the recursion rule that is being used in definition \ref{def:addn}.
+That is, define the function that plays the role of ``$r$''
+in Theorem \ref{thm:rec_exist}.
+Prove that the $r$ that you define satisfies $r:X\rightarrow X$.
+}
+
+\ex{
+\begin{enumerate}
+\item Prove that $\add(3)=\addone\circ(\addone\circ\addone)$.
+\item Prove that $\add(3)(2)=5$.
+\end{enumerate}
+}
+
+\DEFN{Addition\label{def:plus}}{
+$$
+a+b = \add(b)(a)
+$$
+}
+
+\ex{
+\begin{enumerate}
+\item Prove that $1+1=2$.
+\item Prove that $2+3=5$.
+\item Prove that $3+2=5$.
+\end{enumerate}
+}
+
+\THMNP{Essence of $+$\label{thm:ess_plus}}{
+Assume that $m,n\in\N$. Then
+\begin{enumerate}[(1)]
+\item\label{thm:ess_plus1} $m+n\in\N$.
+\item\label{thm:ess_plus2} $m+0 = m$.
+\item\label{thm:ess_plus3} $m+\next{n}=\next{m+n}$.
+\item\label{thm:ess_plus4} $\next{n}=n+1$.
+\item\label{thm:ess_plus5} $m+(n+1)=(m+n)+1$.
+\end{enumerate}
+}{
+\putExerciseHeading.
+}
+
+From now on, whenever $n\in\N$ we may use ``$\next{n}$'' and ``$n+1$'' interchangably.
+
+\THMN{Properties of $+$\label{thm:prop_plus}}{Assume
+that $m,n,k\in\N$. Then\\[-0.5em]
+\begin{enumerate}[(1)]
+\item\label{thm:prop_plus1}
+$ m+(n+k) = (m+n)+k $
+\hfill (associativity for $+$)
+\item\label{thm:prop_plus2}
+$ n+0=n $
+\hfill ($0$ is a right-identity for $+$)
+\item\label{thm:prop_plus3}
+$ 0+n=n $
+\hfill ($0$ is a left-identity for $+$)
+\item\label{thm:prop_plus4}
+$ 1+n=n+1 $
+\hfill (preliminary to commutativity)
+\item\label{thm:prop_plus5}
+$ m+n=n+m $
+\hfill (commutativity for $+$)
+\item\label{thm:prop_plus6}
+$ m<n\ \ARR\ m+k<n+k $
+\hfill ($+$ respects $<$)
+\item\label{thm:prop_plus7}
+$ m+k=n+k\ \ARR\ m=n $
+\hfill ($+$ cancels under $=$)
+\item\label{thm:prop_plus8}
+$ m+k<n+k\ \ARR\ m<n $
+\hfill ($+$ cancels under $<$)
+\item\label{thm:prop_plus9}
+$ m+n=0\ \ARR\ (m=0\,\AND\,n=0) $
+\item\label{thm:prop_plus10}
+$ m+n=1\ \ARR\ ((m=1\,\AND\, n=0)\,\OR\,(m=0\,\AND\,n=1))$
+\item\label{thm:prop_plus11}
+$ m+k=n\ \ARR\ m\leq n $
+\item\label{thm:prop_plus12}
+$ m\leq n\ \ARR\ \EXIST{j}{j\in\N\ \AND\ m+j=n} $
+\hfill (solvability of certain equations)
+% that last one is tricky. induction on n, and split the <= into < and = cases.
+\end{enumerate}
+\vspace{0.5em}
+}
+
+We will prove \ref{thm:prop_plus1}, \ref{thm:prop_plus6}, and \ref{thm:prop_plus7} here.
+Proving the rest of them is \putExerciseHeading.
+Many (but not all!) of them are to be proved by induction.
+
+\textit{Proof of \ref{thm:prop_plus1}:}
+Assume that $m,n\in\N$.
+We will prove that
+$$ \ALL{k}{k\in\N\ \ARR\  m+(n+k) = (m+n)+k } $$
+by induction on $k$.
+
+\BChead{}
+We have
+$$
+m+(n+0)=m+n=(m+n)+0,
+$$
+by two applications of Theorem \ref{thm:ess_plus} part \ref{thm:ess_plus2}.
+
+\IShead{}
+Suppose that $k\in\N$ and  $m+(n+k) = (m+n)+k$.
+We can prove $m+(n+(k+1)) = (m+n)+(k+1)$ as follows:
+$$
+\begin{array}{lllc}
+m+(n+(k+1)) & = & m+((n+k)+1) \hspace{3em} & \text{(Theorem \ref{thm:ess_plus})}  \\
+            & = & (m+(n+k))+1              & \text{(Theorem \ref{thm:ess_plus})}  \\
+            & = & ((m+n)+k)+1              & \text{(induction hypothesis)}        \\
+            & = & (m+n)+(k+1)              & \text{(Theorem \ref{thm:ess_plus})}. \\
+\end{array}
+$$
+\done
+
+\textit{Proof of \ref{thm:prop_plus6}:}
+Assume that $n,m\in\N$ an $m<n$.
+We will prove that
+$$ \ALL{k}{k\in\N\ \ARR\   m+k<n+k } $$
+by induction on $k$.
+
+\BChead{}
+We have $m+0<n+0$
+because $m<n$, $m+0=m$, and $n+0=n$.
+
+\IShead{}
+Suppose that $k\in\N$ and $m+k<n+k$.
+We must prove that
+$$m+(k+1)<n+(k+1).$$
+Using associativity, we can rewrite what we want to prove as $(m+k)+1<(n+k)+1$.
+In fact we have this, by Theorem \ref{thm:succ_ord}.
+\done
+
+
+\textit{Proof of \ref{thm:prop_plus7}:}
+Assume that $n,m\in\N$.
+We will prove that
+$$ \ALL{k}{k\in\N\ \ARR\   (m+k=n+k\ \ARR\ m=n) } $$
+by induction on $k$.
+
+\BChead{}
+We have $m+0=n+0\ \ARR\ m=n$ because $m+0=m$ and $n+0=n$.
+
+\IShead{}
+Suppose that $k\in\N$ and $m+k=n+k\ \ARR\ m=n$.
+We must prove that
+$$
+m+(k+1)=n+(k+1)\ \ARR\ m=n.
+$$
+Assume that $m+(k+1)=n+(k+1)$.
+By associativity, $(m+k)+1=(n+k)+1$.
+By Theorem \ref{thm:succ_canc}, it follows that $m+k=n+k$.
+By the induction hypothesis, it follows that $m=n$.
+\done
+
+\ex{
+Assume that $a\in\N$.
+Let $f:\N\rightarrow\N$ be the unique function satisfying $f(0)=0$ and $f(n+1)=f(n)+a$ for all $n\in\N$.
+Prove that $f(m+k)=f(m)+f(k)$ for all $m,k\in\N$.
+}
+
+
+
+
+
 
 \subsection{Cardinality}
 
