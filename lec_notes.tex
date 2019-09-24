@@ -3123,7 +3123,7 @@ Is there a mathematical version of ``the'' that can allow us to write down a \em
 which refers to ``the unique such-and-such''?
 
 If we know that $\EXIST{x}{\text{$x$ is green}}$, then we can always use \hyperlink{hl:EI}{EI}
-to ``get'' a gren thing $x$.
+to ``get'' a green thing $x$.
 But that would just be a \emph{hypothetical} green thing that was can use for the sake of arguments.
 We can use it to draw conclusions, but ``$x$'' would still not refer to any \emph{specific} green thing.
 It would be ``a green thing'' and not ``the green thing.''
@@ -3139,7 +3139,7 @@ is a \emph{singleton}.
 This means that $\COLL{x}{\text{$x$ is green}}=\{g\}$ for some $g$, and then if we ``pluck'' $g$ out of $\{g\}$, that's
 ``\emph{the} green thing.''
 
-It is therefore useful to have a formal mechanism for ``plucking'' the single occupant of a signleton out from between the curly braces.
+It is therefore useful to have a formal mechanism for ``plucking'' the single occupant of a singleton out from between the curly braces.
 The following definition provides this, although this may not be clear until Theorem \ref{thm:occ}.
 
 
@@ -3157,7 +3157,7 @@ If you try to use the definition without first verifying that those conditions h
 We can declare the notation to be ``undefined'' in such cases, and reject any argument that breaches into undefined territory.
 We just don't talk about $\occ{s}$ unless $s$ is already known to be a singleton.
 
-\THMNP{\label{thm:occ}(Essence of Occupant)}{$\occ{\{g\}}=g.$}{
+\THMNP{\label{thm:occ}Essence of Occupant}{$\occ{\{g\}}=g.$}{
 $\subseteq$:
 Assume that $z\in \occ{\{g\}}$.
 Then for every $x\in \{g\}$, we have $z\in x$.
@@ -5326,7 +5326,7 @@ In other words, $m$ is a minimum of $A$. This contradicts our assumption that $A
 Why couldn't it just have been ``$k\notin\N$''? Try carrying out the proof with (\ref{eq:wellord})
 replaced by ``$k\notin\N$'' and observe what blocks the proof from working.}
 
-The well-ordering theorem, Theorem \ref{thm:wellord}, provides a new and sometime more powerful way to carry out a proof by induction.
+The well-ordering theorem, Theorem \ref{thm:wellord}, provides a new and sometimes more powerful way to carry out a proof by induction.
 Suppose you want to prove that all natural numbers are green. Then instead of proving a base case and an induction step, you can frame
 your argument like this:
 
@@ -5345,29 +5345,277 @@ The fact that $m<n$ and $m\in A$ contradicts that $n$ was the minimum of $A$.
 
 \subsection{Recursion}
 
+A function $f:\N\rightarrow X$ whose domain is $\N$ is called a \emph{sequence}.
+Sequences are sometimes described by listing the first few outputs in order, and then putting ``\ldots''.
+Here is an example:
+$$
+f(0)=2,\ f(1)=3,\ f(2)=4,\ f(3)=5,\ \ldots
+$$
+In this example, it seems that $f:\N\rightarrow\N$, and we can guess what $f$ is intended to be.
+We can guess that the ``\ldots'' are trying to communicate that
+$f(n)=\next{\next{n}}$ for all $n\in\N$, or in other words that
+$f=\COLL{(n,\next{\next{n}})}{n\in\N}$. It might
+be better to just define $f$ explicitly like this,
+rather than create unnecessary guessing with ``\ldots''.
+
+Now consider the following example
+$$
+f(0)=2,\ 
+f(1)=4,\ 
+f(2)=6,\ 
+f(3)=8,\ 
+\ldots 
+$$
+Now what in the world is $f$ supposed to be? What is ``\ldots'' trying to communicate here?
+You might want to write something like ``$f(n)=2\cdot n+2$'',
+but ``$+$'' and ``$\cdot$'' have yet to be defined! 
+The sort of pattern we \emph{can} describe with the machinery built so far is that
+$f(\next{n})$ seems to always equal $\next{\next{f(n)}}$.
+That is, we can describe the output of $f$ in terms of ``previous'' outputs.
+This is called a \emph{recursion rule}.
+The list of outputs above is an attempt to communicate that $f$ has the following two properties:
+\begin{itemize}
+\item $f(0)=2$. 
+\item $\ALL{n}{n\in\N\ \ARR\ f(\next{n})=\next{\next{f(n)}}}$
+\end{itemize}
+Still, how is $f$ \emph{defined} exactly?
+The recursion rule is just some property that $f$ is asserted to satisfy--
+how do we know that there even \emph{is} a function satisfying that property?
+The following theorems are concerned with resolving this issue.
+
+\THMNP{Definition by Recursion - Existence\label{thm:rec_exist}}{
+
+If $s\in X$ and $r:X\rightarrow X$, then there exists an $f:\N\rightarrow X$ such that
+$f(0)=s$ and
+$$ \ALL{n}{n\in\N\ \ARR\ f(\next{n})=r(f(n)) }. $$
+}{
+Assume that $s\in X$ and $r:X\rightarrow X$. Define
+$$
+Z=\COLL{h}{h\subseteq\N\times X\ \ \AND\ \ (0,s)\in h\ \ \AND\ \ \ALL{n,x}{(n,x)\in h\ \ARR\ (\next{n},r(x))\in h}}.
+$$
+The set $Z$ can be thought of as collecting together all the sets of pairs that sort of have the properties that we want,
+except that they might contain more elements than they need in order to do so.
+For example, it is easy to see that $\N\times X$ is an element of $Z$.
+The main problem with elements of $Z$ is that most of them are not functions.
+However, if we attempt to collect only the ``essential'' pairs that every element of $Z$ must have in order to be an element of $Z$,
+then we may find that we have a function that has the desired properties. Define
+$$
+f=\COLL{p}{\ALL{h}{h\in Z\ARR p\in h}}.
+$$
+Since $\N\times X\in Z$, we have $p\in f\,\ARR\,p\in \N\times Z$ for all $p$, so $f\subseteq\N\times X$.
+Since we have $f\subseteq\N\times X$, if we want to prove that $f:\N\rightarrow X$ then we only need to show that $f$ is a function and $\N\subseteq\dom{f}$
+(see Theorem \ref{thm:mapping_convenience}).
+To finish the proof of this theorem, then, we need to prove the following claims:
+\begin{enumerate}[(1)]
+\item $\N\subseteq\dom{f}$. \label{claim:rec_exist_1}
+\item $f$ is a function. \label{claim:rec_exist_2}
+\item $f(0)=s$. \label{claim:rec_exist_3}
+\item $ \ALL{n}{n\in\N\ \ARR\ f(\next{n})=r(f(n)) }. $ \label{claim:rec_exist_4}
+\end{enumerate}
+To do this, we will first prove some helper claims:
+\begin{enumerate}[(1),resume]
+\item $f\in Z$. \label{claim:rec_exist_5}
+\item $(0,s)\in f$ and $s$ is unique with respect to this property. That is, $\COLL{x}{(0,x)\in f}=\{s\}$.\label{claim:rec_exist_6}
+\end{enumerate}
+\textit{Proof of Claim \ref{claim:rec_exist_5}:}
+We now argue that $f\in Z$.
+We already have $f\subseteq\N\times X$.
+We have $(0,s)\in f$ because whenever $h\in Z$, it follows that $(0,s)\in h$.
+Now consider any $(n,x)\in f$. We must show that $(\next{n},r(x))\in f$.
+Consider any $h\in Z$. Since $(n,x)\in f$, we have $(n,x)\in h$.
+It follows that $(\next{n},r(x))\in h$, because $h\in Z$.
+Since we have shown that $(\next{n},r(x))\in h$ for all $h\in Z$, we have shown that $(\next{n},r(x))\in f$.
+Thus we have shown that $f\in Z$.
+
+\textit{Skippable Comment:} It is easy to see from the construction of $f$ that $f\subseteq h$ for every $h\in Z$.
+So $f$ is an element of $Z$ which is a subset of every element of $Z$. Thus $f$ can be thought of as the ``smallest''
+set of pairs in $Z$.
+
+\textit{Proof of Claim \ref{claim:rec_exist_6}:}
+We already have that $(0,s)\in f$ from Claim \ref{claim:rec_exist_5},
+so we only need to prove here that $s$ is unique.
+Suppose that $(0,x)\in f$, and suppose for the sake of contradiction that $x\neq s$.
+Define $g=f\setminus\{(0,x)\}$.
+
+\putExerciseHeading: Prove that $g\in Z$. 
+
+Since $(0,x)\in f$ and $g\in Z$, we should have $(0,x)\in g$. We have arrived at a contradiction, so Claim \ref{claim:rec_exist_6} is proven.
+
+
+\textit{Proof of Claim \ref{claim:rec_exist_1}:}
+We will do induction on $n$ to prove that $\ALL{n}{n\in\N\,\ARR\, n\in\dom{f}}$.
+
+\BChead{}
+Since $(0,s)\in f$, we have $0\in\dom{f}$.
+
+\IShead{}
+Suppose that $n\in\N$ and $n\in\dom{f}$.
+Get $x$ such that $(n,x)\in f$.
+Since $f\in Z$, it follows that $(\next{n},r(x))\in f$.
+Therefore $\next{n}\in\dom{f}$.
+
+By induction, Claim \ref{claim:rec_exist_1} is proven.
+
+\textit{Proof of Claim \ref{claim:rec_exist_2}:}
+Since $f\subseteq \N\times X$, we know that $f$ is a set of pairs. We must prove that
+$$
+\ALL{x,y,z}{(x,y),(x,z)\in f\ \ARR\ y=z}.
+$$
+This is equivalent to
+$$
+\ALL{n}{n\in\N\ \ARR\ \ALL{x,y}{(n,x),(n,y)\in f\ \ARR\ x=y}},
+$$
+which we will prove by doing induction on $n$.
+
+\BChead{}
+Suppose that $(0,x),(0,y)\in f$. Then by Claim \ref{claim:rec_exist_6} we have $x=s=y$.
+
+\IShead{}
+Suppose that $n\in\N$ and that $(n,x),(n,y)\in f\,\ARR\, x=y$ for all $x,y$.
+Consider any $x,y$ such that $(\next{n},x),(\next{n},y)\in f$.
+By Claim \ref{claim:rec_exist_1}, we can get $z$ such that $(n,z)\in f$.
+We will argue that $x=r(z)=y$.
+
+Suppose, for the sake of contradiction, that $x\neq r(z)$.
+Define $g=f\setminus\{(\next{n},x)\}$.
+\indented{Subclaim: $g\in Z$.\\
+\textit{Proof of Subclaim:}
+Since $g\subseteq f\subseteq\N\times X$, we have $g\subseteq \N\times X$.
+We know that $(0,s)\in f$ from Claim \ref{claim:rec_exist_6}, and it cannot be that $(0,s)=(\next{n},x)$
+because it cannot be that $0=\next{n}$ (see Theorem \ref{thm:aboutzero}).
+Therefore $(0,s)\in g$.
+Now we must show that $\ALL{n,x}{(n,x)\in g\ \ARR\ (\next{n},r(x))\in g}$.
+Consider any $(m,w)\in g$.
+Since $f\in Z$ and $(m,w)\in f$, we have $(\next{m},r(w))\in f$.
+In order to deduce $(\next{m},r(w))\in g$, we need to ensure that $(\next{m},r(w))$
+is not equal to $(\next{n},x)$.
+Suppose, for the sake of contradiction, that $(\next{m},r(w))=(\next{n},x)$.
+Then $\next{m}=\next{n}$ and $r(w)=x$.
+By Theorem \ref{thm:succ_canc}, it follows that $m=n$. Then our induction hypothesis applies to 
+the situation $(n,z),(m,w)\in f$ and tells us that $z=w$.
+Thus $x=r(w)=r(z)$, contradicting our assumption that $x\neq r(z)$.
+This proves the subclaim.
+}
+Since $(\next{n},x)\in f$ and $g\in Z$, we should have $(\next{n},x)\in g$. We have arrived
+at a contradiction, and so we conclude that $x=r(z)$.
+
+The same argument can be applied to $y$ show that $y=r(z)$.
+Therefore $x=y$, and the induction step is complete.
+
+By induction, Claim \ref{claim:rec_exist_2} is proven.
+
+Claim \ref{claim:rec_exist_3} immediately follows from the fact that $f$ is a function and $(0,s)\in f$.
+
+
+
+\textit{Proof of Claim \ref{claim:rec_exist_4}:}
+Consider any $n\in\N$.
+Then $n\in\dom{f}$, so $(n,f(n))\in f$. 
+Since $f\in Z$, it follows that $(\next{n},r(f(n)))\in f$.
+Therefore, since $f$ is a function, we have $f(\next{n})=r(f(n))$.
+}
+
+\THMN{Definition by Recursion - Uniqueness\label{thm:rec_unique}}{
+
+Assume that $s\in X$ and $r:X\rightarrow X$. If
+\begin{enumerate}[(1)]
+\item \label{hyp:rec_unique1}
+$f,g:\N\rightarrow X$,
+\item \label{hyp:rec_unique2}
+$f(0)=g(0)=s$,
+\item \label{hyp:rec_unique3}
+$\ALL{n,x}{n\in\N\ARR f(\next{n})=r(f(n))}$, and
+\item \label{hyp:rec_unique4}
+$\ALL{n,x}{n\in\N\ARR g(\next{n})=r(g(n))}$,
+\end{enumerate}
+then $f=g$.
+}
+\proofnewline
+\textit{Proof:}
+Assume that $s\in X$,
+$r:X\rightarrow X$,
+and \ref{hyp:rec_unique1}-\ref{hyp:rec_unique4} hold.
+By Theorem \ref{thm:fn_eq}, if we prove that 
+$$ \ALL{n}{n\in\N\ \ARR\ f(n)=g(n)} $$
+then we will have $f=g$.
+We proceed with an induction on $n$.
+
+\BChead{}
+The base case $f(0)=g(0)$ is built into assumption \ref{hyp:rec_unique2}.
+
+\IShead{}
+Suppose that $n\in\N$ and $f(n)=g(n)$.
+Then
+\[
+f(\next{n})=r(f(n))=r(g(n))=g(\next{n}).
+\tag*{\qedsymbol}
+\]
+
+We now have the ability to define a function (with domain $\N$) by specifying its value at $0$ and specifying a recursion rule.
+
+\ex{\label{ex:recursion01}
+Define $r:\N\rightarrow\N$ by $r(n)=\next{\next{n}}$.
+Let $f:\N\rightarrow\N$ be the unique function that satisfies $f(0)=2$ and $f(\next{n})=r(f(n))$
+for all $n\in\N$.
+\begin{enumerate}
+\item Prove that $f(3)=8$.
+\item Prove that $2\leq f(n)$ for all $n\in\N$.
+\end{enumerate}
+}
+
+\ex{
+Define $r$ and $f$ as in Exercise \ref{ex:recursion01}.
+Assume that $x\neq y$. Define $r'=\{(x,y),(y,x)\}$.
+Let $g:\N\rightarrow \{x,y\}$ be the unique function that satisfies
+$g(0)=x$ and $g(\next{n})=r'(g(n))$.
+\begin{enumerate}
+\item Prove that $r':\{x,y\}\rightarrow\{x,y\}$ and $r'$ is a bijection onto $\{x,y\}$.
+\item Prove that $r'\circ r'=\id{\{x,y\}}$
+\item Prove that $g(3)=y$.
+\item Prove that $g(f(n))=x$ for all $n\in\N$.
+\end{enumerate}
+}
+
+
 \subsection{Addition}
 
-\subsection{Relations}
-
-% defining Z using equiv reln?
-
-% partial orderings
-
-% sup and inf?
+\note{Define addition and prove some of its properties in this section.
+The main objective of this section is to recognize the recursion machine that is always running quietly in the background,
+and also to enjoy the fruits of previous labor.}
 
 \subsection{Cardinality}
 
-% hmm
+\note{Main goals in this section are Cantor's Theorem and Cantor-Schroeder-Bernstein Theorem. Consider also proving ``axiom'' of finite choice.}
+
+\subsection{Relations}
+
+\note{Equivlance relations and partitions.
+Consider defining $\Z$ using equivalence relations.
+Consider talking about partial orders, and other sorts of relations.
+Consider introducing ideas of $\sup$ and $\inf$.}
+
 
 \appendix
 
 \section{Fixing the Bug}
 
+\note{Explain what is broken about the membership axiom. Outline some of the changes that need to be made to align the development here to proper NBG set theory,
+going through how the membership axiom can be repaired, and what new axioms need to be introduced to let pretty much the same machinery run.
+}
+
 \section{Maps}
+
+\note{Describe the category of sets and the theorems from the functions chapter that can be reconstrued as properties of the category of sets.
+Emphasize the importance of ``fixing the bug'' for the purpose of doing category theory.
+Mention that there are many categories.}
 
 % "codomain" and morphisms and the category viewpoint
 
+
+
 \section{Philosophy}
+
+\note{Provide references for interesting topics in the philosophy of mathematics that are approachable after studying the material here.}
 
 % was everything really a set this whole time and we were just ignorant? um no
 % benacerraf points from "what numbers could not be"
