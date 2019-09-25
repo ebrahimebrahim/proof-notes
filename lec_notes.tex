@@ -4648,7 +4648,7 @@ However, there is no hope for a general theorem. What is needed for the general 
 there exists a function $g:Y\rightarrow X$ such that $f\circ g=\id{Y}$.
 }
 
-We will not use Axiom \ref{ax:choice}, but it is absolutely essential for much of modern mathematics.
+We will not use Axiom \ref{ax:choice}, but it is essential for much of modern mathematics.
 
 Putting together Theorems \ref{thm:leftinv} and \ref{thm:rightinv} gives us a nice characterization of bijectivity in terms of composition:
 
@@ -4870,7 +4870,7 @@ Given any term $T$, the string ``$\next{T}$'' forms a term, defined as follows.
 $\next{x}=x\cup\{x\}$.
 }
 
-We now introduce ten new constants into our language.
+We now introduce ten new \hyperlink{hl:constants}{constants} into our language.
 
 \DEF{
 $$
@@ -5054,7 +5054,15 @@ By induction (Theorem \ref{thm:ind}), we have proven (\ref{eqn:pred}).
 \end{enumerate}
 }
 
-\ex{Prove that $x<\next{y}\ \DARR\ x\leq y$. We will use this fact freely.}
+\THMNP{Essence of Order and Succession\label{thm:ess_ord}}{
+\begin{enumerate}[(1)]
+\item $x<\next{x}$.
+\item $x<\next{y}\ \DARR\ x\leq y$.
+\end{enumerate}
+}{
+\putExerciseHeading.
+}
+
 
 \THMNP{About $0$\label{thm:aboutzero}}{
 If $n\in\N$, then
