@@ -30,7 +30,8 @@
 
 
 % Some of Ebrahim's definitions
-\newcommand{\note}[1]{[#1]}
+%\newcommand{\note}[1]{[#1]}
+\newcommand{\note}[1]{[This portion has yet to be written.]}
 \newcommand{\done}{\\\hspace*{0pt}\hfill$\blacksquare$}
 \def\N{\mathbb{N}}
 \def\R{\mathbb{R}}
@@ -73,6 +74,10 @@
 \DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.10] pzcmi7t}{}
 \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 \newcommand{\add}{\mathpzc{ADD}}
+
+\newcommand{\eqnm}{\approx} % equinumerous
+\newcommand{\injex}{\preceq} % an injection exists
+\newcommand{\injnobij}{\prec} % an injection exists but no bijection exists
 
 %\newcommand{\SUBST}[3]{{#1}\left[{#2}\mapsto{#3}\right]}
 %\newcommand{\SUBST}[3]{{#1}_{{#2}\mapsto{#3}}}
@@ -163,7 +168,7 @@ We start in section \ref{sec:lang} with an introduction to formal axiomatic syst
 %a comment on hyperlinks in this document and the usefulness of having a back button
 
 
-\note{Write the general intro here later.}
+%\note{Write the general intro here later.}
 
 
 
@@ -1995,7 +2000,10 @@ and then returning to this exercise.
 \indented{
 Assume that if $\EXIST{x}{\text{$x$ is a bird}}$, then $\EXIST{x}{\text{$x$ can fly}}$.
 We shall now attempt to prove that $\ALL{x}{\text{$x$ is a bird}\ARR\text{$x$ can fly}}$.
-Since $\EXIST{x}{\text{$x$ is a bird}}$, we can get a bird; call this bird $x$.
+Consider any $x$ and assume that $x$ is a bird.
+Then \emph{something} is a bird, so  $\EXIST{x}{\text{$x$ is a bird}}$.
+It follows that $\EXIST{x}{\text{$x$ can fly}}$.
+%Since $\EXIST{x}{\text{$x$ is a bird}}$, we can get a bird; call this bird $x$.
 Since $\EXIST{x}{\text{$x$ can fly}}$, we can get something that can fly; call this something $x$.
 Since $x$ is a bird and it can fly, we have proven that $\text{$x$ is a bird}\ARR\text{$x$ can fly}$.
 Since $x$ is arbitrary, we can generalize to conclude that $\ALL{x}{\text{$x$ is a bird}\ARR\text{$x$ can fly}}$. 
@@ -3906,6 +3914,8 @@ If it is not, explain why not. The first two are done for you.
 \end{enumerate}
 }
 
+\ex{Prove that if $f$ is a function and $g\subseteq f$, then $g$ is a function.}
+
 \ex{
 Prove that if $f$ and $g$ are functions and $\dom{f}\cap\dom{g}=\emptyset$, then $f\cup g$ is a function.
 }
@@ -5790,7 +5800,77 @@ Prove that $f(m+k)=f(m)+f(k)$ for all $m,k\in\N$.
 
 \subsection{Cardinality}
 
-\note{Main goals in this section are Cantor's Theorem and Cantor-Schroeder-Bernstein Theorem. Consider also proving ``axiom'' of finite choice.}
+An injective function $f:A\rightarrow B$ associates to each element of $A$ a unique element of $B$.
+We can imagine that an injection $f$ \emph{embeds} $A$ into $B$, with $\ran{f}$ being a subset of $B$ that, via $f$, looks like a copy of $A$.
+\begin{center}\includegraphics[scale=1]{embed.pdf}\end{center}
+For $A$ to embed into $B$ like this,
+it seems that $B$ must have at least as many elements as $A$, and $B$ can possibly have more elements that don't get mapped to.
+
+A surjective function $g:A\rightarrow B$ associates the elements of $A$ to elements of $B$ in such a way that 
+every element of $B$ has at least one element of $A$ mapping to it.
+However, unless $g$ is also injective, some elements of $B$ can have multiple elements of $A$ mapping to them.
+We can imagine that a surjection $g$ collapses some bunches of elements of $A$ onto all the individual elements of $B$.
+\begin{center}\includegraphics[scale=1]{collapse.pdf}\end{center}
+For each element of $B$ to receive at least one arrow, it seems that $A$ must have at least as many elements as $B$,
+and $A$ can possibly have more elements that get collapsed into some already-targeted elements of $B$.
+
+A bijective function $h:A\rightarrow B$ associates all the element of $A$ to all the elements of $B$ in a one-to-one way.
+\begin{center}\includegraphics[scale=1]{collapse2.pdf}\end{center}
+For a bijection to be possible, it seems that $A$ must have exactly as many elements as $B$.
+If $A$ had too few elements, then some elements of $B$ would remain untargeted, ruling out surjectivity.
+If $A$ had too many elements, then some collapsing would have to occur, ruling out injectivity.
+
+This has been an imprecise discussion of some ideas that you can keep in mind for what is to come.
+
+\DEFN{Cardinality}{
+\begin{enumerate}[(1)]
+\item $A\eqnm B\ \DARR\ \EXIST{f}{f:A\rightarrow B\ \AND\ \text{$f$ is a bijection onto $B$}}$.
+\item $A\injex B\ \DARR\ \EXIST{f}{f:A\rightarrow B\ \AND\ \text{$f$ is injective}}$.
+\item $A\injnobij B\ \DARR\ (A\injex B\ \AND\ \neg(A\eqnm B))$.
+\end{enumerate}
+}
+
+When $A\eqnm B$, we say that $A$ and $B$ \emph{have the same cardinality}.
+
+\THMPL{
+\begin{enumerate}[(1)]
+\item \label{thm:eqnm_props1}
+$A\eqnm A$
+\hfill (reflexivity for $\eqnm$)
+\item \label{thm:eqnm_props2}
+If $A\eqnm B$ then $B\eqnm A$.
+\hfill (symmetry for $\eqnm$)
+\item \label{thm:eqnm_props3}
+If $A\eqnm B$ and $B\eqnm C$, then $A\eqnm C$.
+\hfill (transitivity for $\eqnm$)
+\end{enumerate}
+}{
+Proving \ref{thm:eqnm_props1} and \ref{thm:eqnm_props3} is \putExerciseHeading.
+We prove \ref{thm:eqnm_props2} here.
+
+Assume that $A\eqnm B$.
+Get a bijection $f:A\rightarrow B$.
+By Theorem \ref{thm:bij_inv}, the inverse $\rev{f}:B\rightarrow A$ is bijective.
+Therefore $B\eqnm A$.
+}{\label{thm:eqnm_props}}
+
+
+\THMPL{
+\begin{enumerate}[(1)]
+\item \label{thm:injex_props1}
+$A\injex A$
+\hfill (reflexivity for $\injex$)
+\item \label{thm:injex_props3}
+If $A\injex B$ and $B\injex C$, then $A\injex C$.
+\hfill (transitivity for $\injex$)
+\end{enumerate}
+}{
+\putExerciseHeading.
+}{\label{thm:injex_props}}
+
+
+\note{More to be written here}
+
 
 \subsection{Relations}
 
