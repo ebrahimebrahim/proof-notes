@@ -185,7 +185,7 @@ To build up the grammar of a language, one can specify how parts of speech fit t
 constituents fit together to form even more complex constituents, eventually grammatical sentences.
 
 Mathematics is a language, and so it makes sense to build up its grammar (its \emph{syntax}) using this same strategy.
-Instead of pronouns, nouns, verbs, noun phrases, sentences, and so on, there are just four constitutuents in
+Instead of pronouns, nouns, verbs, noun phrases, sentences, and so on, there are just four constituents in
 mathematics. Two are basic parts of speech and two are more complex constituents:
 \begin{itemize}
 \item \emph{Variables} are a basic part of speech.
@@ -780,7 +780,7 @@ there is a column for $(\pA\AND\pB)\OR\pC$ and a column for $\pA\AND(\pB\OR\pC)$
 
 \item
 Your answer to the above should convince you that it's a terrible idea to write something like ``$\pA\AND\pB\OR\pC$.''
-Replace $\pA$, $\pB$, and $\pC$ by English sentences in $\pA\AND\pB\OR\pC$ such that you get an ambiguous Enlgish sentence.
+Replace $\pA$, $\pB$, and $\pC$ by English sentences in $\pA\AND\pB\OR\pC$ such that you get an ambiguous English sentence.
 Explain the ambiguity in your sentence.
 
 \item \label{itm:truthtables:first_equiv}
@@ -897,7 +897,7 @@ If an assumption leads to a contradiction, then the assumption is rejected as fa
 If you assume $\pB$, and then after some argumentation you deduce $\pA\AND\neg\pA$, then
 you can back out of your original assumption and conclude without a doubt that $\neg\pB$.
 Now let's think, hypothetically, what would happen if a contradiction $\pA\AND\neg\pA$ were actually \emph{true}?
-If $\pA\AND\neg\pA$ holds, then we can prove $\pB$ by contradiciton as follows:
+If $\pA\AND\neg\pA$ holds, then we can prove $\pB$ by contradiction as follows:
 \indented{
 Suppose, for the sake of contradiction, that $\neg\pB$ holds.\vsp
 Since $\pA\AND\neg\pA$ has already been assumed to hold, we've already reached a contradiction.\vsp
@@ -1324,7 +1324,7 @@ we can conclude $\pB$ from $\neg\pA\OR\pB$ and $\pA$.
 
 % comment on the inutiitiveness of this as ``$\pB$, unless $\neg\pA$'', and on how it means implications were not needed
 The fact that $\pA\ARR\pB$ can be rewritten as $\neg\pA\OR\pB$ suggests that we never needed to formally introduce $\ARR$ into our language.
-Everytime we want to say ``if $\pA$, then $\pB$,'' we could instead say ``either $\pB$, or it's not the case that $\pA$.''
+Every time we want to say ``if $\pA$, then $\pB$,'' we could instead say ``either $\pB$, or it's not the case that $\pA$.''
 But life is better when we can phrase things in terms of $\ARR$, and that is why we choose to have it.
 
 % puzzle $\neg(\pA\ARR\pB)\DARR (\pA\AND\neg\pB)$
@@ -1411,7 +1411,7 @@ Instead, it is part of the language we are currently using to communicate. That 
 language in which this document is written, and it will help us in our mission to \emph{specify} the language of mathematics.
 You can think of ``$\SUBST{\pA}{x}{T}$'' as simply a shorthand for the instruction 
 \indented{
-\emph{Take the proposition ``$\pA$'' and replace all occurances of the variable ``$x$'' with the term ``$T$'', and then write the resulting proposition.}
+\emph{Take the proposition ``$\pA$'' and replace all occurrences of the variable ``$x$'' with the term ``$T$'', and then write the resulting proposition.}
 }
 
 \paragraph{More on substitution is coming later.}
@@ -1838,7 +1838,7 @@ $\ALL{x}{\EXIST{y}{\text{$y$ loves $x$}}}$.
 
 As you study the arguments in this section, try to identify exactly where UI, UG, EI, and EG are being used.
 
-Regarding the derived rule above, the coverse cannot be proven!
+Regarding the derived rule above, the converse cannot be proven!
 It may be useful to look at what goes wrong if we attempt to prove it anyway:
 \indented{
 A failed attempt to prove that
@@ -1867,7 +1867,7 @@ The $y$ loves \emph{that} particular $x$, and it does not make sense to generali
 %That was kind of subtle, right?
 %Of the rules UI, UG, EI, and EG, there are two subtle ones. UG is subtle, as we just saw, in that it requires that a variable really be arbitrary before
 %a generalization is made. The other subtle one is EI
-The error in appying UG was really subtle, and it would have been quite difficult to catch in stricly general proof written in terms of ``$\pA$''.
+The error in applying UG was really subtle, and it would have been quite difficult to catch in strictly general proof written in terms of ``$\pA$''.
 This is why we will often include specific English propositions like ``$y$ loves $x$'' as an aide.
 It's actually fairly technical to work with quantifiers in a completely general pure logic setting.
 
@@ -1946,7 +1946,7 @@ Assume that all birds can fly.
 Assume that everything is a bird-- our goal is now to establish that everything can fly.
 Consider any $x$.
 Since everything is a bird, we have in particular that $x$ is a bird.
-Since all birds can fly, we have in particalar that if $x$ is a bird then $x$ can fly.
+Since all birds can fly, we have in particular that if $x$ is a bird then $x$ can fly.
 Therefore $x$ can fly.
 Since $x$ remains arbitrary, we may generalize to conclude that \emph{everything} can fly. 
 }
@@ -1979,7 +1979,7 @@ Since we have found an $x$ such that $\pB$, we conclude that $\EXIST{x}{\pB}$. %
 Assume that all birds can fly.
 Assume that there exists a bird-- our goal is now to establish that there exists something that can fly.
 Since a bird exists, let's get one and call it $x$.
-Since all birds can fly, we have in particalar that if $x$ is a bird then $x$ can fly.
+Since all birds can fly, we have in particular that if $x$ is a bird then $x$ can fly.
 Therefore $x$ can fly.
 Since we have found something $x$ that can fly, we conclude that \emph{something} can fly. 
 }
@@ -2054,7 +2054,7 @@ Before reading on you might want to take a moment and consider what exact part o
 The error is in the second use of EI. Recall that when you use EI to go from $\EXIST{x}{\pA}$ to $\pA$,
 the variable $x$ cannot already be in use. If it is in use, then you have to substitute in a new variable such as $y$, and then you can bring
 $\SUBST{\pA}{x}{y}$ into the argument.
-The critical error in the argument given here is in ``let's call that $x$ as well,'' which is where we decied to name the green thing $x$.
+The critical error in the argument given here is in ``let's call that $x$ as well,'' which is where we decided to name the green thing $x$.
 We should have used a different name, like $y$,
 since we only knew that we could get \emph{some} green thing and we should not allow that to conflict with the name $x$ that we gave to our hypothetical flower.
 If we had called the flower $x$ and the green thing $y$, then there would be no way for the argument to proceed, and all's right with the world.
@@ -2620,7 +2620,7 @@ for some $x$, $\pA$ &
 Recall that the game of mathematics consists of starting points, which are the axioms,
 and ways of generating new results from the starting points, which are the rules of deduction.
 In the previous section, we established all the rules of deduction.
-In this section, we will introduce axioms and genarate some results from them.
+In this section, we will introduce axioms and generate some results from them.
 
 
 
@@ -3279,7 +3279,7 @@ Since $z\notin\emptyset$, it must be that $z \in a$ (Rule \ref{DRULE:alt_elim}).
 Proving the rest of them is \putExerciseHeading.
 
 In the proofs given above, you can see some different ways of proving an equality.
-In the first two proofs, the pattern is to estbalish a chain of ``$\DARR$'' and then gain an equality like $A=B$
+In the first two proofs, the pattern is to establish a chain of ``$\DARR$'' and then gain an equality like $A=B$
 by having proven $\ALL{z}{z\in A\DARR z\in B}$.
 This is relying on Axiom \ref{ax:eq_gain}.
 In the third proof, the pattern is to gain $A=B$ by establishing $A\subseteq B$ and $B\subseteq A$.
@@ -4505,7 +4505,7 @@ The notation ``$f,g:X\rightarrow Y$'' below is short for ``$f:X\rightarrow Y\ \A
 that $f,g:X\rightarrow Y$.
 \begin{enumerate}[(1)]
 \item\label{thm:comp_cancel1}
-If $h:Y\rightarrow Z$, $h$ is injectve,
+If $h:Y\rightarrow Z$, $h$ is injective,
 and $h\circ f=h\circ g$, then $f=g$.
 \item\label{thm:comp_cancel2}
 If $h:Z\rightarrow X$, $h$ is surjective onto $X$,
@@ -5286,8 +5286,8 @@ Proving \ref{thm:tri_N2}, \ref{thm:tri_N3}, and \ref{thm:tri_N4} is \putExercise
 
 \ex{Prove that $2<5$. Prove that $4 \neq 7$.}
 
-\DEFN{Minumum}{Given
-$A\subseteq\N$, we say that $n$ \emph{is a minumum of} $A$ if and only if $n\in A$ and
+\DEFN{Minimum}{Given
+$A\subseteq\N$, we say that $n$ \emph{is a minimum of} $A$ if and only if $n\in A$ and
 $\ALL{a}{a\in A\ \ARR\ n\leq a}$.
 }
 
@@ -5357,7 +5357,7 @@ your argument like this:
 \THMMOCK{All natural numbers are green.}{
 Define $A$ to be the set of non-green natural numbers.
 Suppose, for the sake of contradiction, that $A$ is nonempty.
-Then by well-ordering (Theorem \ref{thm:wellord}), there is a minumum element $n$ of $A$.
+Then by well-ordering (Theorem \ref{thm:wellord}), there is a minimum element $n$ of $A$.
 That is, there is a minimum non-green natural number $n$.
 \indented{[insert argument convincing reader that there exists $m<n$ such that $m$ is non-green]}
 The fact that $m<n$ and $m\in A$ contradicts that $n$ was the minimum of $A$.
@@ -5674,7 +5674,7 @@ Assume that $m,n\in\N$. Then
 \putExerciseHeading.
 }
 
-From now on, whenever $n\in\N$ we may use ``$\next{n}$'' and ``$n+1$'' interchangably.
+From now on, whenever $n\in\N$ we may use ``$\next{n}$'' and ``$n+1$'' interchangeably.
 
 \THMN{Properties of $+$\label{thm:prop_plus}}{Assume
 that $m,n,k\in\N$. Then\\[-0.5em]
@@ -5890,7 +5890,7 @@ going through how the membership axiom can be repaired, and what new axioms need
 
 \section{Maps}
 
-\note{Describe the category of sets and the theorems from the functions chapter that can be reconstrued as properties of the category of sets.
+\note{Describe the category of sets and the theorems from the functions chapter that can be re-construed as properties of the category of sets.
 Emphasize the importance of ``fixing the bug'' for the purpose of doing category theory.
 Mention that there are many categories.}
 
