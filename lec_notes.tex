@@ -222,7 +222,7 @@ The difference between constants and variables is that constants are not meant t
 The constant ``$2$'' refers to a specific thing, rather than being a placeholder for something.
 
 
-Note that we are mainly talking about elements of \emph{language}, and not about what those elements \emph{refer} to.
+Note that we are mainly talking about \emph{elements of language}, and not about what those elements \emph{refer} to.
 Germany is not a noun, it's a country. ``Germany'' is, however, a noun.
 Similarly, we can say that $2$ is not a constant, but rather ``$2$'' is.
 And $x$ is not a variable, but rather ``$x$'' is.
@@ -3748,7 +3748,7 @@ Prove that the domain of $S$ is $\{a,b\}$ and the range of $S$ is $\{a,c,d\}$.}
 
 \ex{Assuming that $S\subseteq T\subseteq A\times B$, prove that $\dom{S}\subseteq\dom{T}$.}
 
-\ex{Assuming that $S$ and $T$ are both sets of pairs, prove that $\dom{S\cup T}=\dom{S}\cup\dom{T}$.}
+\ex{\label{ex:domcup}Assuming that $S$ and $T$ are both sets of pairs, prove that $\dom{S\cup T}=\dom{S}\cup\dom{T}$.}
 
 
 \subsection{Functions}
@@ -3914,9 +3914,9 @@ If it is not, explain why not. The first two are done for you.
 \end{enumerate}
 }
 
-\ex{Prove that if $f$ is a function and $g\subseteq f$, then $g$ is a function.}
+\ex{\label{ex:restrict}Prove that if $f$ is a function and $g\subseteq f$, then $g$ is a function.}
 
-\ex{
+\ex{\label{ex:piecewise}
 Prove that if $f$ and $g$ are functions and $\dom{f}\cap\dom{g}=\emptyset$, then $f\cup g$ is a function.
 }
 
@@ -4483,7 +4483,7 @@ to conclude that $\drev{f}\circ\rev{f}=\id{Y}$.
 Using Theorem \ref{thm:double_rev} to rewrite this as $f\circ\rev{f}=\id{Y}$, we have proven part \ref{thm:inv_comp1}.
 }
 
-\THMNP{Composition, Injectivity, and Surjectivity}{
+\THMNP{\label{thm:comp_inj_surj}Composition, Injectivity, and Surjectivity}{
 
 Assume
 that $f:X\rightarrow Y$ and $g:Y\rightarrow Z$.
@@ -4682,7 +4682,7 @@ And there exists $g:Y\rightarrow X$
 such that $f\circ g=\id{Y}$, so $f$ is surjective onto $Y$ by Theorem \ref{thm:rightinv}.
 }
 
-\ex{(Challenging, skippable)
+\ex{(Challenging)\label{ex:inj_leftinv_real}
 Prove that if $f:X\rightarrow Y$, $f$ is injective, and $X$ is nonempty, then there exists
 some $g:Y\rightarrow X$ such that $g\circ f=\id{X}$.
 (This is what it should really mean for $f$ to be ``left-invertible,'' rather
@@ -5831,6 +5831,12 @@ This has been an imprecise discussion of some ideas that you can keep in mind fo
 }
 
 When $A\eqnm B$, we say that $A$ and $B$ \emph{have the same cardinality}.
+As suggsted by the informal discussion above, we can think of ``$A\eqnm B$'' as saying that
+$A$ and $B$ have ``the same number of elements.''
+%However, notice that there is no notion of ``number'' involved
+%in the definition of ``$A\eqnm B$''.
+However, notice that there is no mention of $\N$ or its elements in the definition of ``$A\eqnm B$''.
+It is interesting that ``having the same number of elements'' can be defined without any reference to ``number.''
 
 \THMPL{
 \begin{enumerate}[(1)]
@@ -5868,8 +5874,162 @@ If $A\injex B$ and $B\injex C$, then $A\injex C$.
 \putExerciseHeading.
 }{\label{thm:injex_props}}
 
+In the informal discussion at the beginning of this section, it is suggested that ``$A\injex B$''
+is a way of saying that $B$ has at least as many elements as $A$.
+If $B$ has at least as many elements as $A$, and $A$ has at least as many elements as $B$, then one would
+expect that $A$ and $B$ must have the same amount of elements.
+This turns out to be correct, but it is not so easy to prove.
+This is the content of the next two theorems.
 
-\note{More to be written here}
+\THMNP{\label{thm:cbs_pre}Preliminary to Cantor-Schroeder-Bernstein}{
+If $C\subseteq A$ and $A\injex C$, then $A\eqnm C$.
+}{
+Assume that $C\subseteq A$ and $A\injex C$.
+Get an injection $f:A\rightarrow C$.
+Let $S:\N\rightarrow \SUB{A}$ be the unique function that satisfies
+$S(0)=A\setminus C$ and
+$S(n+1)=f[S(n)]$ for all $n\in\N$.
+Define
+$$ D=\COLL{d}{\EXIST{n}{n\in\N\ \AND\ d\in S(n)}}. $$
+Define
+$$ g=\COLL{(a,f(a))}{a\in D} \ \cup\ \id{A\setminus D}. $$
+We claim that $g:A\rightarrow C$ and $g$ is a bijection onto $C$.
+Our claims are:
+\begin{enumerate}[(1)]
+\item \label{thm:csb_pre1} $g$ is a function.
+\item \label{thm:csb_pre2} $\dom{g}=A$.
+\item \label{thm:csb_pre3} $\ran{g} = C$.
+\item \label{thm:csb_pre4} $g$ is injective.
+\end{enumerate}
+Once we prove these claims, we can conclude that $A\eqnm C$ and the theorem is proven.
+We will prove a couple of useful facts along the way:
+\begin{enumerate}[(1),resume]
+\item \label{thm:csb_pre5}
+$f[D]\subseteq D$.
+\item \label{thm:csb_pre6}
+For all $a\in A$, we have $g(a)=f(a)$ if $a\in D$ and we have $g(a)=a$ if $a\notin D$.
+\end{enumerate}
+\textit{Proof of Claim \ref{thm:csb_pre5}:}
+Consider any $d\in D$; we must show that $f(d)\in D$.
+Get $n\in\N$ such that $d\in S(n)$.
+Then $f(d)\in f[S(n)]=S(n+1)$.
+Therefore $f(d)\in D$.
+
+\textit{Proof of Claim \ref{thm:csb_pre1}:}
+Since $\COLL{(a,f(a))}{a\in D}$ is a subset of $f$, it is a function (see Exercise \ref{ex:restrict}).
+Observe that $\dom{\COLL{(a,f(a))}{a\in D}}=D$ and $\dom{\id{A\setminus D}}=A\setminus D$
+have empty intersection.
+Since $g$ is the union of the two functions $\COLL{(a,f(a))}{a\in D}$ and $\id{A\setminus D}$,
+and since the intersection of their domains is empty, it follows from Exercise \ref{ex:piecewise} that $g$ is a function.
+
+\textit{Proof of Claim \ref{thm:csb_pre2}:}
+Applying Exercise \ref{ex:domcup},
+$$
+\dom{g}\ =\ \dom{\COLL{(a,f(a))}{a\in D}}\ \cup\ \dom{\id{A\setminus D}}\ =\ D\cup(A\setminus D)\ =\ A.
+$$
+
+\textit{Proof of Claim \ref{thm:csb_pre6}:}
+Consider any $a\in A$.
+We will apply Theorem \ref{thm:ess_eval}.
+If $a\in D$, then $(a,f(a))\in \COLL{(a,f(a))}{a\in D}\subseteq g$, so $f(a)=g(a)$.
+If $a\notin D$, then $(a,a)\in\id{A\setminus D} \subseteq g$, so $a=g(a)$.
+
+\textit{Proof of Claim \ref{thm:csb_pre3}:}
+$\subseteq$:
+Consider any $z\in\ran{g}$.
+Get $x\in A$ such that $z=g(x)$.
+Either $x\in D$ or $x\notin D$.
+
+Case 1: Suppose that $x\in D$.
+Then $z=g(x)=f(x)\in\ran{f}\subseteq C$.
+
+Case 2: Suppose that $x\notin D$.
+Then $z=g(x)=x \in A\setminus D$. If we had $z\notin C$, then we would have $z\in A\setminus C=S(0)\subseteq D$.
+So it must be that $z\in C$.
+
+In both cases we have shown that $z\in C$, so this proves that $\ran{g}\subseteq C$.
+
+$\supseteq$:
+Now consider any $z\in C$. Either $z\in D$ or $z\notin D$.
+
+Case 1: Suppose that $z\notin D$. Then $z\in A\setminus D$, and so we have $z=g(z)\in\ran{g}$.
+
+Case 2: Suppose that $z\in D$. Get $n\in \N$ such that $z\in S(n)$.
+It cannot be that $n=0$, for then we would have $z\in S(0)=A\setminus C$, which contradicts the assumption $z\in C$.
+Therefore we can get $m\in \N$ such that $n=m+1$ (Theorem \ref{thm:pred}).
+Then $z\in S(m+1)=f[S(m)]$, so we can get a $d\in S(m)$ such that $z=f(d)$. Since $d\in D$, we have $g(d)=f(d)=z$.
+
+In both cases we have shown that $z\in \ran{g}$, so this proves the claim.
+
+\textit{Proof of Claim \ref{thm:csb_pre4}:}
+Consider any $a,b\in A$ such that $g(a)=g(b)$.
+We will show that $a=b$.
+We consider four cases based on whether $a\in D$ and whether $b\in D$.
+
+Case 1: Suppose that $a,b\in D$.
+Then $f(a)=g(a)=g(b)=f(b)$, so it follows that $a=b$ due to the injectivity of $f$.
+
+Case 2: Suppose that $a,b\notin D$.
+Then $a=g(a)=g(b)=b$.
+
+Case 3: Suppose that $a\in D$ and $b\notin D$.
+Then $g(a)=f(a)$ and $g(b)=b$, so we have $f(a)=b$.
+But this contradicts that $f[D]\subseteq D$, for we have $a\in D$ and $f(a)=b\notin D$.
+It turns out that Case 3 is not possible.
+
+Case 4: Suppose that $b\in D$ and $a\notin D$. This is Case 3 with $a$ and $b$ swapped.
+Using the same argument, we see that Case 4 is not possible.
+}
+
+\THMNP{\label{thm:csb}Cantor-Schroeder-Bernstein, AKA Antisymmetry for $\injex$}{
+
+If $A\injex B$ and $B\injex A$, then $A\eqnm B$. }{
+Assume that $A\injex B$ and $B\injex A$.
+Get an injection $f:A\rightarrow B$ and an injection $g:B\rightarrow A$.
+Define $C=\ran{g}$. 
+Observe that $g:B\rightarrow C$ is a bijection onto $C$. Therefore we have $B\eqnm C$.
+
+Consider the composite $g\circ f :A\rightarrow A$.
+By Theorem
+\ref{thm:comp_inj_surj},
+the composite $g\circ f$ is injective since $f$ and $g$ are injective.
+Since $\ran{g\circ f}\subseteq\ran{g}=C$, we actually have $g\circ f :A\rightarrow C$.
+That is, we have an injection from $A$ into a subset $C$ of $A$.
+Theorem \ref{thm:cbs_pre} then applies and we conclude that $A\eqnm C$.
+
+Since also $B\eqnm C$, we can apply symmetry and transitivity for $\eqnm$ to conclude that $A\eqnm B$.
+}
+
+\ex{Prove that if $A\subseteq B$, then $A\injex B$.}
+
+\ex{Prove that if $A\eqnm B$ and $C\eqnm D$, then $A\times C \eqnm B\times D$.}
+
+\THMP{If $A\injex B$, then there exists a surjection $g:B\rightarrow A$.}{
+Assume that $A\injex B$.
+Get an injection $f:A\rightarrow B$.
+By Exercise
+\ref{ex:inj_leftinv_real},
+we can get a function $g:B\rightarrow A$ such that $g\circ f = \id{A}$.
+It follows that $g\circ f$ is surjective, and so by Theorem
+\ref{thm:comp_inj_surj}
+we conclude that $g$ is surjective. 
+}
+
+\ex{
+Accepting Axiom \ref{ax:choice} just for this exercise, prove that if $f:A\rightarrow B$ is surjective onto $B$, then $B\injex A$.
+}
+
+
+
+
+\subsection{Finite Sets}
+
+\note{to be written}
+
+
+\subsection{Infinite Sets}
+
+\note{to be written}
 
 
 \subsection{Relations}
@@ -5898,9 +6058,9 @@ Mention that there are many categories.}
 
 
 
-\section{Philosophy}
+%\section{Philosophy}
 
-\note{Provide references for interesting topics in the philosophy of mathematics that are approachable after studying the material here.}
+%\note{Provide references for interesting topics in the philosophy of mathematics that are approachable after studying the material here.}
 
 % was everything really a set this whole time and we were just ignorant? um no
 % benacerraf points from "what numbers could not be"
