@@ -589,12 +589,16 @@ Since $\pC$ holds in both cases, we can conclude that $\pC$ holds.
 }
 
 Let's do an example using English sentences.
-Suppose you see a plant with three-leaf bunches and you're sure that it's either poison ivy or poison oak, but you don't know which.
-Well, you do know that poison ivy is poisonous and that poison oak is poisonous, so you can at least conclude that the plant you see is poisonous, even
-if you don't know which type of plant it is.
+Say you are hiking with your friend, and you see your friend brush past a plant with three-leaf bunches. You're not sure if it's poison ivy or poison oak, but you
+know that it is one of them, and you know that both plants will cause a rash when touched.
+So you argue to your friend: ``Suppose that plant was poison ivy. Then you would get a rash.
+Now suppose the plant was poison oak. Then you would also get a rash. I'm sure that the plant was either poison ivy or it was poison oak, so you can expect a rash my friend.''
+%Suppose you see a plant with three-leaf bunches and you're sure that it's either poison ivy or poison oak, but you don't know which.
+%Well, you do know that poison ivy is poisonous and that poison oak is poisonous, so you can at least conclude that the plant you see is poisonous, even
+%if you don't know which type of plant it is.
 That's a proof by cases.
 To make the proof structure apparent in
-the formatting given above, replace $\pA$ by ``the plant is poison ivy,'' replace $\pB$ by ``the plant is poison oak,'' and replace $\pC$ by ``the plant is poisonous.''
+the formatting given above, replace $\pA$ by ``the plant is poison ivy,'' replace $\pB$ by ``the plant is poison oak,'' and replace $\pC$ by ``you will get a rash.''
 
 %You get something like this:
 %\THM{Assuming that the plant is either poison ivy or poison oak, we can conclude that it is poisonous.}{
@@ -1131,7 +1135,7 @@ Case 2: Suppose that $\pB$ holds... that's it for case 2.
 In both cases we conclude $\pB$, so we can conclude $\pB$.
 }
 
-In the above argument we've made use of the previously discussed rule ``contradictions are powerful!''
+In the above argument we've made use of rule \ref{rule:contradictions}.
 
 
 \DRULEPF{Or Distributes over And}{
@@ -1287,7 +1291,8 @@ Due to excluded middle, either $\pA$ or $\neg\pA$.\lsp
 Case 1: Suppose that $\pA$ holds. Now if $\pB$ held we would obtain $\pA\AND\pB$, which leads to the contradiction $(\pA\AND\pB)\AND\neg(\pA\AND\pB)$.
 Therefore it must be that $\neg\pB$. From this it follows that $\neg\pA\OR\neg\pB$.\lsp
 
-Case 2: Suppose that $\neg\pA$ holds. Then it immediately follows that $\neg\pA\OR\neg\pB$.
+Case 2: Suppose that $\neg\pA$ holds. Then it immediately follows that $\neg\pA\OR\neg\pB$.\lsp
+
 Since we ended up with $\neg\pA\OR\neg\pB$ in both cases, we can conclude that $\neg\pA\OR\neg\pB$.
 \\[1em]
 
@@ -1720,7 +1725,7 @@ Write each of the following using quantifier notation (i.e. using $\forall$ and 
 
 % a comment (maybe put this earlier) on how repetitiveness is okay for now, and better to fix it later. perhaps sian comments on how fix
 
-\subsection{More Derived Logical Rules}
+\subsection{Derived Logical Rules for Quantifiers}
 \label{sec:derived2}
 
 \setlength{\columnseprule}{1pt}
@@ -3916,8 +3921,21 @@ If it is not, explain why not. The first two are done for you.
 
 \ex{\label{ex:restrict}Prove that if $f$ is a function and $g\subseteq f$, then $g$ is a function.}
 
+\ex{\label{ex:restrict2}Assume that $f:X\rightarrow Y$ and $A\subseteq X$.
+Define $g=\COLL{(a,f(a))}{a\in A}$.
+\begin{enumerate}
+\item Write out the full non-shorthand definition of $g$ that includes the existential quantifer.
+\item Prove that $g:A\rightarrow Y$.
+\end{enumerate}
+}
+
 \ex{\label{ex:piecewise}
 Prove that if $f$ and $g$ are functions and $\dom{f}\cap\dom{g}=\emptyset$, then $f\cup g$ is a function.
+}
+
+\ex{\label{ex:fn_deletion}
+Assume that $f:X\rightarrow Y$ and $x\in\dom{f}$.
+Define $g=f\setminus\{(x,f(x))\}$. Prove that $g:(X\setminus\{x\})\rightarrow(Y\setminus\{f(x)\})$.
 }
 
 \DEFN{Injectivity, Surjectivity, and Bijectivity\label{def:ivity}}{
@@ -4002,7 +4020,7 @@ then for each $y\in Y$ \emph{there exists a unique} $x\in X$ that maps to $y$.
 When $f:X\rightarrow Y$ and $f$ is bijective onto $Y$,
 we say that $f$ gives a \emph{one-to-one correspondence} between the elements of $X$ and the elements of $Y$.
 
-\ex{Prove that if $f$ is an injective function and $g\subseteq f$, then $g$ is an injective function.}
+\ex{\label{ex:subset_inj}Prove that if $f$ is an injective function and $g\subseteq f$, then $g$ is an injective function.}
 
 \ex{Let $f=\{(a,c),(b,d)\}$ and assume that $a\neq b$.
 Prove that $f:\{a,b\}\rightarrow\{c,d\}$ and $f$ is bijective onto $\{c,d\}$.
@@ -4798,7 +4816,7 @@ $\supseteq$:
 \ex{Prove that if $f:X\rightarrow Y$, then $f$ is injective
 if and only if for all $y\in Y$, $\rev{f}[\{y\}]$ is either empty or it is a singleton.}
 
-\ex{Prove that if $f:X\rightarrow Y$, then $f$ is surjective onto $Y$ if and only if for all $y\in Y$,
+\ex{\label{ex:surj_preimage}Prove that if $f:X\rightarrow Y$, then $f$ is surjective onto $Y$ if and only if for all $y\in Y$,
 $\rev{f}[\{y\}]$ is nonempty.}
 
 \THMPL{Assume that $f:X\rightarrow Y$, $A\subseteq X$, and $B\subseteq Y$.
@@ -4882,7 +4900,7 @@ $\next{x}=x\cup\{x\}$.
 
 We now introduce ten new \hyperlink{hl:constants}{constants} into our language.
 
-\DEF{
+\DEFN{\label{def:numbers}Certain Numbers}{
 $$
 \begin{array}{ll}
 0 = \emptyset \hspace{6em} & 5=\next{4} \\
@@ -5280,11 +5298,13 @@ in each of the three cases.
 Proving \ref{thm:tri_N2}, \ref{thm:tri_N3}, and \ref{thm:tri_N4} is \putExerciseHeading.
 }
 
-\ex{Prove that if $n,m\in\N$, then $(n\leq m \  \AND\  m\leq n)\ \ARR\ n=m$.}
+\ex{\label{ex:N_antisymmetry}Prove that if $n,m\in\N$, then $(n\leq m \  \AND\  m\leq n)\ \ARR\ n=m$.}
 
 \ex{Prove that if $n,m\in\N$, then $\neg(n\leq m)\ \DARR\ m<n$.\label{ex:notleq}}
 
 \ex{Prove that $2<5$. Prove that $4 \neq 7$.}
+
+\ex{\label{ex:setminus_decrement}Assume that $n=\next{m}$. Prove that $n\setminus\{m\}=m$.}
 
 \DEFN{Minimum}{Given
 $A\subseteq\N$, we say that $n$ \emph{is a minimum of} $A$ if and only if $n\in A$ and
@@ -5902,7 +5922,7 @@ Our claims are:
 \item \label{thm:csb_pre4} $g$ is injective.
 \end{enumerate}
 Once we prove these claims, we can conclude that $A\eqnm C$ and the theorem is proven.
-We will prove a couple of useful facts along the way:
+We will establish a couple of useful facts along the way:
 \begin{enumerate}[(1),resume]
 \item \label{thm:csb_pre5}
 $f[D]\subseteq D$.
@@ -6000,7 +6020,7 @@ Theorem \ref{thm:cbs_pre} then applies and we conclude that $A\eqnm C$.
 Since also $B\eqnm C$, we can apply symmetry and transitivity for $\eqnm$ to conclude that $A\eqnm B$.
 }
 
-\ex{Prove that if $A\subseteq B$, then $A\injex B$.}
+\ex{\label{ex:subset_injex}Prove that if $A\subseteq B$, then $A\injex B$.}
 
 \ex{Prove that if $A\eqnm B$ and $C\eqnm D$, then $A\times C \eqnm B\times D$.}
 
@@ -6015,7 +6035,7 @@ It follows that $g\circ f$ is surjective, and so by Theorem
 we conclude that $g$ is surjective. 
 }
 
-\ex{
+\ex{\label{ex:choice_card}
 Accepting Axiom \ref{ax:choice} just for this exercise, prove that if $f:A\rightarrow B$ is surjective onto $B$, then $B\injex A$.
 }
 
@@ -6023,6 +6043,246 @@ Accepting Axiom \ref{ax:choice} just for this exercise, prove that if $f:A\right
 
 
 \subsection{Finite Sets}
+
+We next investigate finite sets.
+It may be useful to be aware of the elements of $0,1,2,\ldots$ based on Definition \ref{def:numbers}:
+\indented{
+$0=\emptyset$\\
+$1=\next{0}=0\cup\{0\}=\emptyset\cup\{0\}=\{0\}$\\
+$2=\next{1}=1\cup\{1\}=\{0\}\cup\{1\}=\{0,1\}$\\
+$3=\next{2}=2\cup\{2\}=\{0,1\}\cup\{2\}=\{0,1,2\}$\\
+\ldots
+}
+
+\DEFN{Finiteness}{
+\begin{enumerate}[(1)]
+\item We say that $A$ \emph{has $n$ elements} iff $n\in\N$ and $A\eqnm n$.
+\item A set is \emph{finite} iff it has $n$ elements for some $n\in\N$.
+\item A set is \emph{infinite} iff it is not finite.
+\end{enumerate}
+}
+
+In some of the proofs to come, it is useful to be able to quickly get bijections that swap elements:
+
+\THMNP{Element Swap\label{thm:swap}}{
+If $p,q\in A$, then there is a bijection $f:A\rightarrow A$ such that $f(p)=q$ and $f(q)=p$.
+}{
+\putExerciseHeading.
+Hint: Prove that $(\id{A}\setminus\{(p,p),(q,q)\})\cup \{(p,q),(q,p)\}$ works.
+}
+
+\THMNP{$\injex$ and $\leq$\label{thm:injex_leq}}{
+If $n,m\in\N$, then $$n\injex m\ \DARR\ n\leq m.$$
+}{
+Assume that $n,m\in\N$.
+
+$\Leftarrow$:
+Assume that $n\leq m$.
+Then whenever $k<n$, it follows that $k<m$.
+In other words, $n\subseteq m$.
+Therefore $n\injex m$, by Exercise \ref{ex:subset_injex}.
+
+$\Rightarrow$:
+We will prove by induction on $m$ that 
+$$\ALL{n}{n\injex m\ARR n\leq m},$$
+for all $m\in\N$.
+%It is important that the $n$ be quantified in the proposition on which we are doing induction. 
+
+\BChead{}
+Consider any $n\injex 0$.
+Get an injection $f:n\rightarrow 0$.
+We have $f\subseteq n\times \emptyset = \emptyset$, so $f=\emptyset$.
+Therefore $n=\dom{f}=\emptyset=0$, and so $n\leq m$.
+
+\IShead{}
+Suppose that $m\in\N$ and $\ALL{n}{n\injex m\ARR n\leq m}$.
+Consider any $n\injex m+1$.
+Get an injection $f:n\rightarrow (m+1)$.
+Either $m\in\ran{f}$ or $m\notin\ran{f}$.
+
+Case 1: Suppose that $m\notin\ran{f}$.
+Then $f:n\rightarrow m$, so $n\injex m$.
+By the induction hypothesis, it follows that $n\leq m$.
+Therefore we also have $n\leq m+1$.
+
+Case 2: Suppose that $m\in\ran{f}$.
+Let $k$ be the unique element of $n$ such that $f(k)=m$.
+Since $k<n$, we know that $0<n$, so we can get $s\in\N$ such that $n=s+1$.
+Using Theorem \ref{thm:swap}, get a bijection $g:n\rightarrow n$ such that
+$g(s)=k$ and $g(k)=s$.
+Define $h=f\circ g$. Then we have that $h$ is injective,
+$h:n\rightarrow m+1$, and $h(s)=f(g(s))=f(k)=m$.
+Define $j=h\setminus\{(s,m)\}$.
+Then $j$ is injective (see Exercise \ref{ex:subset_inj}), and
+$j:(n\setminus\{s\})\rightarrow ((m+1)\setminus \{m\})$ (see Exercise \ref{ex:fn_deletion}).
+Therefore we have $j:s\rightarrow m$
+(see Exercise \ref{ex:setminus_decrement}).
+Since we have found an injection from $s$ to $m$, we have $s\injex m$.
+We may apply the induction hypothesis to $s$ to conclude that $s\leq m$.
+It follows that $s+1\leq m+1$. That is, $n\leq m+1$.
+}
+
+\THMNP{$\eqnm$ and $=$ for Natural Numbers}{
+If $n,m\in\N$, then $$n\eqnm m\ \DARR\ n = m.$$
+}{
+The implication ``$\Leftarrow$'' is just Axiom \ref{ax:eq_used} and Theorem \ref{thm:eqnm_props}.
+For ``$\Rightarrow$'', assume that $n\eqnm m$. Then $m\eqnm n$ (Theorem \ref{thm:eqnm_props} again),
+and so we have both $n\injex m$ and $m\injex n$. Applying Theorem \ref{thm:injex_leq} to both of these,
+we get $n\leq m$ and $m\leq n$. It follows that $n=m$ (see Exercise \ref{ex:N_antisymmetry}).
+}
+
+\ex{\label{ex:injex_leq}Prove that if $X$ has $n$ elements, $Y$ has $m$ elements, and $X\injex Y$, then $n\leq m$.}
+
+\ex{Assume
+that $X$ has $n$ elements, $Y$ has $m$ elements, and $m<n$.
+Prove that it is impossible for $f:X\rightarrow Y$ to be injective.
+This result is called ``The Pigeonhole Principle.''
+}
+
+The next two theorems are special cases of Axiom \ref{ax:choice}.
+Proofs are immediate if one chooses to accept Axiom \ref{ax:choice}.
+We do not officially accept Axiom \ref{ax:choice} in these notes,
+and so we provide proofs.
+
+\THMNP{Finite Choice - Preliminary Version\label{thm:FC_prelim}}{
+If $n\in\N$ and $f:A\rightarrow n$ surjectively, then there exists $g:n\rightarrow A$ such that $f\circ g=\id{n}$.
+}{
+We will prove that
+$$
+\ALL{A,f}{(\text{$f:A\rightarrow n$ surjectively})\ \ARR\ \EXIST{g}{(g:n\rightarrow A)\ \AND\ (f\circ g=\id{n})}}
+$$
+for all $n\in\N$, by doing induction on $n$.
+
+\BChead{}
+Consider any $A$ and $f$ such that $f:A\rightarrow 0$ surjectively.
+Then we have $f\subseteq A\times\emptyset=\emptyset$, so $f=\emptyset$.
+Therefore $A=\dom{f}=\emptyset$.
+Define $g=\emptyset$.
+Then $g:0\rightarrow A$, and $f\circ g=\emptyset=\id{\emptyset}=\id{0}$.
+
+\IShead{}
+Suppose that $n\in\N$ and that, for all $A,f$ such that $f:A\rightarrow n$ surjectively, there exists $g:n\rightarrow A$
+such that $f\circ g=\id{n}$.
+Now consider any $A$ and $f$ such that $f:A\rightarrow (n+1)$ surjectively.
+Define $N=\rev{f}[\{n\}]$, and define
+$f'=\COLL{(a,f(a))}{a\in A\setminus N}$.
+Then we have $f':A\setminus N\rightarrow (n+1)$ (see Exercise \ref{ex:restrict2}).
+We claim that $\ran{f'}=n$.
+
+$\subseteq$:
+To see that $\ran{f'}\subseteq n$, consider any $k\in\ran{f'}$.
+Then $k\in (n+1)$.
+To show that $k\in n$, we only need to show that $k\neq n$.
+Get $a\in A\setminus N$ such that $f'(a)=k$.
+Since $f'\subseteq f$, we also have $f(a)=f'(a)=k$.
+If we had $k=n$, then we would have $a\in \rev{f}[\{n\}]=N$.
+Therefore $k\neq n$.
+
+$\supseteq$:
+To see that $n\subseteq\ran{f'}$, consider any $k\in n$.
+Then $k\in (n+1)$, so by the surjectivity of $f$ we can get some $a\in A$ such that $f(a)=k$.
+If we had $a\in N$, then we would have $k=f(a)=n$, and this would lead to the impossible situation $n\in n$.
+Therefore $a\in A\setminus N=\dom{f'}$.
+Since $f'\subseteq f$, we then have $f'(a)=f(a)=k$.
+Therefore $k\in \ran{f'}$.
+
+Now we've established that $\ran{f'}=n$, so we have that $f':A\setminus N\rightarrow n$ and that $f'$ is surjective onto $n$.
+Our induction hypothesis allows us to get $g:n\rightarrow A\setminus N$ such that $f'\circ g=\id{n}$.
+Our remaining task is to construct a function $g':(n+1)\rightarrow A$ such that $f\circ g'=\id{n+1}$.
+Since $f$ is surjective, the set $N$ is nonempty (see Exercise \ref{ex:surj_preimage}),
+and so we can get $a_0$ such that $a_0\in N$. Define
+$$
+g'=g\cup\{(n,a_0)\}.
+$$
+We now claim that $g':(n+1)\rightarrow A$ and that $f\circ g'=\id{n+1}$. Once this is established, the induction step will be complete and the theorem will be proven.
+
+To see that $g'$ is a function, we will use Exercise \ref{ex:piecewise}.
+It is clear that $\{(n,a_0)\}$ is a function.
+The intersection of $\dom{g}=n$ and $\dom{\{(n,a_0)\}}=\{n\}$
+is empty by Theorem \ref{thm:irr_N}. By Exercise \ref{ex:piecewise}, we conclude that $g'$ is a function.
+
+To see that $\dom{g'}=n+1$, we apply Exercise \ref{ex:domcup}:
+$$
+\dom{g'}=\dom{g\cup \{(n,a_0)\}}=\dom{g}\cup\dom{\{(n,a_0)\}}=n\cup\{n\}=n+1.
+$$
+To see that $\ran{g'}\subseteq A$, consider any $a\in\ran{g'}$.
+Get $k\in(n+1)$ such that $g'(k)=a$.
+Then either $k=n$ or $k\in n$.
+In the case that $k=n$, we have $g'(k)=a_0\in N\subseteq A$.
+In the case that $k\in n$, we have $g'(k)=g(k)\in\ran{g}\subseteq A\setminus N\subseteq A$.
+In both cases, we ended up with $g'(k)\in A$. In other words, $a\in A$.
+
+Finally, to see that $f\circ g'=\id{n+1}$ we consider any $k\in (n+1)$.
+Then either $k=n$ or $k\in n$.
+
+Case 1: Suppose that $k=n$. Then we have
+$$
+(f\circ g')(k) =
+(f\circ g')(n) =
+f(g'(n)) =
+f(a_0)=n = k.
+$$
+Case 2: Suppose that $k\in n$.
+Since $g\subseteq g'$ and $k\in\dom{g}$, we have $g(k)=g'(k)$.
+Since $k\in\dom{g}$, we have $g(k)\in\ran{g}=A\setminus N = \dom{f'}$.
+Since $f'\subseteq f$ and $g(k)\in\dom{f'}$, we have $f'(g(k))=f(g(k))$.
+Putting these together, we have
+$$
+(f\circ g')(k) =
+f(g'(k)) =
+f(g(k)) = 
+f'(g(k)) = 
+(f'\circ g)(k)=
+\id{n}(k)=
+k.
+$$
+In both cases we ended up with 
+$$(f\circ g')(k) = k = \id{n+1}(k), $$
+so by Theorem \ref{thm:fn_eq} we conclude that $f\circ g'=\id{n+1}$.
+}
+
+\THMNP{Finite Choice\label{thm:FC}}{
+If $X$ is finite and $f:A\rightarrow X$ surjectively, then there exists $g:X\rightarrow A$ such that $f\circ g=\id{X}$.
+}{
+Assume that $X$ is finite and $f:A\rightarrow X$ surjectively.
+Get $n\in\N$ such that $X\eqnm\N$.
+Get a bijection $h:X\rightarrow n$.
+Then $h\circ f:A\rightarrow n$, and $h\circ f$ is surjective by Theorem \ref{thm:comp_inj_surj}.
+Therefore we can apply Theorem \ref{thm:FC_prelim} to get some $j:n\rightarrow A$ such that
+$(h\circ f)\circ j =\id{n}$.
+Composing with $\rev{h}$ on the left and $h$ on the right
+completes the proof; here are the details:
+$$\begin{array}{llll}
+\id{X} & = & \rev{h}\circ h \hspace{9em}                      & \text{(Theorem \ref{thm:inv_comp})}     \\
+      & = & (\rev{h}\circ \id{n})\circ h                      & \text{(Theorem \ref{thm:ess_id})}       \\
+      & = & (\rev{h}\circ ((h\circ f)\circ j))\circ h        &                                          \\
+      & = & (\rev{h}\circ h) \circ (f \circ (j \circ h))     & \text{(Theorem \ref{thm:assoc_comp})}    \\
+      & = & \id{X} \circ (f \circ (j \circ h))                & \text{(Theorem \ref{thm:inv_comp})}     \\
+      & = & f \circ (j \circ h)                              & \text{(Theorem \ref{thm:ess_id})}.     
+\end{array}$$
+We have found a function $j\circ h:X\rightarrow A$ such that $f\circ (j\circ h)=\id{X}$.
+}
+
+Compare the following theorem to Exercise \ref{ex:choice_card}.
+
+\THMPL{If $X$ is finite and $f:A\rightarrow X$ surjectively, then $X\injex A$.}{
+Assume that $X$ is finite and $f:A\rightarrow X$ surjectively.
+By Theorem \ref{thm:FC}, we can get $g:X\rightarrow A$ such that $f\circ g=\id{X}$.
+By Theorem \ref{thm:comp_inj_surj}, the function $g$ must be injective.
+}{\label{thm:surj_finite}}
+
+\ex{Prove that if $n,m\in\N$ and there is a surjection $f:m\rightarrow n$, then $n\leq m$.}
+
+
+
+
+
+
+
+
+
+
+
 
 \note{to be written}
 
