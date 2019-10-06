@@ -3474,14 +3474,14 @@ Prove that $a\cup b=\emptyset$ if and only if $a=\emptyset$ and $b=\emptyset$.
 Prove that $\{x,y\} = \{x\}\cup\{y\}$.
 }
 
-\ex{
+\ex{\label{ex:relcompfun}
 Prove these fun facts about relative complements:
 \begin{enumerate}
 \item $a\setminus b\subseteq a$.
 \item $a\setminus a=\emptyset$.
 \item $a\cap b=\emptyset$ if and only if $a\setminus b=a$.
 \item $a\subseteq b$ if and only if $a\setminus b =\emptyset$.
-\item $(a\setminus b)\cup b = a\cup b$.
+\item $(a\setminus b)\cup b = a\cup b$. \label{ex:relcompfun1}
 \item $(a\setminus b)\cap b = \emptyset$.
 \item $a\setminus (b\cup c) = (a\setminus b)\setminus c$.
 \end{enumerate}
@@ -6062,6 +6062,13 @@ $3=\next{2}=2\cup\{2\}=\{0,1\}\cup\{2\}=\{0,1,2\}$\\
 \end{enumerate}
 }
 
+\ex{Prove that a set is empty if and only if it has $0$ elements.}
+
+\ex{Prove that a set is a singleton if and only if it has $1$ element.}
+
+\ex{Prove that if $\{x,y\}$ has $2$ elements, then $x\neq y$.}
+
+
 In some of the proofs to come, it is useful to be able to quickly get bijections that swap elements:
 
 \THMNP{Element Swap\label{thm:swap}}{
@@ -6273,6 +6280,151 @@ By Theorem \ref{thm:comp_inj_surj}, the function $g$ must be injective.
 
 \ex{Prove that if $n,m\in\N$ and there is a surjection $f:m\rightarrow n$, then $n\leq m$.}
 
+\THMNP{Adding One Element\label{thm:card_add_one}}{
+\begin{enumerate}[(1)]
+\item\label{thm:card_add_one1}
+If $X$ has $n$ elements and $a\notin X$, then $X\cup\{a\}$ has $n+1$ elements.
+\item\label{thm:card_add_one2}
+If $X$ is finite, then $X\cup\{a\}$ is finite.
+\end{enumerate}
+}{
+Assume that $X$ has $n$ elements and $a\notin X$.
+Get a bijection $f:X\rightarrow n$.
+Define $f'=f\cup\{(a,n)\}$.
+
+\putExerciseHeading: Prove that $f':X\cup\{a\}\rightarrow (n+1)$ and $f'$ is bijective.
+
+\putExerciseHeading: Use \ref{thm:card_add_one1} to prove \ref{thm:card_add_one2}.
+}
+
+\THMNP{Subsets Inherit Finiteness - Preliminary Version\label{thm:subsets_inherit_finiteness_prelim}}{
+
+If $n\in\N$ and $S\subseteq n$, then $S$ is finite.
+}{
+We will prove ``Every subset of $n$ is finite'' for all $n\in\N$ by doing induction on $n$.
+
+\BChead{}
+Consider any subset $S$ of $0$. Then $S=\emptyset$, so $S\eqnm 0$.
+
+\IShead{}
+Suppose that $n\in\N$, and that all subsets of $n$ are finite.
+Consider any subset $S$ of $n+1$. Either $n\in S$ or $n\notin S$.
+
+Case 1: Suppose that $n\notin S$.
+Then $S\subseteq (n+1)\setminus\{n\} = n$.
+The induction hypothesis then ensures that $S$ is finite.
+
+Case 2: Suppose that $n\in S$.
+Define $T=S\setminus\{n\}$.
+Then $T\subseteq (n+1)\setminus\{n\} = n$,
+so the induction hypothesis ensures that $T$ is finite.
+It follows that $T\cup\{n\}$ is finite, by Theorem \ref{thm:card_add_one}.
+Since $T\cup\{n\}=(S\setminus\{n\})\cup\{n\}=S$ (see Exercise \ref{ex:relcompfun} part \ref{ex:relcompfun1}),
+we have shown that $S$ is finite.
+}
+
+\THMNP{Images Inherit Finiteness\label{thm:images_inherit_finiteness}}{
+If $f:A\rightarrow B$, $X\subseteq A$, and $X$ is finite, then $f[X]$ is finite.
+}{
+Assume that $f:A\rightarrow B$, $X\subseteq A$, and $X$ is finite.
+Get $n\in\N$ such that $X\eqnm n$.
+Then $n\eqnm X$, so get a bijection $g:n\rightarrow X$.
+We will argue that $f\circ g:n\rightarrow f[X]$ and that $f\circ g$ is a bijection onto $f[X]$.
+This will prove that $n\eqnm f[X]$ and finish the proof of the theorem.
+
+Since $X\subseteq A$, we do have $g:n\rightarrow A$, so $f\circ g:n\rightarrow B$.
+Since $f$ and $g$ are injective, we know that $f\circ g$ is injective.
+
+\putExerciseHeading: Prove that $\ran{f\circ g}=f[X]$.
+}
+
+
+\THMNP{Subsets Inherit Finiteness\label{thm:subsets_inherit_finiteness}}{If
+$X$ is finite and $S\subseteq X$, then $S$ is finite.
+}{
+Assume that $X$ is finite and $S\subseteq X$.
+Get $n\in\N$ such that $X\eqnm n$.
+Get a bijection $f:X\rightarrow n$.
+Then $f[S]\subseteq n$, so
+$f[S]$ is finite by Theorem \ref{thm:subsets_inherit_finiteness_prelim}.
+By Theorem \ref{thm:img_facts}, we have $S=\rev{f}[f[S]]$.
+Since $\rev{f}$ is a function and $f[S]$ is finite, it follows from
+Theorem \ref{thm:images_inherit_finiteness} that $\rev{f}[f[S]]$ is finite.
+Therefore $S$ is finite.
+}
+
+\ex{
+Here is an idea for a simpler way to prove Theorem \ref{thm:subsets_inherit_finiteness}:
+\indented{
+Assume that $X$ is finite and $S\subseteq X$. Then $S\injex X$
+by Exercise \ref{ex:subset_injex}.
+So by Exercise \ref{ex:injex_leq}, the set $S$ must have fewer elements than the finite set $X$.
+Therefore $S$ is finite.
+}
+Why doesn't this approach work?
+}
+
+
+
+\THMNP{$\cup$ and $+$}{
+If the set $X$ has $n$ elements, the set $Y$ has $m$ elements, and $X\cap Y=\emptyset$, then $X\cup Y$ has $n+m$ elements.
+}{
+\putExerciseHeading{} (Challenging).
+Hint: Use induction and Theorem \ref{thm:card_add_one}.
+Be precise about exactly what it is that you are proving by induction.
+}
+
+
+\THMP{Assume that $n\in\N$ and $f:n\rightarrow n$.
+If $f$ is injective, then $f$ is surjective onto $n$.
+}{
+Assume that  $n\in\N$ and $f:n\rightarrow n$, and assume that $f$ is injective.
+Suppose, for the sake of contradiction, that $f$ is not surjective.
+Get $k\in n\setminus\ran{f}$.
+Then $n$ is nonempty, so $n=m+1$ for some $m\in\N$ (Theorem \ref{thm:pred}).
+Using Theorem \ref{thm:swap}, get a bijection $g:n\rightarrow n$ such that $g(k)=m$
+and $g(m)=k$. Then $g\circ f :n\rightarrow n$ and $g\circ f$ is injective.
+We will show that $\ran{g\circ f}\subseteq m$.
+
+Consider any $z\in\ran{g\circ f}$.
+We already have $z\in n=m+1$, so we just need to show that $z\neq m$ in order to conclude that $z\in m$. 
+Get $\ell\in n$ such that $z=(g\circ f)(\ell)=g(f(\ell))$.
+Suppose, for the sake of contradicition, that $z=m$.
+Then $m=g(f(\ell))$ and $m=g(k)$, so since $g$ is injective it follows that $f(\ell)=k$.
+But $k\notin\ran{f}$, so we have reached a contradiction.
+Therefore $z$ cannot be $m$, and we may conclude that $z\in m$.
+
+We have now shown that $\ran{g\circ f}\subseteq m$, so we have an injection $g\circ f :n\rightarrow m$.
+Therefore we have $n\injex m$, and by Theorem \ref{thm:injex_leq} it follows that $n\leq m$.
+But $n=m+1$, so we have reached a contradiction.
+Therfore $f$ must be surjective.
+}
+
+
+\ex{Prove that if $X$ has $n+1$ elements and $x\in X$, then $X\setminus\{x\}$ has $n$ elements.}
+
+\ex{(Challenging) In this exercise you will prove that every nonempty finite subset of $\N$ has a maximum.
+Here are the relevant definitions:
+\begin{itemize}
+\item If $A\subseteq\N$ and $n\in\N$, then $n$ is an \emph{upper bound}
+for $A$ iff $\ALL{k}{k\in A\,\ARR\,k\leq n}$.
+\item If $A\subseteq \N$ and $n\in\N$, then $n$ is a \emph{maximum} for $A$ iff $n\in A$ and $n$ is an upper bound for $A$.
+\end{itemize}
+\begin{enumerate}
+\item Prove that if a subset of $\N$ has a maximum, then the maximum is unique.
+\item Prove that every finite subset of $\N$ has an upper bound.
+Hint: Use induction to prove that
+$$
+\ALL{A}{(A\subseteq \N\ \AND\ A\eqnm n)\ \ARR\ \text{$A$ has an upper bound}}
+$$
+for all $n\in\N$.
+\item Assume that $A$ is a nonempty finite subset of $\N$.
+Let 
+$$U=\COLL{n}{\text{$n\in\N$ and $n$ is an upper bound for $A$}}.$$
+Use well-ordering (Theorem \ref{thm:wellord}) to argue that
+$U$ has a minimum, and then prove that this minimum ends up being a maximum for $A$.
+\end{enumerate}
+}
 
 
 
@@ -6284,10 +6436,28 @@ By Theorem \ref{thm:comp_inj_surj}, the function $g$ must be injective.
 
 
 
-\note{to be written}
 
 
 \subsection{Infinite Sets}
+
+\THMNP{Infinitude of $\N$}{
+$\N$ is infinite.
+}{
+Suppose, for the sake of contradiciton, that $\N$ is finite.
+Get $n\in\N$ such that $\N$ has $n$ elements.
+Since $n+1\subseteq\N$, we have $n+1\injex\N$ (see Exercise \ref{ex:subset_injex}).
+Since $n+1$ has $n+1$ elements, and $\N$ has $n$ elements, it follows that $n+1\leq n$
+(see Exercise \ref{ex:injex_leq}). This is a contradiction.
+Therefore $\N$ must be infinite.
+}
+
+
+\DEF{A set $A$ is set to be \emph{countably infinite} iff $A\eqnm\N$.}
+
+
+\ex{Theorem \ref{thm:images_inherit_finiteness} does not work when ``image'' is replaced by ``preimage.''
+Give an example of $A$, $B$, $f$, and $Y$ such that 
+$f:A\rightarrow B$,\ \ $Y\subseteq B$,\ \ $Y$ is finite,\ \ and $\rev{f}[Y]$ is infinite.}
 
 \note{to be written}
 
