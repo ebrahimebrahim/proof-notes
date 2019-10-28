@@ -1690,7 +1690,7 @@ Hint: Work from the inside towards the outside. So start by eliminating the ment
 Then try to express that in English without mentioning $x$.
 \item $\EXIST{y}{\ALL{x}{\text{ $x$ loves $y$ }}}$
 \item $\ALL{x}{(\text{$x$ is a flower})\ARR\EXIST{y}{(\text{$y$ is a petal of $x$})\AND(\text{$y$ is green})}}$
-\item $\EXIST{x}{(\text{$x$ is a flower})\AND\ALL{y}{(\text{$y$ is a petal of $x$})\AND(\text{$y$ is green})}}$
+\item $\EXIST{x}{(\text{$x$ is a flower})\AND\ALL{y}{(\text{$y$ is a petal of $x$})\ARR(\text{$y$ is green})}}$
 \end{enumerate}
 }
 
@@ -2231,7 +2231,7 @@ That is, $\neg\ALL{x}{\pA}$.
 
 $\Rightarrow$:
 For this direction we will prove the contrapositive $\neg\EXIST{x}{\neg\pA}\ARR\ALL{x}{\pA}$
-(see derived rule \ref{drule:contraposition}).
+(see Derived Rule \ref{drule:contraposition}).
 Assume that $\neg\EXIST{x}{\neg\pA}$.
 Consider any $x$.
 \lsp
@@ -2281,7 +2281,7 @@ $\neg\EXIST{x}{\text{$x$ is \ADJA{}}}\DARR\ALL{x}{\text{$x$ is not \ADJA{}}}$\\
 }{
 Apply ``Quantifiers and Negation 1'' to the proposition $\neg\pA$ (putting $\neg\pA$ in place of $\pA$) to obtain
 $\neg\ALL{x}{\neg\pA}\DARR\EXIST{x}{\pA}$.
-Then invert this equivalence (see derived rule \ref{drule:neg_equiv}) to obtain the desired equivalence.
+Then invert this equivalence (see Derived Rule \ref{drule:neg_equiv}) to obtain the desired equivalence.
 }{
 \putExerciseHeading: Write this proof without relying on ``Quantifiers and Negation 1.''
 Your argument could look pretty similar to the argument that
@@ -2293,7 +2293,7 @@ which is given in ``Quantifiers and Negation 1.''
 
 \def\hsp{\hspace{1em}}
 
-\hypertarget{hl:NOTUSE}{The} two rules above, along with derived rules
+\hypertarget{hl:NOTUSE}{The} two rules above, along with Derived Rules
 \ref{drule:demorgan1},
 \ref{drule:demorgan2},
 and \ref{drule:neg_impl}
@@ -2342,8 +2342,8 @@ Hopefully the overall negation feels intuitive, even if the individual steps in 
 
 \ex{\label{ex:neg_quant1}
 Negate each of the following propositions, and push the negation into the innermost component propositions.
-Recall from derived rule \ref{drule:unless} that $\pA\OR\neg\pB$ can be rewritten as $\pB\ARR\pA$.
-When you encounter things like $\pA\OR\neg\pB$, you can rewrite them in terms of ``$\ARR$''
+Recall from Derived Rule \ref{drule:unless} that $\neg\pA\OR\pB$ can be rewritten as $\pA\ARR\pB$.
+When you encounter things like $\neg\pA\OR\pB$, you can rewrite them in terms of ``$\ARR$''
 in order to reduce the overall number of ``$\neg$'' symbols.
 \begin{enumerate}
 
@@ -2714,7 +2714,7 @@ This will be addressed shortly in Axiom \ref{ax:eq_gain}; we first need to get m
 \paragraph{Notation}
 The proposition ``$a\in b$'' is read as ``$a$ is in $b$'' or ``$a$ is an element of $b$.''
 The term ``$\COLL{x}{\pA}$'' is read as ``the set of $x$ such that $\pA$.''
-The appearance of ``$\bbel$'' suggests that ``$x$'' is \emph{bound} variable in the term ``$\COLL{x}{\pA}$'',
+The appearance of ``$\bbel$'' suggests that ``$x$'' is a \emph{bound} variable in the term ``$\COLL{x}{\pA}$'',
 and indeed it is! Terms of this form can be expressed in English without any mention of the bound variable.
 For example $\COLL{x}{\text{$x$ is green}}$ could be referred to as ``the set of green things,'' with no mention of $x$.
 Also, the bound variable can be replaced without any change in meaning: the term ``$\COLL{y}{\text{$y$ is green}}$''
@@ -2732,7 +2732,7 @@ Various propositions could go in the position of $\pA$ to create collections lik
 \indented{
 $\COLL{x}{\text{$x$ is a person} \AND\EXIST{y}{\text{$y$ is a friend of $x$}}}$
 \hspace*{1em}\hfill
-The set of of people who have a friend.\\
+The set of people who have a friend.\\
 $\COLL{n}{3<n^2<4+x}$\hfill
 The set of things whose square is strictly between $3$ and $4+x$.
 }
@@ -2815,7 +2815,7 @@ Since we showed that $z\in c$ for an arbitrary $z\in a$, we have shown $\ALL{z}{
 In other words, $a\subseteq c$.
 \done
 
-In the proof of Theorem \ref{thm:refl_trans_incl2}, you should be able to spot two uses of \hyperlink{hl:UI}{UI} and one use of \hyperlink{hl:UG}{UG}.
+In the proof of Theorem \ref{thm:refl_trans_incl} part \ref{thm:refl_trans_incl2}, you should be able to spot two uses of \hyperlink{hl:UI}{UI} and one use of \hyperlink{hl:UG}{UG}.
 
 If $a=b$, then by Axiom \ref{ax:eq_used} we have $z\in a\DARR z\in b$, for all $z$.
 So the equality $a=b$ gives both inclusions $a\subseteq b$ and $b\subseteq a$.
@@ -2949,7 +2949,7 @@ it is \hyperlink{hl:vacuous}{vacuously true} that $z\in\emptyset\ARR z\in a$.
 \proofsep
 \textit{Proof of \ref{thm:emptyset_minimal2}:}
 Assume that $a\subseteq\emptyset$.
-We already have $a\subseteq\emptyset$
+We already have $\emptyset\subseteq a$
 from part \ref{thm:emptyset_minimal1}.
 Since we got both inclusions, we have proven the equality $a=\emptyset$ (Theorem \ref{thm:eq_incl}).
 \done
@@ -3017,7 +3017,7 @@ Of course we are restricted to finite lists, because we can only write finite li
 with our finite ink and finite paper.
 
 \THMNP{\label{thm:singleton_subset}Singleton and Inclusion}{
-$x\in S$ if an only if $\{x\}\subseteq S$.
+$x\in S$ if and only if $\{x\}\subseteq S$.
 }{
 $\Rightarrow$:
 Assume that $x\in S$.
@@ -3053,10 +3053,10 @@ We have $x\in\{x\}$, since $x=x$. Thus we have $x\in\{y\}$, and from this we get
 
 $\Leftarrow$:
 Assume that $x=y$.
-Consider any $z$.
-We have $z=x\DARR z=y$,
-so $z\in\{x\}\DARR z\in\{y\}$.
-Thus $\{x\}=\{y\}$.
+%Consider any $z$.
+%We have $z=x\DARR z=y$,
+%so $z\in\{x\}\DARR z\in\{y\}$.
+Then $\{x\}=\{y\}$, by Axiom \ref{ax:eq_used}.
 }{\label{thm:eq_ston}}
 
 
@@ -3109,7 +3109,7 @@ That is, we call $s$ a singleton iff
 $\EXIST{x}{s=\{x\}}.$
 }
 
-A singleton characterized by the fact that it contains a unique element:
+A singleton is characterized by the fact that it contains a unique element:
 
 \THMNP{Existence and Uniqueness in Terms of Singleton\label{thm:singleton_uniqueness}}{
 
@@ -3192,7 +3192,7 @@ Then $x=g$, so $z\in g$ gives $z\in x$.
 Now we have an explicit way to refer to ``the green thing,''
 when we know that there is a unique green thing:
 $$
-\occ{\COLL{x}{\text{$x$ is green}}}.
+\text{Let $g=\occ{\COLL{x}{\text{$x$ is green}}}$.}
 $$
 In practice, this is achieved by writing something like
 \begin{center}
@@ -3530,7 +3530,6 @@ Now we have $x\in z$.
 It follows that $\{x\}\subseteq z$ (Theorem \ref{thm:singleton_subset}),
 and combining this with $z\subseteq \{x\}$ gives us $z=\{x\}$.
 Thus we finally have $z\in\{\emptyset,\{x\}\}$ and we are done.
-
 }
 
 \ex{Prove that $\SUB{\{x,y\}} = \{\emptyset,\{x\},\{y\},\{x,y\}\}$.}
@@ -3885,7 +3884,7 @@ the $Y$ is referred to as a \emph{codomain}.
 
 \ex{\label{ex:fn1}
 Assume that $x,y,z,u,v,w$ are distinct,
-and that non of them is a pair.
+and that none of them is a pair.
 For each of the following, determine whether it is a function.
 If it is, write a true statement of the form ``$f:X\rightarrow Y$.''
 If it is not, explain why not. The first two are done for you.
@@ -6452,7 +6451,7 @@ Therefore $\N$ must be infinite.
 }
 
 
-\DEF{A set $A$ is set to be \emph{countably infinite} iff $A\eqnm\N$.}
+\DEF{A set $A$ is said to be \emph{countably infinite} iff $A\eqnm\N$.}
 
 
 \ex{Theorem \ref{thm:images_inherit_finiteness} does not work when ``image'' is replaced by ``preimage.''
