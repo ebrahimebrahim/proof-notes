@@ -1,0 +1,190 @@
+\documentclass[12pt]{article}
+
+% Basic stuff
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+
+% Skip one line between paragraphs
+\parskip1em
+ 
+% Standard things to include for math   
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+
+% Other stuff
+\usepackage{stmaryrd}
+\usepackage{hyperref}
+\usepackage{datetime} \usdate
+\usepackage[shortlabels]{enumitem}
+\usepackage{changepage}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}
+}
+
+
+%\newcommand{\note}[1]{[#1]}
+\newcommand{\note}[1]{[This portion has yet to be written.]}
+\newcommand{\done}{\\\hspace*{0pt}\hfill$\blacksquare$}
+\def\N{\mathbb{N}}
+\def\R{\mathbb{R}}
+\def\Q{\mathbb{Q}}
+\def\Z{\mathbb{Z}}
+\def\e{\varepsilon}
+\def\d{\delta}
+\newcommand{\seq}[1]{\left(#1\right)_{n\in\N}}
+\renewcommand{\emptyset}{\{\hspace{-2pt}\}}
+\newcommand{\powerset}[1]{\mathcal{P}(#1)}
+\newcommand{\dom}[1]{\operatorname{dom}(#1)}
+\newcommand{\ran}[1]{\operatorname{ran}(#1)}
+\newcommand{\rev}[1]{{#1}^{\dashv}}
+\newcommand{\drev}[1]{{#1}^{\dashv\dashv}}
+\newcommand{\injrightarrow}{\xrightarrow{\text{inj}}}
+\newcommand{\surjrightarrow}{\xrightarrow{\text{surj}}}
+\newcommand{\bijrightarrow}{\xrightarrow{\text{bij}}}
+\newcommand{\AND}{\wedge}
+\newcommand{\OR}{\vee}
+\newcommand{\ARR}{\Rightarrow}
+\newcommand{\DARR}{\Leftrightarrow}
+
+\def\bbel{
+\,
+\raisebox{-2pt}{\includegraphics[scale=0.8]{bbel.pdf}}
+\,
+}
+
+\newcommand{\ALL}[2]{\left(\,\forall{#1}\,\bbel\,#2\,\right)}
+\newcommand{\EXIST}[2]{\left(\,\exists{#1}\,\bbel\,#2\,\right)}
+\newcommand{\COLL}[2]{\left\{\, {#1} \,\bbel\, {#2} \, \right\}}
+\newcommand{\settext}[2]{\COLL{#1}{\text{#2}}}
+\newcommand{\SUB}[1]{\mathcal{P}(#1)}
+\newcommand{\occ}[1]{\operatorname{occ}(#1)}
+\newcommand{\id}[1]{\textrm{id}_{#1}}
+\renewcommand{\next}[1]{\operatorname{next}({#1})}
+\newcommand{\addone}{\ddag}
+
+\DeclareFontFamily{OT1}{pzc}{}
+\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.10] pzcmi7t}{}
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+\newcommand{\add}{\mathpzc{ADD}}
+
+\newcommand{\eqnm}{\approx} % equinumerous
+\newcommand{\injex}{\preceq} % an injection exists
+\newcommand{\injnobij}{\prec} % an injection exists but no bijection exists
+
+%\newcommand{\SUBST}[3]{{#1}\left[{#2}\mapsto{#3}\right]}
+%\newcommand{\SUBST}[3]{{#1}_{{#2}\mapsto{#3}}}
+\newcommand{\SUBST}[3]{{#1}_{[{#2}\rightarrow{#3}]}}
+%\newcommand{\SUBST}[3]{{#1}\,\text{replacing}\,{#2}\,\text{by}\,{#3}}
+%\newcommand{\SUBST}[3]{{#1}\ \text{replacing}\ {#2}\ \text{by}\ {#3}}
+
+%\newcounter{exercise}[subsection]
+\newcounter{exercise}
+\newcounter{rule}
+\newcounter{theorem}
+%\def\theexercise{\thesubsection.\arabic{exercise}}
+
+\def\putExerciseHeading{\refstepcounter{exercise} \textbf{Exercise \theexercise}}
+\def\putRuleNumber{\refstepcounter{rule}\therule}
+\def\putThmNumber{\refstepcounter{theorem}\thetheorem}
+
+\newcommand{\ex}[1]{ \putExerciseHeading: #1}
+\newcommand{\indented}[1]{\begin{adjustwidth}{1em}{}#1\end{adjustwidth}}
+
+
+\def\thmcolonspace{\hspace{0.2em}}
+\def\proofnewline{\\[0.75em]} % Separates theorem box from proof, no new paragraph expected.
+\def\thmStartNewline{\\[0.3em]} % Vertically separates theorem heading from theorem statement, sometimes used.
+\def\proofsep{\\[-0.5em]} % Separates different proofs (e.g. to diff parts of same theorem). No new paragraph expected.
+\renewcommand\qedsymbol{$\blacksquare$}
+\def\done{\qed\\[0em]} % QED with newline so that QED symbol is flushed to the right. IDK why newline is needed for this to happen.
+\newcommand{\thmbox}[1]{\fbox{\parbox{\textwidth}{{#1}}}}
+\newcommand{\THMMOCK}[2]{\thmbox{\textbf{Theorem:} \thmcolonspace #1} \proofnewline \textit{Proof:} #2\done}
+\newcommand{\THMP}[2]{\thmbox{\textbf{Theorem \putThmNumber:} \thmcolonspace #1} \proofnewline\textit{Proof:} #2\done}
+\newcommand{\THMPL}[3]{\thmbox{\textbf{Theorem \putThmNumber{#3}:} \thmcolonspace #1} \proofnewline\textit{Proof:} #2\done}
+\newcommand{\THMNP}[3]{\thmbox{\textbf{Theorem \putThmNumber\ (#1):} \thmcolonspace #2} \proofnewline\textit{Proof:} #3\done}
+\newcommand{\THM}[1]{\thmbox{\textbf{Theorem \putThmNumber:} \thmcolonspace #1}}
+\newcommand{\THMN}[2]{\thmbox{\textbf{Theorem \putThmNumber\ (#1):} \thmcolonspace #2}}
+\newcommand{\AXIOM}[1]{\thmbox{\textbf{Axiom \putThmNumber:} \thmcolonspace #1}}
+\newcommand{\AXIOMN}[2]{\thmbox{\textbf{Axiom \putThmNumber\ (#1):} \thmcolonspace #2}}
+\newcommand{\DEFN}[2]{\thmbox{\textbf{Definition \putThmNumber\ (#1):} \thmcolonspace #2}}
+\newcommand{\DEF}[1]{\thmbox{\textbf{Definition \putThmNumber:} \thmcolonspace #1}}
+
+
+\newcommand{\RULE}[2]{\begin{tcolorbox}[title=Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}}
+\newcommand{\DRULE}[2]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white]#2\end{tcolorbox}} % IDK if derived rules will be different
+\newcommand{\DRULEPF}[3]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} {#3} \end{tcolorbox}}
+\newcommand{\DRULEPZ}[2]{\begin{tcolorbox}[title=Derived Rule \putRuleNumber: #1,colbacktitle=white,coltitle=black,colback=white] {#2} \tcblower \textbf{Proof:} 
+                         \putExerciseHeading. \end{tcolorbox}}
+
+\def\pA{\Phi}
+\def\pB{\Psi}
+\def\pC{\Omega}
+\def\pD{\Sigma}
+\def\pE{\Gamma}
+\def\pF{\Delta}
+
+
+
+
+\begin{document}
+
+\begin{enumerate}
+\item
+Let's use
+\indented{
+$\pA$ for ``$x$ is a person'',\\
+$\pB$ for ``$x$ is lonely'', and\\
+$\pC$ for ``$y$ is a friend of $x$''.
+}
+\begin{enumerate}
+\item
+Use $\pA$, $\pB$, and $\pC$ to express the statement
+\indented{\textit{Every person is either lonely or has a friend}}
+in terms of quantifiers.
+
+\item
+Now negate your answer, and push the $\neg$ all the way in.
+\item
+Finally, write out the result in English again.
+Your sentence should intuitively sound like it means the same thing as 
+``\textit{It is not the case that every person is either lonely or has a friend.}''
+\end{enumerate}
+\item
+Let's use
+\indented{
+$\pA$ for ``$\epsilon$ is a library'',\\
+$\pB$ for ``$\delta$ is a book in $\epsilon$'',\\
+$\pC$ for ``$x$ is a page of $\delta$'', and\\
+$\pD$ for ``$x$ mentions the name of $\epsilon$''.
+}
+\begin{enumerate}
+\item
+Use $\pA$, $\pB$, $\pC$, and $\pD$ to express the statement
+\indented{\textit{There is a library in which every book has at least one page that does not mention the name of the library}}
+in terms of quantifiers.
+
+\item
+Now negate your answer, and push the $\neg$ all the way in.
+
+\item
+Finally, write out the result in English again.
+Your sentence should intuitively sound like it means the same thing as 
+``\textit{It is not the case that there is a library 
+in which every book has at least one page that does not mention the name of the library.}''
+\end{enumerate}
+\end{enumerate}
+
+
+
+
+\end{document}
+
+
+
