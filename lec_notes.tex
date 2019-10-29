@@ -10,7 +10,7 @@
 \parskip1em
  
 % Standard things to include for math   
-\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,mathrsfs}
 
 % Other stuff
 \usepackage{stmaryrd}
@@ -3543,7 +3543,7 @@ Prove that $\SUB{x}\cap\SUB{y}=\SUB{x\cap y}$.
 }
 
 \ex{
-Prove that if $x\neq y$, then $\SUB{x}\cup\SUB{y}\neq\SUB{x\cup y}$.
+Prove that if $\neg(x\subseteq y)$ and $\neg(y\subseteq x)$, then $\SUB{x}\cup\SUB{y}\neq\SUB{x\cup y}$.
 }
 
 
@@ -5220,7 +5220,7 @@ Then since $n<\next{n}$ and $\next{n}<n$, it follows by transitivity (Theorem \r
 This contradicts the induction hypothesis.
 }
 
-\ex{Prove that $\N\notin\N$. Hint: There is a very short proof.}
+\ex{\label{ex:NnotinN}Prove that $\N\notin\N$. Hint: There is a very short proof.}
 
 \THMNP{Successor Cancels\label{thm:succ_canc}}{Assume that $n,m\in\N$.
 \begin{enumerate}[(1)]
@@ -6128,7 +6128,7 @@ We may apply the induction hypothesis to $s$ to conclude that $s\leq m$.
 It follows that $s+1\leq m+1$. That is, $n\leq m+1$.
 }
 
-\THMNP{$\eqnm$ and $=$ for Natural Numbers}{
+\THMNP{$\eqnm$ and $=$ for Natural Numbers\label{thm:eqnm_eq}}{
 If $n,m\in\N$, then $$n\eqnm m\ \DARR\ n = m.$$
 }{
 The implication ``$\Leftarrow$'' is just Axiom \ref{ax:eq_used} and Theorem \ref{thm:eqnm_props}.
@@ -6451,14 +6451,414 @@ Therefore $\N$ must be infinite.
 }
 
 
-\DEF{A set $A$ is said to be \emph{countably infinite} iff $A\eqnm\N$.}
-
-
 \ex{Theorem \ref{thm:images_inherit_finiteness} does not work when ``image'' is replaced by ``preimage.''
 Give an example of $A$, $B$, $f$, and $Y$ such that 
 $f:A\rightarrow B$,\ \ $Y\subseteq B$,\ \ $Y$ is finite,\ \ and $\rev{f}[Y]$ is infinite.}
 
-\note{to be written}
+
+\DEFN{Countability}{A set $A$ is said to be \emph{countably infinite} iff $A\eqnm\N$.}
+
+We have now seen that two types of cardinalities can occur:
+finite cardinality, where a set has the same cardinality as $n$
+for some $n\in\N$, and infinite cardinality, where a set does not have the same cardinality as any $n\in\N$.
+There are many possible finite cardinalities: those of $0$, $1$, $2$, etc.
+These are all distinct cardinalities, by Theorem \ref{thm:eqnm_eq}.
+Is there just one infinite cardinality, or are there also many infinite cardinalities?
+If $A$ and $B$ are infinite sets, then do we necessarily have $A\eqnm B$?
+Or could we actually have $A\injnobij B$ with $A$ and $B$ being infinite sets?
+
+Let us start with the countably infinite set $\N$ and attempt to build up a set
+with ``greater'' cardinality. 
+Drawing inspiration from Theorem \ref{thm:card_add_one},
+the first thing we might try is to add one element to $\N$.
+This turns out not to affect the cardinality!
+
+\THMNP{Hilbert's Hotel\label{thm:hotel}}{
+$\next{\N}\eqnm\N$.
+}{
+Define $f=\addone{}\cup\{(\N,0)\}$.
+Since $\N\notin\N$ (see Exercise \ref{ex:NnotinN}), we may apply Exercise \ref{ex:piecewise} to
+conclude that $f$ is a function.
+We have
+$$
+\dom{f}=\dom{\addone{}}\cup\{\N\} = \N\cup\{\N\} =\next{\N},
+$$
+and we have
+$$
+\ran{f}=\ran{\addone{}}\cup\{0\}\subseteq\N,
+$$
+so $f:\next{\N}\rightarrow \N$.
+We will show that $f$ is injective and surjective.
+
+Suppose that $n,m\in\next{\N}$ and $f(n)=f(m)$.
+In the case that $n,m\in\N$, we have $n+1=m+1$, so $n=m$.
+In the case that $n,m\in\{\N\}$, we obviously have $n=m$.
+In the case that $n\in\N$ and $m=\N$, we have $n+1=0$,
+which is impossible.
+Similarly, $n=\N$ and $m\in\N$ is impossible. Thus $f$ is injective.
+
+Consider any $n\in\N$. If $n=0$, then $n=f(\N)$.
+Otherwise, we can get $n'\in\N$ sich that $n=n'+1$. Then $n=f(n')$.
+Thus $f$ is surjective.
+}
+
+It follows from Theorem \ref{thm:hotel} that adding elements one-by-one to $\N$ is not going to yield new cardinalities.
+All of the sets $\N$, $\next{\N}$, $\next{\next{N}}$, etc. have the same cardinality; they are all countably infinite.
+The next thing one might try in order to produce a new cardinality is to ``double'' the set $\N$.
+We can do this by considering the set $2\times \N$. This set consists of two distinct elements $(0,n)$ and $(1,n)$ for every $n\in\N$.
+The set $2\times\N$ is sort of like a union of two separate copies of $\N$, so we might think it has ``twice as many'' elements.
+And yet, as we are about to see in Theorem \ref{thm:doubleN}, the cardinality has still not changed!
+
+To help us prove this, we will introduce the concepts of even and odd numbers.
+
+
+\def\vsp{\vspace{0.3em}}
+\DEFN{Even and Odd}{
+\vsp
+\begin{enumerate}[(1)]
+\item $n$ is \emph{even} iff $n=k+k$ for some $k\in\N$. 
+\item $n$ is \emph{odd} iff $n=k+k+1$ for some $k\in\N$.
+\end{enumerate}
+\vsp
+}
+
+\THMPL{Every natural number is either odd or even.}{
+\putExerciseHeading. Hint: Induction.
+}{\label{thm:oddeven1}}
+
+\THMPL{A natural number cannot be both odd and even.}{
+Suppose, for the sake of contradiction, that there exists a natural number which is both odd and even.
+Let $n$ be the smallest such natural number (we are using Theorem \ref{thm:wellord}).
+Get $\ell, k\in\N$ such that $n=\ell+\ell+1$ and $n=k+k$.
+Since $n=(\ell+\ell)+1$, we cannot have $n=0$.
+Since $n=k+k$ and $n\neq 0$, it must be that $k\neq 0$.
+Get $k'\in\N$ such that $k=k'+1$.
+Then 
+$$k'+k'+1+1=(k'+1)+(k'+1)=k+k=n=\ell+\ell+1,$$
+so $k'+k'+1=\ell+\ell$.
+We see that $\ell+\ell$ is odd and even, and yet $\ell+\ell<\ell+\ell+1=n$.
+This contradicts the fact that $n$ was the smallest odd-and-even natural number.
+}{\label{thm:oddeven2}}
+
+\THMPL{If $k,\ell\in\N$ and $k+k=\ell+\ell$ then $k=\ell$.}{
+Assume that $k,\ell\in\N$ and $k+k=\ell+\ell$.
+If $k<\ell$, then
+$$ k+k < \ell+k < \ell+\ell $$
+by Theorem \ref{thm:prop_plus},
+so we cannot have $k<\ell$.
+Similarly, we cannot have $\ell<k$. Thus $k=\ell$.
+}{\label{thm:oddeven3}}
+
+\THMNP{Doubling Countable Infinity\label{thm:doubleN}}{
+$2\times \N\eqnm\N$.
+}{
+Define
+$$
+f=\COLL{((0,n),n+n)}{n\in\N}\cup\COLL{((1,n),n+n+1)}{n\in\N}.
+$$
+With the help of Exercise \ref{ex:piecewise}, it is straightforward to show that $f:2\times\N\rightarrow\N$.
+
+To prove that $f$ is injective, assume that $(i,n),(i',n')\in 2\times\N$ and $f((i,n))=f((i',n'))$.
+We cannot have $i=0$ and $i'=1$, for then we would have $n+n=n'+n'+1$,
+and this contadicts Theorem \ref{thm:oddeven2}. Similarly, we cannot have $i=1$ and $i'=0$.
+This leaves two cases.
+
+Case 1: Suppose that $i=i'=0$. Then $n+n=n'+n'$, so $n=n'$ by Theorem \ref{thm:oddeven3}.
+Thus $(i,n)=(i',n')$.
+
+Case 2: Suppose that $i=i'=1$. Then $n+n+1=n'+n'+1$, so $n+n=n'+n'$.
+It follows from Theorem \ref{thm:oddeven3} that $n=n'$. Thus $(i,n)=(i',n')$.
+
+Since we get $(i,n)=(i',n')$ in all cases, we conclude that $f$ is injective.
+
+To prove that $f$ is surjective, consider any $k\in\N$.
+By Theorem \ref{thm:oddeven1}, $k$ is either odd or even.
+
+Case 1: Suppose that $k$ is odd. Get $n\in\N$ such that $k=n+n+1$.
+Then $k=f((1,n))$, so $k\in\ran{f}$.
+
+Case 2: Suppose that $k$ is even. Get $n\in\N$ such that $k=n+n$.
+Then $k=f((0,n))$, so $k\in\ran{f}$.
+
+Since we get $k\in\ran{f}$ either way, we conclude that $f$ is surjective onto $\N$.
+Therefore $f$ is a bijection, and we have shown that $2\times\N\eqnm\N$.
+}
+
+So apparently mushing together two copies of $\N$ still leaves us with the same ``amount'' of elements-- only countably infinitely many.
+Okay, what if we mush together \emph{countably infinitely} many copies of the countably infinite set $\N$?
+What if instead of $2\times \N$ we consider $\N\times \N$? This contains an entire copy of $\N$ for each element of $\N$!
+And yet, as we are about to see, it is still only countably infinite!
+
+\THMNP{Squaring Countable Infinity\label{thm:squareN}}{
+$\N\times \N\eqnm\N$.
+}{
+We will start by constructing a useful function $a:\N\rightarrow\N$,
+and then we will construct a bijection $f:\N\rightarrow \N\times\N$.
+
+First, define $r:\N\times\N\rightarrow\N\times\N$ by
+$$
+r((k,n))=(k+(n+1),n+1)
+$$
+for all $k,n\in\N$. Let $a':\N\rightarrow\N\times\N$ be the unique function that satisfies
+$$
+\begin{array}{ll}
+a'(0)=(0,0)\hspace{2em}&\text{and}\\
+a'(n+1)=r(a'(n))\hspace{2em}&\text{for all $n\in\N$.}
+\end{array}
+$$
+Define $a=\COLL{(n,k)}{(n,(k,n))\in a'}$.
+
+To see that $a$ is a function, suppose that $(n,k),(n,k')\in a$.
+Then $(n,(k,n)),(n',(k',n))\in a'$. Since $a'$ is a function, we have
+$(k,n)=(k',n)$. It follows that $k=k'$.
+Thus $a$ is a function. 
+
+Notice the following about $a$:
+\indented{
+Fact 1: $(0,0)\in a$. This is because $(0,(0,0))\in a'$.\\
+Fact 2: For any $n\in\N$ and any $k$, if $(n,k)\in a$, then $(n+1,k+(n+1))\in a$.
+This is because for any $n\in\N$ and any $k$ we have
+$$
+(n,(k,n))\in a'\Rightarrow (n+1,(k+(n+1),n+1))=(n+1,r((k,n)))\in a'.
+$$
+}
+One consequence of Fact 1 is that $0\in\dom{a}$.
+One consequence of Fact 2 is that for any $n\in\N$, if $n\in\dom{a}$ then $n+1\in\dom{a}$.
+It follows by induction that $\N\subseteq\dom{a}$.
+It is clear from the definition of $a$ that $\dom{a}\subseteq\N$ and that $\ran{a}\subseteq\N$, so
+we now have $a:\N\rightarrow\N$.
+We may now express Facts 1 and 2 as follows:
+\indented{
+Fact 1: $a(0)=0$.\\
+Fact 2: For all $n\in\N$, we have $a(n+1)=a(n)+(n+1)$.
+}
+We will need one more useful fact about $a$ before we construct our bijection:
+\indented{Fact 3: For $n,n'\in\N$, if $n<n'$ then $a(n)+n<a(n')$.}
+To prove this, we fix $n\in\N$ and do induction on $n'$.
+The base case, $n'=0$, is vacuous. Suppose, for the induction step, that 
+$n'\in\N$ and $n<n'\Rightarrow a(n)+n<a(n')$.
+Assume that $n<n'+1$.
+We must prove that $a(n)+n<a(n'+1)$.
+We have $n\leq n'$, so we may proceed by cases as follows.
+
+Case 1: Suppose that $n=n'$. Then
+$$
+a(n)+n<a(n)+(n+1)=a(n+1)=a(n'+1).
+$$
+Case 2: Suppose that $n<n'$. Then we have $a(n)+n<a(n')$ by the induction hypothesis, so
+$$
+a(n)+n<a(n')<a(n')+(n'+1)=a(n'+1).
+$$
+We completed the induction step in both cases, so Fact 3 is proven.
+
+Finally, we construct our bijection for the sake of proving $\N\eqnm\N\times\N$.
+Define
+\begin{align*}
+f&=\COLL{(a(n)+i,(i,j))}{i,j,n\in\N\ \AND\ i+j=n}\\
+&=\COLL{p}{\EXIST{i,j,n}{p=(a(n)+i,(i,j))\ \AND\ i,j,n\in\N\ \AND\ i+j=n}}.
+\end{align*}
+It is clear that $f\subseteq\N\times(\N\times\N)$, so we are left needing to prove four things:
+\indented{
+that $f$ is a function,\\
+that $\N\subseteq\dom{f}$,\\
+that $f$ is injective,\\
+and that $f$ is surjective onto $\N\times\N$.
+}
+To prove that $f$ is a function, consider any $(x,y),(x,y')\in f$.
+Get $i,j,n\in\N$ such that $i+j=n$ and $(x,y)=(a(n)+i,(i,j))$.
+Get $i',j',n'\in\N$ such that $i'+j'=n'$ and $(x,y')=(a(n')+i',(i',j'))$.
+Then $a(n)+i=x=a(n')+i'$.
+Now if we had $n<n'$, then it would follow from Fact 3 above that $a(n)+n<a(n')$.
+But since $i\leq i+j=n$, this would lead to
+$$
+a(n)+i\leq a(n)+n<a(n')\leq a(n')+i',
+$$
+so it cannot be that $n<n'$.
+By a similar argument, it cannot be that $n'<n$.
+Therefore we must have $n=n'$.
+We then get $i=i'$ from 
+$$a(n)+i=a(n')+i'=a(n)+i'.$$
+And finally we get $j=j'$ from
+$$
+i+j=n=n'=i'+j'=i+j'.
+$$
+Therefore $y=(i,j)=(i',j')=y'$,
+and we have proven that $f$ is a function.
+
+To prove that $\N\subseteq\dom{f}$, we will use induction.
+Since $0=a(0)+0$, we have $(0,(0,0))\in f$.
+Therefore $0\in\dom{f}$.
+For an induction step, suppose that $m\in\N$ and $m\in\dom{f}$.
+Get $y$ such that $(m,y)\in f$.
+Get $i,j,n\in\N$ such that $i+j=n$ and $(m,y)=(a(n)+i,(i,j))$.
+Then $m=a(n)+i$. We have $i\leq i+j=n$, so either $i<n$ or $i=n$.
+
+Case 1: Suppose that $i<n$.
+Then $0<j$, for if $j=0$ then $i=n$.
+Get $j'\in\N$ such that $j=j'+1$.
+Define $i'=i+1$.
+Then 
+$$i'+j'=(i+1)+j'=i+(j'+1)=i+j=n,$$
+so $(a(n)+i',(i',j'))\in f$. Thus
+$$
+m+1=(a(n)+i)+1=a(n)+i'\in\dom{f}.
+$$
+Case 2:
+Suppose that $i=n$. Then $m=a(n)+n$, so $m+1=a(n)+(n+1)=a(n+1)$.
+Define $i'=0$ and $j'=n+1$.
+Then we have $i'+j'=n+1$, so $(a(n+1)+i',(i',j'))\in f$.
+Thus
+$$
+m+1=a(n+1)=a(n+1)+i'\in\dom{f}.
+$$
+We completed the induction step in both cases, so by induction we have proven that $\N\subseteq\dom{f}$.
+
+We now have $f:\N\rightarrow\N\times\N$, and it remains to prove that $f$ is bijective.
+
+To prove that $f$ is injective, consider any $x,x'\in\dom{f}$
+such that $f(x)=f(x')$.
+Get $i,j,n\in\N$ such that $i+j=n$ and $(x,f(x))=(a(n)+i,(i,j))$.
+Get $i',j',n'\in\N$ such that $i'+j'=n'$ and $(x',f(x'))=(a(n')+i',(i',j'))$.
+We have $(i,j)=f(x)=f(x')=(i',j')$, so $i=i'$, $j=j'$, and
+$$n=i+j=i'+j'=n'.$$
+Since $i=i'$ and $n=n'$, we have
+$$
+x=a(n)+i=a(n')+i'=x'.
+$$
+Therefore $f$ is injective.
+
+To prove that $f$ is surjective, consider any $(i,j)\in\N\times\N$.
+Define $n=i+j$.
+Then we have $f(a(n)+i)=(i,j)$, so $f$ is surjective onto $\N\times\N$.
+
+We have shown that there exists a bijection $f:\N\rightarrow\N\times\N$; we conclude that $\N\eqnm\N\times\N$.
+}
+
+
+So even 
+putting together countably infinitely many copies of a countably infinite set still does not yield a new cardinality--
+only another countably infinite set.
+It is starting to look like there is only one way for a set to be infinite, from the standpoint of cardinality.
+This turns out to be dead wrong, as we will see in Theorem \ref{thm:cantor}!
+
+\ex{\label{ex:injexsub}
+Prove that $A\injex \SUB{A}$.
+}
+
+
+\THMNP{Cantor's Theorem\label{thm:cantor}}{
+There does not exist a surjection $f:A\rightarrow\SUB{A}$.
+}{
+Suppose for the sake of contradiction that $f:A\rightarrow\SUB{A}$
+is surjective onto $\SUB{A}$.
+Define
+$$
+C=\COLL{a}{a\in A\ \AND\ a\notin f(a)}.
+$$
+Then $C\in\SUB{A}$, so
+since $f$ is surjective we can get some $b\in A$ such that $f(b)=C$.
+Either $b\in C$ or $b\notin C$.
+
+Case 1: Suppose that $b\in C$.
+Then $b\notin f(b)=C$. This a contradiction.
+
+Case 2: Suppose that $b\notin C$.
+Then $b\in f(b)=C$. This is a contradiction.
+}
+
+\DEFN{Uncountability}{
+A set $A$ is said to be \emph{uncountably infinite} iff it is infinite, but it is not countably infinite.
+}
+
+Given Theorem \ref{thm:cantor} and Exercise \ref{ex:injexsub}, we see that
+there are many ways for a set to be infinite, from the standpoint of cardinality.
+We have the countably infinite set $\N$, and then we have
+an unending ladder of uncountably infinite cardinalities beyond that:
+$$
+\N\injnobij\SUB{\N}\injnobij\SUB{\SUB{\N}}\injnobij\SUB{\SUB{\SUB{\N}}}\injnobij\cdots
+$$
+
+\def\A{\mathscr{A}}
+\def\F{\mathscr{F}}
+\def\Ap{\A^*}
+
+\ex{ (Challenging)
+In this exercise, you will prove that $\N$ is the ``smallest'' infinite set there is, from the standpoint of cardinality.
+You will prove that given any infinite set $A$, one has $\N\injex A$.
+As far as I know, this requires Axiom \ref{ax:choice}, so you should accept Axiom \ref{ax:choice} just for this exercise.
+\begin{itemize}
+\item Assume that $A$ is an infinite set.
+\item Define $\A{}=\COLL{S}{S\subseteq A\ \AND\ S\neq\emptyset}=\SUB{A}\setminus\{\emptyset\}$, the set of nonempty subsets of $A$.
+\item Define $\Ap{}=\COLL{(a,S)}{(a,S)\in A\times\A{}\ \AND\ a\in S}$. Elements of $\Ap{}$ are sometimes called \emph{pointed sets},
+since they are pairs consisting of a set and a ``point'' in the set.
+\item Define $\pi_1=\COLL{((a,S),a)}{(a,S)\in\Ap}$ and $\pi_2=\COLL{((a,S),S)}{(a,S)\in\Ap}$.
+Then we have $\pi_1:\Ap{}\rightarrow A$ and $\pi_2:\Ap{}\rightarrow \A{}$.
+These two functions are called \emph{projections}.
+\end{itemize}
+\begin{enumerate}
+\item Prove that $\pi_1$ and $\pi_2$ are surjective.
+\end{enumerate}
+\begin{itemize}
+\item We may now use Axiom \ref{ax:choice} to get some $g:\A{}\rightarrow\Ap{}$ such that $\pi_2\circ g=\id{\A{}}$.
+\item Define $c=\pi_1\circ g$. Then $c:\A{}\rightarrow A$.
+\end{itemize}
+\begin{enumerate}[resume]
+\item Prove that for all $S\in\A{}$, we have $c(S)\in S$.
+Thus the function $c$ serves to ``choose'' an element of each $S\in\A{}$. This is why 
+Axiom \ref{ax:choice} is called the Axiom of Choice.
+\end{enumerate}
+\begin{itemize}
+\item Define $\F=\COLL{S}{S\subseteq A\ \AND\ \text{$S$ is finite}}$, the set of finite subsets of $A$.
+\item The goal now is to construct $h:\N\rightarrow A\times\F$ such that
+\indented{
+$h(0)=(a_0,\emptyset)$, where $a_0\in A$,\\
+$h(1)=(a_1,\{a_0\})$, where $a_1\in A\setminus\{a_0\}$,\\
+$h(2)=(a_2,\{a_0,a_1\})$, where $a_2\in A\setminus\{a_0,a_1\}$,\\
+etc.
+}
+To do this, we first define a function $r:A\times \F\rightarrow A\times\F$ by
+$$
+r((a,F))=(c(A\setminus (F\cup\{a\})),F\cup\{a\})
+$$
+for all $(a,F)\in A\times\F$.
+\end{itemize}
+\begin{enumerate}[resume]
+\item 
+Prove that this definition of $r$ is okay by showing that
+for any $(a,F)\in A\times\F$, we have $A\setminus (F\cup\{a\})\in \A{}$ and $F\cup\{a\}\in\F$.
+\end{enumerate}
+\begin{itemize}
+\item Now let $h:\N\rightarrow A\times \F{}$ be the unique function that satisfies
+\indented{
+$h(0)=(c(A),\emptyset)$ \hspace{2em} (note that $A\in\A{}$, because we assumed $A$ is infinite) \hspace{2em} and\\
+$h(n+1)=r(h(n))$ for all $n\in\N$.
+}
+\item
+Define $\pi_1'=\COLL{((a,F),a)}{(a,H)\in A\times \F{}}$ and $\pi_2'=\COLL{((a,F),F)}{(a,F)\in A\times \F{}}$.
+Then $\pi_1':A\times\F{}\rightarrow A$ and $\pi_2':A\times\F{}\rightarrow\F{}$.
+\item
+Define $f=\pi_1'\circ h$ and $H=\pi_2'\circ h$.
+Then $f:\N\rightarrow A$ and $H:\N\rightarrow \F{}$.
+\end{itemize}
+\begin{enumerate}[resume]
+\item Prove that
+$f(0)=c(A)$,  $H(0)=\emptyset$, and
+$$ H(n+1)=H(n)\cup\{f(n)\} \hspace{2em} \text{and}\hspace{2em} f(n+1)=c(A\setminus H(n+1))$$
+for all $n\in\N$.
+\item Prove that for all $n\in\N$, $f(n)\notin H(n)$.
+\item Prove that for all $n,m\in\N$,  $n<m \ARR f(n)\in H(m)$.
+\item Prove that $f$ is injective.
+\end{enumerate}
+\begin{itemize}
+\item Thus $\N\injex A$.
+\end{itemize}
+}
+
+
+
+
+
+
 
 
 \subsection{Relations}

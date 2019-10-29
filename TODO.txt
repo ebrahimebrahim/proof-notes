@@ -2,6 +2,10 @@ say we only use certain capital greek letters for props
 
 when introduce inclusion, make some kind of diagram or picture explaining the difference between inclusion and membership
 
+illustration for hilbert's hotel
+illustration for doubling N
+illustrations for squaring N
+
 a power set functor exercise!
 
 - do substitution formalism better (like actually a formalism, you know?) Hmmm or maybe not...
@@ -29,3 +33,4 @@ New Ex at end of sec 3.2: If A is a subset of {x} then either A={} or A={x}.
 
 After the comments about how to use "equality used", you should put that summary about how replacements work inside of a box.
 A theorem perhaps, if you can state it that way?
+
