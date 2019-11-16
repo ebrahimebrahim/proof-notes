@@ -16,7 +16,7 @@
 \usepackage{stmaryrd}
 \usepackage{hyperref}
 \usepackage{datetime} \usdate
-\usepackage[shortlabels]{enumitem}
+\usepackage[shortlabels,inline]{enumitem}
 \usepackage{changepage}
 \usepackage{tcolorbox}
 \usepackage{tikz}
@@ -53,6 +53,9 @@
 \newcommand{\OR}{\vee}
 \newcommand{\ARR}{\Rightarrow}
 \newcommand{\DARR}{\Leftrightarrow}
+%\newcommand{\REL}{\leadsto}
+\newcommand{\REL}{\sim}
+\newcommand{\CLASS}[2]{[#1]_{#2}}
 
 \def\bbel{
 \,
@@ -1448,7 +1451,7 @@ For each of the following, write the proposition that results from the substitut
 \item $\SUBST{\pB}{b}{5}$, where $\pB$ is the proposition ``$b\times b\subseteq J$''
 \item $\SUBST{\text{``\ $n^2$ is even\ ''}}{n}{1}$
 \item $\SUBST{\text{``\ $n^2$ is even\ ''}}{n}{n+1}$
-\item $\SUBST{\SUBST{\text{``\ $n^2\sim k$\ ''}}{n}{j+k}}{k}{3}$
+\item $\SUBST{\SUBST{\text{``\ $n^2\REL k$\ ''}}{n}{j+k}}{k}{3}$
 \end{enumerate}
 }
 
@@ -3236,7 +3239,7 @@ Hint: Theorem \ref{thm:emptyset_unique}}.
 \thmline{$a\cap a=a$}{idempotence of $\cap$}
 \thmline{$a\cup a=a$}{idempotence of $\cup$}
 \thmlineL{$a\cup \emptyset=a$}{$\emptyset$ is an identity for $\cup$}{\label{thm:cupcap_props3}}
-\item \hspace*{1em} $a\cap\emptyset=\emptyset$
+\thmlineL{$a\cap\emptyset=\emptyset$}{$\emptyset$ is an annihilator for $\cap$}{\label{thm:cupcap_props4}}
 \end{enumerate}
 \vsp
 }
@@ -3427,7 +3430,7 @@ $a\setminus (a\setminus b) = a\cap b$.
 }{
 $\subseteq:$
 Consider any $z\in a\setminus (a\setminus b)$.
-Then $z\notin a$ and $z\notin a\setminus b$.
+Then $z\in a$ and $z\notin a\setminus b$.
 
 Suppose, for the sake of contradiction, that $z\notin b$.
 Then $z\in a$ and $z\notin b$, so $z\in a\setminus b$.
@@ -3502,7 +3505,7 @@ Prove that the empty set is both an element of and a subset of $\SUB{x}$.
 
 \ex{Prove that $\{x\}\subseteq\SUB{x}$.}
 
-\ex{Prove that $\SUB{\emptyset}=\{\emptyset\}$}
+\ex{Prove that $\SUB{\emptyset}=\{\emptyset\}$.}
 
 \THMP{ $\SUB{\{x\}} = \{\emptyset,\{x\}\}$. }{
 $\supseteq$:
@@ -3641,7 +3644,7 @@ $\Leftarrow$:
 Assume that $y\in A$ and $z\in B$.
 Define $x=(y,z)$.
 We have $x=(y,z)$, $y\in A$, and $z\in B$, so \hyperlink{hl:EG}{we can conclude} that $\EXIST{y,z}{x=(y,z)\,\AND\,y\in A\,\AND\,z\in B}$.
-Therefore $x\in \times B$. In other words, $(y,z)\in A\times B$.
+Therefore $x\in A\times B$. In other words, $(y,z)\in A\times B$.
 }
 
 The intermediate label ``$x$'' was introduced in that proof just to help clarify how the existential generalization took place--
@@ -3684,7 +3687,7 @@ We have $(a,b)\in A\times B$ (Theorem \ref{thm:ess_prod}), so we conclude that $
 }
 
 \THMP{If $A\subseteq B$ and $C\subseteq D$, then $A\times C\subseteq B\times D$.}{
-Assume that $A\subseteq B$ and $B\subseteq C$.
+Assume that $A\subseteq B$ and $C\subseteq D$.
 Consider any $z\in A\times C$.
 Since $$\EXIST{a,c}{z=(a,c)\,\AND\,a\in A\,\AND\,c\in C},$$
 we can get some $a\in A$ and $c\in C$ such that $z=(a,c)$.
@@ -3932,10 +3935,6 @@ Define $g=\COLL{(a,f(a))}{a\in A}$.
 Prove that if $f$ and $g$ are functions and $\dom{f}\cap\dom{g}=\emptyset$, then $f\cup g$ is a function.
 }
 
-\ex{\label{ex:fn_deletion}
-Assume that $f:X\rightarrow Y$ and $x\in\dom{f}$.
-Define $g=f\setminus\{(x,f(x))\}$. Prove that $g:(X\setminus\{x\})\rightarrow(Y\setminus\{f(x)\})$.
-}
 
 \DEFN{Injectivity, Surjectivity, and Bijectivity\label{def:ivity}}{
 
@@ -3995,6 +3994,12 @@ Applying our assumption, it follows that $x=y$.
 
 Thus injectivity is very similar to functionhood (Definition \ref{def:fn}), except that the pairs have been flipped around.
 
+\ex{\label{ex:fn_deletion}
+Assume that $f:X\rightarrow Y$ and $x\in\dom{f}$.
+Assume also that $f$ is injective.
+Define $g=f\setminus\{(x,f(x))\}$. Prove that $g:(X\setminus\{x\})\rightarrow(Y\setminus\{f(x)\})$.
+}
+
 \THMPL{Assume that $f:X\rightarrow Y$. Then $f$ is surjective onto $Y$ if and only if
 $$
 \ALL{y}{y\in Y\,\ARR\,\EXIST{x}{x\in X\,\AND\,f(x)=y}}.
@@ -4021,7 +4026,7 @@ we say that $f$ gives a \emph{one-to-one correspondence} between the elements of
 
 \ex{\label{ex:subset_inj}Prove that if $f$ is an injective function and $g\subseteq f$, then $g$ is an injective function.}
 
-\ex{Let $f=\{(a,c),(b,d)\}$ and assume that $a\neq b$.
+\ex{Let $f=\{(a,c),(b,d)\}$ and assume that $a\neq b$ and $c\neq d$.
 Prove that $f:\{a,b\}\rightarrow\{c,d\}$ and $f$ is bijective onto $\{c,d\}$.
 }
 
@@ -4227,7 +4232,7 @@ Do you see how to get the picture \tagB{} from \tagA?
 No pictures allowed-- give a real proof.
 You can also prove the reverse inclusion if you want, but it's... less fun.
 \item For each $f$ and $g$ below, determine $g\circ f$ by producing images like \tagA{} and \tagB.
-Your answer for each part below should include an image like \tagA{}, and image like \tagB{}, and a
+Your answer for each part below should include an image like \tagA{}, an image like \tagB{}, and a
 list of pairs that describes $g\circ f$.
 \begin{enumerate}
 \item $f=\{
@@ -4387,8 +4392,9 @@ and from this it follows that $(z,w)\in\rev{(S\circ T)}$.
 }
 
 \DEFN{Invertibility}{
-If $f$ is a function, then when $\rev{f}$ is also a function we say that $f$ is \emph{invertible},
-and we then refer to $\rev{f}$ as \emph{the inverse} of $f$.
+If $f$ is a function, then 
+$f$ is said to be \emph{invertible} if and only if $\rev{f}$ is also a function.
+In this context, we will refer to $\rev{f}$ as \emph{the inverse} of $f$.
 }
 
 \THMNP{Invertibility of Injections\label{thm:inj_inv}}{If $f$ is a function, then $\rev{f}$ is a function if and only if $f$ is injective.}{
@@ -5833,7 +5839,7 @@ We can imagine that a surjection $g$ collapses some bunches of elements of $A$ o
 For each element of $B$ to receive at least one arrow, it seems that $A$ must have at least as many elements as $B$,
 and $A$ can possibly have more elements that get collapsed into some already-targeted elements of $B$.
 
-A bijective function $h:A\rightarrow B$ associates all the element of $A$ to all the elements of $B$ in a one-to-one way.
+A bijective function $h:A\rightarrow B$ associates all the elements of $A$ to all the elements of $B$ in a one-to-one way.
 \begin{center}\includegraphics[scale=1]{collapse2.pdf}\end{center}
 For a bijection to be possible, it seems that $A$ must have exactly as many elements as $B$.
 If $A$ had too few elements, then some elements of $B$ would remain untargeted, ruling out surjectivity.
@@ -5841,7 +5847,7 @@ If $A$ had too many elements, then some collapsing would have to occur, ruling o
 
 This has been an imprecise discussion of some ideas that you can keep in mind for what is to come.
 
-\DEFN{Cardinality}{
+\DEFN{Cardinality\label{defn:card}}{
 \begin{enumerate}[(1)]
 \item $A\eqnm B\ \DARR\ \EXIST{f}{f:A\rightarrow B\ \AND\ \text{$f$ is a bijection onto $B$}}$.
 \item $A\injex B\ \DARR\ \EXIST{f}{f:A\rightarrow B\ \AND\ \text{$f$ is injective}}$.
@@ -6513,7 +6519,7 @@ To help us prove this, we will introduce the concepts of even and odd numbers.
 
 
 \def\vsp{\vspace{0.3em}}
-\DEFN{Even and Odd}{
+\DEFN{Even and Odd\label{defn:even}}{
 \vsp
 \begin{enumerate}[(1)]
 \item $n$ is \emph{even} iff $n=k+k$ for some $k\in\N$. 
@@ -6863,10 +6869,210 @@ for all $n\in\N$.
 
 \subsection{Relations}
 
+Given a set $A$, one can think of subsets of $A$ as \emph{unary predicates}
+about elements of $A$.
+For example if one defines $G=\COLL{g}{\text{$g\in A$ and $g$ is green}}$,
+then, for elements of $A$, to ``be green'' is to ``be an element of $G$.''
+This would be a \emph{unary} predicate becuase the proposition ``$g$ is green''
+has just one variable in it-- it is true or false depending on what $g$ is.
+The set $G$ is an object which represents the concept of ``being green'' for elements of $A$.
+
+In a similar vein, one can think of subsets of $A\times A$ as \emph{binary} predicates
+about elements of $A$. For example if one defines
+$L=\COLL{(x,y)}{\text{$x,y\in A$ and $x$ loves $y$}}$,
+then, for elements $x,y$ of $A$, we have ``$x$ loves $y$'' if and only if we have $(x,y)\in L$.
+The set $L$ is an object which represents the concept of ``loving'' for elements of $A$.
+Instead of writing ``$(x,y)\in L$,'' we will often use an infix notation and write ``$xLy$.''
+In this context, $L$ is a \emph{relation}.
+
+\DEFN{Relations}{
+\begin{enumerate}[(1)]
+\item $R$ is a \emph{relation on $A$} if and only if  $R\subseteq A\times A$.
+\item When $R$ is a relation on $A$, we write ``$xRy$'' to mean ``$(x,y)\in R$.''
+\end{enumerate}
+}
+
+Instead of using letters like $R$ or $L$ for variables that stand for relations, we will often
+use the symbol ``$\REL$''. This is just
+because it looks pretty in the infix notation: $(x,y)\in\,\,\REL$ if and only if $x\REL y$.
+Bear in mind that even though the symbol $\REL$ is not a letter of the alphabet, it is
+still a \emph{variable} and not a constant. What ``$\REL$'' refers to and what assumptions about
+``$\REL$'' are available all depends on context.
+
+\DEFN{Adjectives for Relations\label{defn:reln_adj}}{
+Assume that $\REL\,\,\subseteq A\times A$.
+\begin{enumerate}[(1)]
+\item $\REL$ is \emph{reflexive} on $A$ iff $a\REL a$ for all $a\in A$.
+\item $\REL$ is \emph{symmetric} iff $a\REL b\ \ARR\ b\REL a$ for all $a,b$.
+\item $\REL$ is \emph{transitive} iff $((a\REL b)\ \AND\ (b\REL c))\ \ARR\ (a\REL c)$ for all $a,b,c$.
+\item $\REL$ is \emph{antisymmetric} iff $((a\REL b)\ \AND\ (b\REL a))\ \ARR\ (a=b)$ for all $a,b$.
+\item $\REL$ is \emph{total} on $A$ iff $(a\REL b)\ \OR\ (b\REL a)$ for all $a,b\in A$.
+\end{enumerate}
+}
+
+\DEFN{Special Kinds of Relations}{
+Assume that $\REL\,\,\subseteq A\times A$.
+\begin{enumerate}[(1)]
+\item $\REL$ is a \emph{preorder} on $A$ iff it is reflexive on $A$ and transitive.
+\item $\REL$ is a \emph{partial order} on $A$ iff it is an \emph{antisymmetric} preorder on $A$.
+\item $\REL$ is a \emph{total order} on $A$ iff it is a \emph{total} partial order on $A$.
+\item $\REL$ is an \emph{equivalence relation} on $A$ iff it is a \emph{symmetric} preorder on $A$.
+\end{enumerate}
+}
+
+\ex{Assume that $\REL$ is a relation on $A$.
+\begin{enumerate}
+\item Prove that $\REL$ is a preorder on $A$ if and only if $\id{A}\subseteq\,\,\REL$ and $\REL\circ\REL\,\,\subseteq\,\, \REL$.
+\item Prove that if $\REL$ is a preorder on $A$ then $\REL\circ\REL\,\,=\,\, \REL$.
+\item Prove that $\REL$ is an equivalence relation on $A$ if and only if
+$\id{A}\subseteq\,\,\REL$,
+$\REL\circ\REL\,\,\subseteq\,\, \REL$,
+and $\rev{\REL}\subseteq\,\,\REL$.
+\item Prove that if $\REL$ is an equivalence relation on $A$ then
+$\REL\circ\REL\,\,=\,\, \REL$
+and $\rev{\REL}=\,\,\REL$.
+\item Prove that $\REL$ is total on $A$ if and only if $\REL\cup\,\,\rev{\REL}=A\times A$.
+\end{enumerate}
+}
+
+When $A$ is a small finite set, we can depict relations $\REL$ on $A$ by drawing a labeled dot for each element of $A$
+and then drawing an arrow from the the dot labeled $x$ to the dot labeled $y$ whenever $x\REL y$.
+For example,
+\begin{center}
+\includegraphics{relations_gfx/00000.pdf}
+\end{center}
+depicts the relation $\{(0,1),(1,1),(1,3),(0,2),(2,0)\}$
+on the set $\{0,1,2,3\}$.
+
+\newcommand{\exline}[1]{\item \raisebox{-0.8cm}{\includegraphics{relations_gfx/#1.pdf}}}
+
+\ex{Consider the following relations on $\{0,1,2,3\}$:
+
+\begin{minipage}{\textwidth}
+\begin{enumerate*}[(a), itemjoin=\hspace{2cm}] 
+\exline{11100}
+\exline{10110}
+\exline{11000}
+\exline{01000}
+\exline{10101}
+\exline{01100}
+\exline{00000}
+\exline{00110}
+\exline{10000}
+\exline{10001}
+\exline{10010}
+\exline{empty}
+\exline{10100}
+\exline{00100}
+\exline{11110}
+\exline{00010}
+\exline{11101}
+\exline{10011}
+\exline{01110}
+\exline{10111}
+\end{enumerate*}
+\end{minipage}
+
+Answer the questions below. You do not need to prove anything.
+\begin{enumerate}
+\item Which relations are reflexive on $\{0,1,2,3\}$?
+\item Which relations are symmetric?
+\item Which relations are transitive?
+\item Which relations are antisymmetric?
+\item Which relations are total on $\{0,1,2,3\}$?
+\item Which relations are preorders  on $\{0,1,2,3\}$?
+\item Which relations are partial orders on $\{0,1,2,3\}$?
+\item Which relations are total orders on $\{0,1,2,3\}$?
+\item Which relations are equivalence relations on $\{0,1,2,3\}$?
+\end{enumerate}
+}
+
+\ex{
+Assume that $\REL$ is a relation on $A$.
+\begin{enumerate}
+\item Prove that if $\REL$ is total on $A$, then $\REL$ is reflexive on $A$.
+\item Prove that if $\REL$ is symmetric and antisymmetric, then $\REL\,\,\subseteq\id{A}$.
+\item Prove that $\id{A}$ is the only relation on $A$ which is reflexive, symmetric, and antisymmetric.
+\item Prove that $A\times A$ is the only relation on $A$ which is symmetric and total.
+\end{enumerate}
+}
+
+\ex{
+For each of the following relations on $\N$, determine which of the adjectives in Definition \ref{defn:reln_adj} apply.
+Point out which relations are equivalence relations and which are partial orders.
+\begin{enumerate}
+\item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \AND\ n\leq m}$
+\item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \AND\ n< m}$
+\item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \AND\ n= m}$
+\item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \AND\ 4<n+m}$
+\item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \AND\ n\leq m+m}$
+\item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \AND\ n+n\leq m}$
+\item $\REL\,\,=\COLL{(n,n+1)}{n,m\in\N}$
+\item $\REL\,\,=\COLL{(n,n+1)}{n,m\in\N} \cup \COLL{(n+1,n)}{n,m\in\N}$
+\item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \text{ and $n+m$ is even}}$\ \ (recall Definition \ref{defn:even})
+\end{enumerate}
+}
+
+\ex{
+\begin{enumerate}
+\item Define $\REL\,\,=\COLL{(X,Y)}{X,Y\subseteq A\ \AND\ X\subseteq Y}$. 
+Prove that $\REL$ is a partial order on $\SUB{A}$.
+\item Define $\REL\,\,=\COLL{(X,Y)}{X,Y\subseteq A\ \AND\ X\injex Y}$
+(recall Definition \ref{defn:card}).
+Prove that $\REL$ is a partial order on $\SUB{A}$.
+(Hint: Much of the hard work has been done by previous theorems that you can reference.)
+\item Define $\REL\,\,=\COLL{(X,Y)}{X,Y\subseteq A\ \AND\ X\eqnm Y}$.
+Prove that $\REL$ is an equivalence relation on $\SUB{A}$.
+\item For each of the following relations on $\SUB{A}$, determine which of the adjectives in Definition \ref{defn:reln_adj} apply:
+\begin{enumerate}
+\item $\REL\,\,=\COLL{(X,Y)}{X,Y\subseteq A\ \AND\ X\cap Y = \emptyset}$
+\item $\REL\,\,=\COLL{(X,Y)}{X,Y\subseteq A\ \AND\ X\cap Y \neq \emptyset}$
+\end{enumerate}
+\end{enumerate}
+}
+
+
+\renewcommand{\exline}[1]{\item \raisebox{-1.3cm}{\includegraphics{relations_gfx/#1.pdf}}}
+
+\ex{\label{ex:eqblobs}
+For each of the following relations on $7$, add a minimal number of arrows to turn them into equivalence relations.
+So do nothing if the given relation is already an equivalence relation, and otherwise draw in only the arrows that need to be included in order to ensure
+reflexivity, symmetry, and transitivity.
+
+\begin{minipage}{\textwidth}
+\begin{enumerate*}[(a), itemjoin=\hspace{2cm}]
+\exline{er06}
+\exline{er01}
+\exline{er02}
+\exline{er03}
+\exline{er04}
+\exline{er05}
+\end{enumerate*}
+\end{minipage}
+}
+
+After doing Exercise \ref{ex:eqblobs}, you might notice that an equivalence relation seems to partition a set into batches,
+where everything any any given batch is connected to everything else in the same batch, and where there are no connections between different batches.
+These batches are called \emph{equivalence classes}.
+
+\DEFN{Equivalence Class}{Assume that $\REL{}$ is an equivalence relation on $A$ and $a\in A$. Then we define
+$$
+\CLASS{a}{\REL} = \COLL{x}{x\REL{}a}
+$$
+and we call this the \emph{equivalence class of $a$}, or the \emph{equivalence class of $a$ modulo $\REL$}.
+If the relation involved is clear from context, then we may simply write $\CLASS{a}{}$ instead of $\CLASS{a}{\REL}$.
+}
+
+\ex{For each part of Exercise \ref{ex:eqblobs}, determine the equivalence classes $\CLASS{0}{}$ and $\CLASS{1}{}$.
+(``Determine'' means ``list the elements.'')
+}
+
+
 \note{Equivlance relations and partitions.
 Consider defining $\Z$ using equivalence relations.
 Consider talking about partial orders, and other sorts of relations.
 Consider introducing ideas of $\sup$ and $\inf$.}
+
 
 
 \appendix

@@ -34,3 +34,7 @@ New Ex at end of sec 3.2: If A is a subset of {x} then either A={} or A={x}.
 After the comments about how to use "equality used", you should put that summary about how replacements work inside of a box.
 A theorem perhaps, if you can state it that way?
 
+Add the actual defintion of higher -ton's like tripleton and more. We only need up to six, I think!
+
+Add an official statement about defining functions by formulas, and put in a suitable place. 
+Then actually do that when appropriate
