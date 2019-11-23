@@ -5372,8 +5372,8 @@ In other words, $m$ is a minimum of $A$. This contradicts our assumption that $A
 }
 
 \ex{(Open-ended) Why did (\ref{eq:wellord}) have to be so complicated in the proof of Theorem \ref{thm:wellord}?
-Why couldn't it just have been ``$k\notin\N$''? Try carrying out the proof with (\ref{eq:wellord})
-replaced by ``$k\notin\N$'' and observe what blocks the proof from working.}
+Why couldn't it just have been ``$k\notin A$''? Try carrying out the proof with (\ref{eq:wellord})
+replaced by ``$k\notin A$'' and observe what blocks the proof from working.}
 
 The well-ordering theorem, Theorem \ref{thm:wellord}, provides a new and sometimes more powerful way to carry out a proof by induction.
 Suppose you want to prove that all natural numbers are green. Then instead of proving a base case and an induction step, you can frame
@@ -5451,7 +5451,7 @@ then we may find that we have a function that has the desired properties. Define
 $$
 f=\COLL{p}{\ALL{h}{h\in Z\ARR p\in h}}.
 $$
-Since $\N\times X\in Z$, we have $p\in f\,\ARR\,p\in \N\times Z$ for all $p$, so $f\subseteq\N\times X$.
+Since $\N\times X\in Z$, we have $p\in f\,\ARR\,p\in \N\times X$ for all $p$, so $f\subseteq\N\times X$.
 Since we have $f\subseteq\N\times X$, if we want to prove that $f:\N\rightarrow X$ then we only need to show that $f$ is a function and $\N\subseteq\dom{f}$
 (see Theorem \ref{thm:mapping_convenience}).
 To finish the proof of this theorem, then, we need to prove the following claims:
@@ -7063,7 +7063,8 @@ and we call this the \emph{equivalence class of $a$}, or the \emph{equivalence c
 If the relation involved is clear from context, then we may simply write $\CLASS{a}{}$ instead of $\CLASS{a}{\REL}$.
 }
 
-\ex{For each part of Exercise \ref{ex:eqblobs}, determine the equivalence classes $\CLASS{0}{}$ and $\CLASS{1}{}$.
+\ex{For each part of Exercise \ref{ex:eqblobs}, after you have added the arrows that are needed to have an equivalence relation, 
+determine the equivalence classes $\CLASS{0}{}$ and $\CLASS{1}{}$.
 (``Determine'' means ``list the elements.'')
 }
 
