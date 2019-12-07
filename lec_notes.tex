@@ -3045,7 +3045,9 @@ z\in\{x,y\} &\DARR (z=x)\OR (z=y)\\
 &\DARR z\in\{y,x\}.
 \end{align*}
 From $z\in\{x,y\} \DARR z\in\{y,x\}$ we generalize to conclude that $\{x,y\}=\{y,x\}$.
-}{\label{thm:dton_unord}}
+}{
+\label{thm:dton_unord}
+}
 
 \THMPL{
 $\{x\}=\{y\}$ if and only if $x=y$.
@@ -3060,7 +3062,9 @@ Assume that $x=y$.
 %We have $z=x\DARR z=y$,
 %so $z\in\{x\}\DARR z\in\{y\}$.
 Then $\{x\}=\{y\}$, by Axiom \ref{ax:eq_used}.
-}{\label{thm:eq_ston}}
+}{
+\label{thm:eq_ston}
+}
 
 
 
@@ -3068,7 +3072,9 @@ Then $\{x\}=\{y\}$, by Axiom \ref{ax:eq_used}.
 $\{x,y\}=\{u\}$ if and only if $x=y=u$.
 }{
 \putExerciseHeading.
-}{\label{thm:dton_eq_ston}}
+}{
+\label{thm:dton_eq_ston}
+}
 
 
 
@@ -3076,7 +3082,9 @@ $\{x,y\}=\{u\}$ if and only if $x=y=u$.
 If $\{x,y\}=\{u,v\}$, then either $x=u$ and $y=v$, or $x=v$ and $y=u$.
 }{
 \putExerciseHeading.
-}{\label{thm:eq_dton}}
+}{
+\label{thm:eq_dton}
+}
 
 
 \ex{
@@ -3218,12 +3226,14 @@ Hint: Theorem \ref{thm:emptyset_unique}}.
 \vsp
 }
 
+% INCLUDE THESE LINES IN THMS ONLY VERSION
 \newcommand{\thmline}[2]{
 \item \hspace*{1em} #1 \hfill (#2) \hspace*{2em}
-}
+}%
 \newcommand{\thmlineL}[3]{
 \item #3 \hspace*{1em} #1 \hfill (#2) \hspace*{2em}
-}
+}%
+% END INCLUDE
 
 \def\hsp{\hspace{0.8em}}
 
@@ -3585,7 +3595,7 @@ It follows that $u=v$ (again using Theorem \ref{thm:dton_eq_ston}),
 and so $y=v$.
 
 Case 1.2: If $y=v$, then the proof is done.
-}
+}%
 
 Case 2: Suppose that $\{x\}=\{u,v\}$ and $\{x,y\}=\{u\}$.
 By Theorem \ref{thm:dton_eq_ston} it follows that $u=v=x$ and $x=y=u$.
@@ -3611,7 +3621,8 @@ existential assertion being made. For example when an integer is called ``a squa
 what this means is that the integer is the square of \emph{some} integer.
 Definition \ref{def:be_singleton} was another example of this pattern.
 
-\DEFN{Cartesian Product\label{def:prod}}{$$A\times B = \COLL{x}{\EXIST{a,b}{x=(a,b)\,\AND\, a\in A\,\AND\, b\in B}}.$$}
+\DEFN{Cartesian Product\label{def:prod}}{$$A\times B = \COLL{x}{\EXIST{a,b}{x=(a,b)\,\AND\, a\in A\,\AND\, b\in B}}.$$
+}
 
 Observe that the cartesian product $A\times B$ of two sets $A$ and $B$ is a \emph{set of pairs}.
 The product $A\times B$ is the collection of all pairs whose first entry is an element of $A$ and whose second entry is an element of $B$.
@@ -3787,7 +3798,9 @@ Since $x\in\dom{f}$, we can get a $y$ such that $(x,y)\in f$.
 We thus have $y\in \COLL{y}{(x,y)\in f}$.
 Now we must show that $y$ is unique. Suppose that $z\in \COLL{y}{(x,y)\in f}$.
 Then $(x,z)\in f$. Since $f$ is a function and $(x,y),(x,z)\in f$, we conclude that $y=z$.
-}{\label{thm:eval_singleton}}
+}{
+\label{thm:eval_singleton}
+}
 
 \DEFN{Function Evaluation\label{def:eval}}{
 Let $f$ be a function and let $x\in\dom{f}$.
@@ -3845,7 +3858,9 @@ $\Leftarrow:$
 Now assume that  $y=f(x)$ and $x\in\dom{f}$.
 By Theorem \ref{thm:ess_eval}, part \ref{thm:ess_eval1}, it follows that $(x,y)\in f$.
 Thus we have $\EXIST{x}{(x,y)\in f}$. That is, $y\in\ran{f}$.
-}{\label{thm:ran}}
+}{
+\label{thm:ran}
+}
 
 \THMNP{Equality of Functions\label{thm:fn_eq}}{
 If $f$ and $g$ are functions, then $f=g$ if and only if
@@ -3883,7 +3898,8 @@ the $Y$ is referred to as a \emph{codomain}.
 %}
 \THMPL{If $f$ is a function, then $f:X\rightarrow Y$ if and only if $f\subseteq X\times Y$ and $X\subseteq\dom{f}$.}{
 \putExerciseHeading.}{
-\label{thm:mapping_convenience}}
+\label{thm:mapping_convenience}
+}
 
 \ex{\label{ex:fn1}
 Assume that $x,y,z,u,v,w$ are distinct,
@@ -3990,7 +4006,9 @@ Using Theorem \ref{thm:ess_eval}, we have $(x,f(x)),(y,f(y))\in f$.
 Since $f(x)=f(y)$,
 we actually have $(x,f(x)),(y,f(x))\in f$.
 Applying our assumption, it follows that $x=y$.
-}{\label{thm:inj_xyz}}
+}{
+\label{thm:inj_xyz}
+}
 
 Thus injectivity is very similar to functionhood (Definition \ref{def:fn}), except that the pairs have been flipped around.
 
@@ -4005,7 +4023,9 @@ $$
 \ALL{y}{y\in Y\,\ARR\,\EXIST{x}{x\in X\,\AND\,f(x)=y}}.
 $$}{
 \putExerciseHeading.
-}{\label{thm:surj_exist}}
+}{
+\label{thm:surj_exist}
+}
 
 \ex{
 For each of the functions in Exercise \ref{ex:fn1},
@@ -4435,7 +4455,9 @@ f(x) = y & \DARR & (x,y)\in f \hspace{1.5em} & \text{(Theorem \ref{thm:ess_eval}
          & \DARR & (y,x)\in \rev{f}          & \text{(Theorem \ref{thm:ess_rev})}  \\
          & \DARR & \rev{f}(y)=x.             & \text{(Theorem \ref{thm:ess_eval})} 
 \end{array}\]
-}{\label{thm:inv_equiv}}
+}{
+\label{thm:inv_equiv}
+}
 
 
 \THMPL{If $f:X\rightarrow Y$ and $f$ is a bijection onto $Y$, then $\rev{f}:Y\rightarrow X$ and $\rev{f}$ is a bijection onto $X$.}{
@@ -4450,7 +4472,9 @@ Finally, we will use Theorem \ref{thm:inj_inv}
 to argue that $\rev{f}$ is injective.
 We already know that $\rev{f}$ is a function, and we also know that $\drev{f}$, which is $f$ by Theorem \ref{thm:double_rev}, is a function.
 It follows from Theorem \ref{thm:inj_inv} that $\rev{f}$ is injective.
-}{\label{thm:bij_inv}}
+}{
+\label{thm:bij_inv}
+}
 
 \THMPL{If $f:X\rightarrow Y$ and $f$ is injective, then $\rev{f}\circ f=\id{X}$.}{
 Assume that $f:X\rightarrow Y$ and $f$ is injective.
@@ -4484,7 +4508,9 @@ so we have $\rev{f}(f(x)) = x$ and our argument above is justified.
 
 We have now proven that $(\rev{f}\circ f)(x)=\id{X}(x)$ for all $x\in X$. 
 By Theorem \ref{thm:fn_eq}, we have proven that $\rev{f}\circ f=\id{X}$.
-}{\label{thm:inj_leftinv}}
+}{
+\label{thm:inj_leftinv}
+}
 
 \THMNP{Inverse and Composition\label{thm:inv_comp}}{If $f:X\rightarrow Y$ and $f$ is a bijection onto $Y$, then
 \begin{enumerate}[(1)]
@@ -4854,9 +4880,13 @@ Get $x$ such that $(x,b)\in f$. Then $f(x)=b\in B$.
 By Theorem \ref{thm:img_fn} part \ref{thm:img_fn2}, the fact that $f(x)\in B$ gives us $x\in \rev{f}[B]$.
 By Theorem \ref{thm:img_fn} part \ref{thm:img_fn1}, the fact that $x\in\rev{f}[B]$ gives us $f(x)\in f[\rev{f}[B]]$.
 In other words, $b\in f[\rev{f}[B]]$.
-}{\label{thm:img_facts}}
+}{
+\label{thm:img_facts}
+}
 
+% INCLUDE THESE LINES IN THMS ONLY VERSION
 \newcommand{\preimgNiceLine}[1]{$\rev{f}[A{#1}B]=\rev{f}[A]{#1}\rev{f}[B]$}
+% END INCLUDE
 
 \THMNP{Preimage Plays Nice\label{thm:preimg_nice}}{Assume that
 $f:X\rightarrow Y$, $A\subseteq Y$, and $B\subseteq Y$.
@@ -5104,8 +5134,7 @@ If $n\in\N$, then
 \item $0\leq n$.\label{thm:aboutzero2}
 \item $0\neq\next{n}$.\label{thm:aboutzero3}
 \end{enumerate}
-}
-{
+}{
 We will prove that $0<\next{n}$ for all $n\in\N$, by doing induction on $n$.
 
 \BChead{}
@@ -5204,7 +5233,9 @@ This completes the induction step.
 \THMPL{If $n < m$ and $m\in\N$, then $n\in\N$.}{
 \putExerciseHeading.
 Hint: Do an induction on $m$ to prove ``$n < m\ARR n\in\N$'' for all $m\in\N$.
-}{\label{thm:N_closed}}
+}{
+\label{thm:N_closed}
+}
 
 \ex{Prove that if $m\in\N$ then $m\subseteq\N$.}
 
@@ -5544,7 +5575,7 @@ By Theorem \ref{thm:succ_canc}, it follows that $m=n$. Then our induction hypoth
 the situation $(n,z),(m,w)\in f$ and tells us that $z=w$.
 Thus $x=r(w)=r(z)$, contradicting our assumption that $x\neq r(z)$.
 This proves the subclaim.
-}
+}%
 Since $(\next{n},x)\in f$ and $g\in Z$, we should have $(\next{n},x)\in g$. We have arrived
 at a contradiction, and so we conclude that $x=r(z)$.
 
@@ -5883,7 +5914,9 @@ Assume that $A\eqnm B$.
 Get a bijection $f:A\rightarrow B$.
 By Theorem \ref{thm:bij_inv}, the inverse $\rev{f}:B\rightarrow A$ is bijective.
 Therefore $B\eqnm A$.
-}{\label{thm:eqnm_props}}
+}{
+\label{thm:eqnm_props}
+}
 
 
 \THMPL{
@@ -5897,7 +5930,9 @@ If $A\injex B$ and $B\injex C$, then $A\injex C$.
 \end{enumerate}
 }{
 \putExerciseHeading.
-}{\label{thm:injex_props}}
+}{
+\label{thm:injex_props}
+}
 
 In the informal discussion at the beginning of this section, it is suggested that ``$A\injex B$''
 is a way of saying that $B$ has at least as many elements as $A$.
@@ -6281,7 +6316,9 @@ Compare the following theorem to Exercise \ref{ex:choice_card}.
 Assume that $X$ is finite and $f:A\rightarrow X$ surjectively.
 By Theorem \ref{thm:FC}, we can get $g:X\rightarrow A$ such that $f\circ g=\id{X}$.
 By Theorem \ref{thm:comp_inj_surj}, the function $g$ must be injective.
-}{\label{thm:surj_finite}}
+}{
+\label{thm:surj_finite}
+}
 
 \ex{Prove that if $n,m\in\N$ and there is a surjection $f:m\rightarrow n$, then $n\leq m$.}
 
@@ -6462,7 +6499,8 @@ Give an example of $A$, $B$, $f$, and $Y$ such that
 $f:A\rightarrow B$,\ \ $Y\subseteq B$,\ \ $Y$ is finite,\ \ and $\rev{f}[Y]$ is infinite.}
 
 
-\DEFN{Countability}{A set $A$ is said to be \emph{countably infinite} iff $A\eqnm\N$.}
+\DEFN{Countability}{A set $A$ is said to be \emph{countably infinite} iff $A\eqnm\N$.
+}
 
 We have now seen that two types of cardinalities can occur:
 finite cardinality, where a set has the same cardinality as $n$
@@ -6530,7 +6568,9 @@ To help us prove this, we will introduce the concepts of even and odd numbers.
 
 \THMPL{Every natural number is either odd or even.}{
 \putExerciseHeading. Hint: Induction.
-}{\label{thm:oddeven1}}
+}{
+\label{thm:oddeven1}
+}
 
 \THMPL{A natural number cannot be both odd and even.}{
 Suppose, for the sake of contradiction, that there exists a natural number which is both odd and even.
@@ -6544,7 +6584,9 @@ $$k'+k'+1+1=(k'+1)+(k'+1)=k+k=n=\ell+\ell+1,$$
 so $k'+k'+1=\ell+\ell$.
 We see that $\ell+\ell$ is odd and even, and yet $\ell+\ell<\ell+\ell+1=n$.
 This contradicts the fact that $n$ was the smallest odd-and-even natural number.
-}{\label{thm:oddeven2}}
+}{
+\label{thm:oddeven2}
+}
 
 \THMPL{If $k,\ell\in\N$ and $k+k=\ell+\ell$ then $k=\ell$.}{
 Assume that $k,\ell\in\N$ and $k+k=\ell+\ell$.
@@ -6553,7 +6595,9 @@ $$ k+k < \ell+k < \ell+\ell $$
 by Theorem \ref{thm:prop_plus},
 so we cannot have $k<\ell$.
 Similarly, we cannot have $\ell<k$. Thus $k=\ell$.
-}{\label{thm:oddeven3}}
+}{
+\label{thm:oddeven3}
+}
 
 \THMNP{Doubling Countable Infinity\label{thm:doubleN}}{
 $2\times \N\eqnm\N$.
@@ -6627,7 +6671,7 @@ This is because for any $n\in\N$ and any $k$ we have
 $$
 (n,(k,n))\in a'\Rightarrow (n+1,(k+(n+1),n+1))=(n+1,r((k,n)))\in a'.
 $$
-}
+}%
 One consequence of Fact 1 is that $0\in\dom{a}$.
 One consequence of Fact 2 is that for any $n\in\N$, if $n\in\dom{a}$ then $n+1\in\dom{a}$.
 It follows by induction that $\N\subseteq\dom{a}$.
@@ -6637,7 +6681,7 @@ We may now express Facts 1 and 2 as follows:
 \indented{
 Fact 1: $a(0)=0$.\\
 Fact 2: For all $n\in\N$, we have $a(n+1)=a(n)+(n+1)$.
-}
+}%
 We will need one more useful fact about $a$ before we construct our bijection:
 \indented{Fact 3: For $n,n'\in\N$, if $n<n'$ then $a(n)+n<a(n')$.}
 To prove this, we fix $n\in\N$ and do induction on $n'$.
@@ -6669,7 +6713,7 @@ that $f$ is a function,\\
 that $\N\subseteq\dom{f}$,\\
 that $f$ is injective,\\
 and that $f$ is surjective onto $\N\times\N$.
-}
+}%
 To prove that $f$ is a function, consider any $(x,y),(x,y')\in f$.
 Get $i,j,n\in\N$ such that $i+j=n$ and $(x,y)=(a(n)+i,(i,j))$.
 Get $i',j',n'\in\N$ such that $i'+j'=n'$ and $(x,y')=(a(n')+i',(i',j'))$.
