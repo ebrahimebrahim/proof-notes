@@ -5659,7 +5659,7 @@ and
 \ref{thm:rec_unique},
 but some hypotheses need to be verified in order for those theorems to apply.
 Let $X=\COLL{f}{f:\N\rightarrow\N}$.
-Define the recursion rule that is being used in definition \ref{def:addn}.
+Define the recursion rule that is being used in Definition \ref{def:addn}.
 That is, define the function that plays the role of ``$r$''
 in Theorem \ref{thm:rec_exist}.
 Prove that the $r$ that you define satisfies $r:X\rightarrow X$.
@@ -5672,9 +5672,9 @@ Prove that the $r$ that you define satisfies $r:X\rightarrow X$.
 \end{enumerate}
 }
 
-\DEFN{Addition\label{def:plus}}{
+\DEFN{Addition\label{def:plus}}{ Assume that $a,b\in\N$. Then we define
 $$
-a+b = \add(b)(a)
+a+b = \add(b)(a).
 $$
 }
 
@@ -5733,7 +5733,7 @@ $ m+n=0\ \ARR\ (m=0\,\AND\,n=0) $
 \item\label{thm:prop_plus10}
 $ m+n=1\ \ARR\ ((m=1\,\AND\, n=0)\,\OR\,(m=0\,\AND\,n=1))$
 \item\label{thm:prop_plus11}
-$ m+k=n\ \ARR\ m\leq n $
+$ m\leq m+k $
 \item\label{thm:prop_plus12}
 $ m\leq n\ \ARR\ \EXIST{j}{j\in\N\ \AND\ m+j=n} $
 \hfill (solvability of certain equations)
@@ -6096,19 +6096,19 @@ Therefore $n\injex m$, by Exercise \ref{ex:subset_injex}.
 
 $\Rightarrow$:
 We will prove by induction on $m$ that 
-$$\ALL{n}{n\injex m\ARR n\leq m},$$
+$$\ALL{n}{n\in\N\ \ARR\ (n\injex m\ARR n\leq m)},$$
 for all $m\in\N$.
 %It is important that the $n$ be quantified in the proposition on which we are doing induction. 
 
 \BChead{}
-Consider any $n\injex 0$.
+Consider any $n\in\N$ such that $n\injex 0$.
 Get an injection $f:n\rightarrow 0$.
 We have $f\subseteq n\times \emptyset = \emptyset$, so $f=\emptyset$.
 Therefore $n=\dom{f}=\emptyset=0$, and so $n\leq m$.
 
 \IShead{}
-Suppose that $m\in\N$ and $\ALL{n}{n\injex m\ARR n\leq m}$.
-Consider any $n\injex m+1$.
+Suppose that $m\in\N$ and $\ALL{n}{n\in\N\ \ARR\ (n\injex m\ARR n\leq m)}$.
+Consider any $n\in\N$ such that $n\injex m+1$.
 Get an injection $f:n\rightarrow (m+1)$.
 Either $m\in\ran{f}$ or $m\notin\ran{f}$.
 
