@@ -1,5 +1,11 @@
 ## Specific pdf files, b/c I don't want to ignore all of them
 lec_notes.pdf
+lec_notes_thms_only.tex
+lec_notes_thms_only.pdf
+img/*.pdf
+img/*/*.pdf
+additional_puzzles/*.pdf
+
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
