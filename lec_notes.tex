@@ -363,7 +363,7 @@ an axiom, or we need to verify that it follows logically from the previous propo
 In this example, two of the propositions are axioms, and the other three are logical deductions;
 here is a schematic depiction of these relationships:
 \begin{center}
-\includegraphics[scale=0.25]{proofFlow.pdf}
+\includegraphics[scale=0.25]{img/proofFlow.pdf}
 \end{center}
 Again, don't worry yet about understanding why this works.
 What I want you to take away from this is the general structure:
@@ -1398,7 +1398,7 @@ $$
 $$
 stands for the proposition that is obtained by replacing each ``$x$'' in $\pA$ with a ``$T$''.
 In this notation, any variable can go in the position of ``$x$'' and any term can go in the position of ``$T$'':
-\begin{center}\includegraphics[scale=0.8]{subst.pdf}\end{center}
+\begin{center}\includegraphics[scale=0.8]{img/subst.pdf}\end{center}
 Some examples:
 \indented{
 \eg{$x\in A\cup B$}{x}{y}{$y\in A\cup B$}\lsp
@@ -5858,7 +5858,7 @@ Prove that $f(m+k)=f(m)+f(k)$ for all $m,k\in\N$.
 
 An injective function $f:A\rightarrow B$ associates to each element of $A$ a unique element of $B$.
 We can imagine that an injection $f$ \emph{embeds} $A$ into $B$, with $\ran{f}$ being a subset of $B$ that, via $f$, looks like a copy of $A$.
-\begin{center}\includegraphics[scale=1]{embed.pdf}\end{center}
+\begin{center}\includegraphics[scale=1]{img/embed.pdf}\end{center}
 For $A$ to embed into $B$ like this,
 it seems that $B$ must have at least as many elements as $A$, and $B$ can possibly have more elements that don't get mapped to.
 
@@ -5866,12 +5866,12 @@ A surjective function $g:A\rightarrow B$ associates the elements of $A$ to eleme
 every element of $B$ has at least one element of $A$ mapping to it.
 However, unless $g$ is also injective, some elements of $B$ can have multiple elements of $A$ mapping to them.
 We can imagine that a surjection $g$ collapses some bunches of elements of $A$ onto all the individual elements of $B$.
-\begin{center}\includegraphics[scale=1]{collapse.pdf}\end{center}
+\begin{center}\includegraphics[scale=1]{img/collapse.pdf}\end{center}
 For each element of $B$ to receive at least one arrow, it seems that $A$ must have at least as many elements as $B$,
 and $A$ can possibly have more elements that get collapsed into some already-targeted elements of $B$.
 
 A bijective function $h:A\rightarrow B$ associates all the elements of $A$ to all the elements of $B$ in a one-to-one way.
-\begin{center}\includegraphics[scale=1]{collapse2.pdf}\end{center}
+\begin{center}\includegraphics[scale=1]{img/collapse2.pdf}\end{center}
 For a bijection to be possible, it seems that $A$ must have exactly as many elements as $B$.
 If $A$ had too few elements, then some elements of $B$ would remain untargeted, ruling out surjectivity.
 If $A$ had too many elements, then some collapsing would have to occur, ruling out injectivity.
