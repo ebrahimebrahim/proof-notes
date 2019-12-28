@@ -490,7 +490,7 @@ Mathematical propositions are supposed to say things about mathematical objects;
 without any mathematical objects in hand, we cannot form any actual mathematical propositions.
 We will proceed with the discussion anyway, using two strategies:
 
-First, we will use capital Greek letters as placeholders for mathematical propositions. Examples include
+First, we will use the following capital Greek letters as placeholders for mathematical propositions:
 $$
 \pA,
 \pB,
@@ -2777,6 +2777,17 @@ For $a$ to be a subset of $b$, every element of $a$ must be an element of $b$.
 Do not confuse this with ``$a$ is in $b$,'' which is actually a way of saying ``$a\in b$''!
 Explicitly using the symbols ``$\in$'' and ``$\subseteq$'', or explicitly saying ``element'' and ``subset''
 can help to avoid confusion.
+Here is a way to imagine the situation $x\in a$:
+\begin{center}
+\includegraphics[scale=1.5]{img/boxes/1.pdf}
+\end{center}
+
+\begin{samepage}
+And here is a way to imagine the situation $x\subseteq a$:
+\begin{center}
+\includegraphics[scale=1.5]{img/boxes/2.pdf}
+\end{center}
+\end{samepage}
 
 \paragraph{On Definitions}
 Definitions are like axioms in that they serve as starting points.
@@ -2865,6 +2876,14 @@ It follows that $z\in a\DARR z\in b$. Since $z$ is arbitrary, we are done.
 }
 
 Since equality is equivalent to two inclusions, proofs of equality are often split into two parts, with each part dedicated to proving one of the inclusions.
+
+\begin{samepage}
+Before ending this section on membership, we take a moment to point out that membership is normally not transitive;
+having $y\in x$ and $x\in a$ does not allow you to conclude that $y\in a$.
+\begin{center}
+\includegraphics[scale=1.4]{img/boxes/3.pdf}
+\end{center}
+\end{samepage}
 
 \ex{
 For each of the following, determine if it is a term, a proposition, or nothing because it is ill-formed.

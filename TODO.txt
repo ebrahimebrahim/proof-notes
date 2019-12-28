@@ -1,7 +1,3 @@
-say we only use certain capital greek letters for props
-
-when introduce inclusion, make some kind of diagram or picture explaining the difference between inclusion and membership
-
 illustration for hilbert's hotel
 illustration for doubling N
 illustrations for squaring N
