@@ -1,9 +1,3 @@
-- do substitution formalism better (like actually a formalism, you know?) Hmmm or maybe not...
-- When introducing subst subtleties, maybe just tell people to avoid replacing bound variable, rather than
-telling them that they can try but it does nothing. After all, you tell them to avoid "unacceptable" substs!
-
-Move the Predecessor theorem to later on in the natural numbers section. It's not a good first example of induction.
-
 After the comments about how to use "equality used", you should put that summary about how replacements work inside of a box.
 A theorem perhaps, if you can state it that way?
 

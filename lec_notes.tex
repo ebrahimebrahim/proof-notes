@@ -5104,38 +5104,7 @@ Suppose that $n\in\N$ and $n$ is green.
 By induction (Theorem \ref{thm:ind}), it follows that $\ALL{n}{n\in\N\ARR\text{$n$ is green}}$.
 }
 
-\THMNP{Predecessor\label{thm:pred}}{If
-$n\in\N$ and $n\neq 0$, then $n=\next{m}$ for some $m\in\N$.
-}{
-We must prove that
-\[
-\ALL{n}{n\in\N\ARR(n\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,n=\next{m}})}.
-\tag{$\ast$}\label{eqn:pred}
-\]
-We will do this by doing an induction on $n$ in the proposition
-$$
-n\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,n=\next{m}}.
-$$
-\BChead{}
-It is vacuously true that
-$
-0\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,0=\next{m}}.
-$
 
-\IShead{}
-Suppose that $n\in\N$ and $
-n\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,n=\next{m}}.
-$
-We must now show that
-$$
-\next{n}\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,\next{n}=\next{m}}.
-$$
-Assume that $\next{n}\neq 0$.
-Taking $m=n$ gives $m\in\N$ and $\next{n}=\next{m}$, so
-$\EXIST{m}{m\in\N\,\AND\,\next{n}=\next{m}}$. This completes the induction step.
-
-By induction (Theorem \ref{thm:ind}), we have proven (\ref{eqn:pred}).
-}
 
 \DEFN{Order for $\N$}{
 \begin{enumerate}[(1)]
@@ -5172,7 +5141,7 @@ Suppose that $n\in\N$ and $0<\next{n}$.
 Then $0\leq \next{n}$.
 It follows that $0<\next{\next{n}}$.
 
-By induction, we have proven that $0<\next{n}$ for every natural number $n$.
+By induction (Theorem \ref{thm:ind}), we have proven that $0<\next{n}$ for every natural number $n$.
 This completes the proof of part \ref{thm:aboutzero1}.
 
 Part \ref{thm:aboutzero2} is equivalent to part \ref{thm:aboutzero1}.
@@ -5182,6 +5151,43 @@ Suppose for the sake of contradiction that $0=\next{n}$.
 Then it follows from part \ref{thm:aboutzero1} that $0\in 0$.
 But $0=\emptyset$ is empty.
 }
+
+
+
+\THMNP{Predecessor\label{thm:pred}}{If
+$n\in\N$ and $n\neq 0$, then $n=\next{m}$ for some $m\in\N$.
+}{
+We must prove that
+\[
+\ALL{n}{n\in\N\ARR(n\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,n=\next{m}})}.
+\tag{$\ast$}\label{eqn:pred}
+\]
+We will do this by doing an induction on $n$ in the proposition
+$$
+n\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,n=\next{m}}.
+$$
+\BChead{}
+It is vacuously true that
+$
+0\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,0=\next{m}}.
+$
+
+\IShead{}
+Suppose that $n\in\N$ and $
+n\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,n=\next{m}}.
+$
+We must now show that
+$$
+\next{n}\neq 0\ARR\EXIST{m}{m\in\N\,\AND\,\next{n}=\next{m}}.
+$$
+Assume that $\next{n}\neq 0$.
+Taking $m=n$ gives $m\in\N$ and $\next{n}=\next{m}$, so
+$\EXIST{m}{m\in\N\,\AND\,\next{n}=\next{m}}$. This completes the induction step.
+
+By induction (Theorem \ref{thm:ind}), we have proven (\ref{eqn:pred}).
+}
+
+
 
 \THMNP{Succession Preserves Order\label{thm:succ_ord}}{Assume that $n\in\N$.
 \begin{enumerate}[(1)]
