@@ -1,40 +1,38 @@
-illustration for hilbert's hotel
-illustration for doubling N
-illustrations for squaring N
-
-a power set functor exercise!
-
 - do substitution formalism better (like actually a formalism, you know?) Hmmm or maybe not...
 - When introducing subst subtleties, maybe just tell people to avoid replacing bound variable, rather than
 telling them that they can try but it does nothing. After all, you tell them to avoid "unacceptable" substs!
 
-Move Derived Rule 20 so that it comes after Derived Rule 24
-
-Instead of EG UG EI and UI, say "\exists gained" and "\exists removed" etc. perahps with symbols like \exists+ replacing EG
-
-Consider upgrading piecewise definitions of functions from an exercise to a fully fledged theorem and definition-method.
-Same for restriction of functions!
-
-Consider adding more on arithmetic and perhaps even modular arithmetic, division algorithm, euclidean algorithm, etc.
-Perhaps with fast travel paths that sort of tell you what theorems to accept in order to teleport to a section
-
-Often you need to be more clear about when a term goes into a place, like
-with subst notation. It's pretty peupy that you use T, which is a specific variable!
-Maybe you can use a box instead, so a box can play the role that, say, \pi plays in jacoby notes
-
-In Ex 2, consider describing the thing as an alien language where sentences are those grids, and we don't know what they mean
-but we have determined some of the rules of deduction.
-
-New Ex at end of sec 3.2: If A is a subset of {x} then either A={} or A={x}.
+Move the Predecessor theorem to later on in the natural numbers section. It's not a good first example of induction.
 
 After the comments about how to use "equality used", you should put that summary about how replacements work inside of a box.
 A theorem perhaps, if you can state it that way?
+
+Instead of EG UG EI and UI, say "\exists gained" and "\exists removed" etc. perahps with symbols like \exists+ replacing EG
+
+In Ex 2, consider describing the thing as an alien language where sentences are those grids, and we don't know what they mean
+but we have determined some of the rules of deduction.
 
 Add the actual defintion of higher -ton's like tripleton and more. We only need up to six, I think!
 
 Add an official statement about defining functions by formulas, and put in a suitable place. 
 Then actually do that when appropriate
 
-Move the Predecessor theorem to later on in the natural numbers section. It's not a good first example of induction.
+Consider upgrading piecewise definitions of functions from an exercise to a fully fledged theorem and definition-method.
+Same for restriction of functions!
+
+---
+
+New Ex at end of sec 3.2: If A is a subset of {x} then either A={} or A={x}.
+
+a power set functor exercise!
+
+---
 
 I think there is a lack of exercises in which they are asked to construct an example of something. My students were weak at this.
+
+illustration for hilbert's hotel
+illustration for doubling N
+illustrations for squaring N
+
+Consider adding more on arithmetic and perhaps even modular arithmetic, division algorithm, euclidean algorithm, etc.
+Perhaps with fast travel paths that sort of tell you what theorems to accept in order to teleport to a section

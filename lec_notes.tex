@@ -1392,13 +1392,18 @@ Before moving on, review section
 \newcommand{\eg}[4]{If $\pA$ is ``#1'' then $\SUBST{\pA}{#2}{#3}$ is ``#4''.}
 \def\lsp{\\[0.4em]}
 
+\newcommand{\boxsubscript}[2]{\,\raisebox{-1.5pt}{\framebox(#1,7){\scriptsize {#2}}}\,}
+\def\SUBSTtemplate{\SUBST{\pA}{\boxsubscript{30}{variable}}{\boxsubscript{20}{term}}}
+
 Given a proposition $\pA$, the notation
 $$
-\SUBST{\pA}{x}{T}
+\SUBSTtemplate{}
 $$
-stands for the proposition that is obtained by replacing each ``$x$'' in $\pA$ with a ``$T$''.
-In this notation, any variable can go in the position of ``$x$'' and any term can go in the position of ``$T$'':
-\begin{center}\includegraphics[scale=0.8]{img/subst.pdf}\end{center}
+stands for the proposition that is obtained by replacing each copy of the indicated variable in $\pA$ with a copy of
+the indicated term.
+In this notation, any variable can go in place of the box marked ``variable,'' and any term can go in place of the box
+marked ``term.''
+%\begin{center}\includegraphics[scale=0.8]{img/subst.pdf}\end{center}
 Some examples:
 \indented{
 \eg{$x\in A\cup B$}{x}{y}{$y\in A\cup B$}\lsp
@@ -1407,19 +1412,21 @@ Some examples:
 \eg{$a+b\in B$}{c}{3}{$a+b\in B$}\lsp
 \eg{the product of $a$ and $b$ is even}{b}{c^2}{the product of $a$ and $c^2$ is even}
 }
+Observe that parentheses are added as needed to avoid ambiguity.
+
 \paragraph{A Clarification}
 (If you find this remark to be more confusing than clarifying, then please feel free to skip this paragraph for now.)
-What \emph{is} the string of symbols ``$\SUBST{\pA}{x}{T}$''? What part of speech are we looking at here?
-It's almost a proposition, in that you get a proposition once you carry out the substitution that involves replacing $x$ by $T$.
-But the string of symbols ``$\SUBST{\pA}{x}{T}$'' is not itself a proposition.
+What \emph{is} the string of symbols ``$\SUBST{\pA}{x}{y}$''? What part of speech are we looking at here?
+It's almost a proposition, in that you get a proposition once you carry out the substitution that involves replacing $x$ by $y$.
+But the string of symbols ``$\SUBST{\pA}{x}{y}$'' is not itself a proposition.
 It's more like a set of \emph{instructions} telling you how to obtain a certain proposition.
-The string of symbols ``$\SUBST{\pA}{x}{T}$''
+The string of symbols ``$\SUBST{\pA}{x}{y}$''
 has no part of speech because it is in fact not a part of the mathematical language at all!
 Instead, it is part of the language we are currently using to communicate. That is, it is a part of the English
 language in which this document is written, and it will help us in our mission to \emph{specify} the language of mathematics.
-You can think of ``$\SUBST{\pA}{x}{T}$'' as simply a shorthand for the instruction 
+You can think of ``$\SUBST{\pA}{x}{y}$'' as simply a shorthand for the instruction 
 \indented{
-\emph{Take the proposition ``$\pA$'' and replace all occurrences of the variable ``$x$'' with the term ``$T$'', and then write the resulting proposition.}
+\emph{Take the proposition ``$\pA$'' and replace each copy of the variable ``$x$'' with the symbol ``$y$'', and then write the resulting proposition.}
 }
 
 \paragraph{More on substitution is coming later.}
@@ -1525,8 +1532,8 @@ Now let's get into how ``$\forall$'' is used in proofs.
 \hypertarget{hl:UI}{If} you know that $\ALL{x}{\pA}$ holds, then
 you can deduce $\pA$.
 In fact, you can deduce \emph{any} proposition
-that results from the substitution $\SUBST{\pA}{x}{T}$,
-where ``$T$'' can be any term.
+that results from the substitution $\SUBST{\pA}{x}{\boxsubscript{20}{term}}$,
+where \emph{any} term can be put in the box.
 For example,
 if you know that $\ALL{x}{\text{$x$ is even}}$, then
 you can deduce ``$x$ is even'', and you can also deduce
@@ -1598,8 +1605,8 @@ Now let's get into how ``$\exists$'' is used in proofs.
 
 \paragraph{Existential Generalization}
 \hypertarget{hl:EG}{To} prove that $\EXIST{x}{\pA}$, all you need to do is
-prove $\pA$ or some variant of $\pA$ such as $\SUBST{\pA}{x}{T}$,
-in which a particular term $T$ sits in the place of $x$. In other
+prove $\pA$ or some variant of $\pA$ such as $\SUBST{\pA}{x}{\boxsubscript{20}{term}}$,
+in which a particular term sits in place of $x$. In other
 words, to prove that ``there exists an $x$ such that $\pA$,''
 you must \emph{find} an $x$, such that $\pA$.
 
@@ -2529,7 +2536,7 @@ with free $x$ and $y$, rather than explicitly including the ``$\forall x,y$'' as
 It's just easier to write this way, and everyone understands that since $x$ and $y$ are arbitrary, there's sort of an
 implicit ``$\forall x,y$'' that could be included.
 
-Recall that UI allows you to deduce $\SUBST{\pA}{x}{T}$ from $\ALL{x}{\pA}$, for any term $T$ that you'd like to replace $x$.
+Recall that UI allows you to deduce $\SUBST{\pA}{x}{\boxsubscript{20}{term}}$ from $\ALL{x}{\pA}$, for any term that you'd like to have replace $x$.
 For example you can deduce
 \begin{equation}\label{eq:implicitU3}
 \text{if $5$ and $z+1$ are odd, then $5+(z+1)$ is even}
@@ -2539,9 +2546,10 @@ which itself was deduced from (\ref{eq:implicitU2}).
 The bottom line is that if you've proven $\pA$ as a theorem, then you can substitute any terms you like for the free variables in $\pA$, and you would also
 have proven the resulting proposition.
 \DRULE{Variable Substitution}{
-Given $\pA$, if $x$ is \emph{arbitrary} then you can deduce $\SUBST{\pA}{x}{T}$,
-where any term can sit in the position of the ``T''.
-(For example, all variables would be arbitrary if $\pA$ is already proven as a standalone theorem.)
+Given $\pA$, if $x$ is \emph{arbitrary} then you can deduce $\SUBST{\pA}{x}{\boxsubscript{20}{term}}$,
+where any term can sit in the box labeled ``term.''
+(For example, all free variables would be arbitrary if $\pA$ is already proven as a standalone theorem, so free variables
+in a theorem can freely be replaced by terms.)
 }
 
 
