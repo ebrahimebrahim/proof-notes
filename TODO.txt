@@ -1,6 +1,5 @@
 I think there is a lack of exercises in which they are asked to construct an example of something. My students were weak at this.
 
-illustration for hilbert's hotel
 illustration for doubling N
 illustrations for squaring N
 
