@@ -3211,6 +3211,8 @@ if $y=\{b\}$, then
 $\COLL{z}{\EXIST{x}{(z\in x)\AND(x\in y)}}=b$.
 }
 
+\ex{Prove that if $a\subseteq\{x\}$, then either $a=\emptyset$ or $a=\{x\}$.}
+
 \DEFN{Being a Singleton\label{def:be_singleton}}{
 A set is said to be a \emph{singleton} iff it has the form $\{x\}$ for some $x$.
 That is, we call $s$ a singleton iff
@@ -3309,6 +3311,7 @@ In practice, this is achieved by writing something like
 
 \ex{Determine what is $\occ{\COLL{x}{\ALL{y}{y\notin x}}}$, and prove your claim. If it is ``undefined,'' then say so.
 Hint: Theorem \ref{thm:emptyset_unique}}.
+
 
 \subsection{Intersection, Union, and Relative Complement}
 
@@ -3941,6 +3944,13 @@ Since $f$ if a function and $(x,y),(x,f(x))\in f$, we have $y=f(x)$.
 
 Finally, \ref{thm:ess_eval3} is simply a combination of \ref{thm:ess_eval1} and \ref{thm:ess_eval2}.
 }
+
+\textbf{Defining a Function by a Formula}
+Often people will define a function by providing a formula that turns inputs into outputs.
+For example, one might say ``Define $f$ by $f(x)=x^2$ for $x\in A$,'' in order to define a squaring function.
+This is a way of making the definition ``Let $f=\COLL{(x,x^2)}{x\in A}$.''
+Note that in order for the ``formula'' style of definition to be a complete definition of a function, one
+needs to provide a domain (such as $A$ in the example). We will sometimes adopt this style.
 
 \THMPL{If $f$ is a function, then $y\in\ran{f}$ if and only if $y=f(x)$ for some $x\in\dom{f}$.}{
 Assume that $f$ is a function.
@@ -5021,6 +5031,14 @@ $f[A\cap B] = f[A]\,\cap\, f[B]$
 }
 Prove the one that has a proof. You should somehow find yourself blocked from proving the other one. (Open-ended question: What blocks the proof?)}
 
+\ex{
+Given any function $f:A\rightarrow B$, let us define an operation ``hat'' as follows:
+$$ \widehat{f} = \COLL{(S,f[S])}{S\subseteq A}. $$
+\begin{enumerate}
+\item Prove that if $f:A\rightarrow B$, then $\widehat{f}:\SUB{A}\rightarrow\SUB{B}$.
+\item Prove that if $f:A\rightarrow B$ and $g:B\rightarrow C$, then $\widehat{g\circ f} = \widehat{g}\circ \widehat{f}$.
+\end{enumerate}
+}
 
 \subsection{Natural Numbers}
 

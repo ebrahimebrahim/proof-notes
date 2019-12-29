@@ -1,14 +1,7 @@
-Add an official statement about defining functions by formulas, and put in a suitable place. 
-Then actually do that when appropriate
+When it is more appropriate to define a function by a formula, do so.
 
 Consider upgrading piecewise definitions of functions from an exercise to a fully fledged theorem and definition-method.
 Same for restriction of functions!
-
----
-
-New Ex at end of sec 3.2: If A is a subset of {x} then either A={} or A={x}.
-
-a power set functor exercise!
 
 ---
 
