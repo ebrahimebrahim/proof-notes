@@ -2721,7 +2721,7 @@ whose proof is just a general application of the idea above:
 \def\tA{\smiley{}}
 
 \THMNP{Equality Used\label{thm:eq_used}}{In
-this theorem, let us use ``$\tA$''  as a placeholder for a \emph{term},
+this theorem, we use ``$\tA$''  as a placeholder for a \emph{term},
 just like we use ``$\pA$'' as a placeholder for a \emph{proposition}.
 So we can apply parts
 \ref{itm:eq_used:2}
@@ -3102,7 +3102,17 @@ In other words, $x$ is an element of $\{x\}$ and it is the \emph{unique} element
 $\{x,y\}=\COLL{a}{(a=x)\OR (a=y)}$.
 }
 
-You can probably guess how $\{x,y,z\}$ and longer ``lists of elements'' are defined.
+You can probably guess how $\{x,y,z\}$ and longer ``lists of elements'' are defined:
+
+\DEFN{More Ways to List Elements}{
+\begin{enumerate}[(1)]
+\item $\{x,y,z\}=\COLL{a}{(a=x)\OR (a=y)\OR (a=z)}$
+\item $\{x,y,z,u\}=\COLL{a}{(a=x)\OR (a=y)\OR (a=z)\OR (a=u)}$
+\item $\{x,y,z,u,v\}=\COLL{a}{(a=x)\OR (a=y)\OR (a=z)\OR (a=u)\OR (a=v)}$
+\item $\{x,y,z,u,v,w\}=\COLL{a}{(a=x)\OR (a=y)\OR (a=z)\OR (a=u)\OR (a=v)\OR (a=w)}$
+\end{enumerate}
+}
+
 Of course we are restricted to finite lists, because we can only write finite lists
 with our finite ink and finite paper.
 

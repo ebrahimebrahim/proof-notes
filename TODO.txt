@@ -1,10 +1,3 @@
-Instead of EG UG EI and UI, say "\exists gained" and "\exists removed" etc. perahps with symbols like \exists+ replacing EG
-
-In Ex 2, consider describing the thing as an alien language where sentences are those grids, and we don't know what they mean
-but we have determined some of the rules of deduction.
-
-Add the actual defintion of higher -ton's like tripleton and more. We only need up to six, I think!
-
 Add an official statement about defining functions by formulas, and put in a suitable place. 
 Then actually do that when appropriate
 
