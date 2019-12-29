@@ -1,10 +1,3 @@
-When it is more appropriate to define a function by a formula, do so.
-
-Consider upgrading piecewise definitions of functions from an exercise to a fully fledged theorem and definition-method.
-Same for restriction of functions!
-
----
-
 I think there is a lack of exercises in which they are asked to construct an example of something. My students were weak at this.
 
 illustration for hilbert's hotel

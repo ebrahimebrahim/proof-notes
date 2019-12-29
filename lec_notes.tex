@@ -4054,8 +4054,11 @@ Define $g=\COLL{(a,f(a))}{a\in A}$.
 \end{enumerate}
 }
 
-\ex{\label{ex:piecewise}
-Prove that if $f$ and $g$ are functions and $\dom{f}\cap\dom{g}=\emptyset$, then $f\cup g$ is a function.
+\THMNP{\label{thm:piecewise}Piecewise Function Definition}{
+
+If $f$ and $g$ are functions and $\dom{f}\cap\dom{g}=\emptyset$, then $f\cup g$ is a function.
+}{
+\putExerciseHeading.
 }
 
 
@@ -6101,7 +6104,7 @@ Since $\COLL{(a,f(a))}{a\in D}$ is a subset of $f$, it is a function (see Exerci
 Observe that $\dom{\COLL{(a,f(a))}{a\in D}}=D$ and $\dom{\id{A\setminus D}}=A\setminus D$
 have empty intersection.
 Since $g$ is the union of the two functions $\COLL{(a,f(a))}{a\in D}$ and $\id{A\setminus D}$,
-and since the intersection of their domains is empty, it follows from Exercise \ref{ex:piecewise} that $g$ is a function.
+and since the intersection of their domains is empty, it follows from Theorem \ref{thm:piecewise} that $g$ is a function.
 
 \textit{Proof of Claim \ref{thm:csb_pre2}:}
 Applying Exercise \ref{ex:domcup},
@@ -6364,10 +6367,10 @@ g'=g\cup\{(n,a_0)\}.
 $$
 We now claim that $g':(n+1)\rightarrow A$ and that $f\circ g'=\id{n+1}$. Once this is established, the induction step will be complete and the theorem will be proven.
 
-To see that $g'$ is a function, we will use Exercise \ref{ex:piecewise}.
+To see that $g'$ is a function, we will use Theorem \ref{thm:piecewise}.
 It is clear that $\{(n,a_0)\}$ is a function.
 The intersection of $\dom{g}=n$ and $\dom{\{(n,a_0)\}}=\{n\}$
-is empty by Theorem \ref{thm:irr_N}. By Exercise \ref{ex:piecewise}, we conclude that $g'$ is a function.
+is empty by Theorem \ref{thm:irr_N}. By Theorem \ref{thm:piecewise}, we conclude that $g'$ is a function.
 
 To see that $\dom{g'}=n+1$, we apply Exercise \ref{ex:domcup}:
 $$
@@ -6642,7 +6645,7 @@ This turns out not to affect the cardinality!
 $\next{\N}\eqnm\N$.
 }{
 Define $f=\addone{}\cup\{(\N,0)\}$.
-Since $\N\notin\N$ (see Exercise \ref{ex:NnotinN}), we may apply Exercise \ref{ex:piecewise} to
+Since $\N\notin\N$ (see Exercise \ref{ex:NnotinN}), we may apply Theorem \ref{thm:piecewise} to
 conclude that $f$ is a function.
 We have
 $$
@@ -6727,7 +6730,7 @@ Define
 $$
 f=\COLL{((0,n),n+n)}{n\in\N}\cup\COLL{((1,n),n+n+1)}{n\in\N}.
 $$
-With the help of Exercise \ref{ex:piecewise}, it is straightforward to show that $f:2\times\N\rightarrow\N$.
+With the help of Theorem \ref{thm:piecewise}, it is straightforward to show that $f:2\times\N\rightarrow\N$.
 
 To prove that $f$ is injective, assume that $(i,n),(i',n')\in 2\times\N$ and $f((i,n))=f((i',n'))$.
 We cannot have $i=0$ and $i'=1$, for then we would have $n+n=n'+n'+1$,
