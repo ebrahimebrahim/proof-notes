@@ -1,6 +1,3 @@
-After the comments about how to use "equality used", you should put that summary about how replacements work inside of a box.
-A theorem perhaps, if you can state it that way?
-
 Instead of EG UG EI and UI, say "\exists gained" and "\exists removed" etc. perahps with symbols like \exists+ replacing EG
 
 In Ex 2, consider describing the thing as an alien language where sentences are those grids, and we don't know what they mean
