@@ -6736,6 +6736,7 @@ $$
 f=\COLL{((0,n),n+n)}{n\in\N}\cup\COLL{((1,n),n+n+1)}{n\in\N}.
 $$
 With the help of Theorem \ref{thm:piecewise}, it is straightforward to show that $f:2\times\N\rightarrow\N$.
+The diagram following this proof is a depiction of $f$.
 
 To prove that $f$ is injective, assume that $(i,n),(i',n')\in 2\times\N$ and $f((i,n))=f((i',n'))$.
 We cannot have $i=0$ and $i'=1$, for then we would have $n+n=n'+n'+1$,
@@ -6762,6 +6763,10 @@ Then $k=f((0,n))$, so $k\in\ran{f}$.
 Since we get $k\in\ran{f}$ either way, we conclude that $f$ is surjective onto $\N$.
 Therefore $f$ is a bijection, and we have shown that $2\times\N\eqnm\N$.
 }
+
+\begin{center}
+\includegraphics[scale=1]{img/sawtooth.pdf}
+\end{center}
 
 So apparently mushing together two copies of $\N$ still leaves us with the same ``amount'' of elements-- only countably infinitely many.
 Okay, what if we mush together \emph{countably infinitely} many copies of the countably infinite set $\N$?
@@ -6811,6 +6816,10 @@ We may now express Facts 1 and 2 as follows:
 Fact 1: $a(0)=0$.\\
 Fact 2: For all $n\in\N$, we have $a(n+1)=a(n)+(n+1)$.
 }%
+The idea is that $a$ counts the number of dots in these triangular portions of a dot grid:
+\begin{center}
+\includegraphics[scale=1.5]{img/dotgrid.pdf}
+\end{center}
 We will need one more useful fact about $a$ before we construct our bijection:
 \indented{Fact 3: For $n,n'\in\N$, if $n<n'$ then $a(n)+n<a(n')$.}
 To prove this, we fix $n\in\N$ and do induction on $n'$.
@@ -6836,6 +6845,7 @@ Define
 f&=\COLL{(a(n)+i,(i,j))}{i,j,n\in\N\ \AND\ i+j=n}\\
 &=\COLL{p}{\EXIST{i,j,n}{p=(a(n)+i,(i,j))\ \AND\ i,j,n\in\N\ \AND\ i+j=n}}.
 \end{align*}
+The diagram following this proof is a depiction of $f$.
 It is clear that $f\subseteq\N\times(\N\times\N)$, so we are left needing to prove four things:
 \indented{
 that $f$ is a function,\\
@@ -6912,6 +6922,10 @@ Then we have $f(a(n)+i)=(i,j)$, so $f$ is surjective onto $\N\times\N$.
 
 We have shown that there exists a bijection $f:\N\rightarrow\N\times\N$; we conclude that $\N\eqnm\N\times\N$.
 }
+
+\begin{center}
+\includegraphics[scale=1]{img/gridbij.pdf}
+\end{center}
 
 
 So even 

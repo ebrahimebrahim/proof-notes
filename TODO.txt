@@ -1,7 +1,4 @@
 I think there is a lack of exercises in which they are asked to construct an example of something. My students were weak at this.
 
-illustration for doubling N
-illustrations for squaring N
-
 Consider adding more on arithmetic and perhaps even modular arithmetic, division algorithm, euclidean algorithm, etc.
 Perhaps with fast travel paths that sort of tell you what theorems to accept in order to teleport to a section
