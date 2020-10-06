@@ -1,3 +1,16 @@
+"1.0"
+
+- Finish section on relations
+- Write about fixing the bug (NBG, maybe some ZF)
+- Write intro to categories based on what happened with functions of sets
+- Write section on structuralism, summarizing points from benaceraf's paper and the nlab page on the topic
+
+
+---
+
+loose thoughts:
+
+
 I think there is a lack of exercises in which they are asked to construct an example of something. My students were weak at this.
 
 Consider adding more on arithmetic and perhaps even modular arithmetic, division algorithm, euclidean algorithm, etc.
