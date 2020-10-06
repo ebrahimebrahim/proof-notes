@@ -2274,7 +2274,7 @@ Suppose, for the sake of contradiction, that $x$ is not \ADJA{}.
 Then we found an $x$ that is not \ADJA{}, so we may conclude that
 something is not \ADJA{}.
 But we now have a contradiction-- it both is and isn't the case that something is not \ADJA{}.
-Therefore we must reject $x$ is not \ADJA{} and we see that in fact $x$ must be \ADJA{}.
+Therefore we must reject ``$x$ is not \ADJA{}'' and we see that in fact $x$ must be \ADJA{}.
 \lsp
 
 Since we've established that $x$ is \ADJA{} for arbitrary $x$, we can generalize to conclude that \emph{everything} is \ADJA{}.
@@ -2715,19 +2715,23 @@ it follows that $x^2=y^2$.
 
 In summary:
 If $x=y$, then replacing $x$ by $y$ in a \emph{proposition} gives a \emph{logically equivalent} proposition,
-and replacing $x$ by $y$ in a \emph{term} gives an \emph{equal} term. We package these ideas into one handy theorem,
-whose proof is just a general application of the idea above:
+and replacing $x$ by $y$ in a \emph{term} gives an \emph{equal} term. We will package these ideas into the next theorem,
+whose proof is just a general application of the idea above.
 
 \def\tA{\smiley{}}
 
-\THMNP{Equality Used\label{thm:eq_used}}{In
-this theorem, we use ``$\tA$''  as a placeholder for a \emph{term},
-just like we use ``$\pA$'' as a placeholder for a \emph{proposition}.
-So we can apply parts
+In
+the following theorem, we will use ``$\tA$''  as a placeholder for a \emph{term},
+just as we use ``$\pA$'' as a placeholder for a \emph{proposition}.
+We will use the notation ``$\SUBST{\tA}{\boxsubscript{30}{variable}}{\boxsubscript{20}{term}}$'' to indicate
+that a substitution is to be made in a term, just as we have been using ``$\SUBST{\pA}{\boxsubscript{30}{variable}}{\boxsubscript{20}{term}}$''
+to indicate
+that a substitution is to be made in a proposition.
+We can apply parts
 \ref{itm:eq_used:2}
 and
 \ref{itm:eq_used:4}
-below
+of the theorem below
 to a specific situation by
 replacing each copy of ``$\tA$'' by a chosen term,
 just as we can obtain specific instances of parts
@@ -2735,7 +2739,9 @@ just as we can obtain specific instances of parts
 and
 \ref{itm:eq_used:3}
 by replacing each ``$\pA$'' by a chosen proposition.
-\\[0.5em]
+
+
+\THMNP{Equality Used\label{thm:eq_used}}{
 If $x=y$, then:
 \begin{enumerate}[(1)]
 \item \label{itm:eq_used:1} $\SUBST{\pA}{a}{x}\DARR\SUBST{\pA}{a}{y}$
@@ -2946,7 +2952,7 @@ It follows that $z\in a\DARR z\in b$. Since $z$ is arbitrary, we are done.
 Since equality is equivalent to two inclusions, proofs of equality are often split into two parts, with each part dedicated to proving one of the inclusions.
 
 \begin{samepage}
-Before ending this section on membership, we take a moment to point out that membership is normally not transitive;
+Before ending this section, we take a moment to point out that membership is normally not transitive;
 having $y\in x$ and $x\in a$ does not allow you to conclude that $y\in a$.
 \begin{center}
 \includegraphics[scale=1.4]{img/boxes/3.pdf}

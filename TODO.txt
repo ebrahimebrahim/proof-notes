@@ -2,3 +2,10 @@ I think there is a lack of exercises in which they are asked to construct an exa
 
 Consider adding more on arithmetic and perhaps even modular arithmetic, division algorithm, euclidean algorithm, etc.
 Perhaps with fast travel paths that sort of tell you what theorems to accept in order to teleport to a section
+
+I think there is a lack of WRONG proofs, which makes people get used to trusting everything they read.
+Many more exercises are needed in which wrong proofs are caught. Somehow.
+
+Ex idea:
+- something comparing P(X)xP(Y) and P(XxY)
+- the problems on my take home final!
