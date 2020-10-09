@@ -7103,6 +7103,10 @@ Assume that $\REL\,\,\subseteq A\times A$.
 \end{enumerate}
 }
 
+These adjectives are grouped together in ways that have proven useful in practice, as shown in the following definition.
+We will primarily be concerned with \emph{equivalence relations},
+but we also highlight some of the other types of relations that people often care about.
+
 \DEFN{Special Kinds of Relations}{
 Assume that $\REL\,\,\subseteq A\times A$.
 \begin{enumerate}[(1)]
@@ -7112,6 +7116,10 @@ Assume that $\REL\,\,\subseteq A\times A$.
 \item $\REL$ is an \emph{equivalence relation} on $A$ iff it is a \emph{symmetric} preorder on $A$.
 \end{enumerate}
 }
+
+So an equivalence relation (on $A$) is a relation (on $A$) that is reflexive (on $A$), transitive, and symmetric.
+When $\REL$ is an equivlanece relation on $A$, we say often read ``$a\REL b$'' as ``$a$ and $b$ are \emph{equivalent}.''
+
 
 \ex{Assume that $\REL$ is a relation on $A$.
 \begin{enumerate}
@@ -7200,8 +7208,8 @@ Point out which relations are equivalence relations and which are partial orders
 \item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \AND\ 4<n+m}$
 \item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \AND\ n\leq m+m}$
 \item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \AND\ n+n\leq m}$
-\item $\REL\,\,=\COLL{(n,n+1)}{n,m\in\N}$
-\item $\REL\,\,=\COLL{(n,n+1)}{n,m\in\N} \cup \COLL{(n+1,n)}{n,m\in\N}$
+\item $\REL\,\,=\COLL{(n,n+1)}{n\in\N}$
+\item $\REL\,\,=\COLL{(n,n+1)}{n\in\N} \cup \COLL{(n+1,n)}{n\in\N}$
 \item $\REL\,\,=\COLL{(n,m)}{n,m\in\N\ \text{ and $n+m$ is even}}$\ \ (recall Definition \ref{defn:even})
 \end{enumerate}
 }
@@ -7245,7 +7253,7 @@ reflexivity, symmetry, and transitivity.
 }
 
 After doing Exercise \ref{ex:eqblobs}, you might notice that an equivalence relation seems to partition a set into batches,
-where everything any any given batch is connected to everything else in the same batch, and where there are no connections between different batches.
+where everything in any given batch is connected to everything else in the same batch, and where there are no connections between different batches.
 These batches are called \emph{equivalence classes}.
 
 \DEFN{Equivalence Class}{Assume that $\REL{}$ is an equivalence relation on $A$ and $a\in A$. Then we define
@@ -7263,9 +7271,10 @@ determine the equivalence classes $\CLASS{0}{}$ and $\CLASS{1}{}$.
 
 
 \note{Equivlance relations and partitions.
-Consider defining $\Z$ using equivalence relations.
-Consider talking about partial orders, and other sorts of relations.
-Consider introducing ideas of $\sup$ and $\inf$.}
+Consider defining $\Z$ using equivalence relations.}
+% Could talk more about partial orders and maybe lattices. Could introduce the ideas of sup and inf.
+
+
 
 
 
