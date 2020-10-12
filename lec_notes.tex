@@ -56,6 +56,7 @@
 \newcommand{\DARR}{\Leftrightarrow}
 %\newcommand{\REL}{\leadsto}
 \newcommand{\REL}{\sim}
+\newcommand{\MODREL}[1]{#1/\hspace{-3pt}\REL{}}
 \newcommand{\CLASS}[2]{[#1]_{#2}}
 
 \def\bbel{
@@ -6224,7 +6225,7 @@ $3=\next{2}=2\cup\{2\}=\{0,1\}\cup\{2\}=\{0,1,2\}$\\
 \ldots
 }
 
-\DEFN{Finiteness}{
+\DEFN{\label{def:finiteness}Finiteness}{
 \begin{enumerate}[(1)]
 \item We say that $A$ \emph{has $n$ elements} iff $n\in\N$ and $A\eqnm n$.
 \item A set is \emph{finite} iff it has $n$ elements for some $n\in\N$.
@@ -7214,7 +7215,7 @@ Point out which relations are equivalence relations and which are partial orders
 \end{enumerate}
 }
 
-\ex{
+\ex{\label{ex:powerset_relns}
 \begin{enumerate}
 \item Define $\REL\,\,=\COLL{(X,Y)}{X,Y\subseteq A\ \AND\ X\subseteq Y}$. 
 Prove that $\REL$ is a partial order on $\SUB{A}$.
@@ -7222,7 +7223,8 @@ Prove that $\REL$ is a partial order on $\SUB{A}$.
 (recall Definition \ref{defn:card}).
 Prove that $\REL$ is a partial order on $\SUB{A}$.
 (Hint: Much of the hard work has been done by previous theorems that you can reference.)
-\item Define $\REL\,\,=\COLL{(X,Y)}{X,Y\subseteq A\ \AND\ X\eqnm Y}$.
+\item\label{ex:powerset_relns:eq}
+Define $\REL\,\,=\COLL{(X,Y)}{X,Y\subseteq A\ \AND\ X\eqnm Y}$.
 Prove that $\REL$ is an equivalence relation on $\SUB{A}$.
 \item For each of the following relations on $\SUB{A}$, determine which of the adjectives in Definition \ref{defn:reln_adj} apply:
 \begin{enumerate}
@@ -7269,10 +7271,93 @@ determine the equivalence classes $\CLASS{0}{}$ and $\CLASS{1}{}$.
 (``Determine'' means ``list the elements.'')
 }
 
+\ex{Define $\REL\,\,=\COLL{(X,Y)}{X,Y\subseteq A\ \AND\ X\eqnm Y}$.
+You proved in Exercise
+\ref{ex:powerset_relns}
+part
+\ref{ex:powerset_relns:eq}
+that $\REL$ is an equivalence relation on $\SUB{A}$.
+Now suppose that $x\in A$.
+Describe the equivalence classes $\CLASS{\emptyset}{\REL}$ and $\CLASS{\{x\}}{\REL}$.
+(Hint: revisit the ideas around Definition \ref{def:finiteness}.)
+}
 
-\note{Equivlance relations and partitions.
-Consider defining $\Z$ using equivalence relations.}
-% Could talk more about partial orders and maybe lattices. Could introduce the ideas of sup and inf.
+\ex{Show that the following $\REL$ is an equivalence relation on $A\times B$, and then describe the equivalence classes:
+$$
+\REL\,\,=\COLL{((a,b),(a',b))}{a,a'\in A\ \  \AND\ \ b\in B}.
+$$
+}
+
+\DEFN{Set of Equivalence Classes}{Assume
+that $\REL$ is an equivalence relation on $A$. Then we define
+$$
+\MODREL{A} \ =\ \COLL{\CLASS{a}{\REL}}{a\in A}.
+$$
+}
+
+Referring back to the intuitiion from Exercise \ref{ex:eqblobs},
+an equivalence relation on a set \emph{partitions} the set into batches called equivalence classes.
+We can make this concept precise:
+
+\def\part{\mathcal{F}}
+\DEFN{Partition}{A set $\part\subseteq\SUB{A}$ of subsets
+of $A$ is a \emph{partition of $A$} iff
+\begin{enumerate}[(1)]
+  \item $\ALL{a}{a\in A\Rightarrow \EXIST{F}{F\in\part\ \ \AND\ \ a\in F}}$ and
+  \item $\ALL{F,F'}{F,F'\in\part\ \ \Rightarrow\ \ (F\neq F'\ \Rightarrow\ F\cap F'=\emptyset)}$.
+\end{enumerate}
+}
+
+In fact, equivalence relations and partitions are two ways of looking at the same information:
+
+\def\corr{A/\,\begin{picture}(-1,1)(-1,-3)\circle*{3}\end{picture}\,\,}
+\THMNP{Correspondence between Equivalence Relations and Partitions}{
+Given a set $A$, define
+$$ \corr\ =\ \COLL{(\REL\ ,\ \MODREL{A})}{\REL \text{is an equivalence relation on $A$}}. $$
+Then
+$$
+\corr:
+\COLL{\REL}{\REL \text{is an equivalence relation on $A$}}
+\to
+\COLL{\part}{\part\ \text{is a partition of $A$}}
+$$
+and this is a bijection.
+}{
+  \note{Proof coming soon}
+}
+
+\note{Ex labeled F coming soon}
+
+\subsection{Integers}
+
+Why might we want to define more numbers than $\N$ provides?
+Your first answer might be ``because we are missing the negative numbers,''
+but that's cheating! Imagine that you are the first human to come up with these ideas. Why
+are you not satisfied with $\N$? Now might be a good time to revisit Theorem
+\ref{thm:prop_plus} part \ref{thm:prop_plus12}.
+
+If we were only interested in counting (finite collections), then $\N$ would be sufficient.
+But if we want to refer to changes between counts, also
+known as \emph{differences}, then something is missing. A difference, unlike a distance, has a direction to it.
+The change from $3$ to $5$ is a \emph{gain} of $2$, while the change from $5$ to $3$ is a \emph{loss} of $2$.
+We'd like some mathematical objects that can represent gains and losses of various amounts; these will be the integers.
+
+Our approach will be the following strategy which is common throughout mathematics:
+First construct something that might be ``too big'' by introducing a symbol
+for every integer we could ever want to refer to,
+then cut down the redundancy by defining an equivalence relation and taking equivalence classes.
+
+\note{Discuss doing this in the case of integers}
+
+\note{Def: integers are \MODREL{\N\times \N}}
+
+\note{Comments on work to be done: 
+Addition. Ordering.
+Multiplication for \N from Ex, then also multiplicaton for \Z. 
+Rationals, using mult and similar ideas. Also transfer ordering.
+Reals, focusing on partial ordering.}
+
+
 
 
 
