@@ -119,6 +119,8 @@
 \newcommand{\THMN}[2]{\thmbox{\textbf{Theorem \putThmNumber\ (#1):} \thmcolonspace #2}}
 \newcommand{\AXIOM}[1]{\thmbox{\textbf{Axiom \putThmNumber:} \thmcolonspace #1}}
 \newcommand{\AXIOMN}[2]{\thmbox{\textbf{Axiom \putThmNumber\ (#1):} \thmcolonspace #2}}
+\newcommand{\AXIOMMOCK}[1]{\thmbox{\textbf{Axiom:} \thmcolonspace #1}}
+\newcommand{\AXIOMNMOCK}[2]{\thmbox{\textbf{Axiom (#1):} \thmcolonspace #2}}
 \newcommand{\DEFN}[2]{\thmbox{\textbf{Definition \putThmNumber\ (#1):} \thmcolonspace #2}}
 \newcommand{\DEF}[1]{\thmbox{\textbf{Definition \putThmNumber:} \thmcolonspace #1}}
 
@@ -2826,8 +2828,8 @@ $b\in\COLL{n}{3<n^2<4+x}$ if and only if $3<b^2<4+x$.
 \paragraph{Broken?}
 \hypertarget{hl:bug}{We} should talk about that warning.
 Axiom \ref{ax:in} is the way people at one point thought they could set up set theory.
-But it all came crashing down.
-It turns out to be broken in the worst possible way-- Axiom \ref{ax:in} allows us to prove a contradiction.
+But it turns out to be broken in the worst possible way-- Axiom \ref{ax:in} allows us to prove a contradiction
+(see appendix \ref{sec:bugappendix}).
 Allowing $\pA$ to really be \emph{any} proposition does not work;
 certain choices of $\pA$ seem to cause trouble.
 So what do we do about this?
@@ -2835,10 +2837,10 @@ People have handled the bug in various ways by modifying Axiom \ref{ax:in}.
 Different approaches have led to different types of set theory.
 We can also choose to \emph{ignore} the bug and move on.
 Then we would be doing what is called \emph{naive set theory}.
-This is what we choose to do for now, while just bearing in mind that
+This is what we do throughout this text, while just bearing in mind that
 there are some propositions $\pA$ on which Axiom \ref{ax:in} should not be used.
-There will be more comments later on how to fix the bug;
-most of what we do is not affected much by the fix. 
+There are comments in appendix \ref{sec:bugappendix} on how to fix the bug;
+most of our approach is not affected much by the fix. 
  
 Moving on.
 
@@ -7491,7 +7493,7 @@ Just as the need for subtraction led us to construct $\Z$ out of $\N$, a need fo
 to construct the rational numbers, $\Q$, out of $\Z$.
 Eventually you can branch out to specific fields like abstract algebra or real analysis.
 
-The adventure is just beginning!
+The adventure begins!
 
 
 
@@ -7500,12 +7502,149 @@ The adventure is just beginning!
 
 \appendix
 
-\section{The Bug}
+\section{The Bug}\label{sec:bugappendix}
 
-\note{Explain what is broken about the membership axiom. Outline some of the changes that need to be made to align the development here to proper NBG set theory,
-going through how the membership axiom can be repaired, and what new axioms need to be introduced to let pretty much the same machinery run.
-Explain that there are other set theories, like ZF, and highlight the main difference to ZF.
+Axiom \ref{ax:in} makes it possible to prove a contradiction, 
+and this breaks our entire system (recall Derived Rule \ref{rule:contradictions}).
+This bug was first encountered in 1897 when Burali-Forti unknowingly proved a theorem
+that directly contradicted an earlier theorem of Cantor.
+It caused quite a panic when Bertrand Russel pointed it out a few years later.
+The original path to the bug was complicated,
+but now thanks to Russell there is a much simpler way to
+see how a contradiction arises from Axiom \ref{ax:in}.
+
+\def\russ{\mathcal{R}}
+
+Define a set $\russ = \COLL{x}{x\notin x}$.
+Now ask yourself: Is $\russ\in\russ$?
+By Axiom \ref{ax:in} we have
+$$
+\russ\in\russ\ \ \Leftrightarrow \ \ \SUBST{\text{``\ $x\notin x$\ ''}}{x}{\russ}.
+$$
+In other words,
+\[
+\russ\in\russ\ \ \Leftrightarrow \ \ \russ\notin\russ
+\label{eqn:russ}\tag{$\ast$}
+\]
+Due to excluded middle, we have $(\russ\in\russ)\OR(\russ\notin\russ)$.
+In the case that $\russ\in\russ$ we get $\russ\notin\russ$ from (\ref{eqn:russ}).
+In the case that $\russ\notin\russ$ we get $\russ\in\russ$ from (\ref{eqn:russ}).
+This completes a proof by cases in which we have proven the contradiction
+$$
+(\russ\in\russ)\AND(\russ\notin\russ).
+$$
+What a disaster! The framework in this text is completely broken.
+That's why it's called \emph{naive set theory}.
+
+After the panic, people started coming up with different ways to fix the bug.
+Each approach led to a certain kind of set theory. Here we will briefly look at two
+popular flavors of set theory, NBG and ZF. Both fixes of the bug come down to the same basic idea:
+restrict who gets to be on the left hand side of ``$\in$''.
+
+\subsection{NBG}
+
+The NBG approach (Von Neumann–Bernays–Gödel set theory) is to replace Axiom \ref{ax:in} by the following:
+
+\newcommand{\insets}[1]{\EXIST{b}{#1\in b}}
+\def\ainsets{\insets{a}}
+
+\AXIOMNMOCK{Membership, fixed version}{
+$$a\in\COLL{x}{\pA}\DARR\ (\SUBST{\pA}{x}{a}\ \AND\ \ainsets).$$
 }
+
+This makes the proposition ``$a\in\COLL{x}{\pA}$'' harder to prove-- one
+has to establish an extra condition $\ainsets$.
+In other words: For $a$ to be a member of $\COLL{x}{\pA}$, 
+in addition to satisfying the membership condition $\pA$
+it has to also be a known member of \emph{something}.
+
+At first glance this might not sound so hard. After all, isn't any given $a$ at least
+a member of $\{a\}$? Not so!
+From Definition \ref{def:singleton},
+$$\{a\} = \COLL{x}{x=a},$$
+so by the new version of Axiom \ref{ax:in} we have
+$$
+a\in \{a\} \ \DARR\ (a=a \ \AND\ \ainsets).
+$$
+By Axiom \ref{ax:refl_eq} we can deduce
+$$
+a\in \{a\} \ \DARR\ \ainsets,
+$$
+but we are unable to deduce $a\in\{a\}$!
+
+The extra condition ``$\ainsets$'' in the new Axiom \ref{ax:in} blocks us
+from ever proving the elementhood of $a$ in anything.
+If we just knew that $a$ is a member of \emph{something} then $\ainsets$ becomes true
+and the new Axiom \ref{ax:in} reduces to the old Axiom \ref{ax:in} for ``$a\in\ldots$'' statements.
+
+Some bootstrapping is needed to get our first ``'$a\in\ldots$'' statements.
+This comes in the form of a whole bunch of new Axioms in NBG such as
+
+\AXIOMMOCK{$\insets{\emptyset}$.}
+
+This forcibly admits $\emptyset$ into the exclusive club of $a$'s for which $\ainsets$.
+Being in this club means that ``$\emptyset\in\ldots$'' statements effectively get to follow the rules of the old Axiom \ref{ax:in}.
+For example, this makes it possible to use Defintion \ref{def:singleton} to prove that $\emptyset\in\{\emptyset\}$.
+But we still can't prove $\{\emptyset\}\in\{\{\emptyset\}\}$-- for that we might need another axiom like the following:
+
+\AXIOMMOCK{$\insets{a}\ \ARR\ \insets{\{a\}}$.}
+
+NBG has many more axioms like these to make set theoretic constructions such as doubleton, union, powerset, etc. work properly
+with the new Axiom \ref{ax:in}.
+
+How does this repair the contradiciton in (\ref{eqn:russ}) above?
+With the new Axiom \ref{ax:in}, we replace (\ref{eqn:russ}) by
+$$
+\russ\in\russ\ \ \Leftrightarrow \ \ (\russ\notin\russ\ \AND\ \insets{\russ}).
+$$
+Assuming $\russ\in\russ$ still leads to a contradiction, so we must have $\russ\notin\russ$.
+Now assuming $\insets{\russ}$ leads back to $\russ\in\russ$ and another contradiction, so we must have
+$$
+\neg \insets{\russ}.
+$$
+Instead of giving a contradiction when we ask whether $\russ\in\russ$, the new Axiom \ref{ax:in}
+simply tells us that $\russ$ never gets to be a member of \emph{anything}.
+
+In NBG set theory, the word \emph{set} is reserved only for those $a$'s for which $\ainsets$.
+Otherwise the more general term \emph{class} is used instead.
+What we've established above is that $\russ$ is a class that is not a set.
+
+\subsection{ZF}
+
+ZF (Zermelo-Fraenkel) set theory is another very popular way to deal with the paradoxes of naive set theory.
+Instead of starting with a fix to Axiom \ref{ax:in}, ZF set theory treats the notation ``$\COLL{x}{\pA}$''
+in  a completely different way.
+
+When we write ``$\COLL{x}{\pA}$,'' our intent is to refer to
+$$
+\text{``a set $S$ with the property that $a\in S\DARR\SUBST{\pA}{x}{a}$ for all $a$''}.
+$$
+ZF set theory wants us to stop and ask ourselves: Does such a set \emph{exist}?
+In  other words:
+$$
+\EXIST{S}{\ALL{a}{a\in S \DARR \SUBST{\pA}{x}{a}}}?
+$$
+If yes, then a ZF axiom like our Axiom \ref{ax:eq_used} can be used to prove that such an $S$ is unique.
+In ZF set theory we think of the notation ``$\COLL{x}{\pA}$'' as a shorthand for
+$$
+\text{``the unique set $S$ with the property that $a\in S\DARR\SUBST{\pA}{x}{a}$ for all $a$''}.
+$$
+
+Just like with NBG, some bootstrapping is needed in ZF to get set theoretic constructions like doubleton, union, powerset, etc. to work properly.
+This comes in the form of a bunch of axioms about the \emph{existence} of various sets.
+
+How does ZF help with the problematic set $\russ$ at the beginning of this appendix?
+Well, due to the contradiction in (\ref{eqn:russ}) we conclude that there \emph{does not exist}
+a set $\russ$ for which $x\in\russ\DARR x\notin x$ for all $x$.
+If you write ``$\COLL{x}{x\notin x}$'' then you are trying to refer to
+$$
+\text{``the unique set $\russ$ for which $x\in\russ\DARR x\notin x$ for all $x$''}.
+$$
+This is as nonsensical as trying to refer to ``the unique element of the empty set.''
+One can write the words, but they fail to refer to anything.
+
+
+
 
 % \section{Maps}
 

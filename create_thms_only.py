@@ -9,7 +9,7 @@ LINE_REPLACEMENTS = {
   r"\\newcommand\{\\THMP\}" : "\\newcommand{\THMP}[2]{\\thmbox{\\textbf{Theorem \putThmNumber:} \\thmcolonspace #1} }\n",
   r"\\newcommand\{\\THMPL\}" : "\\newcommand{\THMPL}[3]{\\thmbox{\\textbf{Theorem \putThmNumber{#3}:} \\thmcolonspace #1} }\n",
   r"\\newcommand\{\\THMNP\}" : "\\newcommand{\THMNP}[3]{\\thmbox{\\textbf{Theorem \putThmNumber\ (#1):} \\thmcolonspace #2} }\n",
-  r"\\parskip1em" : "\\parskip0.5em",
+  r"\\parskip1em" : "\\parskip0.45em",
   r"\\newcommand\{\\thmbox\}" : "\\newcommand{\\thmbox}[1]{\n\n\parbox{\\textwidth}{{#1}}}",
 }
 
