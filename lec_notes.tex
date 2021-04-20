@@ -227,7 +227,7 @@ The difference between constants and variables is that constants are not meant t
 The constant ``$2$'' refers to a specific thing, rather than being a placeholder for something.
 
 
-Note that we are mainly talking about \emph{elements of language}, and not about what those elements \emph{refer} to.
+Note that when we discuss parts of speech here, we are mainly talking about \emph{elements of language} and not about what those elements \emph{refer} to.
 Germany is not a noun, it's a country. ``Germany'' is, however, a noun.
 Similarly, we can say that $2$ is not a constant, but rather ``$2$'' is.
 And $x$ is not a variable, but rather ``$x$'' is.
@@ -243,7 +243,7 @@ Terms are strings of marks (expressions) that refer to \emph{mathematical object
 Since variables and constants refer to mathematical objects, they are special cases of terms.
 But you can also have more complicated terms that are built out of simpler ones.
 Terms are most like \emph{noun phrases} in English.
-For example the phrase ``the cup that you drank from'' is a noun phrase;
+For example the phrase ``the cup that you drank from'' is a noun phrase--
 it doesn't make any assertion but rather it just refers to a \emph{thing}.
 Here are some terms:
 \begin{itemize}[label=\sp]
@@ -272,7 +272,7 @@ Typically, we communicate by some combination of English and mathematics.
 \def\sp{\hspace{1em}}
 \paragraph{Propositions}
 Propositions are strings of marks (expressions) that \emph{make assertions}.
-They are most like \emph{sentences} in English (declarative sentences).
+They are most like \emph{sentences} in English (\emph{declarative} sentences, to be precise).
 Propositions can be true or false. 
 Here are some propositions:
 \begin{itemize}[label=\sp]
@@ -355,9 +355,8 @@ $x=x$\\
 $x\notin\ES$\\
 $(\forall x\,|\,x\notin\ES)$
 \end{adjustwidth}
-Do not worry about interpreting what the propositions are trying to \emph{say};
-I just want to demonstrate how a theorem arises as a result of applying the rules of logic
-to various axioms. What you see above is a sequence of five propositions, ending with the
+Do not worry about interpreting what the propositions are trying to \emph{say}--
+I just want to make a point about formal proofs. What you see above is a sequence of five propositions, ending with the
 one I claimed to be proving, namely ``$(\forall x\,|\,x\notin\ES)$''.
 To really be convinced that we are looking at a proof, we would need a \emph{justification}
 for each of the five propositions-- for each proposition we need to either point out that it is
@@ -389,7 +388,7 @@ The five-line proof given above is a \emph{formal proof}-- it is written in pure
 with absolutely no English.
 This is great if you want absolute rigor, but
 it is not friendly to read if you are not a computer.
-The main purpose of a mathematical proof is for it to convince a human that a theorem is true.
+The main purpose of a mathematical proof is for it to convince a \emph{human} that a theorem is true.
 But formal proofs make for really inefficient communication between humans.
 Thus we are faced with a trade-off: 
 we can sacrifice some rigor to gain efficiency of communication.
@@ -405,9 +404,9 @@ When developing a new mathematical theory, it's generally good to err on the sid
 Then, as the theory develops and common patterns of arguments become routine,
 one can slowly relax the rigor in favor of efficiency.
 
-Now you can see what this course is all about.
+Now you can see what this text is all about.
 While it is partly giving you some specific mathematical content like set theory,
-this course is mainly about how to communicate proofs in that balanced way-- rigorous, yet informal and efficient.
+this text is mainly about how to communicate proofs in that balanced way-- rigorous, yet informal and efficient.
 
 Here is an informal version of the five-line proof from above.
 
@@ -420,6 +419,9 @@ The arguments are essentially the same ones that appeared in the five-line forma
 But, compared to the formal proof, it's much easier to process the arguments
 in the informal proof
 (though I'm still not expecting you to do so just yet).
+
+% The key is to only omit rigorous details when you are tired of saying them,
+% and never because you don't know what needs to be said.
 
 \newpage 
 \def\s{0.25}
@@ -2632,6 +2634,8 @@ for some $x$, $\pA$ &
 \end{tabular}
 \renewcommand{\arraystretch}{1} % Set back to default
 
+\newpage
+
 \section{Set Theory} % and still writing though...
 \label{sec:sets}
 
@@ -4828,7 +4832,7 @@ We will not use Axiom \ref{ax:choice}, but it is essential for much of modern ma
 
 Putting together Theorems \ref{thm:leftinv} and \ref{thm:rightinv} gives us a nice characterization of bijectivity in terms of composition:
 
-\THMNP{Bijectivity and Isomorphism}{Assume
+\THMNP{Bijectivity and Isomorphism\label{thm:bij_and_iso}}{Assume
 that $f:X\rightarrow Y$.
 Then $f$ is a bijection onto $Y$ if and only if
 $$
@@ -5204,7 +5208,7 @@ By induction (Theorem \ref{thm:ind}), it follows that $\ALL{n}{n\in\N\ARR\text{$
 
 
 
-\DEFN{Order for $\N$}{
+\DEFN{Order for $\N$\label{def:order_for_N}}{
 \begin{enumerate}[(1)]
 \item $x<y\ \DARR\ x\in y$.
 \item $x\leq y\ \DARR\ (x\in y\,\OR\,x=y)$.
@@ -5974,8 +5978,7 @@ By Theorem \ref{thm:succ_canc}, it follows that $m+k=n+k$.
 By the induction hypothesis, it follows that $m=n$.
 \done
 
-\ex{
-Assume that $a\in\N$.
+\ex{\label{ex:mult_intro}Assume that $a\in\N$.
 Let $f:\N\rightarrow\N$ be the unique function satisfying $f(0)=0$ and $f(n+1)=f(n)+a$ for all $n\in\N$.
 Prove that $f(m+k)=f(m)+f(k)$ for all $m,k\in\N$.
 }
@@ -7104,7 +7107,7 @@ Assume that $\REL\,\,\subseteq A\times A$.
 \end{enumerate}
 }
 
-These adjectives are grouped together in ways that have proven useful in practice, as shown in the following definition.
+In the next definition, we will group some of these adjectives together in ways that have proven useful in practice.
 We will primarily be concerned with \emph{equivalence relations},
 but we also highlight some of the other types of relations that people often care about.
 
@@ -7295,40 +7298,128 @@ $$
 $$
 }
 
-Referring back to the intuitiion from Exercise \ref{ex:eqblobs},
+Referring back to the intuition from Exercise \ref{ex:eqblobs},
 an equivalence relation on a set \emph{partitions} the set into batches called equivalence classes.
-We can make this concept precise:
+We can make this concept precise. First, we make precise the concept of a \emph{partition} of a set:
 
 \def\part{\mathcal{F}}
-\DEFN{Partition}{A set $\part\subseteq\SUB{A}$ of subsets
+\DEFN{Partition\label{def:partition}}{A set $\part\subseteq\SUB{A}$ of subsets
 of $A$ is a \emph{partition of $A$} iff
 \begin{enumerate}[(1)]
-  \item $\ALL{a}{a\in A\Rightarrow \EXIST{F}{F\in\part\ \ \AND\ \ a\in F}}$ and
-  \item $\ALL{F,F'}{F,F'\in\part\ \ \Rightarrow\ \ (F\neq F'\ \Rightarrow\ F\cap F'=\emptyset)}$.
+  \item \label{itm:partdef:1}$\emptyset\notin\part$,
+  \item \label{itm:partdef:2}$\ALL{a}{a\in A\Rightarrow \EXIST{F}{F\in\part\ \ \AND\ \ a\in F}}$, and
+  \item \label{itm:partdef:3}$\ALL{F,F'}{F,F'\in\part\ \ \Rightarrow\ \ (F\neq F'\ \Rightarrow\ F\cap F'=\emptyset)}$.
 \end{enumerate}
 }
 
-In fact, equivalence relations and partitions are two ways of looking at the same information:
+Condition \ref{itm:partdef:2} says that the sets in $\part$ must ``cover'' all of $A$ and
+condition \ref{itm:partdef:3} says that the sets in $\part$ must be pairwise disjoint.
+Condition \ref{itm:partdef:1} is an unimportant technicality that makes the
+upcoming Theorem \ref{thm:corr_parts_eqrelns} have a pretty statement.
+Next, we look at how equivalence relations give rise to partitions and vice versa:
 
-\def\corr{A/\,\begin{picture}(-1,1)(-1,-3)\circle*{3}\end{picture}\,\,}
-\THMNP{Correspondence between Equivalence Relations and Partitions}{
-Given a set $A$, define
-$$ \corr\ =\ \COLL{(\REL\ ,\ \MODREL{A})}{\REL \text{is an equivalence relation on $A$}}. $$
-Then
-$$
-\corr:
-\COLL{\REL}{\REL \text{is an equivalence relation on $A$}}
-\to
-\COLL{\part}{\part\ \text{is a partition of $A$}}
-$$
-and this is a bijection.
-}{
-  \note{Proof coming soon}
+\ex{\label{ex:eqreln_to_part}Suppose that $\REL$ is an equivalence relation on $A$. Prove that $\MODREL{A}$ is a partition of $A$.}
+
+\ex{\label{ex:part_to_eqreln}Let $\part$ be a partition of $A$. Prove that
+$$ \COLL{(a,b)}{\EXIST{F}{F\in\part\ \AND\ a,b\in F}} $$
+is an equivalence relation on $A$.
 }
 
-\note{Ex labeled F coming soon}
+Finally, we put the ideas together to see that equivalence relations and partitions are two ways of looking at the same information:
+
+% \def\corr{A/\,\begin{picture}(-1,1)(-1,-3)\circle*{3}\end{picture}\,\,}
+\def\corr{f}
+\def\corrinv{g}
+\def\eqrelnsA{\mathcal{E}}
+\def\partsA{\mathcal{P}}
+\THMNP{Correspondence between Equivalence Relations and Partitions\label{thm:corr_parts_eqrelns}}{
+Given a set $A$, define
+\begin{align*}
+\eqrelnsA\ &=\ \COLL{\REL}{\REL \text{is an equivalence relation on $A$}}\\
+\partsA\ &=\ \COLL{\part}{\part\ \text{is a partition of $A$}}
+\end{align*}
+and define a function $\corr$ on $\eqrelnsA$ by
+$$
+\corr(\REL) = \MODREL{A} \hspace{1.5em} \text{for all $\REL\,\in\eqrelnsA$}.
+$$
+Then
+$
+\corr:
+\eqrelnsA
+\to
+\partsA
+$
+bijectively.
+}{
+Exercise \ref{ex:eqreln_to_part} proves that $\ran{\corr}\subseteq\partsA$,
+so we have $\corr:\eqrelnsA\to\partsA$. It remains to prove that this mapping is bijective.
+We will use Theorem \ref{thm:bij_and_iso} to do this. Define a function $\corrinv$ on $\partsA$ by
+$$\corrinv(\part) = \COLL{(a,b)}{\EXIST{F}{F\in\part\ \AND\ a,b\in F}} $$
+for all $\part\in\partsA$.
+Exercise \ref{ex:part_to_eqreln} proves that $\ran{\corrinv}\subseteq\eqrelnsA$,
+so we have $\corrinv:\partsA\to\eqrelnsA$.
+
+\textit{Proof that $\corrinv\circ\corr =\id{\eqrelnsA}$:}
+Consider any $\REL\,\in\eqrelnsA$. We will show that $\corrinv(\corr(\REL))=\,\REL$.
+
+For the inclusion $\corrinv(\corr(\REL))\subseteq\,\REL$, consider any $(a,b)\in \corrinv(\corr(\REL))$.
+There is some $F\in\corr(\REL)$ such that $a,b\in F$.
+Since $F\in\corr(\REL)=\MODREL{A}$, there is some $c\in A$ such that $F=\CLASS{c}{\REL}$.
+Since $a,b\in F=\CLASS{c}{\REL}$, we have $a\REL c$ and $b\REL c$.
+It follows that $a\REL b$, since $\REL$ is an equivalence relation. In other words, $(a,b)\in\,\REL$.
+
+For the converse inclusion $\corrinv(\corr(\REL))\supseteq\,\REL$, consider any $(a,b)\in\,\REL$.
+We have $a\REL b$ and, since $\REL$ is an equivalence relation, we also have $b\REL b$.
+It follows that $a,b\in\CLASS{b}{\REL}$.
+Since $$a,b\in\CLASS{b}{\REL}\in\MODREL{A}=\corr(\REL),$$
+we have established that $(a,b)\in\corrinv(\corr(\REL))$.
+
+We have shown that $\corrinv(\corr(\REL))=\,\REL$, for arbitrary $\REL\,\in\eqrelnsA$.
+It follows that $\corrinv\circ\corr =\id{\eqrelnsA}$.
+
+\textit{Claim:} For any $a,F,\part$ with $a\in F\in\part\in\partsA$, we have $F=\CLASS{a}{\corrinv(\part)}$.
+
+\textit{Proof of claim:}
+Suppose that $a\in F\in\part\in\partsA$.
+
+Consider any $b\in F$.
+From the fact that $a,b\in F\in \part$ and from the definition of $\corrinv$, we get $(a,b)\in\corrinv(\part)$.
+Hence $b\in\CLASS{a}{\corrinv(\part)}$.
+
+Conversely, consider any $b\in \CLASS{a}{\corrinv(\part)}$. We have $(b,a)\in \corrinv(\part)$,
+so there is some $F'\in\part$ such that $a,b\in F'$. Since $\part$ is a partition of $A$
+and $F,F'\in\part$, we have
+$$ F\neq F'\ \Rightarrow\ F\cap F'=\emptyset.  $$
+We have seen that $a\in F\cap F'$, so $F\cap F'\neq\emptyset$.
+It follows that $F=F'$, and so $b\in F$. This proves the claim.
+
+\textit{Proof that $\corr\circ\corrinv =\id{\partsA}$:}
+Now consider any $\part\in\partsA$. We will show that $\corr(\corrinv(\part))=\part$.
+For convenience of notation, define $\REL\,=\corrinv(\part)$.
+
+For the inclusion $\corr(\REL)\subseteq\part$, consider any $F\in \corr(\REL)=\MODREL{A}$.
+There is some $a\in A$ such that $F=\CLASS{a}{\REL}$.
+Since $a\in A$ and $\part$ is a partition of $A$, there is some $G\in \part$ such that $a\in G$.
+By the claim above, we have $G=\CLASS{a}{\REL}$. Thus we have $F=G\in \part$.
+
+For the converse inclusion $\corr(\REL)\supseteq\part$, consider any $F\in\part$.
+We required in Definition \ref{def:partition}
+that a partition consist of only nonempty sets,
+so there exists some $a\in F$.
+By the claim above, we have $F=\CLASS{a}{\REL}$. Hence $F\in\MODREL{A}=\corr(\REL)$.
+
+We have shown that $\corr(\corrinv(\part))=\part$, for arbitrary $\part\,\in\partsA$.
+It follows that $\corr\circ\corrinv =\id{\partsA}$.
+
+Since $\corr\circ\corrinv =\id{\partsA}$ and $\corrinv\circ\corr =\id{\eqrelnsA}$, we are done by Theorem \ref{thm:bij_and_iso}.
+}
 
 \subsection{Integers}
+
+You have now completed the main portion of this text.
+This final section will be a cursory preview of
+what you could pursue next.
+
 
 Why might we want to define more numbers than $\N$ provides?
 Your first answer might be ``because we are missing the negative numbers,''
@@ -7340,23 +7431,67 @@ If we were only interested in counting (finite collections), then $\N$ would be 
 But if we want to refer to changes between counts, also
 known as \emph{differences}, then something is missing. A difference, unlike a distance, has a direction to it.
 The change from $3$ to $5$ is a \emph{gain} of $2$, while the change from $5$ to $3$ is a \emph{loss} of $2$.
-We'd like some mathematical objects that can represent gains and losses of various amounts; these will be the integers.
+We'd like some mathematical objects that can represent gains and losses of various amounts-- these will be the integers.
 
-Our approach will be the following strategy which is common throughout mathematics:
+The following strategy is common throughout mathematics:
 First construct something that might be ``too big'' by introducing a symbol
 for every integer we could ever want to refer to,
-then cut down the redundancy by defining an equivalence relation and taking equivalence classes.
+allowing for redundant symbols.
+Then cut down the redundancy by defining an equivalence relation and taking equivalence classes.
 
-\note{Discuss doing this in the case of integers}
+One symbolic way to refer to ``the change from $3$ to $5$''
+is simply the pair $(3,5)$.
+The pair $(5,3)$ could refer to ``the change from $5$ to $3$''.
+We could think of $(3,5)$ as sort of \emph{being} the integer ``gain-of-$2$,''
+while $(5,3)$ sort of \emph{is} the integer ``loss-of-$2$.''
+In this view, an integer is just a pair of natural numbers. So the set $\Z$ of all integers could
+be defined to be $\N\times\N$.
 
-\note{Def: integers are \MODREL{\N\times \N}}
+But wait, this produces a lot of redundancy!
+The pair $(3,5)$ represents a gain of $2$, but so does the pair $(4,6)$,
+so does the pair $(5,7)$, and so on.
+For any given pair $(n,m)\in\N\times\N$, there is an infinite collection of pairs
+that represent the same gain or loss that one gets in the change from $n$ to $m$.
 
-\note{Comments on work to be done: 
-Addition. Ordering.
-Multiplication for \N from Ex, then also multiplicaton for \Z. 
-Rationals, using mult and similar ideas. Also transfer ordering.
-Reals, focusing on partial ordering.}
+How can we express the statement that two pairs $(n,m)$ and $(k,l)$ represent the same gain or loss?
+Let's cheat a little. Pretend that $n$ and $m$ are integers,
+even though they're not and even though we haven't defined what that means.
+Pretend that we have defined subtraction for integers.
+Then the change from $n$ to $m$ can be expressed as the difference $m-n$.
+The statement that two pairs $(n,m)$ and $(k,l)$ represent the same gain or loss
+can then (cheatingly) be written like this: $m-n = l-k$.
+Rearrangement leads to $m+k=l+n$, which is slightly less cheaty because it doesn't mention subtraction.
 
+Okay, now stop cheating.
+We define an integer to be an \emph{equivalence class} of pairs of natural numbers,
+where the equivalence relation being used is
+$$
+(n,m)\REL(k,l) \ \Leftrightarrow\ m+k=l+n.
+$$
+More formally:
+
+\THMPL{The following relation on the set $\N\times\N$ is an equivalence relation:
+$$ \COLL{((n,m),(k,l))}{n,m,k,l\in\N\ \ \AND\ \ m+k=l+n}. $$
+}{\putExerciseHeading.}{\label{thm:integers_equiv_reln}}
+
+\DEFN{Integers}{Let $\REL$ be the equivalence relation on $\N\times\N$ defined in Theorem \ref{thm:integers_equiv_reln}.
+We define
+$$ \Z = \MODREL{(\N\times\N)}.$$
+}
+
+We end here.
+There's a lot more work to be done to give the integers $\Z$ the structure that makes them behave like integers.
+We only defined addition (Definition \ref{def:plus}) for natural numbers--
+work is needed to see how $\Z$ can inherit the addition operation.
+Work is also needed to see how ordering for $\N$ (Definition \ref{def:order_for_N}) can be inherited by $\Z$.
+
+Exercise \ref{ex:mult_intro} hints at how one could use recursion to define multiplication on $\N$.
+Further work can pass along the multiplication operation to $\Z$.
+Just as the need for subtraction led us to construct $\Z$ out of $\N$, a need for division can lead one 
+to construct the rational numbers, $\Q$, out of $\Z$.
+Eventually you can branch out to specific fields like abstract algebra or real analysis.
+
+The adventure is just beginning!
 
 
 
@@ -7365,24 +7500,24 @@ Reals, focusing on partial ordering.}
 
 \appendix
 
-\section{Fixing the Bug}
+\section{The Bug}
 
 \note{Explain what is broken about the membership axiom. Outline some of the changes that need to be made to align the development here to proper NBG set theory,
 going through how the membership axiom can be repaired, and what new axioms need to be introduced to let pretty much the same machinery run.
 Explain that there are other set theories, like ZF, and highlight the main difference to ZF.
 }
 
-\section{Maps}
+% \section{Maps}
 
-\note{Describe the category of sets and the theorems from the functions chapter that can be re-construed as properties of the category of sets.
-Emphasize the importance of ``fixing the bug'' for the purpose of doing category theory.
-Mention that there are many categories.}
+% \note{Describe the category of sets and the theorems from the functions chapter that can be re-construed as properties of the category of sets.
+% Emphasize the importance of ``fixing the bug'' for the purpose of doing category theory.
+% Mention that there are many categories.}
 
 % "codomain" and morphisms and the category viewpoint
 
 
 
-\section{Structuralism}
+% \section{Structuralism}
 
 %\note{Provide references for interesting topics in the philosophy of mathematics that are approachable after studying the material here.}
 
