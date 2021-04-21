@@ -5,6 +5,7 @@ lec_notes_thms_only.pdf
 img/*.pdf
 img/*/*.pdf
 additional_puzzles/*.pdf
+proofs.pdf
 
 
 ## Core latex/pdflatex auxiliary files:
