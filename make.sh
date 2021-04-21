@@ -11,3 +11,5 @@ python3 create_thms_only.py
 $PDF_LATEX_COMMAND lec_notes_thms_only.tex
 $PDF_LATEX_COMMAND lec_notes_thms_only.tex
 $PDF_LATEX_COMMAND lec_notes_thms_only.tex
+
+pdftk lec_notes.pdf lec_notes_thms_only.pdf cat output proofs.pdf
